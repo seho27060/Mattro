@@ -5,6 +5,7 @@
     "node": true
   },
   "extends": [
+    "next/core-web-vitals",
     "airbnb",
     "eslint:recommended",
     "plugin:react/recommended",
