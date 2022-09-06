@@ -1,0 +1,26 @@
+/* NotoSansKR - 한글폰트 */
+
+@font-face {
+  font-display: fallback;
+  font-family: "NotoSansRegular";
+  font-style: normal;
+  src: url("./fonts/NotoSansKR-Regular-subset.woff2") format("woff2"),
+    url("./fonts/NotoSansKR-Regular-subset.woff") format("woff"),
+    url("./fonts//NotoSansKR-Regular-subset.otf") format("opentype");
+}
+@font-face {
+  font-display: fallback;
+  font-family: "NotoSansMedium";
+  font-style: normal;
+  src: url("./fonts/NotoSansKR-Medium-subset.woff2") format("woff2"),
+    url("./fonts/NotoSansKR-Medium-subset.woff") format("woff"),
+    url("./fonts/NotoSansKR-Medium-subset.otf") format("opentype");
+}
+@font-face {
+  font-display: fallback;
+  font-family: "NotoSansBold";
+  font-style: normal;
+  src: url("./fonts/NotoSansKR-Bold-subset.woff2") format("woff2"),
+    url("./fonts/NotoSansKR-Bold-subset.woff") format("woff"),
+    url("./fonts/NotoSansKR-Bold-subset.otf") format("opentype");
+}

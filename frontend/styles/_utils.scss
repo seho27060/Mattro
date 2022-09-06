@@ -1,0 +1,38 @@
+$DESKTOP-VW: 1440px;
+$DESKTOP-VH: 1024px;
+
+$TABLET-VW: 768px;
+$TABLET-VH: 1024px;
+
+$PHONE-VW: 375px;
+$PHONE-VH: 812px;
+
+@function vw($size) {
+  $vw-context: $DESKTOP-VW * 0.01;
+  @return $size / $vw-context * 1vw;
+}
+
+@function vw-t($size) {
+  $vw-context: $TABLET-VW * 0.01;
+  @return $size / $vw-context * 1vw;
+}
+
+@function vw-p($size) {
+  $vw-context: $PHONE-VW * 0.01;
+  @return $size / $vw-context * 1vw;
+}
+
+@function vh($size) {
+  $vh-context: $DESKTOP-VH * 0.01;
+  @return $size / $vh-context * 1vh;
+}
+
+@function vh-t($size) {
+  $vh-context: $TABLET-VH * 0.01;
+  @return $size / $vh-context * 1vh;
+}
+
+@function vh-p($size) {
+  $vh-context: $PHONE-VH * 0.01;
+  @return $size / $vh-context * 1vh;
+}

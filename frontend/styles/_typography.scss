@@ -1,0 +1,265 @@
+.fs-8 {
+  font-size: (8px);
+}
+.fs-10 {
+  font-size: (10px);
+}
+.fs-11 {
+  font-size: (11px);
+}
+.fs-12 {
+  font-size: (12px);
+}
+.fs-13 {
+  font-size: (13px);
+}
+.fs-14 {
+  font-size: (14px);
+}
+.fs-15 {
+  font-size: (15px);
+}
+.fs-16 {
+  font-size: (16px);
+}
+.fs-17 {
+  font-size: (17px);
+}
+.fs-18 {
+  font-size: (18px);
+}
+.fs-20 {
+  font-size: (20px);
+}
+.fs-22 {
+  font-size: (22px);
+}
+.fs-24 {
+  font-size: (24px);
+}
+.fs-28 {
+  font-size: (28px);
+}
+.fs-32 {
+  font-size: (32px);
+}
+.fs-36 {
+  font-size: (36px);
+}
+.fs-40 {
+  font-size: (40px);
+}
+.fs-48 {
+  font-size: (48px);
+}
+.fs-60 {
+  font-size: (60px);
+}
+/* 폰트 타이포 */
+.notoMid {
+  font-family: "NotoSansMedium";
+}
+
+.notoBold {
+  font-family: "NotoSansBold";
+}
+
+.notoReg {
+  font-family: "NotoSansRegular";
+}
+
+.phoneOnly {
+  display: none;
+}
+
+@media screen and (max-width: $DESKTOP-VW) {
+  .fs-8 {
+    font-size: vw(8px);
+  }
+  .fs-10 {
+    font-size: vw(10px);
+  }
+  .fs-11 {
+    font-size: vw(11px);
+  }
+  .fs-12 {
+    font-size: vw(12px);
+  }
+  .fs-13 {
+    font-size: vw(13px);
+  }
+  .fs-14 {
+    font-size: vw(14px);
+  }
+  .fs-15 {
+    font-size: vw(15px);
+  }
+  .fs-16 {
+    font-size: vw(16px);
+  }
+  .fs-17 {
+    font-size: vw(17px);
+  }
+  .fs-18 {
+    font-size: vw(18px);
+  }
+  .fs-20 {
+    font-size: vw(20px);
+  }
+  .fs-22 {
+    font-size: vw(22px);
+  }
+  .fs-24 {
+    font-size: vw(24px);
+  }
+  .fs-28 {
+    font-size: vw(28px);
+  }
+  .fs-32 {
+    font-size: vw(32px);
+  }
+  .fs-36 {
+    font-size: vw(36px);
+  }
+  .fs-40 {
+    font-size: vw(40px);
+  }
+  .fs-48 {
+    font-size: vw(48px);
+  }
+  .fs-60 {
+    font-size: vw(60px);
+  }
+}
+
+@media screen and (max-width: $TABLET-VW) {
+  .desktopOnly {
+    display: none;
+  }
+  .phoneOnly {
+    display: none;
+  }
+  .fs-8 {
+    font-size: vw-t(8px);
+  }
+  .fs-10 {
+    font-size: vw-t(10px);
+  }
+  .fs-11 {
+    font-size: vw-t(11px);
+  }
+  .fs-12 {
+    font-size: vw-t(12px);
+  }
+  .fs-13 {
+    font-size: vw-t(13px);
+  }
+  .fs-14 {
+    font-size: vw-t(14px);
+  }
+  .fs-15 {
+    font-size: vw-t(15px);
+  }
+  .fs-16 {
+    font-size: vw-t(16px);
+  }
+  .fs-17 {
+    font-size: vw-t(17px);
+  }
+  .fs-18 {
+    font-size: vw-t(18px);
+  }
+  .fs-20 {
+    font-size: vw-t(20px);
+  }
+  .fs-22 {
+    font-size: vw-t(22px);
+  }
+  .fs-24 {
+    font-size: vw-t(24px);
+  }
+  .fs-28 {
+    font-size: vw-t(28px);
+  }
+  .fs-32 {
+    font-size: vw-t(32px);
+  }
+  .fs-36 {
+    font-size: vw-t(36px);
+  }
+  .fs-40 {
+    font-size: vw-t(40px);
+  }
+  .fs-48 {
+    font-size: vw-t(48px);
+  }
+  .fs-60 {
+    font-size: vw-t(60px);
+  }
+}
+@media screen and (max-width: $PHONE-VW) {
+  .desktopOnly {
+    display: none;
+  }
+  .fs-8 {
+    font-size: vw-p(8px);
+  }
+  .fs-10 {
+    font-size: vw-p(10px);
+  }
+  .fs-11 {
+    font-size: vw-p(11px);
+  }
+  .fs-12 {
+    font-size: vw-p(12px);
+  }
+  .fs-13 {
+    font-size: vw-p(13px);
+  }
+  .fs-14 {
+    font-size: vw-p(14px);
+  }
+  .fs-15 {
+    font-size: vw-p(15px);
+  }
+  .fs-16 {
+    font-size: vw-p(16px);
+  }
+  .fs-17 {
+    font-size: vw-p(17px);
+  }
+  .fs-18 {
+    font-size: vw-p(18px);
+  }
+  .fs-20 {
+    font-size: vw-p(20px);
+  }
+  .fs-22 {
+    font-size: vw-p(22px);
+  }
+  .fs-24 {
+    font-size: vw-p(24px);
+  }
+  .fs-28 {
+    font-size: vw-p(28px);
+  }
+  .fs-32 {
+    font-size: vw-p(32px);
+  }
+  .fs-36 {
+    font-size: vw-p(36px);
+  }
+  .fs-40 {
+    font-size: vw-p(40px);
+  }
+  .fs-48 {
+    font-size: vw-p(48px);
+  }
+  .fs-60 {
+    font-size: vw-p(60px);
+  }
+
+  .notPhone {
+    display: none;
+  }
+}
