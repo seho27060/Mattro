@@ -24,3 +24,38 @@
     url("./fonts/NotoSansKR-Bold-subset.woff") format("woff"),
     url("./fonts/NotoSansKR-Bold-subset.otf") format("opentype");
 }
+
+@font-face {
+  font-display: fallback;
+  font-family: "SCDream5";
+  font-style: normal;
+  src: url("./fonts/SCDream5.otf") format("opentype");
+}
+
+@font-face {
+  font-display: fallback;
+  font-family: "SCDream6";
+  font-style: normal;
+  src: url("./fonts/SCDream6.otf") format("opentype");
+}
+
+@font-face {
+  font-display: fallback;
+  font-family: "SCDream7";
+  font-style: normal;
+  src: url("./fonts/SCDream7.otf") format("opentype");
+}
+
+@font-face {
+  font-display: fallback;
+  font-family: "SCDream8";
+  font-style: normal;
+  src: url("./fonts/SCDream8.otf") format("opentype");
+}
+
+@font-face {
+  font-display: fallback;
+  font-family: "SCDream9";
+  font-style: normal;
+  src: url("./fonts/SCDream9.otf") format("opentype");
+}
