@@ -1,0 +1,18 @@
+.result {
+  .contents {
+    margin-top: vw(28px);
+    .title {
+      color: $GRAY-3A;
+      margin-bottom: vw(56px);
+      .food {
+        padding: vw(19px) vw(93px);
+        border: vw(8px) solid $MAIN;
+        border-radius: vw(46px);
+        margin: 0 vw(52px);
+        span {
+          color: $MAIN;
+        }
+      }
+    }
+  }
+}

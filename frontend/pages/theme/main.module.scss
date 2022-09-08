@@ -1,0 +1,26 @@
+.theme {
+  width: 1440px;
+  height: 100%;
+  //   background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-size: cover;
+  background-image: url("../../public/images/theme_main.png");
+  .contents {
+    // height: 100vh;
+    align-items: flex-end;
+    justify-content: flex-end;
+    .btn {
+      color: $MAIN;
+      background-color: $WHITE;
+      padding: vw(25px) vw(46px);
+      border: vw(8px) solid $MAIN;
+      border-radius: vw(46px);
+      margin-bottom: vw(76px);
+      &:hover {
+        color: $WHITE;
+        background-color: $MAIN;
+      }
+    }
+  }
+}

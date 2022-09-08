@@ -1,0 +1,33 @@
+.home {
+  // width: 100%;
+  width: 1440px;
+  height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-image: url("../public/images/empty.png");
+  .contents {
+    // width: vw(1440px);
+    height: 100%;
+    .subtitle {
+      color: $GRAY_3A;
+      margin: vw(168px) 0 vw(36px) 0;
+    }
+    .title {
+      color: $MAIN;
+      margin-bottom: vw(52px);
+    }
+    .btn {
+      color: $MAIN;
+      background-color: $WHITE;
+      width: vw(360px);
+      height: vw(90px);
+      border-radius: vw(46px);
+      border: vw(8px) solid #3f833a;
+      &:hover {
+        color: $WHITE;
+        background-color: $MAIN;
+      }
+    }
+  }
+}
