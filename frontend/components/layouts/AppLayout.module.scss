@@ -1,0 +1,9 @@
+.root {
+  height: 100%;
+  .children {
+    height: calc(100vh - 70px);
+    //     // padding-top: 70px;
+    margin-top: 70px;
+    //     // height: 100%;
+  }
+}
