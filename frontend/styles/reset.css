@@ -158,6 +158,15 @@ table {
   border-spacing: 0;
 }
 
-input:focus {
-  box-shadow: 0px 0px 4px #d77d20;
+/* input:focus {
+  box-shadow: 0px 0px 4px #d77d20; */
+/* } */
+
+html,
+body,
+body > div:first-child,
+div#__next,
+div#__next > div {
+  height: 100%;
+  overflow: hidden;
 }

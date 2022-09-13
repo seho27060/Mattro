@@ -2,14 +2,16 @@
   height: 100%;
   .children {
     width: 1440px;
-    height: calc(100vh - 70px);
+    height: calc(100% - 70px);
 
     margin-top: 70px;
   }
 }
 
 @media screen and (max-width: $DESKTOP-VW) {
-  .children {
-    width: vw(1440px);
+  .root {
+    .children {
+      width: vw(1440px);
+    }
   }
 }

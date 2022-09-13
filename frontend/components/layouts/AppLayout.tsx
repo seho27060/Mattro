@@ -8,7 +8,7 @@ type AppLayoutProps = {
 
 export default function AppLayout({ children }: AppLayoutProps) {
   return (
-    <div className={`${styles.root} flex column aligng-center`}>
+    <div className={`${styles.root} flex column align-center`}>
       <Navbar />
       <div className={styles.children}>{children}</div>
     </div>
