@@ -1,0 +1,37 @@
+.question {
+  .contents {
+    width: (627px);
+    margin-top: (100px);
+  }
+  .title {
+    color: $MAIN;
+  }
+  .ques {
+    color: $GRAY-3A;
+  }
+}
+@media screen and (max-width: $DESKTOP-VW) {
+  .question {
+    .contents {
+      width: vw(627px);
+      margin-top: vw(100px);
+    }
+  }
+}
+
+@media screen and (max-width: $TABLET-VW) {
+  .question {
+    .contents {
+      width: vw-t(627px);
+      margin-top: vw-t(100px);
+    }
+  }
+}
+@media screen and (max-width: $PHONE-VW) {
+  .question {
+    .contents {
+      width: vw-p(627px);
+      margin-top: vw-p(100px);
+    }
+  }
+}

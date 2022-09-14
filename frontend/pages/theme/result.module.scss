@@ -1,17 +1,103 @@
 .result {
   .contents {
-    margin-top: vw(28px);
+    margin-top: (28px);
     .title {
       color: $GRAY-3A;
-      margin-bottom: vw(56px);
+      margin-bottom: (80px);
       .food {
-        padding: vw(19px) vw(93px);
-        border: vw(8px) solid $MAIN;
-        border-radius: vw(46px);
-        margin: 0 vw(52px);
+        padding: (19px) (93px);
+        border: (8px) solid $MAIN;
+        border-radius: (46px);
+        margin: 0 (52px);
         span {
           color: $MAIN;
         }
+      }
+    }
+    .btn {
+      margin-top: (60px);
+      button {
+        padding: (16px) (28px);
+        background-color: $GRAY-BA;
+        color: $WHITE;
+        border-radius: (30px);
+        margin: 0 (20px);
+        &:hover {
+          background-color: $MAIN;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $DESKTOP-VW) {
+  .result {
+    .contents {
+      margin-top: vw(28px);
+      .title {
+        margin-bottom: vw(80px);
+        .food {
+          padding: vw(19px) vw(93px);
+          border: vw(8px) solid $MAIN;
+          border-radius: vw(46px);
+          margin: 0 vw(52px);
+        }
+      }
+    }
+    .btn {
+      margin-top: vw(60px);
+      button {
+        padding: vw(16px) vw(28px);
+        border-radius: vw(30px);
+        margin: 0 vw(20px);
+      }
+    }
+  }
+}
+@media screen and (max-width: $TABLET-VW) {
+  .result {
+    .contents {
+      margin-top: vw-t(28px);
+      .title {
+        margin-bottom: vw-t(80px);
+        .food {
+          padding: vw-t(19px) vw-t(93px);
+          border: vw-t(8px) solid $MAIN;
+          border-radius: vw-t(46px);
+          margin: 0 vw-t(52px);
+        }
+      }
+    }
+    .btn {
+      margin-top: vw-t(60px);
+      button {
+        padding: vw-t(16px) vw-t(28px);
+        border-radius: vw-t(30px);
+        margin: 0 vw-t(20px);
+      }
+    }
+  }
+}
+@media screen and (max-width: $PHONE-VW) {
+  .result {
+    .contents {
+      margin-top: vw-p(28px);
+      .title {
+        margin-bottom: vw-p(80px);
+        .food {
+          padding: vw-p(19px) vw-p(93px);
+          border: vw-p(8px) solid $MAIN;
+          border-radius: vw-p(46px);
+          margin: 0 vw-p(52px);
+        }
+      }
+    }
+    .btn {
+      margin-top: vw-p(60px);
+      button {
+        padding: vw-p(16px) vw-p(28px);
+        border-radius: vw-p(30px);
+        margin: 0 vw-p(20px);
       }
     }
   }
