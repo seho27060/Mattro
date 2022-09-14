@@ -31,7 +31,7 @@ pipeline {
                     sh 'echo build 성공'
                 }
                 failure{
-                    sh 'ehco build 실패'
+                    sh 'echo build 실패'
                 }
             }
         }
@@ -47,10 +47,10 @@ pipeline {
             }
             post {
                 success{
-                    sh 'ehco create 성공'
+                    sh 'echo create 성공'
                 }
                 failure{
-                    sh 'ehco create 실패'
+                    sh 'echo create 실패'
                 }
             }
         }
