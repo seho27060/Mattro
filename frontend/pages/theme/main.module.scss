@@ -1,25 +1,107 @@
 .theme {
-  width: 1440px;
   height: 100%;
-  //   background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center bottom;
-  background-size: cover;
-  background-image: url("../../public/images/theme_main.png");
   .contents {
-    // height: 100vh;
-    align-items: flex-end;
-    justify-content: flex-end;
+    background: linear-gradient(to top, $GRAY-E0 40%, #ffffff 0%);
+    .title {
+      width: 70%;
+      margin: (50px) 0 (34px) 0;
+    }
+    .images {
+      position: fixed;
+      bottom: 24%;
+      width: (1000px);
+      margin-bottom: (30px);
+      justify-content: space-between;
+      :nth-child(2n + 1) {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      :nth-child(2) {
+        margin-right: 15%;
+        width: 15%;
+      }
+      :nth-child(1) {
+        width: 30%;
+      }
+      :nth-child(3) {
+        width: 15%;
+      }
+    }
     .btn {
+      position: fixed;
+      bottom: (76px);
       color: $MAIN;
       background-color: $WHITE;
-      padding: vw(25px) vw(46px);
-      border: vw(8px) solid $MAIN;
-      border-radius: vw(46px);
-      margin-bottom: vw(76px);
+      padding: (25px) (46px);
+      border: (8px) solid $MAIN;
+      border-radius: (46px);
       &:hover {
         color: $WHITE;
         background-color: $MAIN;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $DESKTOP-VW) {
+  .theme {
+    .contents {
+      .title {
+        margin: vw(50px) 0 vw(34px) 0;
+      }
+      .images {
+        width: vw(1000px);
+        margin-bottom: vw(30px);
+      }
+      .btn {
+        bottom: vw(76px);
+        padding: vw(25px) vw(46px);
+        border: vw(8px) solid $MAIN;
+        border-radius: vw(46px);
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $TABLET-VW) {
+  .theme {
+    .contents {
+      .title {
+        margin: vw-t(50px) 0 vw-t(34px) 0;
+      }
+      .images {
+        width: vw-t(1000px);
+        margin-bottom: vw-t(30px);
+      }
+      .btn {
+        bottom: vw-t(76px);
+        padding: vw-t(25px) vw-t(46px);
+        border: vw-t(8px) solid $MAIN;
+        border-radius: vw-t(46px);
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $PHONE-VW) {
+  .theme {
+    .contents {
+      .title {
+        margin: vw-p(50px) 0 vw-p(34px) 0;
+      }
+      .images {
+        width: vw-p(1000px);
+        margin-bottom: vw-p(30px);
+        :nth-child(2n + 1) {
+          width: vw-p(320px);
+        }
+      }
+      .btn {
+        bottom: vw-p(76px);
+        padding: vw-p(25px) vw-p(46px);
+        border: vw-p(8px) solid $MAIN;
+        border-radius: vw-p(46px);
       }
     }
   }
