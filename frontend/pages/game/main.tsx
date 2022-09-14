@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import Image from "next/image";
 
-import styles from "./start.module.scss";
+import styles from "./main.module.scss";
 import chair2 from "../../public/images/chair2.png";
 
 const userList = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }];
