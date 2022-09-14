@@ -1,0 +1,20 @@
+.infoListRect {
+  border: 1px solid $GRAY_BA;
+  background-color: white;
+  height: (48px);
+  li {
+    padding: (12px);
+  }
+  li + li {
+    border-left: 1px solid $GRAY_BA;
+  }
+}
+
+@media screen and (max-width: $DESKTOP-VW) {
+  .infoListRect {
+    height: vw(48px);
+    li {
+      padding: vw(12px);
+    }
+  }
+}

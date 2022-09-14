@@ -1,0 +1,53 @@
+@mixin box {
+  padding: (12px);
+
+  width: (286px);
+  height: (48px);
+
+  background-color: white;
+  border: 1px solid $GRAY_BA;
+}
+
+.input {
+  @include box();
+}
+
+.li {
+  @include box();
+  &:hover {
+    cursor: pointer;
+    background-color: aliceblue;
+  }
+
+  span {
+    &:hover {
+      transform: none;
+    }
+    & + span {
+      margin-left: (8px);
+    }
+  }
+}
+
+@media screen and (max-width: $DESKTOP-VW) {
+  @mixin box {
+    padding: vw(12px);
+
+    width: vw(286px);
+    height: vw(48px);
+  }
+
+  .input {
+    @include box();
+  }
+
+  .li {
+    @include box();
+
+    span {
+      & + span {
+        margin-left: vw(8px);
+      }
+    }
+  }
+}
