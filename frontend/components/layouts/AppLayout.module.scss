@@ -15,3 +15,17 @@
     }
   }
 }
+@media screen and (max-width: $TABLET-VW) {
+  .root {
+    .children {
+      width: vw-t(1440px);
+    }
+  }
+}
+@media screen and (max-width: $PHONE-VW) {
+  .root {
+    .children {
+      width: vw-p(1440px);
+    }
+  }
+}
