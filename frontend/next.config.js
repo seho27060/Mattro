@@ -10,6 +10,9 @@ const nextConfig = {
             @import "_variables.scss";
             @import "_utils.scss";
           `
+  },
+  eslint: {
+    ignoreDuringBuilds: true
   }
 };
 
