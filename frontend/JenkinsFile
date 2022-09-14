@@ -72,7 +72,7 @@ pipeline {
         }
         stage("run"){
             steps {
-                sh 'docker run -d -p 3000:3000 --network my-network --name mattro wlsgh97/mattro'
+                sh 'docker run --network my-network --name mattro wlsgh97/mattro'
                 sh 'docker run -d -p 80:80 --network my-network --link mattro:nextjs --name mattro-nginx wlsgh97/mattro-nginx'
             }
         }    
