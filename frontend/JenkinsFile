@@ -19,7 +19,7 @@ pipeline {
                         sh 'echo "nginx stop중 실패"'
                     }
                     try{
-                        sh 'docker build -t wlsgh97/mattro ./frotend'
+                        sh 'docker build -t wlsgh97/mattro ./frontend'
                         sh 'docker build -t wlsgh97/mattro-nginx ./frontend/nginx'
                     }catch(e){
                         sh 'echo "docker 이미지빌드중 실패"'
