@@ -62,10 +62,10 @@ pipeline {
             }
             post {
                 success{
-                    sh 'push 성공'
+                    sh 'echo push 성공'
                 }
                 failure{
-                    sh 'push 실패'
+                    sh 'echo push 실패'
                 }
             }
         }
