@@ -39,6 +39,7 @@ pipeline {
             steps{
                 script{
                     try {
+                        sh 'docker network remove my-network'
                         sh 'docker network create my-network'
                     } catch (e) {
                         sh 'echo "네트워크 생성중 실패"'
