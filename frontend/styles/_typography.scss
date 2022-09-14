@@ -1,4 +1,59 @@
-
+.L1 {
+  background-color: $L1;
+  border-color: $L1;
+}
+.L2 {
+  background-color: $L2;
+  border-color: $L2;
+}
+.L3 {
+  background-color: $L3;
+  border-color: $L3;
+}
+.L4 {
+  background-color: $L4;
+  border-color: $L4;
+}
+.L5 {
+  background-color: $L5;
+  border-color: $L5;
+}
+.L6 {
+  background-color: $L6;
+  border-color: $L6;
+}
+.L7 {
+  background-color: $L7;
+  border-color: $L7;
+}
+.L8 {
+  background-color: $L8;
+  border-color: $L8;
+}
+.L9 {
+  background-color: $L9;
+  border-color: $L9;
+}
+.LK {
+  background-color: $LK;
+  border-color: $LK;
+}
+.LB {
+  background-color: $LB;
+  border-color: $LB;
+}
+.LS {
+  background-color: $LS;
+  border-color: $LS;
+}
+.LW {
+  background-color: $LW;
+  border-color: $LW;
+}
+.LSL {
+  background-color: $LSL;
+  border-color: $LSL;
+}
 /* 폰트 타이포 */
 .notoMid {
   font-family: "NotoSansMedium";
@@ -14,20 +69,20 @@
 .notoBlack {
   font-family: "NotoSansBlack";
 }
-.coreHeavy{
-  font-family : "SCDream8";
+.coreHeavy {
+  font-family: "SCDream8";
 }
-.coreBold{
-  font-family : "SCDream6";
+.coreBold {
+  font-family: "SCDream6";
 }
-.coreExtra{
-  font-family : "SCDream7";
+.coreExtra {
+  font-family: "SCDream7";
 }
-.coreMid{
-  font-family : "SCDream5";
+.coreMid {
+  font-family: "SCDream5";
 }
-.coreBlack{
-  font-family : "SCDream9";
+.coreBlack {
+  font-family: "SCDream9";
 }
 
 .phoneOnly {
@@ -101,7 +156,6 @@
 }
 
 @media screen and (max-width: $DESKTOP-VW) {
-
   .fs-10 {
     font-size: vw(10px);
   }
@@ -168,9 +222,7 @@
   .fs-100 {
     font-size: vw(100px);
   }
-
 }
-
 
 @media screen and (max-width: $TABLET-VW) {
   .desktopOnly {
