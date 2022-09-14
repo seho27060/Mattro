@@ -8,9 +8,9 @@ export default function themeMain() {
       <div className={`${styles.contents} flex column`}>
         <nav>
           <Link href="/">
-            <a className={`${styles.btn} fs-32 coreExtra`}>
+            <div className={`${styles.btn} fs-32 coreExtra`}>
               테마별 맛집 추천받기
-            </a>
+            </div>
           </Link>
         </nav>
       </div>
