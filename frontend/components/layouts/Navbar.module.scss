@@ -1,7 +1,7 @@
 .navbar,
 .navbar_main {
   width: (1440px);
-  height: (70px);
+  height: (60px);
   position: fixed;
   top: 0;
   justify-content: space-between;
@@ -28,7 +28,7 @@
   .navbar,
   .navbar_main {
     width: vw(1440px);
-    height: (70px);
+    height: (60px);
     padding: 0 vw(62px);
   }
 
@@ -42,7 +42,7 @@
   .navbar,
   .navbar_main {
     width: vw-t(1440px);
-    height: (70px);
+    height: (40px);
     padding: 0 vw-t(62px);
   }
 
@@ -56,7 +56,7 @@
   .navbar,
   .navbar_main {
     width: vw-p(1440px);
-    height: (70px);
+    height: (40px);
     padding: 0 vw-p(62px);
   }
 
