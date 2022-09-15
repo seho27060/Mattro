@@ -57,7 +57,7 @@
 
 @media screen and (max-width: $PHONE-VW) {
   @mixin children {
-    width: vw(390px);
+    width: vw-p(390px);
   }
 
   .root {
