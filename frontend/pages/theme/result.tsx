@@ -16,10 +16,10 @@ export default function themeMain() {
         </div>
         <ResultCard />
         <div className={`${styles.btns} flex`}>
-          <button type="button" className={`${styles.btn} notoBold fs-16`}>
+          <button type="button" className={`${styles.btn} notoBold `}>
             다른 메뉴 추천 받기
           </button>
-          <button type="button" className={`${styles.btn} notoBold fs-16`}>
+          <button type="button" className={`${styles.btn} notoBold `}>
             홈으로 돌아가기
           </button>
         </div>
