@@ -27,7 +27,7 @@ export default function ResultCard() {
     <div className={`${styles.card} flex column align-center justify-center`}>
       <div className={`${styles.num} coreExtra fs-18 flex align-center`}>
         <p>1</p>
-        <div className="coreBold fs-24">{storeName}</div>
+        <div className="coreBold fs-24 flex ">{storeName}</div>
       </div>
 
       <div className={`${styles.img} flex align-center justify-center`}>
@@ -53,7 +53,7 @@ export default function ResultCard() {
         {/* {stars()} */}
       </div>
       <div className={`${styles.detail} flex column justify-center`}>
-        <div className={`${styles.txt} flex fs-15 notoMid`}>
+        <div className={`${styles.txt} flex  notoMid`}>
           <span>주소</span>
           <span>{address}</span>
         </div>

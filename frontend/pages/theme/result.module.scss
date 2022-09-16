@@ -15,9 +15,10 @@
       }
     }
     .btns {
-      margin-top: (30px);
+      margin-top: (50px);
       .btn {
-        padding: (8px) (20px);
+        font-size: 20px;
+        padding: (12px) (24px);
         background-color: $GRAY-BA;
         color: $WHITE;
         border-radius: (18px);
@@ -47,6 +48,7 @@
     .btns {
       margin-top: vw(30px);
       .btn {
+        font-size: vw(18px);
         padding: vw(16px) vw(28px);
         border-radius: vw(20px);
         margin: 0 vw(20px);
@@ -57,21 +59,17 @@
 @media screen and (max-width: $TABLET-VW) {
   .result {
     .contents {
-      margin-top: (20px);
+      margin-top: (10px);
 
       .title {
-        font-size: (18px);
-        margin-bottom: (40px);
-        flex-direction: column;
-        :nth-child(3) {
-          display: none;
-        }
+        font-size: (14px);
+        margin-bottom: (30px);
         .food {
-          font-size: (20px);
-          padding: (13px) (60px);
+          font-size: (18px);
+          padding: (13px) (40px);
           border: (6px) solid $MAIN;
           border-radius: (46px);
-          margin: (16px) 0 0 0;
+          margin: 0 (16px);
         }
       }
       .btns {
@@ -79,7 +77,7 @@
         .btn {
           padding: (10px) (18px);
           margin: 0 (8px);
-          margin-top: (20px);
+          margin-top: (15px);
           border-radius: (16px);
           font-size: (14px);
         }
@@ -90,17 +88,17 @@
 @media screen and (max-width: $PHONE-VW) {
   .result {
     .contents {
-      margin-top: vw-p(20px);
+      margin-top: vw-p(10px);
 
       .title {
-        font-size: vw-p(18px);
-        margin-bottom: vw-p(40px);
+        font-size: vw-p(14px);
+        margin-bottom: vw-p(30px);
         .food {
-          font-size: vw-p(20px);
-          padding: vw-p(13px) vw-p(60px);
+          font-size: vw-p(18px);
+          padding: vw-p(13px) vw-p(40px);
           border: vw-p(6px) solid $MAIN;
           border-radius: vw-p(46px);
-          margin: vw-p(16px) 0 0 0;
+          margin: 0 vw-p(16px);
         }
       }
       .btns {
@@ -108,7 +106,7 @@
         .btn {
           padding: vw-p(10px) vw-p(18px);
           margin: 0 vw-p(8px);
-          margin-top: vw-p(20px);
+          margin-top: vw-p(15px);
           border-radius: vw-p(16px);
           font-size: vw-p(14px);
         }
