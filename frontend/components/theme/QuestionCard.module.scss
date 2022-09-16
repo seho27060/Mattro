@@ -45,18 +45,21 @@
 @media screen and (max-width: $TABLET-VW) {
   .card {
     .title {
-      margin-bottom: vw-t(40px);
+      font-size: (32px);
+      margin-bottom: (32px);
     }
     .ques {
-      margin-bottom: vw-t(68px);
+      font-size: (24px);
+      margin-bottom: (48px);
     }
     .select {
       button {
-        padding-left: vw-t(51px);
-        margin-bottom: vw-t(40px);
-        border-radius: vw-t(46px);
-        width: vw-t(627px);
-        height: vw-t(114px);
+        font-size: (14px);
+        padding-left: (24px);
+        margin-bottom: (20px);
+        border-radius: (22px);
+        width: (320px);
+        height: (64px);
       }
     }
   }
@@ -64,18 +67,21 @@
 @media screen and (max-width: $PHONE-VW) {
   .card {
     .title {
-      margin-bottom: vw-p(40px);
+      font-size: vw-p(32px);
+      margin-bottom: vw-p(32px);
     }
     .ques {
-      margin-bottom: vw-p(68px);
+      font-size: vw-p(24px);
+      margin-bottom: vw-p(48px);
     }
     .select {
       button {
-        padding-left: vw-p(51px);
-        margin-bottom: vw-p(40px);
-        border-radius: vw-p(46px);
-        width: vw-p(627px);
-        height: vw-p(114px);
+        font-size: vw-p(14px);
+        padding-left: vw-p(24px);
+        margin-bottom: vw-p(20px);
+        border-radius: vw-p(22px);
+        width: vw-p(320px);
+        height: vw-p(64px);
       }
     }
   }

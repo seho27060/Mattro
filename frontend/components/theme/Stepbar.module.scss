@@ -38,16 +38,17 @@
 
 @media screen and (max-width: $TABLET-VW) {
   .step {
-    margin-top: vw-t(200px);
+    margin-top: (100px);
     .num {
-      margin-bottom: vw-t(20px);
+      font-size: (16px);
+      margin-bottom: (20px);
     }
     .bar {
-      border-radius: vw-t(46px);
-      height: vw-t(20px);
-      width: vw-t(627px);
+      border-radius: (7px);
+      height: (16px);
+      width: (320px);
       div {
-        border-radius: vw-t(46px);
+        border-radius: (7px);
       }
     }
   }
@@ -55,16 +56,17 @@
 
 @media screen and (max-width: $PHONE-VW) {
   .step {
-    margin-top: vw-p(200px);
+    margin-top: vw-p(100px);
     .num {
+      font-size: vw-p(16px);
       margin-bottom: vw-p(20px);
     }
     .bar {
-      border-radius: vw-p(46px);
-      height: vw-p(20px);
-      width: vw-p(627px);
+      border-radius: vw-p(7px);
+      height: vw-p(16px);
+      width: vw-p(320px);
       div {
-        border-radius: vw-p(46px);
+        border-radius: vw-p(7px);
       }
     }
   }

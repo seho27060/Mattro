@@ -22,16 +22,16 @@
 @media screen and (max-width: $TABLET-VW) {
   .question {
     .contents {
-      width: vw-t(627px);
-      margin-top: vw-t(100px);
+      width: (320px);
+      margin-top: (76px);
     }
   }
 }
 @media screen and (max-width: $PHONE-VW) {
   .question {
     .contents {
-      width: vw-p(627px);
-      margin-top: vw-p(100px);
+      width: vw-p(320px);
+      margin-top: vw-p(76px);
     }
   }
 }
