@@ -23,7 +23,7 @@
       background-color: $GRAY_3A;
       cursor: pointer;
       &:hover {
-        transform: scale(1.05) translateY(-8px);
+        transform: scale(1.02) translateY(-2px);
       }
       p {
         color: $WHITE;
@@ -83,6 +83,7 @@
         padding: vw(18px) vw(30px);
         width: vw(414px);
         height: vw(100px);
+        border-radius: vw(22px);
         p {
           span {
             margin-right: vw(24px);
@@ -94,12 +95,110 @@
       }
     }
   }
+  
   .footer {
     grid-template-columns: repeat(2, vw(414px));
+    column-gap: vw(64px);
+    row-gap: vw(30px);
     margin-top: vw(44px);
     button {
+      margin-top: vw(20px);
       width: vw(164px);
       height: vw(56px);
+      border: vw(4px) solid $L1;
+      border-radius: vw(20px);
+    }
+  }
+}
+
+@media screen and (max-width: $TABLET-VW) {
+  .wrapper {
+    height: 100%;
+    width: 100%;
+    .station {
+      width: 348px;
+      margin-top: 18px;
+    }
+    .roomList {
+      height: 600px;
+      margin-top: 38px;
+      grid-template-columns: 290px;
+      grid-auto-rows: 70px;
+      row-gap: 30px;
+      .room {
+        width: 100%;
+        height: 100%;
+        border-radius: 22px;
+        padding: 0;
+        p {
+          font-size: 20px;
+          span {
+            margin: 14px 14px;
+            padding: 12px;
+            width: 44px;
+            height: 44px;
+            font-size: 16px;
+          }
+        }
+      }
+    }
+  }
+  .footer {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    .chair1 {
+      width: 60%;
+      align-self: flex-end;
+      justify-self: center;
+    }
+    button {
+      width: 136px;
+      height: 46px;
+      align-self: flex-start;
+      justify-self: flex-start;
+      border: 4px solid $L1;
+      border-radius: 20px;
+      font-size: 20px;
+    }
+  }
+}
+
+@media screen and (max-width: $PHONE-VW) {
+  .wrapper {
+    .station {
+      width: vw-p(348px);
+      margin-top: vw-p(18px);
+    }
+    .roomList {
+      height: vw-p(600px);
+      margin-top: vw-p(38px);
+      grid-template-columns: vw-p(290px);
+      grid-auto-rows: vw-p(70px);
+      row-gap: vw-p(30px);
+      .room {
+        border-radius: vw-p(22px);
+        p {
+          font-size: vw-p(20px);
+          span {
+            margin: vw-p(14px) vw-p(14px);
+            padding: vw-p(12px);
+            width: vw-p(44px);
+            height: vw-p(44px);
+            font-size: vw-p(16px);
+          }
+        }
+      }
+    }
+  }
+  .footer {
+    grid-template-columns: repeat(2, 1fr);
+    button {
+      width: vw-p(136px);
+      height: vw-p(46px);
+      border: vw-p(4px) solid $L1;
+      border-radius: vw-p(20px);
+      font-size: vw-p(20px);
     }
   }
 }

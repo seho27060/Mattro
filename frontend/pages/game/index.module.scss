@@ -5,11 +5,12 @@
   background-image: url("/images/game.png");
   background-size: cover;
   background-position: center;
+  text-align: center;
   h1 {
     margin-bottom: 150px;
     -webkit-text-stroke: 5px $WHITE;
   }
-  div, button {
+  .start__btn, .explanation_btn {
     width: 282px;
     height: 80px;
     border: 8px solid $MAIN;
@@ -22,8 +23,16 @@
       color: $WHITE;
     }
   }
-  div {
+  .start__btn {
     margin-bottom: 28px;
+  }
+  .children {
+    margin: 72px 0;
+    p {
+      margin: 20px 0;
+      line-height: 36px;
+      text-align: start;
+    }
   }
 }
 
@@ -32,12 +41,78 @@
     h1 {
       margin-bottom: vw(150px);
     }
-    div, button {
+    .start__btn, .explanation_btn {
       width: vw(282px);
       height: vw(80px);
     }
-    div {
+    .start__btn {
       margin-bottom: vw(28px);
+    }
+    .children {
+      margin: vw(72px) 0;
+      p {
+        margin: vw(20px) 0;
+        line-height: vw(36px);
+      }
+    }
+  }
+}
+
+
+@media screen and (max-width: $TABLET-VW) {
+  .wrapper {
+    background-image: url("/images/game_main.png");
+    h1 {
+      margin-bottom: 150px;
+      -webkit-text-stroke: 5px $WHITE;
+      font-size: 42px;
+    }
+    .start__btn, .explanation_btn {
+      width: 282px;
+      height: 80px;
+      border: 8px solid $MAIN;
+      border-radius: 46px;
+      font-size: 32px;
+    }
+    .start__btn {
+      margin-bottom: 28px;
+    }
+    .children {
+      margin: 72px 0;
+      p {
+        margin: 20px 0;
+        line-height: 32px;
+        font-size: 20px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $PHONE-VW) {
+  .wrapper {
+    background-image: url("/images/game_main.png");
+    h1 {
+      margin-bottom: vw-p(150px);
+      -webkit-text-stroke: vw-p(5px) $WHITE;
+      font-size: vw-p(42px);
+    }
+    .start__btn, .explanation_btn {
+      width: vw-p(282px);
+      height: vw-p(80px);
+      border: vw-p(8px) solid $MAIN;
+      border-radius: vw-p(46px);
+      font-size: vw-p(32px);
+    }
+    .start__btn {
+      margin-bottom: vw-p(28px);
+    }
+    .children {
+      margin: vw-p(72px) 0;
+      p {
+        margin: vw-p(20px) 0;
+        line-height: vw-p(32px);
+        font-size: vw-p(20px);
+      }
     }
   }
 }
