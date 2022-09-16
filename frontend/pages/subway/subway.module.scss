@@ -11,13 +11,12 @@
   }
 
   div[id="metroMap"] {
-    // position: absolute;
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    padding-top: (70px);
+    padding-top: (60px);
   }
 
   div[id="map-btn"] {
@@ -29,6 +28,7 @@
       margin-right: (20px);
       width: (48px);
       height: (48px);
+      padding: 8px;
 
       background-color: white;
       border-radius: 50%;
@@ -48,50 +48,82 @@
 
 @media screen and (max-width: $DESKTOP-VW) {
   .subway {
-    // position: relative;
-    // width: 100%;
-    // height: 100%;
-
-    // div[id="line-container"] {
-    //   position: absolute;
-    //   width: 100%;
-    //   flex-wrap: wrap;
-    //   justify-content: space-between;
-    // }
-
-    div[id="metroMap"] {
-      // position: absolute;
-      // position: fixed;
-      // top: 0;
-      // left: 0;
-      // width: 100%;
-      // height: 100%;
-      padding-top: vw(70px);
-    }
-
     div[id="map-btn"] {
-      // position: absolute;
-      // right: 0;
       bottom: vw(168px);
 
       button {
         margin-right: vw(20px);
         width: vw(48px);
         height: vw(48px);
-
-        // background-color: white;
-        // border-radius: 50%;
-        // border: 1px solid $GRAY_BA;
+        padding: vw(8px);
         & + button {
           margin-top: vw(4px);
         }
       }
     }
     div[id="select-container"] {
-      // position: absolute;
       bottom: vw(68px);
+    }
+  }
+}
 
-      // width: 100%;
+@media screen and (max-width: $TABLET-VW) {
+  .subway {
+    div[id="metroMap"] {
+      padding-top: 40px;
+    }
+
+    div[id="map-btn"] {
+      bottom: 180px;
+
+      button {
+        margin-right: (12px);
+        width: (36px);
+        height: (36px);
+        padding: (6px);
+        image {
+          width: 30px;
+        }
+        & + button {
+          margin-top: (4px);
+        }
+      }
+    }
+    div[id="select-container"] {
+      width: 390px;
+
+      bottom: (20px);
+      & > div {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $PHONE-VW) {
+  .subway {
+    div[id="metroMap"] {
+      padding-top: (40px);
+    }
+
+    div[id="map-btn"] {
+      bottom: vw-p(180px);
+
+      button {
+        margin-right: vw-p(12px);
+        width: vw-p(36px);
+        height: vw-p(36px);
+        padding: vw-p(6px);
+        & + button {
+          margin-top: vw-p(4px);
+        }
+      }
+    }
+    div[id="select-container"] {
+      width: vw-p(390px);
+      bottom: vw-p(20px);
     }
   }
 }

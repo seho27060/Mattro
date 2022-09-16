@@ -1,7 +1,7 @@
 .wrapper {
   width: 100%;
   height: 100%;
-  padding-bottom: 70px;
+  padding-bottom: 60px;
   div {
     width: 100%;
     height: (184px);
@@ -17,6 +17,7 @@
 
       background-color: white;
       white-space: nowrap;
+      font-size: 100px;
     }
   }
 }
@@ -25,7 +26,7 @@
   .wrapper {
     width: 100%;
     height: 100%;
-    padding-bottom: 70px;
+    padding-bottom: 60px;
     div {
       width: 100%;
       height: vw(184px);
@@ -37,6 +38,51 @@
         border-radius: vw(236px);
 
         border-width: vw(20px);
+        font-size: vw(100px);
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $TABLET-VW) {
+  .wrapper {
+    width: 100%;
+    height: 100%;
+    padding-bottom: 40px;
+    div {
+      width: 100%;
+      height: (100px);
+
+      .circle {
+        padding: (80px) (80px);
+        width: min-content;
+
+        border-radius: (236px);
+
+        border-width: (16px);
+        font-size: (32px);
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $PHONE-VW) {
+  .wrapper {
+    width: 100%;
+    height: 100%;
+    padding-bottom: 40px;
+    div {
+      width: 100%;
+      height: vw-p(100px);
+
+      .circle {
+        padding: vw-p(80px) vw-p(80px);
+        width: min-content;
+
+        border-radius: vw-p(236px);
+
+        border-width: vw-p(16px);
+        font-size: vw-p(32px);
       }
     }
   }

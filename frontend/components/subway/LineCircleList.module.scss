@@ -1,12 +1,11 @@
 .infoListRect {
-  border: 1px solid $GRAY_BA;
-  background-color: white;
   height: (48px);
+
+  background-color: white;
   li {
     padding: (12px);
-  }
-  li + li {
-    border-left: 1px solid $GRAY_BA;
+    box-shadow: 1px 0 0 0 $GRAY_BA, 0 1px 0 0 $GRAY_BA, 1px 0 0 0 $GRAY_BA inset,
+      0 1px 0 0 $GRAY_BA inset, 1px 1px 0 0 $GRAY_BA;
   }
 }
 
@@ -15,6 +14,28 @@
     height: vw(48px);
     li {
       padding: vw(12px);
+    }
+  }
+}
+
+@media screen and (max-width: $TABLET-VW) {
+  .infoListRect {
+    width: 390px;
+    height: 84px;
+    flex-wrap: wrap;
+    li {
+      padding: 11px;
+    }
+  }
+}
+
+@media screen and (max-width: $PHONE-VW) {
+  .infoListRect {
+    width: vw-p(390px);
+    height: vw-p(84px);
+    flex-wrap: wrap;
+    li {
+      padding: vw-p(11px);
     }
   }
 }

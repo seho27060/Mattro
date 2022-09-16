@@ -18,10 +18,10 @@ const index = () => {
       </div>
       <div id="map-btn" className="flex column">
         <button type="button">
-          <Image src={PlusBtn} alt="확대" />
+          <Image src={PlusBtn} layout="responsive" alt="확대" />
         </button>
         <button type="button">
-          <Image src={MinusBtn} alt="축소" />
+          <Image src={MinusBtn} layout="responsive" alt="축소" />
         </button>
       </div>
       <div id="select-container" className="flex justify-center">

@@ -11,7 +11,7 @@ const LineLoadingBar = ({ name, color }: LineLoadingBarProps) => {
     <div className={`${styles.wrapper} flex align-center justify-center`}>
       <div className={`${color} flex align-center justify-center`}>
         <p
-          className={`fs-100 notoBold flex align-center justify-center ${styles.circle} ${color}`}
+          className={`notoBold flex align-center justify-center ${styles.circle} ${color}`}
         >
           {name}
         </p>

@@ -5,26 +5,30 @@
   height: (48px);
 
   background-color: white;
-  border: 1px solid $GRAY_BA;
+  box-shadow: 1px 0 0 0 $GRAY_BA, 0 1px 0 0 $GRAY_BA, 1px 0 0 0 $GRAY_BA inset,
+    0 1px 0 0 $GRAY_BA inset, 1px 1px 0 0 $GRAY_BA;
 }
 
 .input {
   @include box();
+  font-size: 20px;
 }
-
-.li {
-  @include box();
-  &:hover {
-    cursor: pointer;
-    background-color: aliceblue;
-  }
-
-  span {
+.ul {
+  .li {
+    @include box();
     &:hover {
-      transform: none;
+      cursor: pointer;
+      background-color: aliceblue;
     }
-    & + span {
-      margin-left: (8px);
+
+    span {
+      &:hover {
+        transform: none;
+      }
+      & + span {
+        font-size: (16px);
+        margin-left: (8px);
+      }
     }
   }
 }
@@ -39,14 +43,72 @@
 
   .input {
     @include box();
+    font-size: vw(20px);
+  }
+  .ul {
+    .li {
+      @include box();
+
+      span {
+        & + span {
+          font-size: vw(16px);
+          margin-left: vw(8px);
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $TABLET-VW) {
+  @mixin box {
+    padding: 10px;
+    height: 40px;
   }
 
-  .li {
+  .input {
     @include box();
+    width: 390px;
+    font-size: 16px;
+  }
+  .ul {
+    display: flex;
+    flex-wrap: wrap;
+    .li {
+      @include box();
+      width: (195px);
+      span {
+        & + span {
+          font-size: (14px);
+          margin-left: (8px);
+        }
+      }
+    }
+  }
+}
 
-    span {
-      & + span {
-        margin-left: vw(8px);
+@media screen and (max-width: $PHONE-VW) {
+  @mixin box {
+    padding: vw-p(10px);
+    height: vw-p(40px);
+  }
+
+  .input {
+    @include box();
+    width: vw-p(390px);
+    font-size: vw-p(16px);
+  }
+
+  .ul {
+    display: flex;
+    flex-wrap: wrap;
+    .li {
+      @include box();
+      width: vw-p(195px);
+      span {
+        & + span {
+          font-size: vw-p(14px);
+          margin-left: vw-p(8px);
+        }
       }
     }
   }
