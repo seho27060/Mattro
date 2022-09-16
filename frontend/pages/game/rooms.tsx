@@ -15,9 +15,7 @@ const roomList = [
   { id: 6, number: 0, title: "방 제목 666" }
 ];
 
-// eslint-disable-next-line react/prop-types
-const Rooms: NextPage = (id) => {
-  console.log(id);
+const Rooms: NextPage = () => {
   return (
     <div className={`${styles.wrapper} flex column align-center`}>
       <span className={styles.station}>

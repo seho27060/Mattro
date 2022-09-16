@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
 
 import styles from "./[id].module.scss";
@@ -20,13 +21,13 @@ const RoomDetail: NextPage = () => {
   return (
     <div className={`${styles.wrapper} flex column align-center`}>
       <h2 className="align-center coreExtra fs-30">
-        <span className="flex justify-center align-center coreExtra fs-28">
+        <span
+          className={`${styles.room__num} flex justify-center align-center coreExtra fs-28`}
+        >
           0/4
         </span>
         <span className={`${styles.room__title}`}>
-          {room.title.length > 13
-            ? `${room.title.slice(0, 13)}...`
-            : room.title}
+          {room.title.length > 9 ? `${room.title.slice(0, 9)}...` : room.title}
         </span>
         <span className={`${styles.subway1}`}>
           <Image src={subway1} alt="subway1" />
@@ -56,9 +57,14 @@ const RoomDetail: NextPage = () => {
         <span className={styles.chair1}>
           <Image src={chair1} alt="chair1" />
         </span>
-        <button className="coreExtra fs-32" type="button">
-          start
-        </button>
+        <Link href="/game/main">
+          <button
+            className="flex align-center justify-center coreExtra fs-32"
+            type="button"
+          >
+            start
+          </button>
+        </Link>
         <span className={styles.chair2}>
           <Image src={chair2} alt="chair1" />
         </span>

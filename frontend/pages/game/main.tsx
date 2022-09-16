@@ -2,6 +2,7 @@ import type { NextPage } from "next";
 import Image from "next/image";
 
 import styles from "./main.module.scss";
+import chair1 from "../../public/images/chair1.png";
 import chair2 from "../../public/images/chair2.png";
 
 const userList = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }];
@@ -27,14 +28,20 @@ const Start: NextPage = () => {
       </div>
       <div className={`${styles.line} flex justify-center align-center`}>
         <div className={`${styles.circle} flex justify-center align-center`}>
-          <input className="coreExtra fs-60" value="1" onChange={onChange} />
-          <span className="coreExtra fs-60">호선</span>
+          <input
+            className="coreExtra fs-60"
+            value="경의중앙"
+            onChange={onChange}
+          />
+          <span className="coreExtra fs-60">(호)선</span>
         </div>
       </div>
       <div className={`${styles.footer}`}>
-        <span className={styles.empty} />
+        <span className={styles.chair1}>
+          <Image src={chair1} alt="chair1" />
+        </span>
         <button className="coreExtra fs-80" type="button">
-          Start !
+          Start!
         </button>
         <span className={styles.chair2}>
           <Image src={chair2} alt="chair2" />
