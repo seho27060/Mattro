@@ -23,3 +23,23 @@
     border-radius: vw(24px);
   }
 }
+
+@media screen and (max-width: $TABLET-VW) {
+  .circle {
+    padding: (4px) (6px);
+    min-height: (20px);
+    min-width: (20px);
+
+    border-radius: (20px);
+  }
+}
+
+@media screen and (max-width: $PHONE-VW) {
+  .circle {
+    padding: vw-p(4px) vw-p(6px);
+    min-height: vw-p(20px);
+    min-width: vw-p(20px);
+
+    border-radius: vw-p(20px);
+  }
+}
