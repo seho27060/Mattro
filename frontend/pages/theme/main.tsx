@@ -11,28 +11,35 @@ export default function themeMain() {
   return (
     <div className={`${styles.theme} flex justify-center`}>
       <div className={`${styles.contents} flex column align-center`}>
-        <div className={styles.title}>
-          <Image src={title} alt="title" />
+        <div className="flex column align-center">
+          <div className={styles.title}>
+            <Image src={title} alt="title" />
+          </div>
+          <p className="coreBold fs-36"> 오늘 끌리는 맛집은 어디?</p>
         </div>
-        <p className="coreBold fs-36"> 오늘 끌리는 맛집은 어디?</p>
-        <div className={`${styles.images} flex`}>
-          <div>
-            <Image src={chair2} alt="char" className="" />
-          </div>
-          <div>
-            <Image src={char} alt="char" className="" />
-          </div>
-          <div>
-            <Image src={chair1} alt="char" className="" />
-          </div>
-        </div>
-        <nav className="flex justify-center">
-          <Link href="/theme/question">
-            <div className={`${styles.btn} fs-32 coreExtra`}>
-              테마별 맛집 추천받기
+
+        <div className={`${styles.box} flex column align-center`}>
+          <div className={`${styles.images} flex`}>
+            <div>
+              <Image src={chair2} alt="char" className="" />
             </div>
-          </Link>
-        </nav>
+            <div>
+              <Image src={char} alt="char" className="" />
+            </div>
+            <div>
+              <Image src={chair1} alt="char" className="" />
+            </div>
+          </div>
+          <nav className="flex justify-center">
+            <Link href="/theme/question">
+              <div
+                className={`${styles.btn} fs-32 coreExtra flex align-center justify-center`}
+              >
+                테마별 맛집 추천받기
+              </div>
+            </Link>
+          </nav>
+        </div>
       </div>
     </div>
   );

@@ -1,12 +1,12 @@
 .result {
   .contents {
-    margin-top: (28px);
+    margin-top: (12px);
     .title {
       color: $GRAY-3A;
-      margin-bottom: (80px);
+      margin-bottom: (40px);
       .food {
-        padding: (19px) (93px);
-        border: (8px) solid $MAIN;
+        padding: (19px) (70px);
+        border: (7px) solid $MAIN;
         border-radius: (46px);
         margin: 0 (52px);
         span {
@@ -14,14 +14,14 @@
         }
       }
     }
-    .btn {
-      margin-top: (60px);
-      button {
-        padding: (16px) (28px);
+    .btns {
+      margin-top: (30px);
+      .btn {
+        padding: (8px) (20px);
         background-color: $GRAY-BA;
         color: $WHITE;
-        border-radius: (30px);
-        margin: 0 (20px);
+        border-radius: (18px);
+        margin: 0 (14px);
         &:hover {
           background-color: $MAIN;
         }
@@ -33,22 +33,22 @@
 @media screen and (max-width: $DESKTOP-VW) {
   .result {
     .contents {
-      margin-top: vw(28px);
+      margin-top: vw(12px);
       .title {
-        margin-bottom: vw(80px);
+        margin-bottom: vw(40px);
         .food {
-          padding: vw(19px) vw(93px);
+          padding: vw(19px) vw(70px);
           border: vw(8px) solid $MAIN;
           border-radius: vw(46px);
           margin: 0 vw(52px);
         }
       }
     }
-    .btn {
-      margin-top: vw(60px);
-      button {
+    .btns {
+      margin-top: vw(30px);
+      .btn {
         padding: vw(16px) vw(28px);
-        border-radius: vw(30px);
+        border-radius: vw(20px);
         margin: 0 vw(20px);
       }
     }
@@ -57,23 +57,32 @@
 @media screen and (max-width: $TABLET-VW) {
   .result {
     .contents {
-      margin-top: vw-t(28px);
+      margin-top: (20px);
+
       .title {
-        margin-bottom: vw-t(80px);
+        font-size: (18px);
+        margin-bottom: (40px);
+        flex-direction: column;
+        :nth-child(3) {
+          display: none;
+        }
         .food {
-          padding: vw-t(19px) vw-t(93px);
-          border: vw-t(8px) solid $MAIN;
-          border-radius: vw-t(46px);
-          margin: 0 vw-t(52px);
+          font-size: (20px);
+          padding: (13px) (60px);
+          border: (6px) solid $MAIN;
+          border-radius: (46px);
+          margin: (16px) 0 0 0;
         }
       }
-    }
-    .btn {
-      margin-top: vw-t(60px);
-      button {
-        padding: vw-t(16px) vw-t(28px);
-        border-radius: vw-t(30px);
-        margin: 0 vw-t(20px);
+      .btns {
+        margin-top: (20px);
+        .btn {
+          padding: (10px) (18px);
+          margin: 0 (8px);
+          margin-top: (20px);
+          border-radius: (16px);
+          font-size: (14px);
+        }
       }
     }
   }
@@ -81,23 +90,28 @@
 @media screen and (max-width: $PHONE-VW) {
   .result {
     .contents {
-      margin-top: vw-p(28px);
+      margin-top: vw-p(20px);
+
       .title {
-        margin-bottom: vw-p(80px);
+        font-size: vw-p(18px);
+        margin-bottom: vw-p(40px);
         .food {
-          padding: vw-p(19px) vw-p(93px);
-          border: vw-p(8px) solid $MAIN;
+          font-size: vw-p(20px);
+          padding: vw-p(13px) vw-p(60px);
+          border: vw-p(6px) solid $MAIN;
           border-radius: vw-p(46px);
-          margin: 0 vw-p(52px);
+          margin: vw-p(16px) 0 0 0;
         }
       }
-    }
-    .btn {
-      margin-top: vw-p(60px);
-      button {
-        padding: vw-p(16px) vw-p(28px);
-        border-radius: vw-p(30px);
-        margin: 0 vw-p(20px);
+      .btns {
+        margin-top: vw-p(20px);
+        .btn {
+          padding: vw-p(10px) vw-p(18px);
+          margin: 0 vw-p(8px);
+          margin-top: vw-p(20px);
+          border-radius: vw-p(16px);
+          font-size: vw-p(14px);
+        }
       }
     }
   }

@@ -6,7 +6,7 @@ export default function Stepbar() {
   return (
     <div className={`${styles.step} flex column`}>
       <div className={`${styles.num} notoBold fs-20`}>{num}</div>
-      <div className={`${styles.bar} notoBold fs-20`}>
+      <div className={styles.bar}>
         <div />
       </div>
     </div>
