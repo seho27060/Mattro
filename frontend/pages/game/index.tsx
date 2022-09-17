@@ -1,6 +1,8 @@
 import type { NextPage } from "next";
 import Link from "next/link";
 import { useState } from "react";
+import Image from "next/image";
+import logo from "../../public/images/logo/game_logo.png";
 import Modal from "../../components/layouts/Modal";
 
 import styles from "./index.module.scss";
@@ -14,7 +16,9 @@ const index: NextPage = () => {
     <div
       className={`${styles.wrapper} flex column justify-center align-center`}
     >
-      <h1 className="fs-100">지하철 미니 게임</h1>
+      <div>
+        <Image src={logo} alt="logo" />
+      </div>
       <Link href="/game/rooms">
         <div
           className={`${styles.start__btn} flex justify-center align-center fs-32 coreExtra`}

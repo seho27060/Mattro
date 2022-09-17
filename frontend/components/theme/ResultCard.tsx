@@ -73,7 +73,7 @@ export default function ResultCard() {
       <button
         type="button"
         onClick={shareKakao}
-        className="flex notoBold fs-12 align-center justify-center"
+        className="flex notoBold align-center justify-center"
       >
         <div className="flex align-center justify-center">
           <Image src={kakao} alt="kakao" className={styles.icon} />
