@@ -23,6 +23,12 @@
     object-fit: cover;
   }
 }
+.url {
+  :nth-child(n) {
+    color: $GRAY-5B;
+    margin-right: 20px;
+  }
+}
 
 .menu {
   width: (36px);

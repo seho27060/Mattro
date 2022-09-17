@@ -27,11 +27,16 @@ export default function Navbar() {
           <Image src={logo} alt="logo" className={styles.img} />
         </a>
       </Link>
-      <div className="flex align-center justify-center">
-        <div>{/* <DarkMode /> */}</div>
-        <button type="button" className={styles.menu} onClick={transition}>
+      <div className={`${styles.url} flex align-center notoBold fs-20`}>
+        {/* <div> */}
+        <Link href="/subway">1. 지하철</Link>
+        <Link href="/game">2. 게임</Link>
+        <Link href="/theme/main">3. 테마별_추천</Link>
+        <Link href="/theme/result">4. 추천_결과</Link>
+        {/* </div> */}
+        {/* <button type="button" className={styles.menu} onClick={transition}>
           <Image src={before} alt="menu" />
-        </button>
+        </button> */}
       </div>
     </nav>
   );

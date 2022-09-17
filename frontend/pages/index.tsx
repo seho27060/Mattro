@@ -1,5 +1,7 @@
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
+import Image from "next/image";
+import logo from "../public/images/logo/logo.png";
 
 import styles from "./index.module.scss";
 
@@ -15,7 +17,11 @@ const Home: NextPage = () => {
           지하철 노선별 맛집 추천
           <div />
         </div>
-        <div className={`${styles.title} fs-100 coreHeavy`}>맛트로</div>
+        <div
+          className={`${styles.title} fs-100 coreHeavy flex align-center justify-center`}
+        >
+          <Image src={logo} alt="logo" className={styles.logo} />
+        </div>
         <button
           type="button"
           onClick={() => {
