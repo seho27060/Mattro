@@ -1,0 +1,96 @@
+// pipeline {
+//     agent any           // 아무 에이전트에서 해당 파이프라인 또는 stage를 실행함.
+//
+//     triggers {          // triggers - pipeline 블록에서만 작성가능, 언제 재 트리거 될것인지 지정.
+//         pollSCM('H/10 * * * *')
+//     }
+//
+//     environment {       // pipeline 블록의 환경 변수 지정, 모든 단계에 적용됨
+//         imagename = "mattro-back"
+//         dockerImage = ''
+//     }
+//
+//     stages {
+//         // git에서 repository clone
+//         stage('Prepare') {
+//           steps {
+//             echo 'Clonning Repository'
+//             git url: 'https://lab.ssafy.com/s07-bigdata-dist-sub2/S07P22C206',
+//               branch: 'backend',
+//               credentialsId: 'cV63bzFhaXc9FZXLzPBH'
+//             }
+//             post {
+//              success {
+//                echo 'Successfully Cloned Repository'
+//              }
+//            	 failure {
+//                error 'This pipeline stops here...'
+//              }
+//           }
+//         }
+//
+//         // gradle build
+//         stage('Build Gradle') {
+//           agent any
+//           steps {
+//             echo 'Build Gradle'
+//             dir ('./backend/mattro'){
+//                 sh """
+//                 ./gradlew clean build --exclude-task test
+//                 """
+//             }
+//           }
+//           post {
+//             failure {
+//               error 'This pipeline stops here...'
+//             }
+//           }
+//         }
+//
+//         // docker build
+//         stage('Build Docker') {
+//           agent any
+//           steps {
+//             echo 'Build Docker'
+//             script {
+//                 dockerImage = docker.build imagename
+//             }
+//           }
+//           post {
+//             failure {
+//               error 'This pipeline stops here...'
+//             }
+//           }
+//         }
+//
+//         // docker push
+//         stage('Push Docker') {
+//           agent any
+//           steps {
+//             echo 'Push Docker'
+//             script {
+//                 docker.withRegistry( '', registryCredential) {
+//                     dockerImage.push("docker tag name")  // ex) "1.0"
+//                 }
+//             }
+//           }
+//           post {
+//             failure {
+//               error 'This pipeline stops here...'
+//             }
+//           }
+//         }
+//     }
+// }
+
+pipeline {
+    agent any
+
+    stages {
+        stage('Hello') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+    }
+}
