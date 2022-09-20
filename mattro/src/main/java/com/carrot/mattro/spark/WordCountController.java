@@ -1,4 +1,4 @@
-package com.spark.spark;
+package com.carrot.mattro.spark;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;

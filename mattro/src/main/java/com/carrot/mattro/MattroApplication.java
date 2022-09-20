@@ -1,13 +1,13 @@
-package com.spark.spark;
+package com.carrot.mattro;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SparkApplication {
+public class MattroApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SparkApplication.class, args);
+		SpringApplication.run(MattroApplication.class, args);
 	}
 
 }
