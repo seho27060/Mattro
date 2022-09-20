@@ -1,4 +1,4 @@
-package com.spark.spark;
+package com.carrot.mattro.spark;
 
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
