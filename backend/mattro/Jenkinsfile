@@ -64,7 +64,7 @@ pipeline {
 
         stage('Deploy'){
             steps{
-              sh 'docker run -d -p 9090:9090 --name mattro-back mattro-back'
+              sh 'docker run -d -p 9090:8080 --name mattro-back mattro-back'
             }
             post {
             success {
