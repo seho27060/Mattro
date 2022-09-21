@@ -6,14 +6,14 @@ const LineSearch = () => {
   const [searchList, setSearchList] = useState<
     (LineCircleProps & { stationName: string })[]
   >([
-    { id: "LS", lineName: "신분당", stationName: "양재시민의 숲" },
-    { id: "L2", lineName: "2", stationName: "홍대" },
-    { id: "L6", lineName: "6", stationName: "동대입구" }
+    // { id: "LS", lineName: "신분당", stationName: "양재시민의 숲" },
+    // { id: "L2", lineName: "2", stationName: "홍대" },
+    // { id: "L6", lineName: "6", stationName: "동대입구" }
   ]);
 
   return (
     <div id="lineSearch">
-      <input
+      {/* <input
         type="text"
         className={`fs-20 notoBold ${styles.input}`}
         placeholder="지하철 역 검색"
@@ -27,7 +27,7 @@ const LineSearch = () => {
             </span>
           </li>
         ))}
-      </ul>
+      </ul> */}
     </div>
   );
 };

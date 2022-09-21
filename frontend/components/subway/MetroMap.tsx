@@ -1,13 +1,13 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/no-unknown-property */
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, MouseEvent } from "react";
 import styles from "./MetroMap.module.scss";
 
 type MetroMapProps = {
   scaleSize: number;
 };
 const MetroMap = ({ scaleSize }: MetroMapProps) => {
-  const wrraperRef = useRef<HTMLDivElement>();
+  const wrraperRef = useRef<HTMLDivElement>(null);
   const [dragging, setDragging] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
 
