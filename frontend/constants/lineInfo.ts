@@ -1,4 +1,6 @@
-const lineInfos = [
+import { UsedLineIdType, UsedLinNameType } from "./lineType";
+
+const lineInfos: { id: UsedLineIdType; name: UsedLinNameType }[] = [
   { id: "L1", name: "1" },
   { id: "L2", name: "2" },
   { id: "L3", name: "3" },
