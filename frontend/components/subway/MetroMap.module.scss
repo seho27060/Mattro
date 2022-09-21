@@ -1,20 +1,62 @@
-.map {
-  // position: absolute;
-  // top: 0;
-  // left: 0;
-  // z-index: 1000;
-  // padding-top: vw(128px);
-  // transform-origin: 0px 0px 0px;
-  transform-origin: center;
-  backface-visibility: hidden;
+.wrraper {
+  position: absolute;
+  top: 0;
+  left: 0;
 
   width: 100%;
   height: 100%;
-  transform: scale(1) scaleZ(1);
-  transition-timing-function: ease;
-  cursor: default;
-  // cursor: move;
+}
 
+.map {
+  circle[class*="L1"] {
+    color: $L1;
+  }
+  circle[class*="L2"] {
+    color: $L2;
+  }
+  circle[class*="L3"] {
+    color: $L3;
+  }
+  circle[class*="L4"] {
+    color: $L4;
+  }
+  circle[class*="L5"] {
+    color: $L5;
+  }
+  circle[class*="L6"] {
+    color: $L6;
+  }
+  circle[class*="L7"] {
+    color: $L7;
+  }
+  circle[class*="L8"] {
+    color: $L8;
+  }
+  circle[class*="L9"] {
+    color: $L9;
+  }
+  circle[class*="LK"] {
+    color: $LK;
+  }
+  circle[class*="LB"] {
+    color: $LB;
+  }
+  circle[class*="LS"] {
+    color: $LS;
+  }
+  circle[class*="LW"] {
+    color: $LW;
+  }
+  circle[class*="LSL"] {
+    color: $LSL;
+  }
+  transform-origin: center;
+  backface-visibility: hidden;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition-timing-function: ease;
+  cursor: grab;
   circle:hover {
     r: 5;
   }
@@ -23,7 +65,7 @@
     cursor: pointer;
     animation: init 3s ease-in;
   }
-  .isSelected {
+  circle[class*="isSelected"] {
     fill: currentColor;
     r: 4;
   }
@@ -31,16 +73,29 @@
   tspan {
     font-size: 10px;
   }
-  text {
-    margin: 3px;
-    animation: init 2s ease-in;
-  }
+  text,
   rect {
     animation: init 2s ease-in;
   }
-
-  g[class="line"] {
+  text:hover {
+    cursor: pointer;
+  }
+  tspan::after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 5px;
+    position: absolute;
+    left: 0;
+    bottom: 0px;
+    background: rgba(200, 125, 220, 0.6);
+  }
+  text:hover tspan::after {
     background-color: red;
+    width: 100%;
+    transition: width 0.3s;
+  }
+  g[class="line"] {
     stroke-dasharray: 1000;
     stroke-dashoffset: 1000;
     animation: dash 5s ease-in-out forwards;

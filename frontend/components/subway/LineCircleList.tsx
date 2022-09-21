@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import LineCircle from "./LineCircle";
 import styles from "./LineCircleList.module.scss";
 import lineInfos from "../../constants/lineInfo";
+import { UsedLineIdType } from "../../constants/lineType";
 
-const LineCircleList = () => {
+type LineCircleListProps = {
+  togggleSelectedLines: (line: UsedLineIdType) => void;
+};
+
+const LineCircleList = ({ togggleSelectedLines }: LineCircleListProps) => {
   return (
     <ul
       id="lineCircleList"
@@ -15,7 +20,11 @@ const LineCircleList = () => {
           key={line.id}
           className="infoLi flex align-center justify-center"
         >
-          <LineCircle id={line.id} lineName={line.name} />
+          <LineCircle
+            id={line.id}
+            lineName={line.name}
+            togggleSelectedLines={togggleSelectedLines}
+          />
         </li>
       ))}
     </ul>
