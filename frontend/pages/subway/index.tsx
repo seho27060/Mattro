@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState, MouseEvent } from "react";
 import LineInfoList from "../../components/subway/LineCircleList";
 import LineSearch from "../../components/subway/LineSearch";
 import LineSelectedBar from "../../components/subway/LineSelectedBar";
@@ -41,7 +41,7 @@ const Index = () => {
 
   const findNameById = (lineID: UsedLineIdType) => {
     const text = document.querySelector(`.S${lineID}`);
-    return text?.childNodes[0].innerHTML;
+    return (text?.childNodes[0] as HTMLElement).innerHTML;
   };
   const toggleCircle = (circle: SVGCircleElement) => {
     const { classList } = circle;
@@ -66,22 +66,20 @@ const Index = () => {
     }
   };
 
-  const clcikStation = (
-    e: React.MouseEvent<SVGCircleElement | SVGTextElement>
-  ) => {
+  const clcikStation = (e: MouseEvent<SVGCircleElement | SVGTextElement>) => {
     let cx = 0;
     let cy = 0;
-    let name;
+    let name = "";
 
     if (e.currentTarget.tagName === "circle") {
       const circle = e.currentTarget;
       if (!circle.id) {
         const circleChilds = circle.parentElement?.childNodes;
         if (circleChilds) {
-          circleChilds.forEach((circle, ind) => {
+          circleChilds.forEach((cir, ind) => {
             if (ind !== 0) {
-              cx += (circle as SVGCircleElement).cx.baseVal.value;
-              cy += (circle as SVGCircleElement).cy.baseVal.value;
+              cx += (cir as SVGCircleElement).cx.baseVal.value;
+              cy += (cir as SVGCircleElement).cy.baseVal.value;
             }
           });
           cx /= circleChilds.length - 1;
@@ -89,8 +87,8 @@ const Index = () => {
         }
         const id = e.currentTarget.parentElement?.classList.value
           .match(/M\d{4}/g)
-          ?.map((id) => id.replace("M", ""))[0];
-        if (id) name = findNameById(id);
+          ?.map((id_) => id_.replace("M", ""))[0];
+        if (id) name = findNameById(id as UsedLineIdType);
       } else {
         toggleCircle(circle as SVGCircleElement);
         cx = (circle as SVGCircleElement).cx.baseVal.value;
@@ -139,8 +137,12 @@ const Index = () => {
   useEffect(() => {
     const circles = document.querySelectorAll("circle");
     const texts = document.querySelectorAll("text");
-    circles.forEach((circle) => circle.addEventListener("click", clcikStation));
-    texts.forEach((text) => text.addEventListener("click", clcikStation));
+    circles.forEach((circle) =>
+      circle.addEventListener("click", (e) => clcikStation(e as any))
+    );
+    texts.forEach((text) =>
+      text.addEventListener("click", (e) => clcikStation(e as any))
+    );
   }, []);
 
   useEffect(() => {
