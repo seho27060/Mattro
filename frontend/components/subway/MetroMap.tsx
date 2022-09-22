@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/no-unknown-property */
-import React, { useRef, useState, MouseEvent } from "react";
+import React, { useRef, useState, MouseEvent, TouchEvent } from "react";
 import styles from "./MetroMap.module.scss";
 
 type MetroMapProps = {
@@ -33,6 +33,30 @@ const MetroMap = ({ scaleSize }: MetroMapProps) => {
   const endDrag = () => {
     setDragging(false);
   };
+
+  const startTouch = (e: TouchEvent<HTMLDivElement>) => {
+    setPosition({ x: e.touches[0].clientX, y: e.touches[0].clientY });
+    setDragging(true);
+  };
+
+  const touchMove = (e: TouchEvent<HTMLDivElement>) => {
+    if (dragging && wrraperRef.current) {
+      e.preventDefault();
+      wrraperRef.current.style.left = `${
+        (wrraperRef.current.style.left.replace("px", "") as unknown as number) -
+        (position.x - e.touches[0].clientX)
+      }px`;
+      wrraperRef.current.style.top = `${
+        (wrraperRef.current.style.top.replace("px", "") as unknown as number) -
+        (position.y - e.touches[0].clientY)
+      }px`;
+      setPosition({ x: e.touches[0].clientX, y: e.touches[0].clientY });
+    }
+  };
+  const endTouch = () => {
+    setDragging(false);
+  };
+
   return (
     <div id="metroMap">
       <div
@@ -41,6 +65,9 @@ const MetroMap = ({ scaleSize }: MetroMapProps) => {
         onMouseMove={drag}
         onMouseUp={endDrag}
         onMouseLeave={endDrag}
+        onTouchStart={startTouch}
+        onTouchMove={touchMove}
+        onTouchEnd={endTouch}
         ref={wrraperRef}
       >
         <svg
