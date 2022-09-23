@@ -1,30 +1,29 @@
 .home {
-  // width: 100%;
-  width: 1440px;
+  width: 100%;
+  position: relative;
+  // width: 1440px;
   height: 100%;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center top;
   background-image: url("../public/images/empty.png");
+  overflow: hidden;
   .contents {
     // width: vw(1440px);
     height: 100%;
     .subtitle {
+      z-index: 1;
       color: $GRAY_3A;
-      margin: (168px) 0 (50px) 0;
+      margin: (88px) 0 (30px) 0;
     }
     .title {
+      z-index: 1;
       color: $MAIN;
-      margin-bottom: (100px);
-      overflow: hidden;
-      width: 600px;
-      .logo {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
+      margin-bottom: (60px);
+      width: 400px;
     }
     .btn {
+      z-index: 1;
       color: $MAIN;
       background-color: $WHITE;
       width: (360px);
@@ -34,7 +33,58 @@
       &:hover {
         color: $WHITE;
         background-color: $MAIN;
+        box-shadow: 0px 0px 10px 3px rgba(229, 48, 96, 0.3);
       }
+    }
+
+    // 기차 ======
+    .train,
+    .train_out {
+      position: absolute;
+      // height: 300px;
+      width: 800px;
+      height: 600px;
+      animation-timing-function: ease-out;
+      .img {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .train {
+      animation-name: train;
+      animation-delay: 2s;
+      // animation-duration: 1s;
+      animation-fill-mode: forwards;
+      // margin-top: 30px;
+      left: -50%;
+      bottom: 300px;
+    }
+    .train_out {
+      animation-duration: 3s;
+      animation-name: train_out;
+      animation-fill-mode: forwards;
+    }
+  }
+
+  @keyframes train {
+    from {
+      left: -50%;
+    }
+    to {
+      left: -20%;
+      bottom: 0px;
+    }
+  }
+
+  @keyframes train_out {
+    from {
+      left: -20%;
+      bottom: 0px;
+    }
+    to {
+      left: 50%;
+      bottom: -60%;
     }
   }
 }
@@ -45,17 +95,22 @@
     width: vw(1440px);
     .contents {
       .subtitle {
-        margin: vw(168px) 0 vw(50px) 0;
+        margin: vw(88px) 0 vw(30px) 0;
       }
       .title {
-        margin-bottom: vw(100px);
-        width: vw(600px);
+        margin-bottom: vw(60px);
+        width: vw(400px);
       }
       .btn {
         width: vw(360px);
         height: vw(90px);
         border-radius: vw(46px);
         border: vw(8px) solid $MAIN;
+      }
+      .train,
+      .train_out {
+        width: vw(850px);
+        height: vw(600px);
       }
     }
   }
@@ -83,6 +138,37 @@
         border-radius: (46px);
         border: (4px) solid $MAIN;
       }
+      .train,
+      .train_out {
+        width: (500px);
+        height: (250px);
+      }
+
+      .train {
+        left: -100%;
+        bottom: (300px);
+        // bottom: 0px;
+      }
+    }
+    @keyframes train {
+      from {
+        left: -100%;
+      }
+      to {
+        left: -50%;
+        bottom: 150px;
+      }
+    }
+
+    @keyframes train_out {
+      from {
+        left: -50%;
+        bottom: 150px;
+      }
+      to {
+        left: 40%;
+        bottom: -10%;
+      }
     }
   }
 }
@@ -107,6 +193,37 @@
         border-radius: vw-p(46px);
         border: vw-p(4px) solid $MAIN;
       }
+      .train,
+      .train_out {
+        width: vw-p(500px);
+        height: vw-p(300px);
+      }
+
+      .train {
+        left: -100%;
+        bottom: vw-p(300px);
+        // bottom: 0px;
+      }
+    }
+  }
+  @keyframes train {
+    from {
+      left: -100%;
+    }
+    to {
+      left: -50%;
+      bottom: vw-p(150px);
+    }
+  }
+
+  @keyframes train_out {
+    from {
+      left: -50%;
+      bottom: vw-p(150px);
+    }
+    to {
+      left: 40%;
+      bottom: -10%;
     }
   }
 }
