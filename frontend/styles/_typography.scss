@@ -1,0 +1,375 @@
+.L1 {
+  background-color: $L1;
+  border-color: $L1;
+}
+.L2 {
+  background-color: $L2;
+  border-color: $L2;
+}
+.L3 {
+  background-color: $L3;
+  border-color: $L3;
+}
+.L4 {
+  background-color: $L4;
+  border-color: $L4;
+}
+.L5 {
+  background-color: $L5;
+  border-color: $L5;
+}
+.L6 {
+  background-color: $L6;
+  border-color: $L6;
+}
+.L7 {
+  background-color: $L7;
+  border-color: $L7;
+}
+.L8 {
+  background-color: $L8;
+  border-color: $L8;
+}
+.L9 {
+  background-color: $L9;
+  border-color: $L9;
+}
+.LK {
+  background-color: $LK;
+  border-color: $LK;
+}
+.LB {
+  background-color: $LB;
+  border-color: $LB;
+}
+.LS {
+  background-color: $LS;
+  border-color: $LS;
+}
+.LW {
+  background-color: $LW;
+  border-color: $LW;
+}
+.LSL {
+  background-color: $LSL;
+  border-color: $LSL;
+}
+/* 폰트 타이포 */
+.notoMid {
+  font-family: "NotoSansMedium";
+}
+
+.notoBold {
+  font-family: "NotoSansBold";
+}
+
+.notoReg {
+  font-family: "NotoSansRegular";
+}
+.notoBlack {
+  font-family: "NotoSansBlack";
+}
+.coreHeavy {
+  font-family: "SCDream8";
+}
+.coreBold {
+  font-family: "SCDream6";
+}
+.coreExtra {
+  font-family: "SCDream7";
+}
+.coreMid {
+  font-family: "SCDream5";
+}
+.coreBlack {
+  font-family: "SCDream9";
+}
+
+.phoneOnly {
+  display: none;
+}
+.fs-10 {
+  font-size: (10px);
+}
+.fs-12 {
+  font-size: (12px);
+}
+.fs-13 {
+  font-size: (13px);
+}
+.fs-14 {
+  font-size: (14px);
+}
+.fs-15 {
+  font-size: (15px);
+}
+.fs-16 {
+  font-size: (16px);
+}
+.fs-18 {
+  font-size: (18px);
+}
+.fs-20 {
+  font-size: (20px);
+}
+.fs-22 {
+  font-size: (22px);
+}
+.fs-24 {
+  font-size: (24px);
+}
+.fs-28 {
+  font-size: (28px);
+}
+.fs-30 {
+  font-size: (30px);
+}
+.fs-32 {
+  font-size: (32px);
+}
+.fs-34 {
+  font-size: (34px);
+}
+.fs-36 {
+  font-size: (36px);
+}
+.fs-40 {
+  font-size: (40px);
+}
+.fs-48 {
+  font-size: (48px);
+}
+.fs-50 {
+  font-size: (50px);
+}
+.fs-60 {
+  font-size: (60px);
+}
+.fs-80 {
+  font-size: (80px);
+}
+.fs-90 {
+  font-size: (90px);
+}
+.fs-100 {
+  font-size: (100px);
+}
+
+@media screen and (max-width: $DESKTOP-VW) {
+  .fs-10 {
+    font-size: vw(10px);
+  }
+  .fs-12 {
+    font-size: vw(12px);
+  }
+  .fs-13 {
+    font-size: vw(13px);
+  }
+  .fs-14 {
+    font-size: vw(14px);
+  }
+  .fs-15 {
+    font-size: vw(15px);
+  }
+  .fs-16 {
+    font-size: vw(16px);
+  }
+  .fs-18 {
+    font-size: vw(18px);
+  }
+  .fs-20 {
+    font-size: vw(20px);
+  }
+  .fs-22 {
+    font-size: vw(22px);
+  }
+  .fs-24 {
+    font-size: vw(24px);
+  }
+  .fs-28 {
+    font-size: vw(28px);
+  }
+  .fs-30 {
+    font-size: vw(30px);
+  }
+  .fs-32 {
+    font-size: vw(32px);
+  }
+  .fs-34 {
+    font-size: vw(34px);
+  }
+  .fs-36 {
+    font-size: vw(36px);
+  }
+  .fs-40 {
+    font-size: vw(40px);
+  }
+  .fs-48 {
+    font-size: vw(48px);
+  }
+  .fs-50 {
+    font-size: vw(50px);
+  }
+  .fs-60 {
+    font-size: vw(60px);
+  }
+  .fs-80 {
+    font-size: vw(80px);
+  }
+  .fs-90 {
+    font-size: vw(90px);
+  }
+  .fs-100 {
+    font-size: vw(100px);
+  }
+}
+
+@media screen and (max-width: $TABLET-VW) {
+  .desktopOnly {
+    display: none;
+  }
+  .phoneOnly {
+    display: none;
+  }
+  .fs-10 {
+    font-size: vw-t(10px);
+  }
+  .fs-12 {
+    font-size: vw-t(12px);
+  }
+  .fs-13 {
+    font-size: vw-t(13px);
+  }
+  .fs-14 {
+    font-size: vw-t(14px);
+  }
+  .fs-15 {
+    font-size: vw-t(15px);
+  }
+  .fs-16 {
+    font-size: vw-t(16px);
+  }
+  .fs-18 {
+    font-size: vw-t(18px);
+  }
+  .fs-20 {
+    font-size: vw-t(20px);
+  }
+  .fs-22 {
+    font-size: vw-t(22px);
+  }
+  .fs-24 {
+    font-size: vw-t(24px);
+  }
+  .fs-28 {
+    font-size: vw-t(28px);
+  }
+  .fs-30 {
+    font-size: vw-t(30px);
+  }
+  .fs-32 {
+    font-size: vw-t(32px);
+  }
+  .fs-34 {
+    font-size: vw-t(34px);
+  }
+  .fs-36 {
+    font-size: vw-t(36px);
+  }
+  .fs-40 {
+    font-size: vw-t(40px);
+  }
+  .fs-48 {
+    font-size: vw-t(48px);
+  }
+  .fs-50 {
+    font-size: vw-t(50px);
+  }
+  .fs-60 {
+    font-size: vw-t(60px);
+  }
+  .fs-80 {
+    font-size: vw-t(80px);
+  }
+  .fs-90 {
+    font-size: vw-t(90px);
+  }
+  .fs-100 {
+    font-size: vw-t(100px);
+  }
+}
+@media screen and (max-width: $PHONE-VW) {
+  .desktopOnly {
+    display: none;
+  }
+
+  .notPhone {
+    display: none;
+  }
+  .fs-10 {
+    font-size: vw-p(10px);
+  }
+  .fs-12 {
+    font-size: vw-p(12px);
+  }
+  .fs-13 {
+    font-size: vw-p(13px);
+  }
+  .fs-14 {
+    font-size: vw-p(14px);
+  }
+  .fs-15 {
+    font-size: vw-p(15px);
+  }
+  .fs-16 {
+    font-size: vw-p(16px);
+  }
+  .fs-18 {
+    font-size: vw-p(18px);
+  }
+  .fs-20 {
+    font-size: vw-p(20px);
+  }
+  .fs-22 {
+    font-size: vw-p(22px);
+  }
+  .fs-24 {
+    font-size: vw-p(24px);
+  }
+  .fs-28 {
+    font-size: vw-p(28px);
+  }
+  .fs-30 {
+    font-size: vw-p(30px);
+  }
+  .fs-32 {
+    font-size: vw-p(32px);
+  }
+  .fs-34 {
+    font-size: vw-p(34px);
+  }
+  .fs-36 {
+    font-size: vw-p(36px);
+  }
+  .fs-40 {
+    font-size: vw-p(40px);
+  }
+  .fs-48 {
+    font-size: vw-p(48px);
+  }
+  .fs-50 {
+    font-size: vw-p(50px);
+  }
+  .fs-60 {
+    font-size: vw-p(60px);
+  }
+  .fs-80 {
+    font-size: vw-p(80px);
+  }
+  .fs-90 {
+    font-size: vw-p(90px);
+  }
+  .fs-100 {
+    font-size: vw-p(100px);
+  }
+}
