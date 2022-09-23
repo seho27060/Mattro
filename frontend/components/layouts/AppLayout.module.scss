@@ -1,0 +1,76 @@
+@mixin children {
+  width: 1440px;
+}
+
+.root {
+  height: 100%;
+  .children {
+    @include children();
+    height: calc(100% - 60px);
+
+    margin-top: 60px;
+  }
+  .children_main {
+    @include children();
+    height: 100%;
+  }
+}
+
+@media screen and (max-width: $DESKTOP-VW) {
+  @mixin children {
+    width: vw(1440px);
+  }
+
+  .root {
+    height: 100%;
+    .children {
+      @include children();
+      height: calc(100% - 60px);
+      margin-top: 60px;
+    }
+    .children_main {
+      @include children();
+      height: 100%;
+    }
+  }
+}
+
+@media screen and (max-width: $TABLET-VW) {
+  @mixin children {
+    width: 390px;
+  }
+
+  .root {
+    height: 100%;
+    .children {
+      @include children();
+      height: calc(100% - 40px);
+
+      margin-top: 40px;
+    }
+    .children_main {
+      @include children();
+      height: 100%;
+    }
+  }
+}
+
+@media screen and (max-width: $PHONE-VW) {
+  @mixin children {
+    width: vw-p(390px);
+  }
+
+  .root {
+    height: 100%;
+    .children {
+      @include children();
+      height: calc(100% - 40px);
+
+      margin-top: 40px;
+    }
+    .children_main {
+      @include children();
+      height: 100%;
+    }
+  }
+}

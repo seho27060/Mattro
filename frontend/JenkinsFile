@@ -1,0 +1,80 @@
+pipeline {
+    agent any
+    stages {
+        stage("build"){
+            steps{
+                script{
+                    try {
+                        sh 'docker stop mattro'
+                        sh 'docker rm mattro'
+                        sh 'docker rmi wlsgh97/mattro'
+                    } catch (e) {
+                        sh 'echo "nextjs stop중 실패"'
+                    }
+                    try {
+                        sh 'docker stop mattro-nginx'
+                        sh 'docker rm mattro-nginx'
+                        sh 'docker rmi wlsgh97/mattro-nginx'
+                    } catch (e) {
+                        sh 'echo "nginx stop중 실패"'
+                    }
+                    try{
+                        sh 'docker build -t wlsgh97/mattro ./frontend'
+                        sh 'docker build -t wlsgh97/mattro-nginx ./frontend/nginx'
+                    }catch(e){
+                        sh 'echo "docker 이미지빌드중 실패"'
+                    }
+                }
+            }
+            post {
+                success{
+                    sh 'echo build 성공'
+                }
+                failure{
+                    sh 'echo build 실패'
+                }
+            }
+        }
+        stage("create network"){
+            steps{
+                script{
+                    try {
+                        sh 'docker network remove my-network'
+                        sh 'docker network create my-network'
+                    } catch (e) {
+                        sh 'echo "네트워크 생성중 실패"'
+                    }
+                }
+            }
+            post {
+                success{
+                    sh 'echo create 성공'
+                }
+                failure{
+                    sh 'echo create 실패'
+                }
+            }
+        }
+        stage("docker-image push"){
+            steps{
+                sh 'echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_ID" --password-stdin'
+                sh "docker push wlsgh97/mattro"
+                sh "docker push wlsgh97/mattro-nginx"
+            }
+            post {
+                success{
+                    sh 'echo push 성공'
+                }
+                failure{
+                    sh 'echo push 실패'
+                }
+            }
+        }
+        stage("run"){
+            steps {
+                sh 'docker run -d --network my-network --name mattro wlsgh97/mattro'
+                sh 'docker run -d -p 80:80 --network my-network --link mattro:nextjs --name mattro-nginx wlsgh97/mattro-nginx'
+            }
+        }    
+    }    
+}
