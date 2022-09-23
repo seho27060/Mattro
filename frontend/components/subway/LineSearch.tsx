@@ -1,5 +1,6 @@
 import React, { useState, ChangeEvent, useRef } from "react";
 import { searchByName } from "../../constants/lineData";
+import { UsedLineIdType } from "../../constants/lineType";
 import LineCircle, { LineCircleProps } from "./LineCircle";
 import styles from "./LineSearch.module.scss";
 
@@ -12,8 +13,13 @@ type SearchListType = {
 type LineSearchProps = {
   setSearchId: (id: string) => void;
   setScaleSize: (size: number) => void;
+  setSelectedLines: (lines: UsedLineIdType[]) => void;
 };
-const LineSearch = ({ setSearchId, setScaleSize }: LineSearchProps) => {
+const LineSearch = ({
+  setSearchId,
+  setScaleSize,
+  setSelectedLines
+}: LineSearchProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [searchList, setSearchList] = useState<SearchListType[]>([]);
   // searchByName("화");
@@ -26,6 +32,16 @@ const LineSearch = ({ setSearchId, setScaleSize }: LineSearchProps) => {
       setSearchList([]);
     }
   };
+
+  const clickSearchItem = (item: SearchListType) => {
+    setSearchId(item.id);
+    setScaleSize(4);
+    setSearchList([]);
+    if (inputRef.current) inputRef.current.value = "";
+    const selectedLines = item.lines.map((line) => line.id);
+    setSelectedLines(selectedLines);
+  };
+
   return (
     <div id="lineSearch">
       <input
@@ -41,12 +57,7 @@ const LineSearch = ({ setSearchId, setScaleSize }: LineSearchProps) => {
           <li
             key={item.id}
             className={`flex align-center ${styles.li}`}
-            onClick={(e) => {
-              setSearchId(item.id);
-              setScaleSize(4);
-              setSearchList([]);
-              if (inputRef.current) inputRef.current.value = "";
-            }}
+            onClick={() => clickSearchItem(item)}
           >
             {item.lines.map((line) => (
               <LineCircle

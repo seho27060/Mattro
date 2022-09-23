@@ -176,7 +176,11 @@ const Index = () => {
       <MetroMap scaleSize={scaleSize} searchId={searchId} />
       <div id="line-container" className="flex">
         <LineInfoList togggleSelectedLines={handleSelectedLines} />
-        <LineSearch setSearchId={setSearchId} setScaleSize={setScaleSize} />
+        <LineSearch
+          setSearchId={setSearchId}
+          setScaleSize={setScaleSize}
+          setSelectedLines={setSelectedLines}
+        />
       </div>
       <div id="map-btn" className="flex column">
         <button
