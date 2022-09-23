@@ -36,4 +36,14 @@ public class MongoDBServiceImpl implements MongoDBService{
     public void findPlaceListByUrl(String url) {
 
     }
+
+    @Override
+    public OutputResponse findPlaceByStoreIndex(String storeIndex) {
+        Optional<Output> output = outputR.findByStoreIdx(storeIndex);
+        if(output.isPresent()){
+            return new OutputResponse(output.get());
+        }
+        else
+            return null;
+    }
 }

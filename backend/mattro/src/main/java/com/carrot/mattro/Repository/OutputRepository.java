@@ -8,4 +8,5 @@ import java.util.Optional;
 public interface OutputRepository extends MongoRepository<Output, String> {
 
     Optional<Output> findBy역명(String subwayName);
+    Optional<Output> findByStoreIdx(String storeIdx);
 }

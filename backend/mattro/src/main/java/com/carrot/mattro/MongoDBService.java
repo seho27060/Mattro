@@ -8,4 +8,5 @@ public interface MongoDBService {
     public void findPlaceListByChoiceList(String ChoiceList);
     public void findPlaceListByUrl(String url);
 
+    OutputResponse findPlaceByStoreIndex(String storeIndex);
 }
