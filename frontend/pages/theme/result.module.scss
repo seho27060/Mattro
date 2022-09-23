@@ -1,0 +1,116 @@
+.result {
+  .contents {
+    margin-top: (12px);
+    .title {
+      color: $GRAY-3A;
+      margin-bottom: (40px);
+      .food {
+        padding: (19px) (70px);
+        border: (7px) solid $MAIN;
+        border-radius: (46px);
+        margin: 0 (52px);
+        span {
+          color: $MAIN;
+        }
+      }
+    }
+    .btns {
+      margin-top: (50px);
+      .btn {
+        font-size: 20px;
+        padding: (12px) (24px);
+        background-color: $GRAY-BA;
+        color: $WHITE;
+        border-radius: (18px);
+        margin: 0 (14px);
+        &:hover {
+          background-color: $MAIN;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $DESKTOP-VW) {
+  .result {
+    .contents {
+      margin-top: vw(12px);
+      .title {
+        margin-bottom: vw(40px);
+        .food {
+          padding: vw(19px) vw(70px);
+          border: vw(8px) solid $MAIN;
+          border-radius: vw(46px);
+          margin: 0 vw(52px);
+        }
+      }
+    }
+    .btns {
+      margin-top: vw(30px);
+      .btn {
+        font-size: vw(18px);
+        padding: vw(16px) vw(28px);
+        border-radius: vw(20px);
+        margin: 0 vw(20px);
+      }
+    }
+  }
+}
+@media screen and (max-width: $TABLET-VW) {
+  .result {
+    .contents {
+      margin-top: (10px);
+
+      .title {
+        font-size: (14px);
+        margin-bottom: (30px);
+        .food {
+          font-size: (18px);
+          padding: (13px) (40px);
+          border: (6px) solid $MAIN;
+          border-radius: (46px);
+          margin: 0 (16px);
+        }
+      }
+      .btns {
+        margin-top: (20px);
+        .btn {
+          padding: (10px) (18px);
+          margin: 0 (8px);
+          margin-top: (15px);
+          border-radius: (16px);
+          font-size: (14px);
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: $PHONE-VW) {
+  .result {
+    .contents {
+      margin-top: vw-p(10px);
+
+      .title {
+        font-size: vw-p(14px);
+        margin-bottom: vw-p(30px);
+        .food {
+          font-size: vw-p(18px);
+          padding: vw-p(13px) vw-p(40px);
+          border: vw-p(6px) solid $MAIN;
+          border-radius: vw-p(46px);
+          margin: 0 vw-p(16px);
+        }
+      }
+      .btns {
+        margin-top: vw-p(20px);
+        .btn {
+          padding: vw-p(10px) vw-p(18px);
+          margin: 0 vw-p(8px);
+          margin-top: vw-p(15px);
+          border-radius: vw-p(16px);
+          font-size: vw-p(14px);
+        }
+      }
+    }
+  }
+}
