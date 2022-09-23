@@ -12790,11 +12790,11 @@ const MetroMap = ({ scaleSize }: MetroMapProps) => {
               id="S0205"
               style={{ textAnchor: "end" }}
             >
-              <tspan x="850" dx="-7" dy="-7" fontSize="9px" fontWeight="bold">
-                문화공원
-              </tspan>
               <tspan x="850" dx="-7" dy="-12" fontSize="9px" fontWeight="bold">
                 동대문역사
+              </tspan>
+              <tspan x="850" dx="-7" dy="9" fontSize="9px" fontWeight="bold">
+                문화공원
               </tspan>
             </text>
             <text
@@ -14893,11 +14893,11 @@ const MetroMap = ({ scaleSize }: MetroMapProps) => {
               id="S2743"
               style={{ textAnchor: "middle" }}
             >
-              <tspan x="555" dx="0" dy="-5" fontSize="9px">
-                삼거리
-              </tspan>
               <tspan x="555" dx="0" dy="-12" fontSize="9px">
                 신대방
+              </tspan>
+              <tspan x="555" dx="0" dy="9" fontSize="9px">
+                삼거리
               </tspan>
             </text>
             <text
@@ -16091,11 +16091,11 @@ const MetroMap = ({ scaleSize }: MetroMapProps) => {
               id="S1883"
               style={{ textAnchor: "middle" }}
             >
-              <tspan x="285" dx="0" dy="-5" fontSize="9px">
-                인더스파크
-              </tspan>
               <tspan x="285" dx="0" dy="-12" fontSize="9px">
                 남동
+              </tspan>
+              <tspan x="285" dx="0" dy="9" fontSize="9px">
+                인더스파크
               </tspan>
             </text>
             <text

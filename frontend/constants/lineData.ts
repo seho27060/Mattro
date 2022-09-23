@@ -1,4 +1,9 @@
-const lineData = {
+/* eslint-disable no-plusplus */
+import { LineCircleProps } from "../components/subway/LineCircle";
+import lineInfos from "./lineInfo";
+import { lineDataType } from "./lineType";
+
+const lineData: lineDataType = {
   "1": {
     attr: {
       "data-label": "1호선",
@@ -7,7 +12,6 @@ const lineData = {
       "data-color": "#052f93"
     },
     stations: [
-      {},
       {
         id: "1916",
         name: "소요산"
@@ -115,14 +119,12 @@ const lineData = {
       {
         id: "1017",
 
-        name: "신이문",
-        "data-marker": "station"
+        name: "신이문"
       },
       {
         id: "1016",
 
-        name: "외대앞",
-        "data-marker": "station"
+        name: "외대앞"
       },
 
       {
@@ -343,16 +345,9 @@ const lineData = {
         intertChange: true
       },
       {
-        "data-moveTo": "46,154"
-      },
-      {
-        id: "1701",
-        "data-moveTo": "83,115"
-      },
-      {
         id: "1702",
 
-        name: "가산\n디지털단지",
+        name: "가산디지털단지",
         intertChange: true
       },
       {
@@ -369,8 +364,7 @@ const lineData = {
       {
         id: "1750",
 
-        name: "광명",
-        "data-moveTo": "78,140"
+        name: "광명"
       },
 
       {
@@ -517,11 +511,6 @@ const lineData = {
         id: "1408",
         name: "신창"
       },
-      {},
-      {
-        id: "1716",
-        "data-moveTo": "146,190"
-      },
       {
         id: "1749",
         name: "서동탄"
@@ -561,9 +550,6 @@ const lineData = {
 
         name: "신도림",
         intertChange: true
-      },
-      {
-        "data-changeLineWidth": "3"
       },
 
       {
@@ -641,7 +627,7 @@ const lineData = {
 
       {
         id: "0205",
-        name: "동대문역사\n문화공원",
+        name: "동대문역사문화공원",
 
         intertChange: true
       },
@@ -789,14 +775,14 @@ const lineData = {
         intertChange: true
       },
 
-      {
-        id: "1007"
-      },
-      {
-        id: "0211",
-        "data-moveTo": "211,91",
-        "data-changeLineWidth": "2"
-      },
+      // {
+      //   id: "1007"
+      // },
+      // {
+      //   id: "0211",
+      //   "data-moveTo": "211,91",
+      //   "data-changeLineWidth": "2"
+      // },
       {
         id: "0244",
         name: "용답"
@@ -828,7 +814,6 @@ const lineData = {
       "data-color": "#de6d00"
     },
     stations: [
-      {},
       {
         id: "1958",
 
@@ -1063,10 +1048,10 @@ const lineData = {
         name: "오금",
 
         intertChange: true
-      },
-      {
-        "data-moveTo": "278,127"
       }
+      // {
+      //   "data-moveTo": "278,127"
+      // }
     ]
   },
   "4": {
@@ -1077,7 +1062,6 @@ const lineData = {
       "data-color": "#0099d1"
     },
     stations: [
-      {},
       {
         id: "0405",
         name: "진접"
@@ -1154,7 +1138,7 @@ const lineData = {
 
       {
         id: "0205",
-        name: "동대문역사\n문화공원",
+        name: "동대문역사문화공원",
 
         intertChange: true
       },
@@ -1332,10 +1316,10 @@ const lineData = {
         name: "오이도",
 
         intertChange: true
-      },
-      {
-        "data-moveTo": "19,192.5"
       }
+      // {
+      //   "data-moveTo": "19,192.5"
+      // }
     ]
   },
   "5": {
@@ -1346,7 +1330,6 @@ const lineData = {
       "data-color": "#a95094"
     },
     stations: [
-      {},
       {
         id: "2511",
 
@@ -1493,7 +1476,7 @@ const lineData = {
       },
       {
         id: "0205",
-        name: "동대문역사\n문화공원",
+        name: "동대문역사문화공원",
 
         intertChange: true
       },
@@ -1599,11 +1582,10 @@ const lineData = {
         id: "2566",
         name: "하남검단산"
       },
-      {},
-      {
-        id: "2549",
-        "data-moveTo": "282,108"
-      },
+      // {
+      //   id: "2549",
+      //   "data-moveTo": "282,108"
+      // },
       {
         id: "2555",
         name: "둔촌동"
@@ -1635,8 +1617,7 @@ const lineData = {
       {
         id: "2561",
         name: "마천"
-      },
-      {}
+      }
     ]
   },
   "6": {
@@ -1847,11 +1828,11 @@ const lineData = {
         id: "2616",
 
         name: "구산"
-      },
-
-      {
-        "data-moveTo": "243,51"
       }
+
+      // {
+      //   "data-moveTo": "243,51"
+      // }
     ]
   },
   "7": {
@@ -1936,7 +1917,7 @@ const lineData = {
       {
         id: "1702",
 
-        name: "가산\n디지털단지",
+        name: "가산디지털단지",
         intertChange: true
       },
       {
@@ -1961,7 +1942,7 @@ const lineData = {
       },
       {
         id: "2743",
-        name: "신대방\n삼거리"
+        name: "신대방삼거리"
       },
       {
         id: "2742",
@@ -2115,11 +2096,10 @@ const lineData = {
       {
         id: "2711",
         name: "장암"
-      },
-      {},
-      {
-        "data-moveTo": "37,118"
       }
+      // {
+      //   "data-moveTo": "37,118"
+      // }
     ]
   },
   "8": {
@@ -2130,7 +2110,6 @@ const lineData = {
       "data-color": "#e74e6d"
     },
     stations: [
-      {},
       {
         id: "2811",
         name: "암사"
@@ -2217,10 +2196,10 @@ const lineData = {
         name: "모란",
 
         intertChange: true
-      },
-      {
-        "data-moveTo": "261,158"
       }
+      // {
+      //   "data-moveTo": "261,158"
+      // }
     ]
   },
   "9": {
@@ -2231,7 +2210,6 @@ const lineData = {
       "data-color": "#b58600"
     },
     stations: [
-      {},
       {
         id: "4101",
         name: "개화"
@@ -2427,10 +2405,8 @@ const lineData = {
 
       {
         id: "4138",
-        name: "중앙\n보훈병원"
-      },
-
-      {}
+        name: "중앙보훈병원"
+      }
     ]
   },
   KP: {
@@ -2459,11 +2435,11 @@ const lineData = {
       },
       {
         id: "4926",
-        name: "사우 \n (김포시청)"
+        name: "사우  (김포시청)"
       },
       {
         id: "4925",
-        name: "걸포\n북변"
+        name: "걸포북변"
       },
 
       {
@@ -2486,8 +2462,7 @@ const lineData = {
       {
         id: "4920",
         name: "양촌"
-      },
-      {}
+      }
     ]
   },
   U: {
@@ -2498,9 +2473,6 @@ const lineData = {
       "data-color": "#d9750d"
     },
     stations: [
-      {
-        "data-nodeLength": 40
-      },
       {
         id: "4601",
 
@@ -2553,7 +2525,7 @@ const lineData = {
       {
         id: "4610",
 
-        name: "경기도청\n북부청사"
+        name: "경기도청북부청사"
       },
       {
         id: "4611",
@@ -2580,10 +2552,6 @@ const lineData = {
         id: "4615",
 
         name: "탑석"
-      },
-
-      {
-        "data-nodeLength": 40
       }
     ]
   },
@@ -2596,11 +2564,8 @@ const lineData = {
     },
     stations: [
       {
-        "data-nodeLength": 18
-      },
-      {
         id: "3139",
-        name: "송도달빛\n축제공원"
+        name: "송도달빛축제공원"
       },
       {
         id: "3138",
@@ -2743,9 +2708,6 @@ const lineData = {
     },
     stations: [
       {
-        "data-nodeLength": 18
-      },
-      {
         id: "3201",
         name: "검단오류"
       },
@@ -2783,7 +2745,7 @@ const lineData = {
 
       {
         id: "3209",
-        name: "아시아드\n경기장"
+        name: "아시아드경기장"
       },
       {
         id: "3210",
@@ -2865,9 +2827,6 @@ const lineData = {
       {
         id: "3227",
         name: "운연"
-      },
-      {
-        "data-nodeLength": 18
       }
     ]
   },
@@ -3013,14 +2972,14 @@ const lineData = {
 
         name: "춘천"
       },
-      {
-        "data-nodeLength": 14
-      },
-      {
-        id: "2722",
-        "data-moveTo": "233,55",
-        "data-changeLineWidth": "2"
-      },
+      // {
+      //   "data-nodeLength": 14
+      // },
+      // {
+      //   id: "2722",
+      //   "data-moveTo": "233,55",
+      //   "data-changeLineWidth": "2"
+      // },
 
       {
         id: "1019",
@@ -3040,16 +2999,8 @@ const lineData = {
     },
     stations: [
       {
-        "data-nodeLength": 32
-      },
-      {
         id: "1285",
         name: "임진강"
-      },
-
-      {
-        id: "1284",
-        intertChange: true
       },
       {
         id: "1284",
@@ -3154,10 +3105,10 @@ const lineData = {
 
         name: "서울역"
       },
-      {
-        id: "1265",
-        "data-moveTo": "99,63"
-      },
+      // {
+      //   id: "1265",
+      //   "data-moveTo": "99,63"
+      // },
 
       {
         id: "0239",
@@ -3347,9 +3298,6 @@ const lineData = {
         id: "1220",
 
         name: "지평"
-      },
-      {
-        "data-nodeLength": 32
       }
     ]
   },
@@ -3362,19 +3310,16 @@ const lineData = {
     },
     stations: [
       {
-        "data-nodeLength": 14
-      },
-      {
         id: "4215",
-        name: "인천공항\n2터미널"
+        name: "인천공항2터미널"
       },
       {
         id: "4213",
-        name: "인천공항\n1터미널"
+        name: "인천공항1터미널"
       },
       {
         id: "4212",
-        name: "공항\n화물청사"
+        name: "공항화물청사"
       },
       {
         id: "4211",
@@ -3386,7 +3331,7 @@ const lineData = {
       },
       {
         id: "4210",
-        name: "청라\n국제도시"
+        name: "청라국제도시"
       },
       {
         id: "4209",
@@ -3455,18 +3400,8 @@ const lineData = {
     },
     stations: [
       {
-        "data-moveTo": "43,164",
-
-        "data-nodeLength": 20
-      },
-      {
-        "data-moveTo": "140,178",
-
-        "data-nodeLength": 20
-      },
-      {
         id: "1812",
-        "data-moveTo": "44,160",
+        // "data-moveTo": "44,160",
         name: "인천",
 
         intertChange: true
@@ -3502,7 +3437,7 @@ const lineData = {
 
       {
         id: "1883",
-        name: "남동\n인더스파크"
+        name: "남동인더스파크"
       },
       {
         id: "1882",
@@ -3876,9 +3811,6 @@ const lineData = {
       {
         id: "4319",
         name: "광교"
-      },
-      {
-        "data-nodeLength": 20
       }
     ]
   },
@@ -3939,9 +3871,6 @@ const lineData = {
       {
         id: "1511",
         name: "여주"
-      },
-      {
-        "data-nodeLength": 14
       }
     ]
   },
@@ -4014,9 +3943,6 @@ const lineData = {
       {
         id: "4517",
         name: "전대·에버랜드"
-      },
-      {
-        "data-nodeLength": 35
       }
     ]
   },
@@ -4090,9 +4016,6 @@ const lineData = {
       {
         id: "4701",
         name: "북한산우이"
-      },
-      {
-        "data-nodeLength": 47
       }
     ]
   },
@@ -4153,9 +4076,6 @@ const lineData = {
       {
         id: "4815",
         name: "원시"
-      },
-      {
-        "data-nodeLength": 18
       }
     ],
     attr: {
@@ -4182,7 +4102,7 @@ const lineData = {
       },
       {
         id: "4403",
-        name: "서울지방\n병무청"
+        name: "서울지방병무청"
       },
 
       {
@@ -4219,9 +4139,6 @@ const lineData = {
       {
         id: "4411",
         name: "관악산(서울대)"
-      },
-      {
-        "data-nodeLength": 18
       }
     ],
     attr: {
@@ -4233,4 +4150,50 @@ const lineData = {
   }
 };
 
+export const searchByName = (name: string) => {
+  console.log(name);
+  const result: {
+    id: string;
+    name: string;
+    line: LineCircleProps;
+  }[] = [];
+  const newResult: {
+    id: string;
+    name: string;
+    lines: LineCircleProps[];
+  }[] = [];
+  lineInfos.forEach((lineInfo) => {
+    const { stations } = lineData[lineInfo.id.slice(1)];
+    stations.forEach((station) => {
+      if (station.name.includes(name)) {
+        result.push({ id: station.id, name: station.name, line: lineInfo });
+      }
+    });
+  });
+  console.log(result);
+  // result.forEach((res)=>)
+  for (let i = 0; i < result.length; i++) {
+    let dupliInd = -1;
+    for (let j = 0; j < newResult.length; j++) {
+      if (result[i].id === newResult[j].id) {
+        dupliInd = j;
+        break;
+      }
+    }
+    if (dupliInd !== -1 && newResult.length !== 0) {
+      newResult[dupliInd].lines = [
+        ...newResult[dupliInd].lines,
+        result[i].line
+      ];
+    } else {
+      newResult.push({
+        id: result[i].id,
+        name: result[i].name,
+        lines: [result[i].line]
+      });
+    }
+  }
+  console.log(result, newResult);
+  return newResult;
+};
 export default lineData;

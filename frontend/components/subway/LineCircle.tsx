@@ -6,14 +6,16 @@ import styles from "./LineCircle.module.scss";
 
 export type LineCircleProps = {
   id: UsedLineIdType;
-  lineName: UsedLinNameType;
+  name: UsedLinNameType;
+};
+type togggleSelectedLinesType = {
   togggleSelectedLines: null | ((line: UsedLineIdType) => void);
 };
 const LineCircle = ({
   id,
-  lineName,
+  name,
   togggleSelectedLines
-}: LineCircleProps) => {
+}: LineCircleProps & togggleSelectedLinesType) => {
   const toggleCircle = () => {
     if (togggleSelectedLines) {
       togggleSelectedLines(id);
@@ -24,7 +26,7 @@ const LineCircle = ({
       className={`${id} ${styles.circle} notoBold fs-10 flex align-center justify-center`}
       onClick={toggleCircle}
     >
-      {lineName}
+      {name}
     </span>
   );
 };

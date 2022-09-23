@@ -1,33 +1,51 @@
-import React, { useState } from "react";
+import React, { useState, ChangeEvent } from "react";
+import { searchByName } from "../../constants/lineData";
 import LineCircle, { LineCircleProps } from "./LineCircle";
 import styles from "./LineSearch.module.scss";
 
-const LineSearch = () => {
-  const [searchList, setSearchList] = useState<
-    (LineCircleProps & { stationName: string })[]
-  >([
-    // { id: "LS", lineName: "신분당", stationName: "양재시민의 숲" },
-    // { id: "L2", lineName: "2", stationName: "홍대" },
-    // { id: "L6", lineName: "6", stationName: "동대입구" }
-  ]);
+type SearchListType = {
+  id: string;
+  name: string;
+  lines: LineCircleProps[];
+};
 
+const LineSearch = () => {
+  const [searchList, setSearchList] = useState<SearchListType[]>([]);
+  // searchByName("화");
+  const searchByKeyword = (e: ChangeEvent<HTMLInputElement>) => {
+    // console.log(e.target.value);
+    const keyword = e.target.value;
+    if (keyword) {
+      setSearchList(searchByName(keyword));
+    } else {
+      setSearchList([]);
+    }
+  };
   return (
     <div id="lineSearch">
-      {/* <input
+      <input
         type="text"
         className={`fs-20 notoBold ${styles.input}`}
         placeholder="지하철 역 검색"
+        onChange={searchByKeyword}
       />
       <ul className={`${styles.ul}`}>
-        {searchList.map((lineInfo) => (
-          <li key={lineInfo.id} className={`flex align-center ${styles.li}`}>
-            <LineCircle id={lineInfo.id} lineName={lineInfo.lineName} />
+        {searchList.map((item) => (
+          <li key={item.id} className={`flex align-center ${styles.li}`}>
+            {item.lines.map((line) => (
+              <LineCircle
+                key={line.id}
+                id={line.id}
+                name={line.name}
+                togggleSelectedLines={null}
+              />
+            ))}
             <span id="test" className="notoBold flex align-center">
-              {lineInfo.stationName}
+              {item.name}
             </span>
           </li>
         ))}
-      </ul> */}
+      </ul>
     </div>
   );
 };
