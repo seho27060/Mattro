@@ -54,7 +54,7 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
 
   const touchMove = (e: TouchEvent<HTMLDivElement>) => {
     if (dragging && wrraperRef.current) {
-      e.preventDefault();
+      // e.preventDefault();
       movePosition(
         position.x - e.touches[0].clientX,
         position.y - e.touches[0].clientY
@@ -117,6 +117,7 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
               strokeLinecap="round"
             />
           </svg>
+          <g className="selectedMarker" />
           {/* <!-- 경로        --> */}
           <g
             className="line"
