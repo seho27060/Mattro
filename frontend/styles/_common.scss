@@ -1,0 +1,97 @@
+.inline-block {
+  display: inline-block;
+}
+
+.block {
+  display: block;
+}
+
+.relative {
+  position: relative;
+}
+
+.hidden {
+  display: none;
+}
+
+.notVisible {
+  visibility: hidden;
+}
+
+.ellipsis {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.flex {
+  display: flex;
+
+  &.column {
+    flex-direction: column;
+  }
+
+  &.align-center {
+    align-items: center;
+  }
+
+  &.justify-end {
+    justify-content: flex-end;
+  }
+
+  &.justify-center {
+    justify-content: center;
+  }
+
+  &.justify-space-between {
+    justify-content: space-between;
+  }
+
+  .f-one {
+    flex: 1;
+  }
+}
+
+.page-fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-spinner {
+  height: (32px);
+  width: (32px);
+  animation: spin 1s linear infinite;
+}
+
+@media screen and (max-width: $DESKTOP-VW) {
+  .loading-spinner {
+    height: vw(32px);
+    width: vw(32px);
+  }
+}
+
+@media screen and (max-width: $TABLET-VW) {
+  .loading-spinner {
+    height: vw-t(32px);
+    width: vw-t(32px);
+  }
+}
+
+@media screen and (max-width: $PHONE-VW) {
+  .loading-spinner {
+    height: vw-p(32px);
+    width: vw-p(32px);
+  }
+}

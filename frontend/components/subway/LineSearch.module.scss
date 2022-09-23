@@ -1,0 +1,127 @@
+@mixin box {
+  padding: (12px);
+
+  width: (286px);
+  height: (48px);
+
+  background-color: white;
+  box-shadow: 1px 0 0 0 $GRAY_BA, 0 1px 0 0 $GRAY_BA, 1px 0 0 0 $GRAY_BA inset,
+    0 1px 0 0 $GRAY_BA inset, 1px 1px 0 0 $GRAY_BA;
+}
+
+.input {
+  @include box();
+  font-size: 20px;
+}
+.ul {
+  .li {
+    @include box();
+    &:hover {
+      cursor: pointer;
+      background-color: aliceblue;
+    }
+
+    span {
+      &:hover {
+        transform: none;
+      }
+      & + span {
+        margin-left: (4px);
+      }
+      &:nth-last-child(1) {
+        font-size: (16px);
+        margin-left: (8px);
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $DESKTOP-VW) {
+  @mixin box {
+    padding: vw(12px);
+
+    width: vw(286px);
+    height: vw(48px);
+  }
+
+  .input {
+    @include box();
+    font-size: vw(20px);
+  }
+  .ul {
+    .li {
+      @include box();
+
+      span {
+        & + span {
+          margin-left: vw(4px);
+        }
+        &:nth-last-child(1) {
+          font-size: vw(16px);
+          margin-left: vw(8px);
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $TABLET-VW) {
+  @mixin box {
+    padding: 10px;
+    height: 40px;
+  }
+
+  .input {
+    @include box();
+    width: 390px;
+    font-size: 16px;
+  }
+  .ul {
+    display: flex;
+    flex-wrap: wrap;
+    .li {
+      @include box();
+      width: (195px);
+      span {
+        & + span {
+          margin-left: (4px);
+        }
+        &:nth-last-child(1) {
+          font-size: (16px);
+          margin-left: (8px);
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $PHONE-VW) {
+  @mixin box {
+    padding: vw-p(10px);
+    height: vw-p(40px);
+  }
+
+  .input {
+    @include box();
+    width: vw-p(390px);
+    font-size: vw-p(16px);
+  }
+
+  .ul {
+    display: flex;
+    flex-wrap: wrap;
+    .li {
+      @include box();
+      width: vw-p(195px);
+      span {
+        & + span {
+          margin-left: vw-p(4px);
+        }
+        &:nth-last-child(1) {
+          font-size: vw-p(16px);
+          margin-left: vw-p(8px);
+        }
+      }
+    }
+  }
+}

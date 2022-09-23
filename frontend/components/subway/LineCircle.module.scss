@@ -1,0 +1,46 @@
+.circle {
+  padding: (6px) (9px);
+  min-height: (24px);
+  min-width: (24px);
+
+  border-radius: (24px);
+  color: white;
+
+  white-space: nowrap;
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+  }
+}
+
+@media screen and (max-width: $DESKTOP-VW) {
+  .circle {
+    padding: vw(6px) vw(9px);
+    min-height: vw(24px);
+    min-width: vw(24px);
+
+    border-radius: vw(24px);
+  }
+}
+
+@media screen and (max-width: $TABLET-VW) {
+  .circle {
+    padding: (4px) (6px);
+    min-height: (20px);
+    min-width: (20px);
+
+    border-radius: (20px);
+    font-size: 10px;
+  }
+}
+
+@media screen and (max-width: $PHONE-VW) {
+  .circle {
+    padding: vw-p(4px) vw-p(6px);
+    min-height: vw-p(20px);
+    min-width: vw-p(20px);
+
+    border-radius: vw-p(20px);
+  }
+}
