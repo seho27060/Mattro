@@ -26,6 +26,9 @@
         transform: none;
       }
       & + span {
+        margin-left: (4px);
+      }
+      &:nth-last-child(1) {
         font-size: (16px);
         margin-left: (8px);
       }
@@ -51,6 +54,9 @@
 
       span {
         & + span {
+          margin-left: vw(4px);
+        }
+        &:nth-last-child(1) {
           font-size: vw(16px);
           margin-left: vw(8px);
         }
@@ -78,7 +84,10 @@
       width: (195px);
       span {
         & + span {
-          font-size: (14px);
+          margin-left: (4px);
+        }
+        &:nth-last-child(1) {
+          font-size: (16px);
           margin-left: (8px);
         }
       }
@@ -106,7 +115,10 @@
       width: vw-p(195px);
       span {
         & + span {
-          font-size: vw-p(14px);
+          margin-left: vw-p(4px);
+        }
+        &:nth-last-child(1) {
+          font-size: vw-p(16px);
           margin-left: vw-p(8px);
         }
       }

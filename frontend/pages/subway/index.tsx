@@ -41,7 +41,12 @@ const Index = () => {
 
   const findNameById = (lineID: UsedLineIdType) => {
     const text = document.querySelector(`.S${lineID}`);
-    return (text?.childNodes[0] as HTMLElement).innerHTML;
+    let name = "";
+    text?.childNodes.forEach((node) => {
+      name += (node as HTMLElement).innerHTML;
+    });
+    return name;
+    // return (text?.childNodes[0] as HTMLElement).innerHTML;
   };
   const toggleCircle = (circle: SVGCircleElement) => {
     const { classList } = circle;
@@ -54,7 +59,6 @@ const Index = () => {
   };
 
   const handleSelectedStations = () => {
-    // console.log("handle", selectedStations);
     if (!stationInfo.name) return;
     const ind = selectedStations.indexOf(stationInfo.name);
     if (ind === -1) {

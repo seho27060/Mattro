@@ -27,7 +27,7 @@ export type UsedLinNameType =
   | "경의중앙"
   | "수인분당"
   | "신분당"
-  | "우아신설"
+  | "우이신설"
   | "신림";
 
 export type UnusedLineIdType =
@@ -51,3 +51,13 @@ export type UnusedLineNameType =
   | "경강선"
   | "서해선"
   | "김포도시철도";
+
+export type StationType = {
+  id: string;
+  name: string;
+  intertChange?: boolean;
+};
+
+export type lineDataType = {
+  [key: string]: { attr: any; stations: StationType[] };
+};

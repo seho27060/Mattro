@@ -22,7 +22,7 @@ const LineCircleList = ({ togggleSelectedLines }: LineCircleListProps) => {
         >
           <LineCircle
             id={line.id}
-            lineName={line.name}
+            name={line.name}
             togggleSelectedLines={togggleSelectedLines}
           />
         </li>
