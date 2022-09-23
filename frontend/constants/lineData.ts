@@ -4151,7 +4151,6 @@ const lineData: lineDataType = {
 };
 
 export const searchByName = (name: string) => {
-  console.log(name);
   const result: {
     id: string;
     name: string;
@@ -4170,8 +4169,7 @@ export const searchByName = (name: string) => {
       }
     });
   });
-  console.log(result);
-  // result.forEach((res)=>)
+
   for (let i = 0; i < result.length; i++) {
     let dupliInd = -1;
     for (let j = 0; j < newResult.length; j++) {
@@ -4193,7 +4191,7 @@ export const searchByName = (name: string) => {
       });
     }
   }
-  console.log(result, newResult);
+
   return newResult;
 };
 export default lineData;
