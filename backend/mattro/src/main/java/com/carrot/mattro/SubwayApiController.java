@@ -1,5 +1,4 @@
-package com.spark.spark;
-
+package com.carrot.mattro;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;

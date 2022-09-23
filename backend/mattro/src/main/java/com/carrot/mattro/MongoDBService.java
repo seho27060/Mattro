@@ -1,5 +1,4 @@
-package com.spark.spark;
-
+package com.carrot.mattro;
 
 public interface MongoDBService {
     public void findPlaceBySubwayName(String SubwayName);

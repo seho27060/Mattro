@@ -1,4 +1,4 @@
-package com.spark.spark;
+package com.carrot.mattro;
 
 import org.springframework.stereotype.Service;
 

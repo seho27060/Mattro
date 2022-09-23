@@ -1,5 +1,4 @@
-package com.spark.spark;
-
+package com.carrot.mattro;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.Optional;
