@@ -2,6 +2,8 @@ package com.carrot.mattro;
 
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MongoDBServiceImpl implements MongoDBService{
 
@@ -24,4 +26,10 @@ public class MongoDBServiceImpl implements MongoDBService{
     public void findPlaceListByUrl(String url) {
 
     }
+
+    @Override
+    public void findPlaceBySurvey(List<Integer> survey) {
+
+    }
+
 }
