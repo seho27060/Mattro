@@ -4,6 +4,7 @@ import com.carrot.mattro.DTO.CrawlingResponse;
 import com.carrot.mattro.Repository.CrawlingRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
 import java.util.List;

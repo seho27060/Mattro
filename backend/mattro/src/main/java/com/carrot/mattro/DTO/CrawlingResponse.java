@@ -19,7 +19,6 @@ public class CrawlingResponse {
         this.name = crawling.getName();
         this.menuList = crawling.getMenuList();
         this.foodCategory = crawling.getFoodCategory();
-        this.menuList = crawling.getMenuList();
         this.keywordReviewList =crawling.getKeywordReviewList();
         this.mainImageURL = crawling.getMainImageURL();
         this.menuImageURL = crawling.getMenuImageURL();
