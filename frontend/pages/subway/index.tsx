@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 /* eslint-disable no-param-reassign */
 import Image from "next/image";
 import { useEffect, useState, MouseEvent } from "react";
@@ -11,15 +12,33 @@ import MinusBtn from "../../public/icons/minus.svg";
 import lineInfos from "../../constants/lineInfo";
 import { UsedLineIdType } from "../../constants/lineType";
 
+type SelectedStationType = {
+  name: string;
+  cx: number;
+  cy: number;
+  lineId: UsedLineIdType | null;
+  stationId: string;
+};
+
 const Index = () => {
   const [selectedLines, setSelectedLines] = useState<UsedLineIdType[]>(
     lineInfos.map((line) => line.id)
   );
-  const [selectedStations, setSelectedStations] = useState<string[]>([]);
+  const [selectedStations, setSelectedStations] = useState<
+    SelectedStationType[]
+  >([]);
   const [selecting, setSelecting] = useState(true);
-  const [stationInfo, setStationInfo] = useState({ cx: 0, cy: 0, name: "" });
+  const [stationInfo, setStationInfo] = useState<SelectedStationType>({
+    cx: 0,
+    cy: 0,
+    name: "",
+    lineId: null,
+    stationId: ""
+  });
   const [scaleSize, setScaleSize] = useState(1);
   const [searchId, setSearchId] = useState<string | null>(null);
+
+  // 현재 선택된 라인
   const handleSelectedLines = (line: UsedLineIdType) => {
     const ind = selectedLines.indexOf(line);
     if (ind === -1) {
@@ -31,6 +50,7 @@ const Index = () => {
     }
   };
 
+  // 현재 선택된 라인 불투명조정
   const handleLineOpacity = (lineId: UsedLineIdType, opacity: 0.1 | 1) => {
     const lines = document.querySelectorAll<HTMLElement>(`.${lineId}`);
     lines.forEach((line) => {
@@ -40,6 +60,7 @@ const Index = () => {
     });
   };
 
+  // id값으로 역이름 조회
   const findNameById = (lineID: UsedLineIdType) => {
     const text = document.querySelector(`.S${lineID}`);
     let name = "";
@@ -47,8 +68,9 @@ const Index = () => {
       name += (node as HTMLElement).innerHTML;
     });
     return name;
-    // return (text?.childNodes[0] as HTMLElement).innerHTML;
   };
+
+  // 동그라미 토글
   const toggleCircle = (circle: SVGCircleElement) => {
     const { classList } = circle;
     const isSelected = classList.contains("isSelected");
@@ -59,25 +81,54 @@ const Index = () => {
     }
   };
 
+  // 최종적으로 선택된역들
   const handleSelectedStations = () => {
     if (!stationInfo.name) return;
-    const ind = selectedStations.indexOf(stationInfo.name);
-    if (ind === -1) {
-      setSelectedStations((prev) => [...prev, stationInfo.name]);
+    // const ind = selectedStations.indexOf(stationInfo.name);
+    let isInclude = false;
+    selectedStations.forEach((station) => {
+      if (JSON.stringify(station) === JSON.stringify(stationInfo)) {
+        isInclude = true;
+      }
+    });
+    if (!isInclude) {
+      setSelectedStations((prev) => [...prev, stationInfo]);
+
+      const newMarker = document.createElement("rect");
+      newMarker.innerHTML = `
+      <rect x="710" y="65" width="20" height="20">
+      <path d="M28 0C12.52 0 0 12.52 0 28C0 34.96 2 41.48 5.64 47.36C9.44 53.52 14.44 58.8 18.28 64.96C20.16 67.96 21.52 70.76 22.96 74C24 76.2 24.84 80 28 80C31.16 80 32 76.2 33 74C34.48 70.76 35.8 67.96 37.68 64.96C41.52 58.84 46.52 53.56 50.32 47.36C54 41.48 56 34.96 56 28C56 12.52 43.48 0 28 0ZM28 39C22.48 39 18 34.52 18 29C18 23.48 22.48 19 28 19C33.52 19 38 23.48 38 29C38 34.52 33.52 39 28 39Z" fill="black"/>
+      </rect>
+      `;
+      // newMarker.setAttribute("x", 710);
+      // newMarker.setAttribute("y", 65);
+      // newMarker.setAttribute("width", 20);
+      // newMarker.setAttribute("height", 20);
+      const markerGroup = document.querySelector(".selectedMarker");
+      markerGroup?.appendChild(newMarker);
+      console.log(newMarker, markerGroup);
     } else {
       setSelectedStations((prev) =>
-        prev.filter((station) => station !== stationInfo.name)
+        prev.filter(
+          (station) => JSON.stringify(station) !== JSON.stringify(stationInfo)
+        )
       );
     }
+    setSelecting(false);
   };
 
+  // 클릭 이벤트 핸들
   const clcikStation = (e: MouseEvent<SVGCircleElement | SVGTextElement>) => {
     let cx = 0;
     let cy = 0;
     let name = "";
-
+    let lineId = null;
+    let stationId = "";
+    // 동그라미를 클릭했다면
     if (e.currentTarget.tagName === "circle") {
       const circle = e.currentTarget;
+
+      // 환승역
       if (!circle.id) {
         const circleChilds = circle.parentElement?.childNodes;
         if (circleChilds) {
@@ -93,7 +144,18 @@ const Index = () => {
         const id = e.currentTarget.parentElement?.classList.value
           .match(/M\d{4}/g)
           ?.map((id_) => id_.replace("M", ""))[0];
-        if (id) name = findNameById(id as UsedLineIdType);
+        if (id) {
+          name = findNameById(id as UsedLineIdType);
+          stationId = id;
+          const lineData =
+            e.currentTarget.parentElement?.classList.value.match(
+              /L[A-Z|1-9]{1,}/
+            );
+          if (lineData) {
+            lineId = lineData[0] as UsedLineIdType;
+          }
+        }
+        // 환승역이 아니면
       } else {
         toggleCircle(circle as SVGCircleElement);
         cx = (circle as SVGCircleElement).cx.baseVal.value;
@@ -101,6 +163,13 @@ const Index = () => {
         name = findNameById(
           e.currentTarget.id.replace("M", "") as UsedLineIdType
         );
+        stationId = e.currentTarget.id.replace("M", "");
+        const lineData =
+          e.currentTarget.classList.value.match(/L[A-Z|1-9]{1,}/);
+        if (lineData) {
+          lineId = lineData[0] as UsedLineIdType;
+        }
+        // console.log(lineData);
       }
     } else if (e.currentTarget.tagName === "text") {
       const circleIds = e.currentTarget.classList.value
@@ -132,10 +201,14 @@ const Index = () => {
           cy /= circleChilds.length - 1;
         }
       }
-
+      stationId = circleIds[0];
       name = findNameById(circleIds[0] as UsedLineIdType);
+      const lineData = e.currentTarget.classList.value.match(/L[A-Z|1-9]{1,}/);
+      if (lineData) {
+        lineId = lineData[0] as UsedLineIdType;
+      }
     }
-    setStationInfo({ cx, cy, name });
+    setStationInfo({ cx, cy, name, lineId, stationId });
     setSelecting(false);
   };
 
