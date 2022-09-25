@@ -1,15 +1,11 @@
 package com.carrot.mattro;
 import static org.assertj.core.api.Assertions.*;
 
-import com.carrot.mattro.Result;
-import com.carrot.mattro.ResultMongoDBRepository;
+import com.carrot.mattro.Repository.ResultMongoDBRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Optional;
 
 
