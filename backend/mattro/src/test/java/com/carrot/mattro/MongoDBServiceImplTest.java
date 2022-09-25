@@ -1,7 +1,7 @@
 package com.carrot.mattro;
 import static org.assertj.core.api.Assertions.*;
 
-import com.carrot.mattro.Repository.ResultMongoDBRepository;
+import com.carrot.mattro.Repository.CrawlingRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,7 +15,7 @@ import java.util.Optional;
 class MongoDBServiceImplTest {
 
     @Autowired
-    ResultMongoDBRepository mongoDBRepository;
+    CrawlingRepository mongoDBRepository;
 
 
     // 역 데이터 + 크롤링 데이터
@@ -25,7 +25,7 @@ class MongoDBServiceImplTest {
     void findPlaceBySubwayName() {
         String storeName = "아울림";
         System.out.println(storeName);
-        Optional<Result> test_result = mongoDBRepository.findByName("아울림");
+        Optional<Crawling> test_result = mongoDBRepository.findByName("아울림");
 //        List<Result> list = mongoDBRepository.findAll()
 //        System.out.println(test.get(0));
 //        assertThat(test_list.get(0).getKeywordReviewList()).isNotNull();
