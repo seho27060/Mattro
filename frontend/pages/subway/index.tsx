@@ -70,6 +70,15 @@ const Index = () => {
     return name;
   };
 
+  // 해당 라인 어딘지 추출
+  const getLineIdByEle = (ele: Element): UsedLineIdType => {
+    const lineData = ele.classList.value.match(/L[A-Z|1-9]{1,}/);
+    if (lineData) {
+      return lineData[0] as UsedLineIdType;
+    }
+    return "L1";
+  };
+
   // 동그라미 토글
   const toggleCircle = (circle: SVGCircleElement) => {
     const { classList } = circle;
@@ -147,13 +156,8 @@ const Index = () => {
         if (id) {
           name = findNameById(id as UsedLineIdType);
           stationId = id;
-          const lineData =
-            e.currentTarget.parentElement?.classList.value.match(
-              /L[A-Z|1-9]{1,}/
-            );
-          if (lineData) {
-            lineId = lineData[0] as UsedLineIdType;
-          }
+
+          lineId = getLineIdByEle(e.currentTarget.parentElement as Element);
         }
         // 환승역이 아니면
       } else {
@@ -164,12 +168,7 @@ const Index = () => {
           e.currentTarget.id.replace("M", "") as UsedLineIdType
         );
         stationId = e.currentTarget.id.replace("M", "");
-        const lineData =
-          e.currentTarget.classList.value.match(/L[A-Z|1-9]{1,}/);
-        if (lineData) {
-          lineId = lineData[0] as UsedLineIdType;
-        }
-        // console.log(lineData);
+        lineId = getLineIdByEle(e.currentTarget);
       }
     } else if (e.currentTarget.tagName === "text") {
       const circleIds = e.currentTarget.classList.value
@@ -203,10 +202,7 @@ const Index = () => {
       }
       stationId = circleIds[0];
       name = findNameById(circleIds[0] as UsedLineIdType);
-      const lineData = e.currentTarget.classList.value.match(/L[A-Z|1-9]{1,}/);
-      if (lineData) {
-        lineId = lineData[0] as UsedLineIdType;
-      }
+      lineId = getLineIdByEle(e.currentTarget);
     }
     setStationInfo({ cx, cy, name, lineId, stationId });
     setSelecting(false);
