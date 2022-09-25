@@ -2,6 +2,7 @@
 /* eslint-disable no-param-reassign */
 import Image from "next/image";
 import { useEffect, useState, MouseEvent } from "react";
+import { useRouter } from "next/router";
 import LineInfoList from "../../components/subway/LineCircleList";
 import LineSearch from "../../components/subway/LineSearch";
 import LineSelectedBar from "../../components/subway/LineSelectedBar";
@@ -37,6 +38,7 @@ const Index = () => {
   });
   const [scaleSize, setScaleSize] = useState(1);
   const [searchId, setSearchId] = useState<string | null>(null);
+  const router = useRouter();
 
   // 현재 선택된 라인
   const handleSelectedLines = (line: UsedLineIdType) => {
@@ -208,6 +210,12 @@ const Index = () => {
     setSelecting(false);
   };
 
+  const recommendPlace = () => {
+    const randomInd = Math.floor(Math.random() * selectedStations.length);
+    const { lineId, stationId } = selectedStations[randomInd];
+    router.push(`/subway/${lineId}/${stationId}/1`);
+  };
+
   useEffect(() => {
     const circles = document.querySelectorAll("circle");
     const texts = document.querySelectorAll("text");
@@ -266,7 +274,15 @@ const Index = () => {
         </button>
       </div>
       <div id="select-container" className="flex justify-center">
-        {/* <LineSelectedBar selectedStation={selectedStations} /> */}
+        {selectedStations.length !== 0 && (
+          <button
+            className={`fs-30 notoBold flex align-center justify-center  ${styles.btn}`}
+            type="button"
+            onClick={recommendPlace}
+          >
+            맛집 추천받기
+          </button>
+        )}
       </div>
     </div>
   );
