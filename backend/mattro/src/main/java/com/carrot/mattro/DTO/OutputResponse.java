@@ -18,10 +18,11 @@ public class OutputResponse {
         this.mainImageURL = output.getMainImageURL();
         this.storURL = output.getStorURL();
         this.tell = output.getTell();
+        this.storeName = output.getName();
     }
     private String id;
     private String storeIdx;
-    private String store_name;
+    private String storeName;
     private String foodCategory;
     private String menuImageURL;
     private String mainImageURL;
