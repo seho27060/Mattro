@@ -8,22 +8,24 @@ pipeline {
             steps {
               checkout scm
               
-              try{
-                sh 'docker stop mattro-back'
-              } catch(e) {
-                echo 'stop mattro-back success'
-              }
+              script{
+                try{
+                  sh 'docker stop mattro-back'
+                } catch(e) {
+                  echo 'stop mattro-back fail'
+                }
 
-              try{
-                sh 'docker rm mattro-back'
-              } catch(e) {
-                echo 'remove mattro-back container success'
-              }
+                try{
+                  sh 'docker rm mattro-back'
+                } catch(e) {
+                  echo 'remove mattro-back container fail'
+                }
 
-              try{
-                sh 'docker rmi mattro-back'
-              } catch(e) {
-                echo 'remove mattro-back image success'
+                try{
+                  sh 'docker rmi mattro-back'
+                } catch(e) {
+                  echo 'remove mattro-back image fail'
+                }
               }
             }
             post {
