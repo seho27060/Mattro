@@ -3,7 +3,6 @@
 /* eslint-disable no-param-reassign */
 import Image from "next/image";
 import { useEffect, useState, MouseEvent } from "react";
-import { useRouter } from "next/router";
 import LineInfoList from "../../components/subway/LineCircleList";
 import LineSearch from "../../components/subway/LineSearch";
 import MetroMap from "../../components/subway/MetroMap";
@@ -34,12 +33,11 @@ const Index = () => {
     cx: 0,
     cy: 0,
     name: "",
-    lineId: null,
+    lineId: [],
     stationId: ""
   });
   const [scaleSize, setScaleSize] = useState(1);
   const [searchId, setSearchId] = useState<string | null>(null);
-  const router = useRouter();
 
   // 현재 선택된 라인
   const handleSelectedLines = (line: UsedLineIdType) => {
@@ -223,14 +221,10 @@ const Index = () => {
       name = findNameById(circleIds[0] as UsedLineIdType);
       lineId = getLineIdByEle(e.currentTarget);
     }
-    setStationInfo({ cx, cy, name, lineId, stationId });
-    setSelecting(false);
-  };
-
-  const recommendPlace = () => {
-    const randomInd = Math.floor(Math.random() * selectedStations.length);
-    const { lineId, stationId } = selectedStations[randomInd];
-    router.push(`/subway/${lineId}/${stationId}/1`);
+    if (lineId) {
+      setStationInfo({ cx, cy, name, lineId, stationId });
+      setSelecting(false);
+    }
   };
 
   useEffect(() => {
