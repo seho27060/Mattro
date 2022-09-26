@@ -117,7 +117,6 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
               strokeLinecap="round"
             />
           </svg>
-          <g className="selectedMarker" />
           {/* <!-- 경로        --> */}
           <g
             className="line"
@@ -3238,7 +3237,7 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
           <g
             className="line"
             fill="none"
-            stroke="#dbba16"
+            stroke="#f8ce49"
             strokeLinejoin="round"
             strokeLinecap="round"
           >
@@ -3558,8 +3557,8 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
                 y="815"
                 width="20"
                 height="10"
-                fill="#dbba16"
-                stroke="#dbba16"
+                fill="#f8ce49"
+                stroke="#f8ce49"
                 strokeLinejoin="round"
                 strokeLinecap="round"
                 strokeWidth="5"
@@ -3585,8 +3584,8 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
                 y="885"
                 width="20"
                 height="10"
-                fill="#dbba16"
-                stroke="#dbba16"
+                fill="#f8ce49"
+                stroke="#f8ce49"
                 strokeLinejoin="round"
                 strokeLinecap="round"
                 strokeWidth="5"
@@ -4339,9 +4338,9 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
                 cx="995"
                 cy="290"
                 r="1.5"
-                stroke="#dbba16"
+                stroke="#f8ce49"
                 strokeWidth="1"
-                fill="#dbba16"
+                fill="#f8ce49"
               />
             </g>
             <circle
@@ -5107,9 +5106,9 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
                 cx="225"
                 cy="800"
                 r="1.5"
-                stroke="#dbba16"
+                stroke="#f8ce49"
                 strokeWidth="1"
-                fill="#dbba16"
+                fill="#f8ce49"
               />
             </g>
             <g
@@ -5345,9 +5344,9 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
                 cx="670"
                 cy="945"
                 r="1.5"
-                stroke="#dbba16"
+                stroke="#f8ce49"
                 strokeWidth="1"
-                fill="#dbba16"
+                fill="#f8ce49"
               />
             </g>
             <circle
@@ -6061,9 +6060,9 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
                 cx="990"
                 cy="405"
                 r="1.5"
-                stroke="#dbba16"
+                stroke="#f8ce49"
                 strokeWidth="1"
-                fill="#dbba16"
+                fill="#f8ce49"
               />
             </g>
             <circle
@@ -6291,9 +6290,9 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
                 cx="1015"
                 cy="685"
                 r="1.5"
-                stroke="#dbba16"
+                stroke="#f8ce49"
                 strokeWidth="1"
-                fill="#dbba16"
+                fill="#f8ce49"
               />
             </g>
             <circle
@@ -7119,9 +7118,9 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
                 cx="1015"
                 cy="730"
                 r="1.5"
-                stroke="#dbba16"
+                stroke="#f8ce49"
                 strokeWidth="1"
-                fill="#dbba16"
+                fill="#f8ce49"
               />
             </g>
             <circle
@@ -7191,9 +7190,9 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
                 cx="1290"
                 cy="765"
                 r="1.5"
-                stroke="#dbba16"
+                stroke="#f8ce49"
                 strokeWidth="1"
-                fill="#dbba16"
+                fill="#f8ce49"
               />
             </g>
             <g
@@ -7789,9 +7788,9 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
                 cx="350"
                 cy="950"
                 r="1.5"
-                stroke="#dbba16"
+                stroke="#f8ce49"
                 strokeWidth="1"
-                fill="#dbba16"
+                fill="#f8ce49"
               />
             </g>
             <g
@@ -7821,9 +7820,9 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
                 cx="320"
                 cy="950"
                 r="1.5"
-                stroke="#dbba16"
+                stroke="#f8ce49"
                 strokeWidth="1"
-                fill="#dbba16"
+                fill="#f8ce49"
               />
             </g>
             <g
@@ -7853,9 +7852,9 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
                 cx="290"
                 cy="950"
                 r="1.5"
-                stroke="#dbba16"
+                stroke="#f8ce49"
                 strokeWidth="1"
-                fill="#dbba16"
+                fill="#f8ce49"
               />
             </g>
             <g
@@ -7885,9 +7884,9 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
                 cx="260"
                 cy="950"
                 r="1.5"
-                stroke="#dbba16"
+                stroke="#f8ce49"
                 strokeWidth="1"
-                fill="#dbba16"
+                fill="#f8ce49"
               />
               <circle
                 cx="260"
@@ -7925,9 +7924,9 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
                 cx="230"
                 cy="950"
                 r="1.5"
-                stroke="#dbba16"
+                stroke="#f8ce49"
                 strokeWidth="1"
-                fill="#dbba16"
+                fill="#f8ce49"
               />
             </g>
             <g
@@ -7957,9 +7956,9 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
                 cx="195"
                 cy="950"
                 r="1.5"
-                stroke="#dbba16"
+                stroke="#f8ce49"
                 strokeWidth="1"
-                fill="#dbba16"
+                fill="#f8ce49"
               />
             </g>
             <g
@@ -7989,9 +7988,9 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
                 cx="155"
                 cy="950"
                 r="1.5"
-                stroke="#dbba16"
+                stroke="#f8ce49"
                 strokeWidth="1"
-                fill="#dbba16"
+                fill="#f8ce49"
               />
             </g>
             <g
@@ -8021,9 +8020,9 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
                 cx="100"
                 cy="950"
                 r="1.5"
-                stroke="#dbba16"
+                stroke="#f8ce49"
                 strokeWidth="1"
-                fill="#dbba16"
+                fill="#f8ce49"
               />
             </g>
             <circle
@@ -9487,9 +9486,9 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
                 cx="1095"
                 cy="575"
                 r="1.5"
-                stroke="#dbba16"
+                stroke="#f8ce49"
                 strokeWidth="1"
-                fill="#dbba16"
+                fill="#f8ce49"
               />
             </g>
             <circle
@@ -9809,9 +9808,9 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
                 cx="1380"
                 cy="765"
                 r="1.5"
-                stroke="#dbba16"
+                stroke="#f8ce49"
                 strokeWidth="1"
-                fill="#dbba16"
+                fill="#f8ce49"
               />
             </g>
             <circle
@@ -9901,9 +9900,9 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
                 cx="1300"
                 cy="805"
                 r="1.5"
-                stroke="#dbba16"
+                stroke="#f8ce49"
                 strokeWidth="1"
-                fill="#dbba16"
+                fill="#f8ce49"
               />
             </g>
             <circle
@@ -10199,9 +10198,9 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
                 cx="1050"
                 cy="645"
                 r="1.5"
-                stroke="#dbba16"
+                stroke="#f8ce49"
                 strokeWidth="1"
-                fill="#dbba16"
+                fill="#f8ce49"
               />
             </g>
             <circle
@@ -10312,9 +10311,9 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
                 cx="320"
                 cy="860"
                 r="1.5"
-                stroke="#dbba16"
+                stroke="#f8ce49"
                 strokeWidth="1"
-                fill="#dbba16"
+                fill="#f8ce49"
               />
             </g>
             <g
@@ -10852,7 +10851,7 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
               cy="800"
               r="1.7999999999999998"
               id="M1890"
-              stroke="#dbba16"
+              stroke="#f8ce49"
               strokeWidth="1"
               fill="#ffffff"
             />
@@ -10862,7 +10861,7 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
               cy="805"
               r="1.7999999999999998"
               id="M1889"
-              stroke="#dbba16"
+              stroke="#f8ce49"
               strokeWidth="1"
               fill="#ffffff"
             />
@@ -10872,7 +10871,7 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
               cy="818"
               r="1.7999999999999998"
               id="M1888"
-              stroke="#dbba16"
+              stroke="#f8ce49"
               strokeWidth="1"
               fill="#ffffff"
             />
@@ -10882,7 +10881,7 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
               cy="831.5"
               r="1.7999999999999998"
               id="M1886"
-              stroke="#dbba16"
+              stroke="#f8ce49"
               strokeWidth="1"
               fill="#ffffff"
             />
@@ -10892,7 +10891,7 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
               cy="845"
               r="1.7999999999999998"
               id="M1885"
-              stroke="#dbba16"
+              stroke="#f8ce49"
               strokeWidth="1"
               fill="#ffffff"
             />
@@ -10902,7 +10901,7 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
               cy="900"
               r="1.7999999999999998"
               id="M1883"
-              stroke="#dbba16"
+              stroke="#f8ce49"
               strokeWidth="1"
               fill="#ffffff"
             />
@@ -10912,7 +10911,7 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
               cy="900"
               r="1.7999999999999998"
               id="M1882"
-              stroke="#dbba16"
+              stroke="#f8ce49"
               strokeWidth="1"
               fill="#ffffff"
             />
@@ -10922,7 +10921,7 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
               cy="900"
               r="1.7999999999999998"
               id="M1881"
-              stroke="#dbba16"
+              stroke="#f8ce49"
               strokeWidth="1"
               fill="#ffffff"
             />
@@ -10932,7 +10931,7 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
               cy="900"
               r="1.7999999999999998"
               id="M1880"
-              stroke="#dbba16"
+              stroke="#f8ce49"
               strokeWidth="1"
               fill="#ffffff"
             />
@@ -10942,7 +10941,7 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
               cy="900"
               r="1.7999999999999998"
               id="M1879"
-              stroke="#dbba16"
+              stroke="#f8ce49"
               strokeWidth="1"
               fill="#ffffff"
             />
@@ -10952,7 +10951,7 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
               cy="920"
               r="1.7999999999999998"
               id="M1878"
-              stroke="#dbba16"
+              stroke="#f8ce49"
               strokeWidth="1"
               fill="#ffffff"
             />
@@ -10962,7 +10961,7 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
               cy="965"
               r="1.7999999999999998"
               id="M1877"
-              stroke="#dbba16"
+              stroke="#f8ce49"
               strokeWidth="1"
               fill="#ffffff"
             />
@@ -10972,7 +10971,7 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
               cy="965"
               r="1.7999999999999998"
               id="M1876"
-              stroke="#dbba16"
+              stroke="#f8ce49"
               strokeWidth="1"
               fill="#ffffff"
             />
@@ -10982,7 +10981,7 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
               cy="965"
               r="1.7999999999999998"
               id="M1875"
-              stroke="#dbba16"
+              stroke="#f8ce49"
               strokeWidth="1"
               fill="#ffffff"
             />
@@ -10992,7 +10991,7 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
               cy="965"
               r="1.7999999999999998"
               id="M1874"
-              stroke="#dbba16"
+              stroke="#f8ce49"
               strokeWidth="1"
               fill="#ffffff"
             />
@@ -11002,7 +11001,7 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
               cy="965"
               r="1.7999999999999998"
               id="M1873"
-              stroke="#dbba16"
+              stroke="#f8ce49"
               strokeWidth="1"
               fill="#ffffff"
             />
@@ -11012,7 +11011,7 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
               cy="910"
               r="1.7999999999999998"
               id="M1872"
-              stroke="#dbba16"
+              stroke="#f8ce49"
               strokeWidth="1"
               fill="#ffffff"
             />
@@ -11022,7 +11021,7 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
               cy="890"
               r="1.7999999999999998"
               id="M1871"
-              stroke="#dbba16"
+              stroke="#f8ce49"
               strokeWidth="1"
               fill="#ffffff"
             />
@@ -11032,7 +11031,7 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
               cy="870"
               r="1.7999999999999998"
               id="M1870"
-              stroke="#dbba16"
+              stroke="#f8ce49"
               strokeWidth="1"
               fill="#ffffff"
             />
@@ -11042,7 +11041,7 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
               cy="870"
               r="1.7999999999999998"
               id="M1869"
-              stroke="#dbba16"
+              stroke="#f8ce49"
               strokeWidth="1"
               fill="#ffffff"
             />
@@ -11052,7 +11051,7 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
               cy="870"
               r="1.7999999999999998"
               id="M1868"
-              stroke="#dbba16"
+              stroke="#f8ce49"
               strokeWidth="1"
               fill="#ffffff"
             />
@@ -11062,7 +11061,7 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
               cy="870"
               r="1.7999999999999998"
               id="M1867"
-              stroke="#dbba16"
+              stroke="#f8ce49"
               strokeWidth="1"
               fill="#ffffff"
             />
@@ -11072,7 +11071,7 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
               cy="870"
               r="1.7999999999999998"
               id="M1866"
-              stroke="#dbba16"
+              stroke="#f8ce49"
               strokeWidth="1"
               fill="#ffffff"
             />
@@ -11095,9 +11094,9 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
                 cx="865"
                 cy="870"
                 r="1.5"
-                stroke="#dbba16"
+                stroke="#f8ce49"
                 strokeWidth="1"
-                fill="#dbba16"
+                fill="#f8ce49"
               />
               <circle
                 cx="865"
@@ -11114,7 +11113,7 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
               cy="870"
               r="1.7999999999999998"
               id="M1864"
-              stroke="#dbba16"
+              stroke="#f8ce49"
               strokeWidth="1"
               fill="#ffffff"
             />
@@ -11124,7 +11123,7 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
               cy="870"
               r="1.7999999999999998"
               id="M1863"
-              stroke="#dbba16"
+              stroke="#f8ce49"
               strokeWidth="1"
               fill="#ffffff"
             />
@@ -11134,7 +11133,7 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
               cy="870"
               r="1.7999999999999998"
               id="M1861"
-              stroke="#dbba16"
+              stroke="#f8ce49"
               strokeWidth="1"
               fill="#ffffff"
             />
@@ -11144,7 +11143,7 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
               cy="870"
               r="1.7999999999999998"
               id="M1862"
-              stroke="#dbba16"
+              stroke="#f8ce49"
               strokeWidth="1"
               fill="#ffffff"
             />
@@ -11154,7 +11153,7 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
               cy="870"
               r="1.7999999999999998"
               id="M1859"
-              stroke="#dbba16"
+              stroke="#f8ce49"
               strokeWidth="1"
               fill="#ffffff"
             />
@@ -11177,9 +11176,9 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
                 cx="1070"
                 cy="850"
                 r="1.5"
-                stroke="#dbba16"
+                stroke="#f8ce49"
                 strokeWidth="1"
-                fill="#dbba16"
+                fill="#f8ce49"
               />
               <circle
                 cx="1065"
@@ -11209,9 +11208,9 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
                 cx="1090"
                 cy="830"
                 r="1.5"
-                stroke="#dbba16"
+                stroke="#f8ce49"
                 strokeWidth="1"
-                fill="#dbba16"
+                fill="#f8ce49"
               />
               <circle
                 cx="1085"
@@ -11228,7 +11227,7 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
               cy="805"
               r="1.7999999999999998"
               id="M1856"
-              stroke="#dbba16"
+              stroke="#f8ce49"
               strokeWidth="1"
               fill="#ffffff"
             />
@@ -11238,7 +11237,7 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
               cy="805"
               r="1.7999999999999998"
               id="M1855"
-              stroke="#dbba16"
+              stroke="#f8ce49"
               strokeWidth="1"
               fill="#ffffff"
             />
@@ -11261,9 +11260,9 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
                 cx="1210"
                 cy="805"
                 r="1.5"
-                stroke="#dbba16"
+                stroke="#f8ce49"
                 strokeWidth="1"
-                fill="#dbba16"
+                fill="#f8ce49"
               />
               <circle
                 cx="1210"
@@ -11280,7 +11279,7 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
               cy="805"
               r="1.7999999999999998"
               id="M1854"
-              stroke="#dbba16"
+              stroke="#f8ce49"
               strokeWidth="1"
               fill="#ffffff"
             />
@@ -11290,7 +11289,7 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
               cy="805"
               r="1.7999999999999998"
               id="M1852"
-              stroke="#dbba16"
+              stroke="#f8ce49"
               strokeWidth="1"
               fill="#ffffff"
             />
@@ -11300,7 +11299,7 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
               cy="785"
               r="1.7999999999999998"
               id="M1851"
-              stroke="#dbba16"
+              stroke="#f8ce49"
               strokeWidth="1"
               fill="#ffffff"
             />
@@ -11310,7 +11309,7 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
               cy="765"
               r="1.7999999999999998"
               id="M1028"
-              stroke="#dbba16"
+              stroke="#f8ce49"
               strokeWidth="1"
               fill="#ffffff"
             />
@@ -11320,7 +11319,7 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
               cy="765"
               r="1.7999999999999998"
               id="M1027"
-              stroke="#dbba16"
+              stroke="#f8ce49"
               strokeWidth="1"
               fill="#ffffff"
             />
@@ -11330,7 +11329,7 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
               cy="765"
               r="1.7999999999999998"
               id="M1026"
-              stroke="#dbba16"
+              stroke="#f8ce49"
               strokeWidth="1"
               fill="#ffffff"
             />
@@ -11340,7 +11339,7 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
               cy="700"
               r="1.7999999999999998"
               id="M1024"
-              stroke="#dbba16"
+              stroke="#f8ce49"
               strokeWidth="1"
               fill="#ffffff"
             />
@@ -11350,7 +11349,7 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
               cy="535"
               r="1.7999999999999998"
               id="M1848"
-              stroke="#dbba16"
+              stroke="#f8ce49"
               strokeWidth="1"
               fill="#ffffff"
             />
@@ -11360,7 +11359,7 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
               cy="485"
               r="1.7999999999999998"
               id="M1847"
-              stroke="#dbba16"
+              stroke="#f8ce49"
               strokeWidth="1"
               fill="#ffffff"
             />
@@ -16756,6 +16755,7 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
               </tspan>
             </text>
           </g>
+          <g className="selectedMarker" />
         </svg>
       </div>
     </div>
