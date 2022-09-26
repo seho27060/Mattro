@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 /* eslint-disable prefer-destructuring */
 /* eslint-disable no-param-reassign */
 import Image from "next/image";
@@ -5,19 +6,19 @@ import { useEffect, useState, MouseEvent } from "react";
 import { useRouter } from "next/router";
 import LineInfoList from "../../components/subway/LineCircleList";
 import LineSearch from "../../components/subway/LineSearch";
-import LineSelectedBar from "../../components/subway/LineSelectedBar";
 import MetroMap from "../../components/subway/MetroMap";
 import styles from "./subway.module.scss";
 import PlusBtn from "../../public/icons/plus.svg";
 import MinusBtn from "../../public/icons/minus.svg";
 import lineInfos from "../../constants/lineInfo";
 import { UsedLineIdType } from "../../constants/lineType";
+import LineSelectedBar from "../../components/subway/LineSelectedBar";
 
-type SelectedStationType = {
+export type SelectedStationType = {
   name: string;
   cx: number;
   cy: number;
-  lineId: UsedLineIdType | null;
+  lineId: UsedLineIdType[];
   stationId: string;
 };
 
@@ -73,12 +74,11 @@ const Index = () => {
   };
 
   // 해당 라인 어딘지 추출
-  const getLineIdByEle = (ele: Element): UsedLineIdType => {
-    const lineData = ele.classList.value.match(/L[A-Z|1-9]{1,}/);
-    if (lineData) {
-      return lineData[0] as UsedLineIdType;
-    }
-    return "L1";
+  const getLineIdByEle = (ele: Element): UsedLineIdType[] => {
+    const lineData = ele.classList.value.match(
+      /L[A-Z|1-9]{1,}/g
+    ) as UsedLineIdType[];
+    return lineData;
   };
 
   // 동그라미 토글
@@ -105,12 +105,29 @@ const Index = () => {
     if (!isInclude) {
       setSelectedStations((prev) => [...prev, stationInfo]);
 
-      const newMarker = document.createElement("rect");
-      newMarker.innerHTML = `
-      <rect x="710" y="65" width="20" height="20">
-      <path d="M28 0C12.52 0 0 12.52 0 28C0 34.96 2 41.48 5.64 47.36C9.44 53.52 14.44 58.8 18.28 64.96C20.16 67.96 21.52 70.76 22.96 74C24 76.2 24.84 80 28 80C31.16 80 32 76.2 33 74C34.48 70.76 35.8 67.96 37.68 64.96C41.52 58.84 46.52 53.56 50.32 47.36C54 41.48 56 34.96 56 28C56 12.52 43.48 0 28 0ZM28 39C22.48 39 18 34.52 18 29C18 23.48 22.48 19 28 19C33.52 19 38 23.48 38 29C38 34.52 33.52 39 28 39Z" fill="black"/>
-      </rect>
-      `;
+      // newMarker.innerHTML = `
+      // <svg width="56" height="80" viewBox="0 0 56 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      // <path d="M28 0C12.52 0 0 12.52 0 28C0 34.96 2 41.48 5.64 47.36C9.44 53.52 14.44 58.8 18.28 64.96C20.16 67.96 21.52 70.76 22.96 74C24 76.2 24.84 80 28 80C31.16 80 32 76.2 33 74C34.48 70.76 35.8 67.96 37.68 64.96C41.52 58.84 46.52 53.56 50.32 47.36C54 41.48 56 34.96 56 28C56 12.52 43.48 0 28 0ZM28 39C22.48 39 18 34.52 18 29C18 23.48 22.48 19 28 19C33.52 19 38 23.48 38 29C38 34.52 33.52 39 28 39Z" fill="black"/>
+      // </svg>      `;
+
+      const newMarker = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "rect"
+      );
+      newMarker.setAttributeNS(null, "x", `${stationInfo.cx - 10}`);
+      newMarker.setAttributeNS(null, "y", `${stationInfo.cy - 10}`);
+      newMarker.setAttributeNS(null, "width", "20");
+      newMarker.setAttributeNS(null, "height", "20");
+
+      const test = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "svg"
+      );
+      test.setAttributeNS(null, "viewBox", `0 0 20 20`);
+      test.setAttributeNS(null, "width", "20");
+      test.setAttributeNS(null, "height", "20");
+      test.innerHTML = `<path d="M28 0C12.52 0 0 12.52 0 28C0 34.96 2 41.48 5.64 47.36C9.44 53.52 14.44 58.8 18.28 64.96C20.16 67.96 21.52 70.76 22.96 74C24 76.2 24.84 80 28 80C31.16 80 32 76.2 33 74C34.48 70.76 35.8 67.96 37.68 64.96C41.52 58.84 46.52 53.56 50.32 47.36C54 41.48 56 34.96 56 28C56 12.52 43.48 0 28 0ZM28 39C22.48 39 18 34.52 18 29C18 23.48 22.48 19 28 19C33.52 19 38 23.48 38 29C38 34.52 33.52 39 28 39Z" fill="black"/>`;
+      newMarker.appendChild(test);
       // newMarker.setAttribute("x", 710);
       // newMarker.setAttribute("y", 65);
       // newMarker.setAttribute("width", 20);
@@ -275,13 +292,7 @@ const Index = () => {
       </div>
       <div id="select-container" className="flex justify-center">
         {selectedStations.length !== 0 && (
-          <button
-            className={`fs-30 notoBold flex align-center justify-center  ${styles.btn}`}
-            type="button"
-            onClick={recommendPlace}
-          >
-            맛집 추천받기
-          </button>
+          <LineSelectedBar selectedStations={selectedStations} />
         )}
       </div>
     </div>
