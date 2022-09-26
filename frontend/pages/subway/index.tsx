@@ -100,46 +100,41 @@ const Index = () => {
         isInclude = true;
       }
     });
+    const markerGroup = document.querySelector(".selectedMarker");
     if (!isInclude) {
       setSelectedStations((prev) => [...prev, stationInfo]);
 
-      // newMarker.innerHTML = `
-      // <svg width="56" height="80" viewBox="0 0 56 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-      // <path d="M28 0C12.52 0 0 12.52 0 28C0 34.96 2 41.48 5.64 47.36C9.44 53.52 14.44 58.8 18.28 64.96C20.16 67.96 21.52 70.76 22.96 74C24 76.2 24.84 80 28 80C31.16 80 32 76.2 33 74C34.48 70.76 35.8 67.96 37.68 64.96C41.52 58.84 46.52 53.56 50.32 47.36C54 41.48 56 34.96 56 28C56 12.52 43.48 0 28 0ZM28 39C22.48 39 18 34.52 18 29C18 23.48 22.48 19 28 19C33.52 19 38 23.48 38 29C38 34.52 33.52 39 28 39Z" fill="black"/>
-      // </svg>      `;
-
-      const newMarker = document.createElementNS(
+      const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      svg.setAttributeNS(null, "x", `${stationInfo.cx - 6}`);
+      svg.setAttributeNS(null, "y", `${stationInfo.cy - 18}`);
+      svg.setAttributeNS(null, "width", "300");
+      svg.setAttributeNS(null, "height", "200");
+      svg.setAttributeNS(null, "viewBox", "0 0 1500 1000");
+      svg.setAttributeNS(null, "id", stationInfo.stationId);
+      const path = document.createElementNS(
         "http://www.w3.org/2000/svg",
-        "rect"
+        "path"
       );
-      newMarker.setAttributeNS(null, "x", `${stationInfo.cx - 10}`);
-      newMarker.setAttributeNS(null, "y", `${stationInfo.cy - 10}`);
-      newMarker.setAttributeNS(null, "width", "20");
-      newMarker.setAttributeNS(null, "height", "20");
+      path.setAttributeNS(
+        null,
+        "d",
+        "M28 0C12.52 0 0 12.52 0 28C0 34.96 2 41.48 5.64 47.36C9.44 53.52 14.44 58.8 18.28 64.96C20.16 67.96 21.52 70.76 22.96 74C24 76.2 24.84 80 28 80C31.16 80 32 76.2 33 74C34.48 70.76 35.8 67.96 37.68 64.96C41.52 58.84 46.52 53.56 50.32 47.36C54 41.48 56 34.96 56 28C56 12.52 43.48 0 28 0ZM28 39C22.48 39 18 34.52 18 29C18 23.48 22.48 19 28 19C33.52 19 38 23.48 38 29C38 34.52 33.52 39 28 39Z"
+      );
+      path.setAttributeNS(null, "fill", "#e53060");
+      svg.appendChild(path);
 
-      const test = document.createElementNS(
-        "http://www.w3.org/2000/svg",
-        "svg"
-      );
-      test.setAttributeNS(null, "viewBox", `0 0 20 20`);
-      test.setAttributeNS(null, "width", "20");
-      test.setAttributeNS(null, "height", "20");
-      test.innerHTML = `<path d="M28 0C12.52 0 0 12.52 0 28C0 34.96 2 41.48 5.64 47.36C9.44 53.52 14.44 58.8 18.28 64.96C20.16 67.96 21.52 70.76 22.96 74C24 76.2 24.84 80 28 80C31.16 80 32 76.2 33 74C34.48 70.76 35.8 67.96 37.68 64.96C41.52 58.84 46.52 53.56 50.32 47.36C54 41.48 56 34.96 56 28C56 12.52 43.48 0 28 0ZM28 39C22.48 39 18 34.52 18 29C18 23.48 22.48 19 28 19C33.52 19 38 23.48 38 29C38 34.52 33.52 39 28 39Z" fill="black"/>`;
-      newMarker.appendChild(test);
-      // newMarker.setAttribute("x", 710);
-      // newMarker.setAttribute("y", 65);
-      // newMarker.setAttribute("width", 20);
-      // newMarker.setAttribute("height", 20);
-      const markerGroup = document.querySelector(".selectedMarker");
-      markerGroup?.appendChild(newMarker);
-      console.log(newMarker, markerGroup);
+      markerGroup?.appendChild(svg);
     } else {
+      const marker = document.getElementById(stationInfo.stationId);
+      markerGroup?.removeChild(marker as HTMLElement);
+
       setSelectedStations((prev) =>
         prev.filter(
           (station) => JSON.stringify(station) !== JSON.stringify(stationInfo)
         )
       );
     }
+
     setSelecting(false);
   };
 

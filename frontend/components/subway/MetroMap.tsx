@@ -16755,7 +16755,12 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
               </tspan>
             </text>
           </g>
-          <g className="selectedMarker" />
+          <svg
+            className="selectedMarker"
+            width="100%"
+            height="100%"
+            viewBox="0 0 1500 1000"
+          />
         </svg>
       </div>
     </div>
