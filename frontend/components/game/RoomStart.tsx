@@ -99,7 +99,7 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
     },
     ref
   ) => {
-    console.log(turn, order, limit);
+    console.log(turn, order, limit - now * 500);
     const router = useRouter();
     const timeoutReturn: { current: NodeJS.Timeout | null } = useRef(null);
     const clear = () => {
