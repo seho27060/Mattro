@@ -68,7 +68,7 @@ io.on("connection", (socket) => {
     socket.emit(
       "welcome",
       roomName,
-      { id: socket.id, nickname: socket.data.nickname, me: true },
+      { id: socket.id, nickname: socket.data.nickname },
       howManyInRoom(roomName)
     );
     socket
@@ -76,7 +76,7 @@ io.on("connection", (socket) => {
       .emit(
         "welcome",
         roomName,
-        { id: socket.id, nickname: socket.data.nickname, me: false },
+        { id: socket.id, nickname: socket.data.nickname },
         howManyInRoom(roomName)
       );
     // 방 입장할 때마다 방 개수를 emit
@@ -108,15 +108,16 @@ io.on("connection", (socket) => {
     socket.emit("start_lobby", true);
   });
   socket.on("start_game", (roomName, line, order) => {
-    socket.to(roomName).emit("start_game", line, order, 10000);
-    socket.emit("start_game", line, order, 10000);
+    socket.to(roomName).emit("start_game", line, order, 8000);
+    socket.emit("start_game", line, order, 8000);
   });
   socket.on("room_change", () => {
     socket.emit("room_change", publicRooms());
   });
   socket.on(
     "answer",
-    (roomName, line, answer, arr, order, now, userListNum) => {
+    (roomName, line, answer, arr, order, now, userListNum, socketId, done) => {
+      done();
       const res = isAnswer(line, answer, arr);
       arr.push(answer);
       socket.emit(
@@ -127,7 +128,8 @@ io.on("connection", (socket) => {
         answer,
         order,
         now,
-        userListNum
+        userListNum,
+        socketId
       );
       socket
         .to(roomName)
@@ -139,31 +141,39 @@ io.on("connection", (socket) => {
           answer,
           order,
           now,
-          userListNum
+          userListNum,
+          socketId
         );
     }
   );
-  socket.on("correct", (roomName, answer, order, now, userListNum) => {
-    socket.emit(
-      "correct",
-      answer,
-      socket.id,
-      now + 1,
-      order[(now + 1) % userListNum]
-    );
-    socket
-      .to(roomName)
-      .emit(
+  socket.on(
+    "correct",
+    (roomName, answer, order, now, userListNum, socketId) => {
+      socket.emit(
         "correct",
         answer,
-        socket.id,
+        socketId,
         now + 1,
         order[(now + 1) % userListNum]
       );
+      socket
+        .to(roomName)
+        .emit(
+          "correct",
+          answer,
+          socketId,
+          now + 1,
+          order[(now + 1) % userListNum]
+        );
+    }
+  );
+  socket.on("uncorrect", (roomName, answer, socketId) => {
+    socket.to(roomName).emit("uncorrect", answer, socketId);
+    socket.emit("uncorrect", answer, socketId);
   });
-  socket.on("uncorrect", (roomName, answer) => {
-    socket.to(roomName).emit("uncorrect", answer, socket.id);
-    socket.emit("uncorrect", answer, socket.id);
+  socket.on("time_over", (roomName, answer, socketId) => {
+    socket.to(roomName).emit("uncorrect", answer, socketId);
+    socket.emit("uncorrect", answer, socketId);
   });
 });
 

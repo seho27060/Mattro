@@ -11,13 +11,13 @@ function isOverlap(arr, val) {
 
 export default function isAnswer(targetLine, val, arr) {
   if (isOverlap(arr, val)) {
-    return false;
+    return "중복";
   }
   // eslint-disable-next-line consistent-return
   for (let i = 0; i < lineData[Number(targetLine)].stations.length; i += 1) {
     if (lineData[Number(targetLine)].stations[i].name === val) {
-      return true;
+      return "정답";
     }
   }
-  return false;
+  return "오답";
 }

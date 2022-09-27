@@ -75,14 +75,18 @@ const RoomLobby: React.FunctionComponent<Props> = ({
               </span>
               <div
                 className={`${styles.username} notoBold`}
-                onClick={toggleModal}
+                onClick={() => {
+                  if (user.id === socket.id) {
+                    toggleModal();
+                  }
+                }}
                 aria-hidden="true"
               >
                 {user.nickname}님
               </div>
               <span
                 className={`${
-                  user.me ? styles.visible : styles.invisible
+                  user.id === socket.id ? styles.visible : styles.invisible
                 } flex justify-center align-center notoBold fs-20`}
               >
                 나

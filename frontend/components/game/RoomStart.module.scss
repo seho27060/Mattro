@@ -73,21 +73,24 @@
 }
 
 .footer {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
   width: 80%;
   margin-top: 30px;
   button {
-    grid-column-start: 2;
+    // grid-column-start: 2;
     color: $GRAY_3A;
     &:hover {
       color: $LS;
     }
   }
-  .chair2 {
-    justify-self: flex-end;
-    width: 30%;
+  .visible {
   }
+  .invisible {
+    visibility: hidden;
+  }
+  // .chair2 {
+  //   justify-self: flex-end;
+  //   width: 30%;
+  // }
 }
 
 @media screen and (max-width: $DESKTOP-VW) {
@@ -178,7 +181,7 @@
       align-self: flex-end;
     }
     button {
-      grid-column-start: span 2;
+      grid-column-start: span 3;
       align-self: flex-start;
       justify-self: center;
       font-size: 72px;

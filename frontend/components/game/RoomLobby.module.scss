@@ -104,6 +104,7 @@
 }
 .modal__input {
   border-bottom: 1px solid $BLACK;
+  width: 440px;
 }
 
 @media screen and (max-width: $DESKTOP-VW) {
@@ -161,6 +162,13 @@
   .footer {
     width: vw(1004px);
   }
+
+  .modal__label {
+    margin-right: vw(10px);
+  }
+  .modal__input {
+    width: vw(440px);
+  }
 }
 
 @media screen and (max-width: $TABLET-VW) {
@@ -212,6 +220,7 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
+    row-gap: 18px;
     column-gap: 0;
     .user {
       width: 136px;
@@ -254,6 +263,13 @@
     .chair2 {
     }
   }
+  .modal__label {
+    margin-right: 0;
+  }
+  .modal__input {
+    width: 240px;
+    margin-top: 20px;
+  }
 }
 
 @media screen and (max-width: $PHONE-VW) {
@@ -293,6 +309,7 @@
 
   .userList {
     margin-top: vw-p(30px);
+    row-gap: vw-p(18px);
     .user {
       width: vw-p(136px);
       height: vw-p(208px);
@@ -322,5 +339,11 @@
       height: vw-p(52px);
       font-size: vw-p(24px);
     }
+  }
+  .modal__label {
+  }
+  .modal__input {
+    width: vw-p(240px);
+    margin-top: vw-p(20px);
   }
 }
