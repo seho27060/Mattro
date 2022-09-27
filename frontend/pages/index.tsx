@@ -8,11 +8,12 @@ import styles from "./index.module.scss";
 
 const Home: NextPage = () => {
   const router = useRouter();
-  const [clicked, setClicked] = useState(false);
+  const [clicked, setClicked] = useState<boolean>(false);
   const startClick = () => {
     setClicked(true);
+
     setTimeout(function () {
-      router.push("/theme/main");
+      router.push("/subway");
     }, 3000);
   };
 
