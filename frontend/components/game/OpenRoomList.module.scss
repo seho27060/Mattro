@@ -27,7 +27,7 @@
       }
       p {
         color: $WHITE;
-        span {
+        .room__num {
           margin-right: 24px;
           padding: 12px;
           width: 64px;
@@ -85,7 +85,7 @@
         height: vw(100px);
         border-radius: vw(22px);
         p {
-          span {
+          .room__num {
             margin-right: vw(24px);
             padding: vw(12px);
             width: vw(64px);
@@ -132,7 +132,7 @@
         padding: 0;
         p {
           font-size: 20px;
-          span {
+          .room__num {
             margin: 14px 14px;
             padding: 12px;
             width: 44px;
@@ -180,7 +180,7 @@
         border-radius: vw-p(22px);
         p {
           font-size: vw-p(20px);
-          span {
+          .room__num {
             margin: vw-p(14px) vw-p(14px);
             padding: vw-p(12px);
             width: vw-p(44px);
