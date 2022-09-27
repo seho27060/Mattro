@@ -86,8 +86,12 @@
         }
       }
     }
-    div[id="select-container"] {
-      bottom: vw(68px);
+    .btn {
+      bottom: vw(168px);
+      width: vw(280px);
+      height: vw(72px);
+
+      border-radius: vw(20px);
     }
     // .btn {
     //   bottom: vw(168px);
@@ -160,10 +164,6 @@
           margin-top: vw-p(4px);
         }
       }
-    }
-    div[id="select-container"] {
-      width: vw-p(390px);
-      bottom: vw-p(20px);
     }
   }
 }

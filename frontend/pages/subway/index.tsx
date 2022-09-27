@@ -148,8 +148,6 @@ const Index = () => {
     // 동그라미를 클릭했다면
     if (e.currentTarget.tagName === "circle") {
       const circle = e.currentTarget;
-
-      // 환승역
       if (!circle.id) {
         const circleChilds = circle.parentElement?.childNodes;
         if (circleChilds) {
