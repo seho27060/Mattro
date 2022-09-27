@@ -100,6 +100,7 @@ const Main: NextPage = () => {
           setTotal(arr);
           socket.emit("correct", roomName, answer, order, now, userListNum);
         } else {
+          childRef.current?.clear();
           socket.emit("uncorrect", roomName, answer);
         }
       }
