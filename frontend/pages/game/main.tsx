@@ -3,7 +3,6 @@
 import type { NextPage } from "next";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { io } from "socket.io-client";
-import { useRouter } from "next/router";
 
 import { IUserList } from "../../constants/socketio";
 import OpenRoomList from "../../components/game/OpenRoomList";
@@ -14,7 +13,6 @@ import RoomStart from "../../components/game/RoomStart";
 const socket = io("ws://j7c206.p.ssafy.io:8000");
 
 const Main: NextPage = () => {
-  const router = useRouter();
   const childRef = useRef<{
     setLine: (line: string) => void;
     toggleModal: (a: boolean) => void;
@@ -35,7 +33,7 @@ const Main: NextPage = () => {
   const [total, setTotal] = useState<string[]>([]);
   const [result, setResult] = useState({});
   const [now, setNow] = useState<number>(0);
-  const [limit, setLimit] = useState<number>(5000);
+  const [limit, setLimit] = useState<number>(8000);
 
   const resetGame = useCallback(() => {
     setIsStartedLobby(false);
@@ -76,7 +74,7 @@ const Main: NextPage = () => {
     socket.on("start_game", (line, order, limit) => {
       setIsStartedGame(true);
       childRef.current?.setLine(line);
-      setTurn(order[now]);
+      setTurn(order[0]);
       setOrder(order);
       setNow(0);
       setLimit(limit);
@@ -94,14 +92,28 @@ const Main: NextPage = () => {
     });
     socket.on(
       "check_answer",
-      (roomName, res, arr, answer, order, now, userListNum) => {
-        if (res) {
-          childRef.current?.clear();
+      (roomName, res, arr, answer, order, now, userListNum, socketId) => {
+        childRef.current?.clear();
+        if (res === "정답") {
+          console.log("맞음!!");
           setTotal(arr);
-          socket.emit("correct", roomName, answer, order, now, userListNum);
-        } else {
-          childRef.current?.clear();
-          socket.emit("uncorrect", roomName, answer);
+          socket.emit(
+            "correct",
+            roomName,
+            answer,
+            order,
+            now,
+            userListNum,
+            socketId
+          );
+        }
+        if (res === "오답") {
+          console.log("틀림!!");
+          socket.emit("uncorrect", roomName, res, socketId);
+        }
+        if (res === "중복") {
+          console.log("중복!!");
+          socket.emit("uncorrect", roomName, res, socketId);
         }
       }
     );
@@ -117,10 +129,10 @@ const Main: NextPage = () => {
       setResult({ answer, socketId });
       setTimeout(() => {
         childRef.current?.toggleModal(true);
-        setTimeout(() => {
-          resetGame();
-        }, 2000);
       }, 1000);
+      setTimeout(() => {
+        resetGame();
+      }, 3000);
     });
     return () => {
       socket.off("welcome");
@@ -136,23 +148,23 @@ const Main: NextPage = () => {
     };
   }, []);
 
-  const leave = (e: any) => {
-    setIsEntered(false);
-    resetGame();
-    socket.disconnect();
-    setTimeout(() => {
-      router.push("/");
-    }, 10000);
-    // e.preventDefault();
-    // e.returnValue = "";
-  };
+  // const leave = (e: any) => {
+  //   // setIsEntered(false);
+  //   // resetGame();
+  //   // socket.disconnect();
+  //   // setTimeout(() => {
+  //   //   router.push("/");
+  //   // }, 10000);
+  //   e.preventDefault();
+  //   e.returnValue = "";
+  // };
 
-  useEffect(() => {
-    window.addEventListener("beforeunload", leave);
-    return () => {
-      window.removeEventListener("beforeunload", leave);
-    };
-  }, []);
+  // useEffect(() => {
+  //   window.addEventListener("beforeunload", leave);
+  //   return () => {
+  //     window.removeEventListener("beforeunload", leave);
+  //   };
+  // }, []);
 
   // const [closeSession, setCloseSession] = useState(false);
 

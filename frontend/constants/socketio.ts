@@ -36,9 +36,11 @@ export interface ClientToServerEvents {
     total: string[],
     order: IUserList[],
     now: number,
-    userListNum: number
+    userListNum: number,
+    socketId: string,
+    done: () => void
   ) => void;
-  uncorrect: (roomName: string, answer: string) => void;
+  time_over: (roomName: string, answer: string, socketId: string) => void;
 }
 
 export type ISocket = Socket<ServerToClientEvents, ClientToServerEvents>;

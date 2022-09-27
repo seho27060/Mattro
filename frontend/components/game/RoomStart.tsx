@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable no-shadow */
 /* eslint-disable react/display-name */
 /* eslint-disable no-alert */
@@ -10,7 +11,6 @@ import React, {
   useRef,
   useEffect
 } from "react";
-import { useRouter } from "next/router";
 import styles from "./RoomStart.module.scss";
 import { IUserList, ISocket } from "../../constants/socketio";
 import Modal from "../layouts/Modal";
@@ -99,10 +99,9 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
     },
     ref
   ) => {
-    console.log(turn, order, limit - now * 500);
-    const router = useRouter();
     const timeoutReturn: { current: NodeJS.Timeout | null } = useRef(null);
     const clear = () => {
+      console.log("시간초과 클리어========");
       clearTimeout(timeoutReturn.current as NodeJS.Timeout);
     };
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -149,17 +148,28 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
         total,
         order,
         now,
-        userList.length
+        userList.length,
+        socket.id,
+        () => {
+          clear();
+        }
       );
       setAnswer("");
     };
     useEffect(() => {
       if (!limit) return;
       if (socket.id !== turn.id) return;
+      console.log(limit - now * 500, "시간초과 카운트 시작=========");
       const id = setTimeout(() => {
-        socket.emit("uncorrect", roomName, "시간초과");
+        console.log("시간초과 됨===========");
+        socket.emit("time_over", roomName, "시간초과", socket.id);
       }, limit - now * 500);
-      timeoutReturn.current = id;
+      if (timeoutReturn?.current) {
+        timeoutReturn.current = id;
+      }
+      return () => {
+        clearTimeout(id);
+      };
     }, [limit, now, turn]);
 
     useEffect(() => {
@@ -180,29 +190,33 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
     //   }
     // }, [closeSession]);
     const onEnterKeyUp = (e: { key: string }) => {
-      if (e.key === "Enter") {
+      if (answer && e.key === "Enter") {
         onSubmitAnswer(answer);
       }
     };
     return (
       <div className={`${styles.wrapper} flex column align-center`}>
         <h2 className="flex justify-center align-center coreExtra fs-34">
-          {turn && <span>{turn.nickname}님 차례</span>}
+          {turn && (
+            <div>
+              <span>{turn.nickname}</span>님 차례
+            </div>
+          )}
         </h2>
         <div className={`${styles.userList}`}>
-          {userList.map((user) => (
+          {order.map((user) => (
             <div key={user.id}>
               <div
                 className={`${
                   result.socketId === user.id ? styles.result : styles.empty
                 }`}
               >
-                {result.answer}
+                <span>{result.answer}</span>
               </div>
               <div
                 className={`${styles.user} flex justify-center align-center coreExtra fs-24`}
               >
-                {user.nickname}님
+                <span>{user.nickname}님</span>
               </div>
             </div>
           ))}
@@ -252,24 +266,30 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
             )}
           </div>
         </div>
-        <div className={`${styles.footer}`}>
+        <div className={`${styles.footer} flex align-center justify-center`}>
           {/* <span className={styles.chair1}>
             <Image src={chair1} alt="chair1" />
           </span> */}
-          {!isStartedGame && canStart && (
-            <button
-              className="coreExtra fs-80"
-              type="button"
-              onClick={onStartGame}
-            >
-              Start!
-            </button>
-          )}
+          <button
+            className={`${
+              !isStartedGame && canStart ? styles.visible : styles.invisible
+            } coreExtra fs-80`}
+            type="button"
+            onClick={onStartGame}
+          >
+            Start!
+          </button>
           {/* <span className={styles.chair2}>
             <Image src={chair2} alt="chair2" />
           </span> */}
         </div>
-        <Modal isOpen={isModalOpen} onClose={toggleModal}>
+        <Modal
+          isOpen={isModalOpen}
+          onClose={() => {
+            toggleModal();
+            resetGame();
+          }}
+        >
           <div className={`${styles.children} fs-32 coreExtra`}>
             <div>
               {isModalOpen && (
