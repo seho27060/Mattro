@@ -12,7 +12,7 @@ import React, {
 } from "react";
 import { useRouter } from "next/router";
 import styles from "./RoomStart.module.scss";
-import { IUserList, ISocket } from "../../pages/game/api/socketio";
+import { IUserList, ISocket } from "../../constants/socketio";
 import Modal from "../layouts/Modal";
 
 interface Props {

@@ -4,7 +4,7 @@ import Image from "next/image";
 import station from "../../public/images/station.png";
 import chair1 from "../../public/images/chair1.png";
 import styles from "./OpenRoomList.module.scss";
-import type { ISocket } from "../../pages/game/api/socketio";
+import type { ISocket } from "../../constants/socketio";
 
 interface Props {
   roomList: string[];

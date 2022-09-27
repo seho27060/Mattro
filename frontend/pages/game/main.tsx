@@ -5,7 +5,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { io } from "socket.io-client";
 import { useRouter } from "next/router";
 
-import { IUserList } from "./api/socketio";
+import { IUserList } from "../../constants/socketio";
 import OpenRoomList from "../../components/game/OpenRoomList";
 import RoomLobby from "../../components/game/RoomLobby";
 import RoomStart from "../../components/game/RoomStart";

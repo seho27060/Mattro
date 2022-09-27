@@ -7,7 +7,7 @@ import chair1 from "../../public/images/chair1.png";
 import chair2 from "../../public/images/chair2.png";
 import subway1 from "../../public/images/subway1.svg";
 import subway2 from "../../public/images/subway2.svg";
-import { ISocket, IUserList } from "../../pages/game/api/socketio";
+import { ISocket, IUserList } from "../../constants/socketio";
 import Modal from "../layouts/Modal";
 
 interface Props {
