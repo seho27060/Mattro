@@ -10,7 +10,7 @@ type QuestionType = {
 export default function QuestionCard({ start, moveNext }: QuestionType) {
   const [result, setResult] = useState<number[]>([]); // 배열에 값 담아 보내기 api
 
-  const aniRef = useRef();
+  const aniRef = useRef<any>();
   const [quesList, setQuesList] = useState([
     { num: 0, question: "같이 갈 일행이 있나요?" },
     { num: 1, question: "자차로 방문하나요?" },
