@@ -14,7 +14,7 @@ const LineSelectedBar = ({ selectedStations }: LineSelectedBarProps) => {
   const recommendPlace = () => {
     const randomInd = Math.floor(Math.random() * selectedStations.length);
     const { lineId, stationId } = selectedStations[randomInd];
-    router.push(`/subway/${lineId}/${stationId}/1`);
+    router.push(`/subway/${lineId[0]}/${stationId}/1`);
   };
 
   return (
