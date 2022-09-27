@@ -108,8 +108,8 @@ io.on("connection", (socket) => {
     socket.emit("start_lobby", true);
   });
   socket.on("start_game", (roomName, line, order) => {
-    socket.to(roomName).emit("start_game", line, order, 5000);
-    socket.emit("start_game", line, order, 5000);
+    socket.to(roomName).emit("start_game", line, order, 1000);
+    socket.emit("start_game", line, order, 1000);
   });
   socket.on("room_change", () => {
     socket.emit("room_change", publicRooms());
