@@ -27,7 +27,7 @@ export const unUsedLineInfos: {
   name: UnusedLineNameType;
 }[] = [
   { id: "LI", name: "인천1" },
-  { id: "LI", name: "인천2" },
+  { id: "LI2", name: "인천2" },
   { id: "LA", name: "공항철도" },
   { id: "LG", name: "경춘" },
   { id: "LU", name: "의정부경전철" },

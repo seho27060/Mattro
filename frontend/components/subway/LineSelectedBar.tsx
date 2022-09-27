@@ -1,29 +1,43 @@
-import React, { useState } from "react";
+/* eslint-disable import/no-cycle */
+import React from "react";
+import { useRouter } from "next/router";
+import { SelectedStationType } from "../../pages/subway";
 import styles from "./LineSelectedBar.module.scss";
 
-const LineSelectedBar = () => {
-  const [selectedStation, setSeletedStation] = useState([
-    { line: "L1", name: "노량진" },
-    { line: "L2", name: "합정" },
-    { line: "L2", name: "구로디지털단지" },
-    { line: "LS", name: "강남" },
-    { line: "LS", name: "판교" }
-  ]);
+type LineSelectedBarProps = {
+  selectedStations: SelectedStationType[];
+};
+
+const LineSelectedBar = ({ selectedStations }: LineSelectedBarProps) => {
+  const router = useRouter();
+
+  const recommendPlace = () => {
+    const randomInd = Math.floor(Math.random() * selectedStations.length);
+    const { lineId, stationId } = selectedStations[randomInd];
+    router.push(`/subway/${lineId[0]}/${stationId}/1`);
+  };
+
   return (
     <div id="lineSelectedBar" className="flex align-center">
       <ul className={`flex ${styles.stations} align-center`}>
-        {selectedStation.map((station) => (
+        {selectedStations.map((station) => (
           <li
             key={station.name}
-            className={`notoBold flex align-center justify-center ${station.line} ${styles.station}`}
+            className={`notoBold flex column align-center justify-center ${styles.station}`}
           >
+            <div className={`${styles.circleContainer} flex`}>
+              {station.lineId.map((id) => (
+                <div key={id} className={`${styles.circle} ${id}`} />
+              ))}
+            </div>
             {station.name}
           </li>
         ))}
       </ul>
       <button
-        className={`fs-20 notoBold flex align-center justify-center  ${styles.btn}`}
+        className={`fs-24 notoBold flex align-center justify-center  ${styles.btn}`}
         type="button"
+        onClick={recommendPlace}
       >
         맛집 추천받기
       </button>
