@@ -1,9 +1,12 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React from "react";
+import { useRouter } from "next/router";
 import ResultCard from "../../components/theme/ResultCard";
 import styles from "./result.module.scss";
 
 export default function themeMain() {
   const food = "떡볶이";
+  const router = useRouter();
   return (
     <div className={`${styles.result} flex justify-center`}>
       <div className={`${styles.contents} flex column align-center`}>
@@ -16,10 +19,22 @@ export default function themeMain() {
         </div>
         <ResultCard />
         <div className={`${styles.btns} flex`}>
-          <button type="button" className={`${styles.btn} notoBold `}>
+          <button
+            onClick={() => {
+              router.push("/theme");
+            }}
+            type="button"
+            className={`${styles.btn} notoBold `}
+          >
             다른 메뉴 추천 받기
           </button>
-          <button type="button" className={`${styles.btn} notoBold `}>
+          <button
+            onClick={() => {
+              router.push("/");
+            }}
+            type="button"
+            className={`${styles.btn} notoBold `}
+          >
             홈으로 돌아가기
           </button>
         </div>

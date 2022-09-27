@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import Navbar from "./Navbar";
@@ -10,6 +10,7 @@ type AppLayoutProps = {
 
 export default function AppLayout({ children }: AppLayoutProps) {
   const { pathname } = useRouter();
+
   return (
     <>
       <Head>

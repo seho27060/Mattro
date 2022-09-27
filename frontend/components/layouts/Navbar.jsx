@@ -19,7 +19,7 @@ export default function Navbar() {
   const navList = [
     ["/", "메인"],
     ["/subway", "노선별 추천"],
-    ["/theme/main", "오늘의 추천"],
+    ["/theme", "오늘의 추천"],
     ["/game", "지하철 게임"]
   ];
 
