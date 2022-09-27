@@ -19,7 +19,7 @@ const index: NextPage = () => {
       <div>
         <Image src={logo} alt="logo" />
       </div>
-      <Link href="/game/rooms">
+      <Link href="/game/main">
         <div
           className={`${styles.start__btn} flex justify-center align-center fs-32 coreExtra`}
         >
@@ -35,14 +35,16 @@ const index: NextPage = () => {
       </button>
       <Modal isOpen={isModalOpen} onClose={toggleModal}>
         <div className={`${styles.children} fs-32 coreExtra`}>
-          <p>
+          <div className={styles.article}>
             1. 랜덤한 유저가 지하철 노선 중 하나를 입력하면 게임이 시작됩니다.
-          </p>
-          <p>
+          </div>
+          <div className={styles.article}>
             2. 유저들이 순서대로 해당 노선에 포함되는 지하철 역 이름을 제한시간
             내에 입력합니다.
-          </p>
-          <p>3. 1등이 가려질 때까지 위를 반복합니다.</p>
+          </div>
+          <div className={styles.article}>
+            3. 1등이 가려질 때까지 위를 반복합니다.
+          </div>
         </div>
       </Modal>
     </div>
