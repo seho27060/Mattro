@@ -23,7 +23,7 @@ public class CrawlingResponse {
         this.mainImageURL = crawling.getMainImageURL();
         this.menuImageURL = crawling.getMenuImageURL();
         this.tell = crawling.getTell();
-        this.storURL = crawling.getStoreURL();
+        this.storeURL = crawling.getStoreURL();
     }
 
     private String id;
@@ -36,5 +36,5 @@ public class CrawlingResponse {
     private org.bson.Document keywordReviewList;
     private String foodCategory;
     private String tell;
-    private String storURL;
+    private String storeURL;
 }
