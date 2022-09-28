@@ -134,8 +134,23 @@ const Main: NextPage = () => {
         resetGame();
       }, 3000);
     });
-    socket.on("time_over", (socketId) => {
-      setResult({ answer: "시간초과", socketId });
+    socket.on("time_over", (order, now) => {
+      setResult({
+        answer: "시간초과",
+        socketId: order[(now + 1) % order.length].id
+      });
+      setTimeout(() => {
+        childRef.current?.toggleModal(true);
+      }, 1000);
+      setTimeout(() => {
+        resetGame();
+      }, 3000);
+    });
+    socket.on("start_time_over", (socketId) => {
+      setResult({
+        answer: "시간초과",
+        socketId
+      });
       setTimeout(() => {
         childRef.current?.toggleModal(true);
       }, 1000);
@@ -155,6 +170,7 @@ const Main: NextPage = () => {
       socket.off("correct");
       socket.off("uncorrect");
       socket.off("time_over");
+      socket.off("start_time_over");
     };
   }, []);
 

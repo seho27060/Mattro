@@ -93,8 +93,7 @@ io.on("connection", (socket) => {
   socket.on("iMHere", (roomName) => {
     socket.to(roomName).emit("iMHere", {
       id: socket.id,
-      nickname: socket.data.nickname,
-      me: false
+      nickname: socket.data.nickname
     });
   });
   socket.on("disconnecting", () => {
@@ -123,8 +122,8 @@ io.on("connection", (socket) => {
     console.log("시간 체크 시작========", limit - 400 * now);
     timeout = setTimeout(() => {
       console.log("시간초과 =============", limit - 400 * now);
-      socket.emit("time_over", socketId);
-      socket.to(roomName).emit("time_over", socketId);
+      socket.emit("start_time_over", socketId);
+      socket.to(roomName).emit("start_time_over", socketId);
     }, limit - 400 * now);
   });
   socket.on("room_change", () => {
@@ -137,8 +136,8 @@ io.on("connection", (socket) => {
       console.log("시간 체크 시작========", limit - 400 * now);
       timeout = setTimeout(() => {
         console.log("시간초과 =============", limit - 400 * now);
-        socket.emit("time_over", socketId);
-        socket.to(roomName).emit("time_over", socketId);
+        socket.emit("time_over", order, now);
+        socket.to(roomName).emit("time_over", order, now);
       }, limit - 400 * now);
 
       const res = isAnswer(line, answer, arr);
