@@ -27,7 +27,7 @@ interface Props {
   result: any;
   order: IUserList[];
   now: number;
-  limit: number;
+  // limit: number;
   // closeSession: boolean;
   resetGame: () => void;
   setIsEntered: (a: boolean) => void;
@@ -92,7 +92,7 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
       result,
       order,
       now,
-      limit,
+      // limit,
       // closeSession,
       resetGame,
       setIsEntered
@@ -132,6 +132,7 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
         if (inputLineRef?.current) {
           socket.emit(
             "start_game",
+            socket.id,
             roomName,
             inputLineRef.current.value,
             shuffle([...userList], socket.id)
@@ -149,28 +150,25 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
         order,
         now,
         userList.length,
-        socket.id,
-        () => {
-          clear();
-        }
+        socket.id
       );
       setAnswer("");
     };
-    useEffect(() => {
-      if (!limit) return;
-      if (socket.id !== turn.id) return;
-      console.log(limit - now * 500, "시간초과 카운트 시작=========");
-      const id = setTimeout(() => {
-        console.log("시간초과 됨===========");
-        socket.emit("time_over", roomName, "시간초과", socket.id);
-      }, limit - now * 500);
-      if (timeoutReturn?.current) {
-        timeoutReturn.current = id;
-      }
-      return () => {
-        clearTimeout(id);
-      };
-    }, [limit, now, turn]);
+    // useEffect(() => {
+    //   if (!limit) return;
+    //   if (socket.id !== turn.id) return;
+    //   console.log(limit - now * 500, "시간초과 카운트 시작=========");
+    //   const id = setTimeout(() => {
+    //     console.log("시간초과 됨===========");
+    //     socket.emit("time_over", roomName, "시간초과", socket.id);
+    //   }, limit - now * 500);
+    //   if (timeoutReturn?.current) {
+    //     timeoutReturn.current = id;
+    //   }
+    //   return () => {
+    //     clearTimeout(id);
+    //   };
+    // }, [limit, now, turn]);
 
     useEffect(() => {
       if (socket.id === turn.id) {

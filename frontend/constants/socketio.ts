@@ -28,7 +28,12 @@ export interface ClientToServerEvents {
   new_message: (msg: string, room: object, done: () => void) => void;
   nickname: (roomName: string, nickname: string) => void;
   start_lobby: (roomName: string) => void;
-  start_game: (roomName: string, line: string, order: IUserList[]) => void;
+  start_game: (
+    socketId: string,
+    roomName: string,
+    line: string,
+    order: IUserList[]
+  ) => void;
   answer: (
     roomName: string,
     line: string,
@@ -37,8 +42,7 @@ export interface ClientToServerEvents {
     order: IUserList[],
     now: number,
     userListNum: number,
-    socketId: string,
-    done: () => void
+    socketId: string
   ) => void;
   time_over: (roomName: string, answer: string, socketId: string) => void;
 }

@@ -9,8 +9,8 @@ import OpenRoomList from "../../components/game/OpenRoomList";
 import RoomLobby from "../../components/game/RoomLobby";
 import RoomStart from "../../components/game/RoomStart";
 
-// const socket = io("ws://localhost:8000");
-const socket = io("ws://j7c206.p.ssafy.io:8000");
+const socket = io("ws://localhost:8000");
+// const socket = io("ws://j7c206.p.ssafy.io:8000");
 
 const Main: NextPage = () => {
   const childRef = useRef<{
@@ -71,13 +71,13 @@ const Main: NextPage = () => {
       setCanStart(canStart);
       setIsStartedLobby(true);
     });
-    socket.on("start_game", (line, order, limit) => {
+    socket.on("start_game", (line, order) => {
       setIsStartedGame(true);
       childRef.current?.setLine(line);
       setTurn(order[0]);
       setOrder(order);
       setNow(0);
-      setLimit(limit);
+      // setLimit(limit);
     });
     socket.on("nickname", (socketId, nickname) => {
       setUserList((prev) => {
@@ -134,6 +134,15 @@ const Main: NextPage = () => {
         resetGame();
       }, 3000);
     });
+    socket.on("time_over", (socketId) => {
+      setResult({ answer: "시간초과", socketId });
+      setTimeout(() => {
+        childRef.current?.toggleModal(true);
+      }, 1000);
+      setTimeout(() => {
+        resetGame();
+      }, 3000);
+    });
     return () => {
       socket.off("welcome");
       socket.off("iMHere");
@@ -145,6 +154,7 @@ const Main: NextPage = () => {
       socket.off("check_answer");
       socket.off("correct");
       socket.off("uncorrect");
+      socket.off("time_over");
     };
   }, []);
 
@@ -202,7 +212,7 @@ const Main: NextPage = () => {
             result={result}
             order={order}
             now={now}
-            limit={limit}
+            // limit={limit}
             // closeSession={closeSession}
             resetGame={resetGame}
             setIsEntered={setIsEntered}
