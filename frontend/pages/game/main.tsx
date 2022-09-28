@@ -9,8 +9,8 @@ import OpenRoomList from "../../components/game/OpenRoomList";
 import RoomLobby from "../../components/game/RoomLobby";
 import RoomStart from "../../components/game/RoomStart";
 
-const socket = io("ws://localhost:8000");
-// const socket = io("ws://j7c206.p.ssafy.io:8000");
+// const socket = io("ws://localhost:8000");
+const socket = io("ws://j7c206.p.ssafy.io:8000");
 
 const Main: NextPage = () => {
   const childRef = useRef<{
@@ -175,14 +175,15 @@ const Main: NextPage = () => {
   }, []);
 
   // const leave = (e: any) => {
-  //   // setIsEntered(false);
-  //   // resetGame();
-  //   // socket.disconnect();
-  //   // setTimeout(() => {
-  //   //   router.push("/");
-  //   // }, 10000);
-  //   e.preventDefault();
-  //   e.returnValue = "";
+  // setIsEntered(false);
+  // resetGame();
+  // socket.disconnect();
+  // setTimeout(() => {
+  //   router.push("/");
+  // }, 10000);
+  // e.preventDefault();
+  // e.returnValue = "";
+  // socket.emit("time_over", roomName, "시간초과", socket.id);
   // };
 
   // useEffect(() => {
