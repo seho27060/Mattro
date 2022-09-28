@@ -105,7 +105,7 @@ io.on("connection", (socket) => {
       socket.emit("bye", socket.id, howManyInRoom(room) - 1);
     });
   });
-  socket.on("disconnect", (roomName) => {
+  socket.on("disconnect", () => {
     io.sockets.emit("room_change", publicRooms());
     socket.to(roomName).emit("who_out");
   });
