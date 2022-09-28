@@ -1,4 +1,5 @@
 .wrapper {
+  justify-content: space-between;
   flex-direction: column;
   background-color: $GRAY_ED;
   height: 100%;
@@ -6,7 +7,7 @@
     display: grid;
     grid-template-columns: 1fr 5fr 1fr;
     column-gap: 20px;
-    margin-top: 20px;
+    margin-top: 40px;
     padding: 16px;
     width: 500px;
     height: 92px;
@@ -46,7 +47,6 @@
 }
 
 .userList {
-  margin: 50px 0;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   column-gap: 36px;
@@ -85,6 +85,7 @@
   display: grid;
   grid-template-columns: repeat(8, 1fr);
   width: 1004px;
+  margin-bottom: 40px;
   .chair1 {
     grid-column-start: span 2;
   }
@@ -112,7 +113,7 @@
     width: 100%;
     h2 {
       column-gap: vw(20px);
-      margin-top: vw(20px);
+      margin-top: vw(40px);
       padding: vw(16px);
       width: vw(500px);
       height: vw(92px);
@@ -139,7 +140,6 @@
   }
   .userList {
     column-gap: vw(36px);
-    margin: vw(50px) 0;
     .user {
       width: vw(224px);
       height: vw(340px);
@@ -161,6 +161,7 @@
   }
   .footer {
     width: vw(1004px);
+    margin-bottom: vw(40px);
   }
 
   .modal__label {
@@ -216,7 +217,6 @@
 
   .userList {
     width: 90%;
-    margin-top: 30px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
@@ -252,6 +252,7 @@
 
   .footer {
     width: 80%;
+    margin-bottom: 30px;
     .chair1 {
     }
     .startBtn {
@@ -308,7 +309,6 @@
   }
 
   .userList {
-    margin-top: vw-p(30px);
     row-gap: vw-p(18px);
     .user {
       width: vw-p(136px);
@@ -334,6 +334,7 @@
   }
 
   .footer {
+    margin-bottom: vw-p(30px);
     .startBtn {
       width: vw-p(150px);
       height: vw-p(52px);

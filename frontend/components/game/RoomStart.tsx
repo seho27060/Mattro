@@ -200,17 +200,27 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
         <h2 className="flex justify-center align-center coreExtra fs-34">
           {turn && (
             <div>
-              <span>{turn.nickname}</span>님 차례
+              <span
+                className={`${
+                  socket.id === turn.id ? styles.isTurn : styles.isNotTurn
+                }`}
+              >
+                {turn.nickname}
+              </span>
+              님 차례
             </div>
           )}
         </h2>
         <div className={`${styles.userList}`}>
           {order.map((user) => (
-            <div key={user.id}>
+            <div
+              key={user.id}
+              className="flex column align-center justify-center"
+            >
               <div
                 className={`${
                   result.socketId === user.id ? styles.result : styles.empty
-                }`}
+                } flex align-center justify-center coreExtra fs-24`}
               >
                 <span>{result.answer}</span>
               </div>
@@ -237,7 +247,7 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
                 <span
                   className={`${
                     styles.answer__station
-                  } flex justify-center align-center coreExtra L${lineToColor(
+                  } flex justify-center align-center coreExtra fs-60 L${lineToColor(
                     line
                   )}`}
                 >
