@@ -72,7 +72,6 @@
     .explanation_btn {
       width: 282px;
       height: 80px;
-      border: 8px solid $MAIN;
       border-radius: 46px;
       font-size: 32px;
     }
@@ -102,7 +101,7 @@
     .explanation_btn {
       width: vw-p(282px);
       height: vw-p(80px);
-      border: vw-p(8px) solid $MAIN;
+      border: vw-p(8px) solid $SUB_PINK;
       border-radius: vw-p(46px);
       font-size: vw-p(32px);
     }

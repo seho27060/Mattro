@@ -43,6 +43,7 @@ let timeout;
 let order;
 let now;
 let limit;
+let clear = false;
 
 io.on("connection", (socket) => {
   order = [];
@@ -119,12 +120,20 @@ io.on("connection", (socket) => {
     socket.to(roomName).emit("start_game", line, order);
     socket.emit("start_game", line, order);
     clearTimeout(timeout);
-    console.log("시간 체크 시작========", limit - 400 * now);
+    clear = true;
+    console.log(
+      "시간 체크 시작========",
+      limit - 500 * Math.floor(now / order.length)
+    );
     timeout = setTimeout(() => {
-      console.log("시간초과 =============", limit - 400 * now);
+      console.log(
+        "시간초과 =============",
+        limit - 500 * Math.floor(now / order.length)
+      );
       socket.emit("start_time_over", socketId);
       socket.to(roomName).emit("start_time_over", socketId);
-    }, limit - 400 * now);
+      clear = false;
+    }, limit - 500 * Math.floor(now / order.length));
   });
   socket.on("room_change", () => {
     socket.emit("room_change", publicRooms());
@@ -132,14 +141,25 @@ io.on("connection", (socket) => {
   socket.on(
     "answer",
     (roomName, line, answer, arr, order, now, userListNum, socketId) => {
-      console.log("시간 체크 시작========", limit - 400 * now);
+      console.log(now);
+      if (!clear) {
+        return;
+      }
+      console.log(
+        "시간 체크 시작========",
+        limit - 500 * Math.floor(now / order.length)
+      );
       clearTimeout(timeout);
+      clear = true;
       timeout = setTimeout(() => {
-        console.log("시간초과 =============", limit - 400 * now);
+        console.log(
+          "시간초과 =============",
+          limit - 500 * Math.floor(now / order.length)
+        );
         socket.emit("time_over", order, now);
         socket.to(roomName).emit("time_over", order, now);
-      }, limit - 400 * now);
-
+        clear = false;
+      }, limit - 500 * Math.floor(now / order.length));
       const res = isAnswer(line, answer, arr);
       arr.push(answer);
       socket.emit(
