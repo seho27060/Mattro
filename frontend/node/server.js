@@ -120,7 +120,6 @@ io.on("connection", (socket) => {
     socket.to(roomName).emit("start_game", line, order);
     socket.emit("start_game", line, order);
     clearTimeout(timeout);
-    clearTimeout(timeout);
     clear = true;
     console.log(
       "시간 체크 시작========",
@@ -142,8 +141,6 @@ io.on("connection", (socket) => {
   socket.on(
     "answer",
     (roomName, line, answer, arr, order, now, userListNum, socketId) => {
-      console.log(now);
-      clearTimeout(timeout);
       clearTimeout(timeout);
       if (!clear) {
         return;
@@ -193,29 +190,21 @@ io.on("connection", (socket) => {
   socket.on(
     "correct",
     (roomName, answer, order, now, userListNum, socketId) => {
-      socket.emit(
-        "correct",
-        answer,
-        socketId,
-        now + 1,
-        order[(now + 1) % userListNum]
-      );
+      clearTimeout(timeout);
+      now += 1;
+      socket.emit("correct", answer, socketId, now, order[now % userListNum]);
       socket
         .to(roomName)
-        .emit(
-          "correct",
-          answer,
-          socketId,
-          now + 1,
-          order[(now + 1) % userListNum]
-        );
+        .emit("correct", answer, socketId, now, order[now % userListNum]);
     }
   );
   socket.on("uncorrect", (roomName, answer, socketId) => {
+    clearTimeout(timeout);
     socket.to(roomName).emit("uncorrect", answer, socketId);
     socket.emit("uncorrect", answer, socketId);
   });
   socket.on("time_over", (roomName, answer, socketId) => {
+    clearTimeout(timeout);
     socket.to(roomName).emit("uncorrect", answer, socketId);
     socket.emit("uncorrect", answer, socketId);
   });
