@@ -120,6 +120,7 @@ io.on("connection", (socket) => {
     socket.to(roomName).emit("start_game", line, order);
     socket.emit("start_game", line, order);
     clearTimeout(timeout);
+    clearTimeout(timeout);
     clear = true;
     console.log(
       "시간 체크 시작========",
@@ -142,6 +143,8 @@ io.on("connection", (socket) => {
     "answer",
     (roomName, line, answer, arr, order, now, userListNum, socketId) => {
       console.log(now);
+      clearTimeout(timeout);
+      clearTimeout(timeout);
       if (!clear) {
         return;
       }
@@ -149,7 +152,6 @@ io.on("connection", (socket) => {
         "시간 체크 시작========",
         limit - 500 * Math.floor(now / order.length)
       );
-      clearTimeout(timeout);
       clear = true;
       timeout = setTimeout(() => {
         console.log(
