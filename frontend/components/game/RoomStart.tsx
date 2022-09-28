@@ -107,7 +107,7 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const toggleModal = () => {
       console.log("콘솔 켜져라 얍");
-      setIsModalOpen(!isModalOpen);
+      setIsModalOpen(true);
     };
     const inputLineRef = useRef<HTMLInputElement>(null);
     const inputAnswerRef = useRef<HTMLInputElement>(null);
