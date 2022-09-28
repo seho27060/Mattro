@@ -192,8 +192,6 @@ io.on("connection", (socket) => {
   socket.on(
     "correct",
     (roomName, answer, order, now, userListNum, socketId) => {
-      clearTimeout(timeout);
-      console.log("코렉트 클리어");
       now += 1;
       socket.emit("correct", answer, socketId, now, order[now % userListNum]);
       socket
