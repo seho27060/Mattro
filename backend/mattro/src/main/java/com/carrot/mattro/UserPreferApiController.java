@@ -27,4 +27,9 @@ public class UserPreferApiController {
         }
     }
 
+//    @GetMapping("/individual/recommendation/list/{storeIdxList}")
+//    public ResponseEntity getPlacesByStoreIndexList(@PathVariable(name = "storeIndexList") String storeIdxList){
+////        List<Output> result =
+//    }
+
 }
