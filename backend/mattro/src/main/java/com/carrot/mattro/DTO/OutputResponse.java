@@ -28,4 +28,5 @@ public class OutputResponse {
     private String mainImageURL;
     private String storURL;
     private String tell;
+
 }

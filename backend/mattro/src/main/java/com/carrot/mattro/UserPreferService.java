@@ -1,10 +1,9 @@
 package com.carrot.mattro;
 
-import com.carrot.mattro.DTO.CrawlingResponse;
-
 import java.util.List;
+import java.util.Optional;
 
 
 public interface UserPreferService {
-    List<CrawlingResponse> userPrefer(String choices);
+    List<Output> userPrefer(String choices);
 }

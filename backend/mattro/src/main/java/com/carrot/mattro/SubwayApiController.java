@@ -6,6 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 //@CrossOrigin("*")
 @RestController
 @RequestMapping("/subway/recommendation")
@@ -16,7 +18,7 @@ public class SubwayApiController {
 
     @GetMapping("/find/{subway_name}")
     public ResponseEntity getPlaceBySubwayName(@PathVariable(name = "subway_name") String name){
-        OutputResponse response = mds.findPlaceBySubwayName(name);
+        Optional<Output> response = mds.findPlaceBySubwayName(name);
         if(response != null)
             return new ResponseEntity(response, HttpStatus.OK);
         else
@@ -25,7 +27,7 @@ public class SubwayApiController {
 
     @GetMapping("/{store_index}")
     public ResponseEntity getPlaceByStoreIndex(@PathVariable(name = "store_index") String storeIndex){
-        OutputResponse response = mds.findPlaceByStoreIndex(storeIndex);
+        Optional<Output> response = mds.findPlaceByStoreIndex(storeIndex);
         if(response != null) {
             return new ResponseEntity(response, HttpStatus.OK);
         }else {

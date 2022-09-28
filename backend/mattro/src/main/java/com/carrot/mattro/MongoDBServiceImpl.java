@@ -14,10 +14,10 @@ public class MongoDBServiceImpl implements MongoDBService{
     private final OutputRepository outputR;
     private final Output invalidOutput = new Output();
     @Override
-    public OutputResponse findPlaceBySubwayName(String subwayName) {
+    public Optional<Output> findPlaceBySubwayName(String subwayName) {
         Optional<Output> output = outputR.findBy역명(subwayName);
         if(output.isPresent()){
-            return new OutputResponse(output.get());
+            return output;
         }
         return null;
     }
@@ -37,11 +37,20 @@ public class MongoDBServiceImpl implements MongoDBService{
 
     }
 
+//    @Override
+//    public OutputResponse findPlaceByStoreIndex(String storeIndex) {
+//        Optional<Output> output = outputR.findByStoreIdx(storeIndex);
+//        if(output.isPresent()){
+//            return new OutputResponse(output.get());
+//        }
+//        else
+//            return null;
+//    }
     @Override
-    public OutputResponse findPlaceByStoreIndex(String storeIndex) {
+    public Optional<Output> findPlaceByStoreIndex(String storeIndex) {
         Optional<Output> output = outputR.findByStoreIdx(storeIndex);
         if(output.isPresent()){
-            return new OutputResponse(output.get());
+            return output;
         }
         else
             return null;

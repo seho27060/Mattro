@@ -67,7 +67,7 @@ class UserPreferServiceImplTest {
             resultFoodCategoryList.addAll(meetFoodList);
         }
         System.out.printf("%b %b %b %s",index0,index1,index2,resultFoodCategoryList.toString());
-        List<Crawling> testResult3 = crawlingRepository.findByUserPrefer(index0,index1,index2,resultFoodCategoryList);
+        List<Output> testResult3 = crawlingRepository.findByUserPrefer(index0,index1,index2,resultFoodCategoryList);
         assertThat(testResult3).isNotEmpty();
 
         System.out.println(testResult3.subList(0,3));
