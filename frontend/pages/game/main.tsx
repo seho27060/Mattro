@@ -9,8 +9,8 @@ import OpenRoomList from "../../components/game/OpenRoomList";
 import RoomLobby from "../../components/game/RoomLobby";
 import RoomStart from "../../components/game/RoomStart";
 
-// const socket = io("ws://localhost:8000");
-const socket = io("ws://j7c206.p.ssafy.io:8000");
+const socket = io("ws://localhost:8000");
+// const socket = io("ws://j7c206.p.ssafy.io:8000");
 
 const Main: NextPage = () => {
   const childRef = useRef<{

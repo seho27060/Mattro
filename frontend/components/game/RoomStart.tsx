@@ -105,7 +105,10 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
       clearTimeout(timeoutReturn.current as NodeJS.Timeout);
     };
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-    const toggleModal = () => setIsModalOpen(!isModalOpen);
+    const toggleModal = () => {
+      console.log("콘솔 켜져라 얍");
+      setIsModalOpen(!isModalOpen);
+    };
     const inputLineRef = useRef<HTMLInputElement>(null);
     const inputAnswerRef = useRef<HTMLInputElement>(null);
     // const lineRef = useRef<any>(null);
@@ -281,13 +284,7 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
             <Image src={chair2} alt="chair2" />
           </span> */}
         </div>
-        <Modal
-          isOpen={isModalOpen}
-          onClose={() => {
-            toggleModal();
-            resetGame();
-          }}
-        >
+        <Modal isOpen={isModalOpen} onClose={toggleModal}>
           <div className={`${styles.children} fs-32 coreExtra`}>
             <div>
               {isModalOpen && (

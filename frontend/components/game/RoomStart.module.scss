@@ -67,7 +67,7 @@
       // text-align: right;
     }
     span {
-      width: 80px;
+      width: 144px;
     }
   }
 }
@@ -159,7 +159,7 @@
     .circle {
       // width: 180px;
       height: 180px;
-      border: 12px solid;
+      border-width: 12px;
       border-radius: 236px;
       input {
         max-width: 128px;
@@ -220,7 +220,7 @@
     .circle {
       // width: vw-p(180px);
       height: vw-p(180px);
-      border: vw-p(12px) solid;
+      border-width: vw-p(12px);
       border-radius: vw-p(236px);
       input {
         max-width: vw-p(156px);
