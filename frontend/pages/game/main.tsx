@@ -9,8 +9,10 @@ import OpenRoomList from "../../components/game/OpenRoomList";
 import RoomLobby from "../../components/game/RoomLobby";
 import RoomStart from "../../components/game/RoomStart";
 
-// const socket = io("ws://localhost:8000");
-const socket = io("ws://j7c206.p.ssafy.io:8000");
+const socket =
+  process.env.NODE_ENV === "development"
+    ? io("ws://localhost:8000")
+    : io("ws://j7c206.p.ssafy.io:8000");
 
 const Main: NextPage = () => {
   const childRef = useRef<{
@@ -127,9 +129,10 @@ const Main: NextPage = () => {
     });
     socket.on("uncorrect", (answer, socketId) => {
       setResult({ answer, socketId });
-      setTimeout(() => {
-        childRef.current?.toggleModal(true);
-      }, 1000);
+      childRef.current?.toggleModal(true);
+      // setTimeout(() => {
+      //   childRef.current?.toggleModal(true);
+      // }, 1000);
       setTimeout(() => {
         resetGame();
       }, 3000);
@@ -139,9 +142,10 @@ const Main: NextPage = () => {
         answer: "시간초과",
         socketId: order[(now + 1) % order.length].id
       });
-      setTimeout(() => {
-        childRef.current?.toggleModal(true);
-      }, 1000);
+      childRef.current?.toggleModal(true);
+      // setTimeout(() => {
+      //   childRef.current?.toggleModal(true);
+      // }, 1000);
       setTimeout(() => {
         resetGame();
       }, 3000);
@@ -151,9 +155,10 @@ const Main: NextPage = () => {
         answer: "시간초과",
         socketId
       });
-      setTimeout(() => {
-        childRef.current?.toggleModal(true);
-      }, 1000);
+      childRef.current?.toggleModal(true);
+      // setTimeout(() => {
+      //   childRef.current?.toggleModal(true);
+      // }, 1000);
       setTimeout(() => {
         resetGame();
       }, 3000);

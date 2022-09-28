@@ -132,8 +132,8 @@ io.on("connection", (socket) => {
   socket.on(
     "answer",
     (roomName, line, answer, arr, order, now, userListNum, socketId) => {
-      clearTimeout(timeout);
       console.log("시간 체크 시작========", limit - 400 * now);
+      clearTimeout(timeout);
       timeout = setTimeout(() => {
         console.log("시간초과 =============", limit - 400 * now);
         socket.emit("time_over", order, now);
