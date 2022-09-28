@@ -163,6 +163,9 @@ const Main: NextPage = () => {
         resetGame();
       }, 3000);
     });
+    socket.on("who_out", () => {
+      resetGame();
+    });
     return () => {
       socket.off("welcome");
       socket.off("iMHere");
@@ -176,6 +179,7 @@ const Main: NextPage = () => {
       socket.off("uncorrect");
       socket.off("time_over");
       socket.off("start_time_over");
+      socket.off("who_out");
     };
   }, []);
 

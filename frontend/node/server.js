@@ -44,6 +44,7 @@ let order;
 let now;
 let limit;
 let clear = false;
+let roomName;
 
 io.on("connection", (socket) => {
   order = [];
@@ -58,35 +59,36 @@ io.on("connection", (socket) => {
     // console.log(io.sockets.adapter);
     console.log(`Socket Event : ${event}`);
   });
-  socket.on("enter_room", (roomName, done) => {
-    if (howManyInRoom(roomName) >= 4) {
+  socket.on("enter_room", (newRoomName, done) => {
+    roomName = newRoomName;
+    if (howManyInRoom(newRoomName) >= 4) {
       return;
     }
-    const totalUser = whoInRoom(roomName);
+    const totalUser = whoInRoom(newRoomName);
     if (!totalUser) {
-      socket.join(roomName);
+      socket.join(newRoomName);
     } else {
       for (let i = 0; i < totalUser.size; i += 1) {
         if (totalUser[i] === socket.id) {
           return;
         }
-        socket.join(roomName);
+        socket.join(newRoomName);
       }
     }
     done();
     socket.emit(
       "welcome",
-      roomName,
+      newRoomName,
       { id: socket.id, nickname: socket.data.nickname },
-      howManyInRoom(roomName)
+      howManyInRoom(newRoomName)
     );
     socket
-      .to(roomName)
+      .to(newRoomName)
       .emit(
         "welcome",
-        roomName,
+        newRoomName,
         { id: socket.id, nickname: socket.data.nickname },
-        howManyInRoom(roomName)
+        howManyInRoom(newRoomName)
       );
     // 방 입장할 때마다 방 개수를 emit
     io.sockets.emit("room_change", publicRooms());
@@ -103,8 +105,9 @@ io.on("connection", (socket) => {
       socket.emit("bye", socket.id, howManyInRoom(room) - 1);
     });
   });
-  socket.on("disconnect", () => {
+  socket.on("disconnect", (roomName) => {
     io.sockets.emit("room_change", publicRooms());
+    socket.to(roomName).emit("who_out");
   });
   socket.on("nickname", (roomName, nickname) => {
     socket.data.nickname = nickname;
