@@ -39,7 +39,15 @@ function howManyInRoom(roomName) {
   return io.sockets.adapter.rooms.get(roomName)?.size;
 }
 
+let timeout;
+let order;
+let now;
+let limit;
+
 io.on("connection", (socket) => {
+  order = [];
+  now = 0;
+  limit = 8000;
   // 소켓 연결 되자마자 강제로 어떤 방으로 입장시키기
   // io.socketsJoin("어떤");
   // socket.data.nickname = `Anonymous`;
@@ -107,17 +115,32 @@ io.on("connection", (socket) => {
     socket.to(roomName).emit("start_lobby", false);
     socket.emit("start_lobby", true);
   });
-  socket.on("start_game", (roomName, line, order) => {
-    socket.to(roomName).emit("start_game", line, order, 8000);
-    socket.emit("start_game", line, order, 8000);
+  socket.on("start_game", (socketId, roomName, line, newOrder) => {
+    order = newOrder;
+    socket.to(roomName).emit("start_game", line, order);
+    socket.emit("start_game", line, order);
+    clearTimeout(timeout);
+    console.log("시간 체크 시작========", limit - 400 * now);
+    timeout = setTimeout(() => {
+      console.log("시간초과 =============", limit - 400 * now);
+      socket.emit("time_over", socketId);
+      socket.to(roomName).emit("time_over", socketId);
+    }, limit - 400 * now);
   });
   socket.on("room_change", () => {
     socket.emit("room_change", publicRooms());
   });
   socket.on(
     "answer",
-    (roomName, line, answer, arr, order, now, userListNum, socketId, done) => {
-      done();
+    (roomName, line, answer, arr, order, now, userListNum, socketId) => {
+      clearTimeout(timeout);
+      console.log("시간 체크 시작========", limit - 400 * now);
+      timeout = setTimeout(() => {
+        console.log("시간초과 =============", limit - 400 * now);
+        socket.emit("time_over", socketId);
+        socket.to(roomName).emit("time_over", socketId);
+      }, limit - 400 * now);
+
       const res = isAnswer(line, answer, arr);
       arr.push(answer);
       socket.emit(
