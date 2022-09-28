@@ -5,6 +5,7 @@ import com.carrot.mattro.Repository.OutputRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -15,10 +16,10 @@ public class MongoDBServiceImpl implements MongoDBService{
     private final Output invalidOutput = new Output();
     @Override
     public OutputResponse findPlaceBySubwayName(String subwayName) {
-        Optional<Output> output = outputR.findBy역명(subwayName);
-        if(output.isPresent()){
-            return new OutputResponse(output.get());
-        }
+        List<Output> output = outputR.findAllBy역명(subwayName);
+//        if(!output.isEmpty()){
+//            return new OutputResponse(output.g);
+//        }
         return null;
     }
 
@@ -39,11 +40,11 @@ public class MongoDBServiceImpl implements MongoDBService{
 
     @Override
     public OutputResponse findPlaceByStoreIndex(String storeIndex) {
-        Optional<Output> output = outputR.findByStoreIdx(storeIndex);
-        if(output.isPresent()){
-            return new OutputResponse(output.get());
-        }
-        else
+//        Output output = outputR.findByStoreIdx(storeIndex);
+//        if(output.isPresent()){
+//            return new OutputResponse(output.get());
+//        }
+//        else
             return null;
     }
 }

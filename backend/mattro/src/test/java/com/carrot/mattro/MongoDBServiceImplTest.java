@@ -33,15 +33,15 @@ class MongoDBServiceImplTest {
 //        System.out.println(list.get(0).getKeywordReviewList().getClass().getName());
 //        assertThat(list).isNotEmpty();
         // 쿼리 결과가 존재하기를 기대하고 있음
-        assertThat(test_result).isNotEmpty();
+//        assertThat(test_result).isNotEmpty();
         // 키워드리뷰리스트가 존재하길 기대하고 있음.
-        assertThat(test_result.get().getKeywordReviewList()).isNotNull();
+//        assertThat(test_result.get().getKeywordReviewList()).isNotNull();
         // org.bson.Document
         // 매핑을 틀리게 하면 안되던데?
         // String
-        System.out.println(test_result.get().getKeywordReviewList().getClass().getName());
-        System.out.println(test_result.get().getKeywordReviewList());
-        System.out.println(test_result.get().getKeywordReviewList().get("1")                                                                                                                                                                                                                                                                                                                                                                                                                                                                        );
+//        System.out.println(test_result.get().getKeywordReviewList().getClass().getName());
+//        System.out.println(test_result.get().getKeywordReviewList());
+//        System.out.println(test_result.get().getKeywordReviewList().get("1")                                                                                                                                                                                                                                                                                                                                                                                                                                                                        );
 
     }
 
