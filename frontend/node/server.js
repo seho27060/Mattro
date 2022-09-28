@@ -120,6 +120,7 @@ io.on("connection", (socket) => {
     socket.to(roomName).emit("start_game", line, order);
     socket.emit("start_game", line, order);
     clearTimeout(timeout);
+    console.log("스타트게임 클리어");
     clear = true;
     console.log(
       "시간 체크 시작========",
@@ -142,23 +143,10 @@ io.on("connection", (socket) => {
     "answer",
     (roomName, line, answer, arr, order, now, userListNum, socketId) => {
       clearTimeout(timeout);
+      console.log("앤서 클리어");
       if (!clear) {
         return;
       }
-      console.log(
-        "시간 체크 시작========",
-        limit - 500 * Math.floor(now / order.length)
-      );
-      clear = true;
-      timeout = setTimeout(() => {
-        console.log(
-          "시간초과 =============",
-          limit - 500 * Math.floor(now / order.length)
-        );
-        socket.emit("time_over", order, now);
-        socket.to(roomName).emit("time_over", order, now);
-        clear = false;
-      }, limit - 500 * Math.floor(now / order.length));
       const res = isAnswer(line, answer, arr);
       arr.push(answer);
       socket.emit(
@@ -185,12 +173,27 @@ io.on("connection", (socket) => {
           userListNum,
           socketId
         );
+      console.log(
+        "시간 체크 시작========",
+        limit - 500 * Math.floor(now / order.length)
+      );
+      clear = true;
+      timeout = setTimeout(() => {
+        console.log(
+          "시간초과 =============",
+          limit - 500 * Math.floor(now / order.length)
+        );
+        socket.emit("time_over", order, now);
+        socket.to(roomName).emit("time_over", order, now);
+        clear = false;
+      }, limit - 500 * Math.floor(now / order.length));
     }
   );
   socket.on(
     "correct",
     (roomName, answer, order, now, userListNum, socketId) => {
       clearTimeout(timeout);
+      console.log("코렉트 클리어");
       now += 1;
       socket.emit("correct", answer, socketId, now, order[now % userListNum]);
       socket
@@ -200,11 +203,13 @@ io.on("connection", (socket) => {
   );
   socket.on("uncorrect", (roomName, answer, socketId) => {
     clearTimeout(timeout);
+    console.log("언코렉트 클리어");
     socket.to(roomName).emit("uncorrect", answer, socketId);
     socket.emit("uncorrect", answer, socketId);
   });
   socket.on("time_over", (roomName, answer, socketId) => {
     clearTimeout(timeout);
+    console.log("타임오버 클리어");
     socket.to(roomName).emit("uncorrect", answer, socketId);
     socket.emit("uncorrect", answer, socketId);
   });
