@@ -266,7 +266,7 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
             ) : (
               <input
                 ref={inputLineRef}
-                className="coreExtra fs-60"
+                className={`${styles.line__content} coreExtra fs-60`}
                 value={line}
                 onChange={onChangeLine}
               />
