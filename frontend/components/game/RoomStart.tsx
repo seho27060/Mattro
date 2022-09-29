@@ -125,13 +125,32 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
       useCallback(() => {
         if (!roomName) return;
         if (inputLineRef?.current) {
-          socket.emit(
-            "start_game",
-            socket.id,
-            roomName,
-            inputLineRef.current.value,
-            shuffle([...userList], socket.id)
-          );
+          if (
+            [
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7",
+              "8",
+              "9",
+              "경의중앙",
+              "수인분당",
+              "신분당",
+              "우아신설",
+              "신림"
+            ].includes(inputLineRef.current.value)
+          ) {
+            socket.emit(
+              "start_game",
+              socket.id,
+              roomName,
+              inputLineRef.current.value,
+              shuffle([...userList], socket.id)
+            );
+          }
         }
       }, [roomName]);
 
