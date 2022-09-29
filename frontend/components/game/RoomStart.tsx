@@ -14,6 +14,7 @@ import React, {
 import styles from "./RoomStart.module.scss";
 import { IUserList, ISocket } from "../../constants/socketio";
 import Modal from "../layouts/Modal";
+import Ready from "./Ready";
 
 interface Props {
   userList: IUserList[];
@@ -108,6 +109,7 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
     // const answerRef = useRef<HTMLDivElement>(null);
     const [line, setLine] = useState<string>("2");
     const [answer, setAnswer] = useState<string>("");
+    const [isReadyOpen, setIsReadyOpen] = useState<boolean>(false);
     useImperativeHandle(ref, () => ({
       setLine,
       toggleModal,
@@ -153,8 +155,8 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
           }
         }
       }, [roomName]);
-
     const onSubmitAnswer = (answer: string) => {
+      if (isReadyOpen) return;
       socket.emit(
         "answer",
         roomName,
@@ -185,6 +187,14 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
         inputLineRef.current.focus();
       }
     }, []);
+    useEffect(() => {
+      if (isStartedGame) {
+        setIsReadyOpen(true);
+        setTimeout(() => {
+          setIsReadyOpen(false);
+        }, 3500);
+      }
+    }, [isStartedGame]);
     return (
       <div className={`${styles.wrapper} flex column align-center`}>
         <h2 className="flex justify-center align-center coreExtra fs-34">
@@ -298,6 +308,7 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
             </div>
           </div>
         </Modal>
+        <Ready isOpen={isReadyOpen} lineColor={`L${lineToColor(line)}`} />
       </div>
     );
   }

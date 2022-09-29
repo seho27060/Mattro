@@ -137,7 +137,7 @@ io.on("connection", (socket) => {
       socket.emit("start_time_over", socketId);
       socket.to(roomName).emit("start_time_over", socketId);
       clear = false;
-    }, limit - 500 * Math.floor(now / order.length));
+    }, limit - 500 * Math.floor(now / order.length) + 3500);
   });
   socket.on("room_change", () => {
     socket.emit("room_change", publicRooms());
