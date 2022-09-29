@@ -180,6 +180,11 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
         onSubmitAnswer(answer);
       }
     };
+    useEffect(() => {
+      if (inputLineRef?.current) {
+        inputLineRef.current.focus();
+      }
+    }, []);
     return (
       <div className={`${styles.wrapper} flex column align-center`}>
         <h2 className="flex justify-center align-center coreExtra fs-34">
@@ -232,7 +237,7 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
                 <span
                   className={`${
                     styles.answer__station
-                  } flex justify-center align-center coreExtra fs-60 L${lineToColor(
+                  } flex justify-center align-center coreExtra fs-48 L${lineToColor(
                     line
                   )}`}
                 >

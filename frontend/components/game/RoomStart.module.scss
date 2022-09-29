@@ -58,21 +58,20 @@
   height: 90px;
   .circle {
     width: min-content;
-    // width: 292px;
     height: 292px;
     padding: 20px;
     border-width: 20px;
     border-style: solid;
-    // border: 20px solid;
     border-radius: 236px;
     text-align: center;
     background-color: $WHITE;
     .answer__station {
-      border-radius: 50%;
-      width: 100px;
-      height: 100px;
+      width: min-content;
+      border-radius: 70px;
+      padding: 20px 24px;
       margin-right: 10px;
       color: $WHITE;
+      white-space: nowrap;
     }
     input {
       max-width: 236px;
@@ -138,9 +137,13 @@
     margin-bottom: vw(100px);
     height: vw(90px);
     .circle {
-      // width: vw(292px);
       height: vw(292px);
       border-radius: vw(236px);
+      .answer__station {
+        border-radius: vw(70px);
+        padding: vw(20px) vw(24px);
+        margin-right: vw(10px);
+      }
       input {
         max-width: vw(236px);
       }
@@ -192,9 +195,9 @@
       border-width: 12px;
       border-radius: 236px;
       .answer__station {
-        width: 50px;
-        height: 50px;
-        margin-right: 10px;
+        border-radius: (36px);
+        padding: (10px) (14px);
+        font-size: 24px;
       }
       input {
         max-width: 128px;
@@ -266,9 +269,9 @@
       border-width: vw-p(12px);
       border-radius: vw-p(236px);
       .answer__station {
-        width: vw-p(50px);
-        height: vw-p(50px);
-        margin-right: vw-p(10px);
+        border-radius: vw-p(36px);
+        padding: vw-p(10px) vw-p(14px);
+        font-size: vw-p(24px);
       }
       input {
         max-width: vw-p(128px);
