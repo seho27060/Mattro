@@ -190,14 +190,28 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
         <h2 className="flex justify-center align-center coreExtra fs-34">
           {turn && (
             <div>
-              <span
+              {/* <span
                 className={`${
                   socket.id === turn.id ? styles.isTurn : styles.isNotTurn
                 }`}
               >
                 {turn.nickname}
-              </span>
-              님 차례
+                <span>님 차례</span>
+              </span> */}
+              {isStartedGame ? (
+                <div>
+                  <span
+                    className={`${
+                      socket.id === turn.id ? styles.isTurn : styles.isNotTurn
+                    }`}
+                  >
+                    {turn.nickname}
+                  </span>
+                  <span>님 차례</span>
+                </div>
+              ) : (
+                <span>호선을 선택해주세요.</span>
+              )}
             </div>
           )}
         </h2>

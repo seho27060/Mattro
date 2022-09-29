@@ -15,11 +15,12 @@
     border-radius: 22px;
     background-color: $GRAY_3A;
     color: $WHITE;
-    span {
-      color: $SUB_YELLOW;
-    }
     .isTurn {
-      animation: blink-effect 1s step-end infinite;
+      animation: blink-effect 1.5s step-end infinite;
+      color: $SUB_YELLOW;
+      span {
+        color: $WHITE;
+      }
     }
     .isNotTurn {
       animation: none;
