@@ -192,7 +192,7 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
         setIsReadyOpen(true);
         setTimeout(() => {
           setIsReadyOpen(false);
-        }, 3500);
+        }, 3800);
       }
     }, [isStartedGame]);
     return (

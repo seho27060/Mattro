@@ -12,7 +12,7 @@ const Ready: React.FunctionComponent<Props> = ({ isOpen, lineColor }) => {
     return null;
   }
   return (
-    <div className={styles.body}>
+    <div className={`${styles.body} ${lineColor}`}>
       <div className={styles.demo}>
         <div className={styles.demo__colored__blocks}>
           <div className={styles.demo__colored__blocks__rotater}>

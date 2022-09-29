@@ -122,7 +122,7 @@ $totalLen: $num1Len + $num2Len + $num3Len + $numJoin1-2 + $numJoin2-3 +
     .demo__numbers__path {
       fill: none;
       stroke-width: 10px;
-      stroke: #000000;
+      stroke: #fff;
       stroke-linecap: round;
       stroke-linejoin: round;
       stroke-dasharray: 0, $totalLen;
@@ -142,7 +142,7 @@ $totalLen: $num1Len + $num2Len + $num3Len + $numJoin1-2 + $numJoin2-3 +
     text-align: center;
     line-height: $size;
     font-size: 100px;
-    color: #000000;
+    color: #fff;
     text-transform: uppercase;
     letter-spacing: 15px;
     transform: translateX(10px);
