@@ -24,7 +24,7 @@ const Result = ({ loadingBarData, lineId, placeInd }: ResultType) => {
       <div className={styles.dimmer} />
       <div className={`${styles.card} flex column align-center`}>
         <ResultCard />
-        <button className="notoBold fs-24" type="button">
+        <button className={`${styles.button} notoBold fs-24`} type="button">
           다시시작하기
         </button>
       </div>
