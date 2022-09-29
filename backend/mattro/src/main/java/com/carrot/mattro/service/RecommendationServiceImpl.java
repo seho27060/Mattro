@@ -62,7 +62,7 @@ public class RecommendationServiceImpl implements RecommendationService {
         for(int i = 0; i < storeList.size(); i++){
             double reviewCnt;
             if(!storeList.get(i).getReviewCnt().isEmpty()){
-                reviewCnt = Double.parseDouble(storeList.get(i).getReviewCnt());
+                reviewCnt = Double.parseDouble(storeList.get(i).getReviewCnt().replace(",",""));
             } else {
                 reviewCnt = 0;
             }
@@ -103,7 +103,7 @@ public class RecommendationServiceImpl implements RecommendationService {
         for(int i = 0; i < storeList.size(); i++){
             double blogCnt;
             if(!storeList.get(i).getBlogCnt().isEmpty()){
-                blogCnt = Double.parseDouble(storeList.get(i).getBlogCnt());
+                blogCnt = Double.parseDouble(storeList.get(i).getBlogCnt().replace(",",""));
             } else {
                 blogCnt = 0;
             }

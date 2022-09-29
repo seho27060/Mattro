@@ -15,11 +15,11 @@ public class MongoDBServiceImpl implements MongoDBService{
     private final OutputRepository outputR;
     private final Output invalidOutput = new Output();
     @Override
-    public OutputResponse findPlaceBySubwayName(String subwayName) {
-        List<Output> output = outputR.findAllBy역명(subwayName);
-//        if(!output.isEmpty()){
-//            return new OutputResponse(output.g);
-//        }
+    public Optional<Output> findPlaceBySubwayName(String subwayName) {
+        Optional<Output> output = Optional.ofNullable(outputR.findBy역명(subwayName));
+        if(output.isPresent()){
+            return output;
+        }
         return null;
     }
 
@@ -39,12 +39,12 @@ public class MongoDBServiceImpl implements MongoDBService{
     }
 
     @Override
-    public OutputResponse findPlaceByStoreIndex(String storeIndex) {
-//        Output output = outputR.findByStoreIdx(storeIndex);
-//        if(output.isPresent()){
-//            return new OutputResponse(output.get());
-//        }
-//        else
+    public Optional<Output> findPlaceByStoreIndex(String storeIndex) {
+        Optional<Output> output = Optional.ofNullable(outputR.findByStoreIdx(storeIndex));
+        if(output.isPresent()){
+            return output;
+        }
+        else
             return null;
     }
 }

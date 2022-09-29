@@ -9,5 +9,6 @@ import java.util.Optional;
 public interface OutputRepository extends MongoRepository<Output, String> {
 
     List<Output> findAllBy역명(String subwayName);
+    Output findBy역명(String subwayName);
     Output findByStoreIdx(String storeIdx);
 }

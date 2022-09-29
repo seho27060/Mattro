@@ -10,21 +10,27 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("")
 @RequiredArgsConstructor
 public class UserPreferApiController {
     private final UserPreferService userPreferService;
-    @GetMapping("/invididual/recommendation/{choices}")
+    @GetMapping("/individual/recommendation/{choices}")
     public ResponseEntity userPrefer(@PathVariable("choices") String choices){
-        Optional<List<CrawlingResponse>> result = Optional.ofNullable(userPreferService.userPrefer(choices));
+        List<Integer> result = userPreferService.userPrefer(choices);
 
-        if(result==null){
+        if(result.isEmpty()){
             return new ResponseEntity("데이터가 없습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
         }else{
 
             return new ResponseEntity(result,HttpStatus.OK);
         }
     }
+
+//    @GetMapping("/individual/recommendation/list/{storeIdxList}")
+//    public ResponseEntity getPlacesByStoreIndexList(@PathVariable(name = "storeIndexList") String storeIdxList){
+////        List<Output> result =
+//    }
 
 }

@@ -29,7 +29,7 @@ public class SetStandardsServiceImpl implements SetStandardsService{
         for (Output store : storeList) {
             double reviewCnt;
             if(!store.getReviewCnt().isEmpty()){
-                reviewCnt = Double.parseDouble(store.getReviewCnt());
+                reviewCnt = Double.parseDouble(store.getReviewCnt().replace(",",""));
             } else {
                 reviewCnt = 0;
             }
@@ -43,7 +43,7 @@ public class SetStandardsServiceImpl implements SetStandardsService{
         for (Output store : storeList) {
             double reviewCnt;
             if(!store.getReviewCnt().isEmpty()){
-                reviewCnt = Double.parseDouble(store.getReviewCnt());
+                reviewCnt = Double.parseDouble(store.getReviewCnt().replace(",",""));
             } else {
                 reviewCnt = 0;
             }
@@ -113,7 +113,7 @@ public class SetStandardsServiceImpl implements SetStandardsService{
         for (Output store : storeList) {
             double blogCnt;
             if(!store.getBlogCnt().isEmpty()){
-                blogCnt = Double.parseDouble(store.getBlogCnt());
+                blogCnt = Double.parseDouble(store.getBlogCnt().replace(",",""));
             } else {
                 blogCnt = 0;
             }
@@ -127,7 +127,7 @@ public class SetStandardsServiceImpl implements SetStandardsService{
         for (Output store : storeList) {
             double blogCnt;
             if(!store.getBlogCnt().isEmpty()){
-                blogCnt = Double.parseDouble(store.getBlogCnt());
+                blogCnt = Double.parseDouble(store.getBlogCnt().replace(",",""));
             } else {
                 blogCnt = 0;
             }
