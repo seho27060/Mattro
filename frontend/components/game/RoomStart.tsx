@@ -27,10 +27,6 @@ interface Props {
   result: any;
   order: IUserList[];
   now: number;
-  // limit: number;
-  // closeSession: boolean;
-  resetGame: () => void;
-  setIsEntered: (a: boolean) => void;
 }
 
 const lineToColor = (line: string): string => {
@@ -91,11 +87,7 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
       total,
       result,
       order,
-      now,
-      // limit,
-      // closeSession,
-      resetGame,
-      setIsEntered
+      now
     },
     ref
   ) => {
@@ -157,22 +149,6 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
       );
       setAnswer("");
     };
-    // useEffect(() => {
-    //   if (!limit) return;
-    //   if (socket.id !== turn.id) return;
-    //   console.log(limit - now * 500, "시간초과 카운트 시작=========");
-    //   const id = setTimeout(() => {
-    //     console.log("시간초과 됨===========");
-    //     socket.emit("time_over", roomName, "시간초과", socket.id);
-    //   }, limit - now * 500);
-    //   if (timeoutReturn?.current) {
-    //     timeoutReturn.current = id;
-    //   }
-    //   return () => {
-    //     clearTimeout(id);
-    //   };
-    // }, [limit, now, turn]);
-
     useEffect(() => {
       if (socket.id === turn.id) {
         if (inputAnswerRef?.current) {
@@ -180,16 +156,6 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
         }
       }
     }, [turn]);
-    // useEffect(() => {
-    //   if (closeSession) {
-    //     setIsEntered(false);
-    //     resetGame();
-    //     socket.disconnect();
-    //     setTimeout(() => {
-    //       router.push("/game");
-    //     });
-    //   }
-    // }, [closeSession]);
     const onEnterKeyUp = (e: { key: string }) => {
       if (answer && e.key === "Enter") {
         onSubmitAnswer(answer);
@@ -278,9 +244,6 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
           </div>
         </div>
         <div className={`${styles.footer} flex align-center justify-center`}>
-          {/* <span className={styles.chair1}>
-            <Image src={chair1} alt="chair1" />
-          </span> */}
           <button
             className={`${
               !isStartedGame && canStart ? styles.visible : styles.invisible
@@ -290,9 +253,6 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
           >
             Start!
           </button>
-          {/* <span className={styles.chair2}>
-            <Image src={chair2} alt="chair2" />
-          </span> */}
         </div>
         <Modal isOpen={isModalOpen} onClose={toggleModal}>
           <div className={`${styles.children} fs-32 coreExtra`}>

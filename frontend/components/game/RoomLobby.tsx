@@ -28,10 +28,8 @@ const RoomLobby: React.FunctionComponent<Props> = ({
   setNickname
 }) => {
   const nicknameRef = useRef<HTMLInputElement>(null);
-  // const [nickname, setNickname] = useState("익명");
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const toggleModal = () => setIsModalOpen(!isModalOpen);
-
   const onChangeNickname: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     setNickname(e.target.value);
   };
@@ -40,7 +38,6 @@ const RoomLobby: React.FunctionComponent<Props> = ({
       socket.emit("start_lobby", roomName);
     }
   };
-
   useEffect(() => {
     if (isModalOpen && nicknameRef?.current) {
       nicknameRef.current.focus();
@@ -119,10 +116,6 @@ const RoomLobby: React.FunctionComponent<Props> = ({
           <Image src={chair2} alt="chair1" />
         </span>
       </footer>
-      {/* <form onSubmit={onSubmitNickname}>
-        <input value={nickname} onChange={onChangeNickname} />
-        <button type="submit">Save</button>
-      </form> */}
       <Modal isOpen={isModalOpen} onClose={toggleModal}>
         <div className={`${styles.children} fs-32 coreExtra`}>
           <div>

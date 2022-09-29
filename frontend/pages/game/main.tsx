@@ -80,7 +80,6 @@ const Main: NextPage = () => {
       setTurn(order[0]);
       setOrder(order);
       setNow(0);
-      // setLimit(limit);
     });
     socket.on("nickname", (socketId, nickname) => {
       setUserList((prev) => {
@@ -131,9 +130,6 @@ const Main: NextPage = () => {
     socket.on("uncorrect", (answer, socketId) => {
       setResult({ answer, socketId });
       childRef.current?.toggleModal(true);
-      // setTimeout(() => {
-      //   childRef.current?.toggleModal(true);
-      // }, 1000);
       setTimeout(() => {
         resetGame();
       }, 3000);
@@ -144,9 +140,6 @@ const Main: NextPage = () => {
         socketId: order[(now + 1) % order.length].id
       });
       childRef.current?.toggleModal(true);
-      // setTimeout(() => {
-      //   childRef.current?.toggleModal(true);
-      // }, 1000);
       setTimeout(() => {
         resetGame();
       }, 3000);
@@ -157,9 +150,6 @@ const Main: NextPage = () => {
         socketId
       });
       childRef.current?.toggleModal(true);
-      // setTimeout(() => {
-      //   childRef.current?.toggleModal(true);
-      // }, 1000);
       setTimeout(() => {
         resetGame();
       }, 3000);
@@ -183,46 +173,6 @@ const Main: NextPage = () => {
       socket.off("who_out");
     };
   }, []);
-
-  // const leave = (e: any) => {
-  // setIsEntered(false);
-  // resetGame();
-  // socket.disconnect();
-  // setTimeout(() => {
-  //   router.push("/");
-  // }, 10000);
-  // e.preventDefault();
-  // e.returnValue = "";
-  // socket.emit("time_over", roomName, "시간초과", socket.id);
-  // };
-
-  // useEffect(() => {
-  //   window.addEventListener("beforeunload", leave);
-  //   return () => {
-  //     window.removeEventListener("beforeunload", leave);
-  //   };
-  // }, []);
-
-  // const [closeSession, setCloseSession] = useState(false);
-
-  // const closeQuickView = () => {
-  //   setCloseSession(true);
-  // };
-
-  // useEffect(() => {
-  //   window.history.pushState(
-  //     "fake-route",
-  //     document.title,
-  //     window.location.href
-  //   );
-  //   window.addEventListener("popstate", closeQuickView);
-  //   return () => {
-  //     window.removeEventListener("popstate", closeQuickView);
-  //     if (window.history.state === "fake-route") {
-  //       window.history.back();
-  //     }
-  //   };
-  // }, []);
   return (
     <div className={styles.wrapper}>
       {socket && isEntered ? (
@@ -239,10 +189,6 @@ const Main: NextPage = () => {
             result={result}
             order={order}
             now={now}
-            // limit={limit}
-            // closeSession={closeSession}
-            resetGame={resetGame}
-            setIsEntered={setIsEntered}
           />
         ) : (
           <RoomLobby
