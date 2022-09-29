@@ -203,10 +203,7 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
         </h2>
         <div className={`${styles.userList}`}>
           {order.map((user) => (
-            <div
-              key={user.id}
-              className="flex column align-center justify-center"
-            >
+            <div key={user.id} className="flex column">
               <div
                 className={`${
                   result.socketId === user.id ? styles.result : styles.empty
