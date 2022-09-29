@@ -8,6 +8,7 @@ import { IUserList } from "../../constants/socketio";
 import OpenRoomList from "../../components/game/OpenRoomList";
 import RoomLobby from "../../components/game/RoomLobby";
 import RoomStart from "../../components/game/RoomStart";
+import styles from "./main.module.scss";
 
 const socket =
   process.env.NODE_ENV === "development"
@@ -29,7 +30,7 @@ const Main: NextPage = () => {
   const [userList, setUserList] = useState<IUserList[]>([]);
   const [canStart, setCanStart] = useState<boolean>(false);
   const [isStartedGame, setIsStartedGame] = useState<boolean>(false);
-
+  const [nickname, setNickname] = useState<string>("익명");
   const [order, setOrder] = useState<IUserList[]>([]);
   const [turn, setTurn] = useState<IUserList | object>({});
   const [total, setTotal] = useState<string[]>([]);
@@ -223,7 +224,7 @@ const Main: NextPage = () => {
   //   };
   // }, []);
   return (
-    <div>
+    <div className={styles.wrapper}>
       {socket && isEntered ? (
         isStartedLobby ? (
           <RoomStart
@@ -249,6 +250,8 @@ const Main: NextPage = () => {
             nowCnt={nowCnt}
             userList={userList}
             roomName={roomName}
+            nickname={nickname}
+            setNickname={setNickname}
           />
         )
       ) : (
