@@ -36,13 +36,17 @@
       margin-right: (20px);
       width: (48px);
       height: (48px);
-      padding: 8px;
 
       background-color: white;
-      border-radius: 50%;
+      border-radius: 30%;
       border: 1px solid $GRAY_BA;
+
+      .btnImg {
+        width: (40px);
+        height: (40px);
+      }
       & + button {
-        margin-top: (4px);
+        margin-top: (8px);
       }
     }
   }
