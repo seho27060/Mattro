@@ -89,10 +89,10 @@
   width: 80%;
   margin-top: 30px;
   button {
-    // grid-column-start: 2;
     color: $GRAY_3A;
+    opacity: 0.5;
     &:hover {
-      color: $LS;
+      opacity: 1;
     }
   }
   .visible {
