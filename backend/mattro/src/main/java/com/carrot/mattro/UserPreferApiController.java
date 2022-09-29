@@ -22,6 +22,7 @@ public class UserPreferApiController {
         if(result==null){
             return new ResponseEntity("데이터가 없습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
         }else{
+
             return new ResponseEntity(result,HttpStatus.OK);
         }
     }

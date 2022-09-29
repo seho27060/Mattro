@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class UserPreferServiceImpl implements UserPreferService {
     private final List<String> koreanFoodList = List.of("한식");
-    private final List<String> nonKoreanFoodList = List.of("비한식");
+    private final List<String> MeatFoodList = List.of("돼지고기 구이","소고기 구이","양꼬치","돼지고기 구이");
     private final CrawlingRepository crawlingRepository;
     @Override
     public List<CrawlingResponse> userPrefer(String choices) {

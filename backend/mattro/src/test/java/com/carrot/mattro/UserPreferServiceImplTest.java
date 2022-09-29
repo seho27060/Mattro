@@ -2,12 +2,13 @@ package com.carrot.mattro;
 
 import com.carrot.mattro.DTO.CrawlingResponse;
 import com.carrot.mattro.Repository.CrawlingRepository;
-import com.jayway.jsonpath.internal.function.text.Length;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import static org.assertj.core.api.Assertions.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -37,4 +38,14 @@ class UserPreferServiceImplTest {
 //        System.out.println(test_result.getClass());
 //        System.out.println(test_result.size());
     }
+
+    @Test
+    void testFunc(){
+        List<String> koreanFoodList = List.of("한식");
+        List<Crawling> testResult = crawlingRepository.findByFoodCategoryIn(koreanFoodList);
+        Integer limit = Math.min(testResult.size(),10);
+
+//        testResult = Arrays.copyOfRange(testResult,0,limit);
+    }
+
 }
