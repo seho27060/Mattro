@@ -10,7 +10,6 @@ import java.util.Optional;
 public interface CrawlingRepository extends MongoRepository<Crawling, String> {
 
     Optional<Crawling> findByName(String storeName);
-//    List<Crawling> findByFoodCategoryIn(List<String> koreanFoodList);
     List<Crawling> findByFoodCategoryIn(List<String> koreanFoodList);
 
 

@@ -6,6 +6,7 @@ import com.carrot.mattro.service.RecommendationService;
 import com.carrot.mattro.service.SetStandardsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -72,8 +73,6 @@ public class UserPreferServiceImpl implements UserPreferService {
 
             // z에 따른 정렬
             Arrays.sort(storeZ, (o1, o2) -> Double.compare(o2.getZ(), o1.getZ()));
-
-            System.out.println(storeZ.length);
             Integer limit = Math.min(storeZ.length,20);
             List<Integer> numLst = new ArrayList<>();
             for(int i = 0; i < 5; i++){
