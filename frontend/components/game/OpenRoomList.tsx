@@ -5,6 +5,7 @@ import station from "../../public/images/station.png";
 import chair1 from "../../public/images/chair1.png";
 import styles from "./OpenRoomList.module.scss";
 import type { ISocket } from "../../constants/socketio";
+import Modal from "../layouts/Modal";
 
 interface Props {
   roomList: string[];
@@ -23,7 +24,11 @@ const Rooms: React.FunctionComponent<Props> = ({
   //   });
   // }, []);
   const title = useRef<HTMLSpanElement>(null);
+  const modalRoomNameInput = useRef<HTMLInputElement>(null);
   const [roomName, setRoomName] = useState<string>("");
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const toggleModal = () => setIsModalOpen((prev) => !prev);
+
   const onChangeRoomName: React.ChangeEventHandler<HTMLInputElement> =
     useCallback((e) => {
       setRoomName(e.target.value);
@@ -44,6 +49,14 @@ const Rooms: React.FunctionComponent<Props> = ({
         });
       }
     }, [title.current]);
+
+  useEffect(() => {
+    if (isModalOpen) {
+      if (modalRoomNameInput.current) {
+        modalRoomNameInput.current.focus();
+      }
+    }
+  }, [isModalOpen]);
 
   return (
     <div className={`${styles.wrapper} flex column align-center`}>
@@ -75,15 +88,35 @@ const Rooms: React.FunctionComponent<Props> = ({
         <span className={styles.chair1}>
           <Image src={chair1} alt="chair1" />
         </span>
-        <input
-          style={{ border: "1px solid black" }}
-          value={roomName}
-          onChange={onChangeRoomName}
-        />
-        <button className="fs-24 coreExtra" type="button" onClick={onMakeRoom}>
+
+        <button className="fs-24 coreExtra" type="button" onClick={toggleModal}>
           방 만들기
         </button>
       </div>
+      <Modal isOpen={isModalOpen} onClose={toggleModal}>
+        <div className={`${styles.modal} flex column`}>
+          <div className="flex">
+            <span
+              className={`${styles.modal__label} flex align-center justify-center fs-32 coreExtra`}
+            >
+              방 제목 :
+            </span>
+            <input
+              className={`${styles.modal__input} flex align-center justify-center fs-32 coreExtra`}
+              ref={modalRoomNameInput}
+              value={roomName}
+              onChange={onChangeRoomName}
+            />
+          </div>
+          <button
+            className={`${styles.modal__btn} fs-24 coreExtra`}
+            type="button"
+            onClick={onMakeRoom}
+          >
+            방 만들기
+          </button>
+        </div>
+      </Modal>
     </div>
   );
 };
