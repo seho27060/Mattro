@@ -214,6 +214,9 @@ io.on("connection", (socket) => {
     socket.to(roomName).emit("uncorrect", answer, socketId);
     socket.emit("uncorrect", answer, socketId);
   });
+  socket.on("on_change_line", (roomName, line) => {
+    socket.to(roomName).emit("on_change_line", line);
+  });
 });
 
 const port = 8000;

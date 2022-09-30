@@ -28,6 +28,8 @@ interface Props {
   result: any;
   order: IUserList[];
   now: number;
+  line: string;
+  onChangeLine: React.ChangeEventHandler<HTMLInputElement>;
 }
 
 const lineToColor = (line: string): string => {
@@ -88,7 +90,9 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
       total,
       result,
       order,
-      now
+      now,
+      line,
+      onChangeLine
     },
     ref
   ) => {
@@ -107,18 +111,12 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
     // const lineRef = useRef<any>(null);
     // const circleRef = useRef<HTMLDivElement>(null);
     // const answerRef = useRef<HTMLDivElement>(null);
-    const [line, setLine] = useState<string>("2");
     const [answer, setAnswer] = useState<string>("");
     const [isReadyOpen, setIsReadyOpen] = useState<boolean>(false);
     useImperativeHandle(ref, () => ({
-      setLine,
       toggleModal,
       clear
     }));
-    const onChangeLine: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-      if (isStartedGame) return;
-      setLine(e.target.value);
-    };
     const onChangeAnswer: React.ChangeEventHandler<HTMLInputElement> =
       useCallback((e) => {
         setAnswer(e.target.value);
@@ -200,14 +198,6 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
         <h2 className="flex justify-center align-center coreExtra fs-34">
           {turn && (
             <div>
-              {/* <span
-                className={`${
-                  socket.id === turn.id ? styles.isTurn : styles.isNotTurn
-                }`}
-              >
-                {turn.nickname}
-                <span>님 차례</span>
-              </span> */}
               {isStartedGame ? (
                 <div>
                   <span

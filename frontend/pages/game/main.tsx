@@ -38,6 +38,13 @@ const Main: NextPage = () => {
   const [now, setNow] = useState<number>(0);
   const [limit, setLimit] = useState<number>(8000);
 
+  const [line, setLine] = useState<string>("2");
+  const onChangeLine: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    if (isStartedGame) return;
+    setLine(e.target.value);
+    socket.emit("on_change_line", roomName, e.target.value);
+  };
+
   const resetGame = useCallback(() => {
     setIsStartedLobby(false);
     setIsStartedGame(false);
@@ -76,7 +83,7 @@ const Main: NextPage = () => {
     });
     socket.on("start_game", (line, order) => {
       setIsStartedGame(true);
-      childRef.current?.setLine(line);
+      setLine(line);
       setTurn(order[0]);
       setOrder(order);
       setNow(0);
@@ -157,6 +164,9 @@ const Main: NextPage = () => {
     socket.on("who_out", () => {
       resetGame();
     });
+    socket.on("on_change_line", (line) => {
+      setLine(line);
+    });
     return () => {
       socket.off("welcome");
       socket.off("iMHere");
@@ -171,6 +181,7 @@ const Main: NextPage = () => {
       socket.off("time_over");
       socket.off("start_time_over");
       socket.off("who_out");
+      socket.off("on_change_line");
     };
   }, []);
   return (
@@ -189,6 +200,8 @@ const Main: NextPage = () => {
             result={result}
             order={order}
             now={now}
+            line={line}
+            onChangeLine={onChangeLine}
           />
         ) : (
           <RoomLobby
