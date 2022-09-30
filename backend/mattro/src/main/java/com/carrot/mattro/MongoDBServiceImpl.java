@@ -16,7 +16,7 @@ public class MongoDBServiceImpl implements MongoDBService{
     private final Output invalidOutput = new Output();
     @Override
     public Optional<Output> findPlaceBySubwayName(String subwayName) {
-        Optional<Output> output = outputR.findBy역명(subwayName);
+        Optional<Output> output = Optional.ofNullable(outputR.findBy역명(subwayName));
         if(output.isPresent()){
             return output;
         }
@@ -38,18 +38,9 @@ public class MongoDBServiceImpl implements MongoDBService{
 
     }
 
-//    @Override
-//    public OutputResponse findPlaceByStoreIndex(String storeIndex) {
-//        Optional<Output> output = outputR.findByStoreIdx(storeIndex);
-//        if(output.isPresent()){
-//            return new OutputResponse(output.get());
-//        }
-//        else
-//            return null;
-//    }
     @Override
     public Optional<Output> findPlaceByStoreIndex(String storeIndex) {
-        Optional<Output> output = outputR.findByStoreIdx(storeIndex);
+        Optional<Output> output = Optional.ofNullable(outputR.findByStoreIdx(storeIndex));
         if(output.isPresent()){
             return output;
         }

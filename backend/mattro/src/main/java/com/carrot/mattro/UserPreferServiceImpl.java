@@ -1,10 +1,12 @@
 package com.carrot.mattro;
 
+import com.carrot.mattro.DTO.store;
 import com.carrot.mattro.Repository.CrawlingRepository;
 import com.carrot.mattro.service.RecommendationService;
 import com.carrot.mattro.service.SetStandardsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,7 +23,7 @@ public class UserPreferServiceImpl implements UserPreferService {
     private final SetStandardsService setStandardsService;
 
     @Override
-    public List<Output> userPrefer(String choices) {
+    public List<Integer> userPrefer(String choices) {
         Boolean index0 = false;
         Boolean index1 = false;
         Boolean index2 = false;
@@ -47,9 +49,49 @@ public class UserPreferServiceImpl implements UserPreferService {
         }
         List<Output> byUserPrefer = crawlingRepository.findByUserPrefer(index0, index1, index2, resultFoodCategoryList);
 //        추천알고리즘 적용
-        System.out.println(byUserPrefer.size());
-        System.out.println(byUserPrefer);
-        return byUserPrefer;
+
+        if (byUserPrefer.isEmpty()){
+            return new ArrayList<>();
+        } else{
+            store[] storeZ = new store[byUserPrefer.size()];
+
+            double[] reviewCountZ = recommendationService.reviewCountNormalization(setStandardsService.reviewCountBase(byUserPrefer), byUserPrefer);
+            double[] reviewContentZ = recommendationService.reviewContentNormalization(setStandardsService.reviewContentBase(byUserPrefer), byUserPrefer);
+            double[] reviewBlogZ = recommendationService.reviewBlogNormalization(setStandardsService.blogBase(byUserPrefer), byUserPrefer);
+            double[] reviewRatingZ = recommendationService.reviewRatingNormalization(setStandardsService.ratingBase(byUserPrefer), byUserPrefer);
+
+            for(int i = 0; i < byUserPrefer.size(); i++){
+                double z = 0;
+
+                z += reviewCountZ[i] * 0.25;
+                z += reviewContentZ[i] * 0.1;
+                z += reviewBlogZ[i] * 0.1;
+                z += reviewRatingZ[i] * 0.25;
+
+                storeZ[i] = new store(byUserPrefer.get(i).getStoreIdx(), z);
+            }
+
+            // z에 따른 정렬
+            Arrays.sort(storeZ, (o1, o2) -> Double.compare(o2.getZ(), o1.getZ()));
+            Integer limit = Math.min(storeZ.length,20);
+            List<Integer> numLst = new ArrayList<>();
+            for(int i = 0; i < 5; i++){
+                int num = Integer.parseInt(storeZ[(int)(Math.random() * limit)].getStoreIdx());
+
+                if(numLst.isEmpty()){
+                    numLst.add(num);
+                    continue;
+                }
+
+                if (!numLst.contains(num)){
+                    numLst.add(num);
+                } else{
+                    i--;
+                }
+            }
+            return numLst;
+        }
+
     }
 
     @Override
