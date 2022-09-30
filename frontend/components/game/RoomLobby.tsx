@@ -15,21 +15,24 @@ interface Props {
   nowCnt: number;
   userList: IUserList[];
   roomName: string;
-  nickname: string;
-  setNickname: (a: string) => void;
+  // nickname: string;
+  // setNickname: (a: string) => void;
 }
 
 const RoomLobby: React.FunctionComponent<Props> = ({
   socket,
   nowCnt,
   userList,
-  roomName,
-  nickname,
-  setNickname
+  roomName
+  // nickname,
+  // setNickname
 }) => {
   const nicknameRef = useRef<HTMLInputElement>(null);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const toggleModal = () => setIsModalOpen(!isModalOpen);
+  const [nickname, setNickname] = useState<string>(
+    userList.filter((user) => user.id === socket.id)?.[0]?.nickname
+  );
   const onChangeNickname: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     setNickname(e.target.value);
   };
@@ -49,11 +52,11 @@ const RoomLobby: React.FunctionComponent<Props> = ({
       toggleModal();
     }
   };
-  useEffect(() => {
-    if (nickname === "익명") {
-      setIsModalOpen(true);
-    }
-  }, [nickname]);
+  // useEffect(() => {
+  //   if (nickname === "익명") {
+  //     setIsModalOpen(true);
+  //   }
+  // }, [nickname]);
   return (
     <div className={`${styles.wrapper} flex align-center`}>
       <h2 className="align-center coreExtra fs-30">

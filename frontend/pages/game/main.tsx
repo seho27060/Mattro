@@ -34,7 +34,7 @@ const Main: NextPage = () => {
   const [userList, setUserList] = useState<IUserList[]>([]);
   const [canStart, setCanStart] = useState<boolean>(false);
   const [isStartedGame, setIsStartedGame] = useState<boolean>(false);
-  const [nickname, setNickname] = useState<string>("익명");
+  // const [nickname, setNickname] = useState<string>("익명");
   const [order, setOrder] = useState<IUserList[]>([]);
   const [turn, setTurn] = useState<IUserList | object>({});
   const [total, setTotal] = useState<string[]>([]);
@@ -76,7 +76,6 @@ const Main: NextPage = () => {
       setNowCnt(newCount);
     });
     socket.on("room_change", (rooms) => {
-      console.log(rooms);
       setRoomList(rooms);
     });
     socket.on("start_lobby", (canStart) => {
@@ -218,8 +217,8 @@ const Main: NextPage = () => {
             nowCnt={nowCnt}
             userList={userList}
             roomName={roomName}
-            nickname={nickname}
-            setNickname={setNickname}
+            // nickname={nickname}
+            // setNickname={setNickname}
           />
         )
       ) : (

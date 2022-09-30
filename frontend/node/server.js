@@ -57,7 +57,7 @@ io.on("connection", (socket) => {
   // 소켓 연결 되자마자 강제로 어떤 방으로 입장시키기
   // io.socketsJoin("어떤");
   // socket.data.nickname = `Anonymous`;
-  socket.data.nickname = `익명`;
+  // socket.data.nickname = `익명`;
   // socket.emit("room_change", publicRooms());
   socket.onAny((event) => {
     // console.log(io.sockets.adapter);
@@ -66,6 +66,9 @@ io.on("connection", (socket) => {
   socket.on("enter_room", (roomName, done) => {
     if (!data.get(roomName)) {
       data.set(roomName, new Map());
+      data
+        .get(roomName)
+        .set("nicknameList", ["4번 출구", "3번 출구", "2번 출구", "1번 출구"]);
     }
     if (data.get(roomName).get("isStarted")) {
       socket.emit("isStarted");
@@ -91,6 +94,11 @@ io.on("connection", (socket) => {
       data.get(roomName).set("size", 1);
     } else {
       data.get(roomName).set("size", data.get(roomName).get("size") + 1);
+    }
+    if (data.get(roomName).get("nicknameList").length > 0) {
+      socket.data.nickname = data.get(roomName).get("nicknameList").pop();
+    } else {
+      socket.data.nickname = "익명";
     }
     done();
     socket.emit(

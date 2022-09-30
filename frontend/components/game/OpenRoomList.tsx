@@ -82,7 +82,6 @@ const Rooms: React.FunctionComponent<Props> = forwardRef(
         }
       }
     }, [isMakeRoomModalOpen]);
-    console.log(roomList);
     return (
       <div className={`${styles.wrapper} flex column align-center`}>
         <span className={styles.station}>
