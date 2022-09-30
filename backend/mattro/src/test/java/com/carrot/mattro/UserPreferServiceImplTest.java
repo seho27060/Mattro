@@ -24,7 +24,7 @@ class UserPreferServiceImplTest {
     private SetStandardsService setStandardsService;
 
     @Test
-    List<Integer> testFunc(){
+    void testFunc(){
         String input = "11111";
         Boolean index0 = false;
         Boolean index1 = false;
@@ -108,7 +108,6 @@ class UserPreferServiceImplTest {
 //        추천알고리즘 적용
 
         if (byUserPrefer.isEmpty()){
-            return new ArrayList<>();
         } else{
             store[] storeZ = new store[byUserPrefer.size()];
 
@@ -148,7 +147,6 @@ class UserPreferServiceImplTest {
             }
             System.out.println(input+" "+ numLst);
     }
-        return null;
     }
 
 
