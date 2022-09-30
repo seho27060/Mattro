@@ -16,10 +16,13 @@ const socket =
     : io("ws://j7c206.p.ssafy.io:8000");
 
 const Main: NextPage = () => {
-  const childRef = useRef<{
+  const roomStartRef = useRef<{
     setLine: (line: string) => void;
     toggleModal: (a: boolean) => void;
     clear: () => void;
+  }>(null);
+  const openRoomListRef = useRef<{
+    toggleIsFullModal: (a: boolean) => void;
   }>(null);
   const [roomName, setRoomName] = useState<string>("");
   // const [messages, setMessages] = useState([]);
@@ -37,6 +40,7 @@ const Main: NextPage = () => {
   const [result, setResult] = useState({});
   const [now, setNow] = useState<number>(0);
   const [line, setLine] = useState<string>("2");
+  const [isFull, setIsFull] = useState<boolean>(false);
   const onChangeLine: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     if (isStartedGame) return;
     setLine(e.target.value);
@@ -99,7 +103,7 @@ const Main: NextPage = () => {
     socket.on(
       "check_answer",
       (roomName, res, arr, answer, order, now, userListNum, socketId) => {
-        childRef.current?.clear();
+        roomStartRef.current?.clear();
         if (res === "정답") {
           console.log("맞음!!");
           setTotal(arr);
@@ -133,7 +137,7 @@ const Main: NextPage = () => {
     });
     socket.on("uncorrect", (answer, socketId) => {
       setResult({ answer, socketId });
-      childRef.current?.toggleModal(true);
+      roomStartRef.current?.toggleModal(true);
       setTimeout(() => {
         resetGame();
       }, 3000);
@@ -143,7 +147,7 @@ const Main: NextPage = () => {
         answer: "시간초과",
         socketId: order[(now + 1) % order.length].id
       });
-      childRef.current?.toggleModal(true);
+      roomStartRef.current?.toggleModal(true);
       setTimeout(() => {
         resetGame();
       }, 3000);
@@ -153,7 +157,7 @@ const Main: NextPage = () => {
         answer: "시간초과",
         socketId
       });
-      childRef.current?.toggleModal(true);
+      roomStartRef.current?.toggleModal(true);
       setTimeout(() => {
         resetGame();
       }, 3000);
@@ -163,6 +167,9 @@ const Main: NextPage = () => {
     });
     socket.on("on_change_line", (line) => {
       setLine(line);
+    });
+    socket.on("full", () => {
+      openRoomListRef.current?.toggleIsFullModal(true);
     });
     return () => {
       socket.off("welcome");
@@ -179,6 +186,7 @@ const Main: NextPage = () => {
       socket.off("start_time_over");
       socket.off("who_out");
       socket.off("on_change_line");
+      socket.off("full");
     };
   }, []);
   return (
@@ -191,7 +199,7 @@ const Main: NextPage = () => {
             roomName={roomName}
             canStart={canStart}
             isStartedGame={isStartedGame}
-            ref={childRef}
+            ref={roomStartRef}
             turn={turn}
             total={total}
             result={result}
@@ -212,6 +220,7 @@ const Main: NextPage = () => {
         )
       ) : (
         <OpenRoomList
+          ref={openRoomListRef}
           roomList={roomList}
           socket={socket}
           setIsEntered={setIsEntered}

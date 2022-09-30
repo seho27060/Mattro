@@ -7,7 +7,8 @@ export interface IUserList {
 }
 
 export interface IRoomList {
-  title: string;
+  roomName: string;
+  size: number;
 }
 
 export interface ServerToClientEvents {

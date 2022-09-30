@@ -11,6 +11,7 @@ import React, {
   useRef,
   useEffect
 } from "react";
+
 import styles from "./RoomStart.module.scss";
 import { IUserList, ISocket } from "../../constants/socketio";
 import Modal from "../layouts/Modal";
@@ -22,7 +23,6 @@ interface Props {
   roomName: string;
   canStart: boolean;
   isStartedGame: boolean;
-  ref: React.ForwardedRef<unknown>;
   turn: any;
   total: string[];
   result: any;
@@ -30,6 +30,7 @@ interface Props {
   now: number;
   line: string;
   onChangeLine: React.ChangeEventHandler<HTMLInputElement>;
+  ref: React.ForwardedRef<unknown>;
 }
 
 const lineToColor = (line: string): string => {

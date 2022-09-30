@@ -56,7 +56,12 @@ io.on("connection", (socket) => {
       data.set(roomName, new Map());
       // console.log(data);
     }
+    if (data.get(roomName).get("isStarted")) {
+      return;
+    }
+    data.get(roomName).set("size", howManyInRoom(roomName));
     if (howManyInRoom(roomName) >= 4) {
+      socket.emit("full");
       return;
     }
     const totalUser = whoInRoom(roomName);
@@ -70,6 +75,19 @@ io.on("connection", (socket) => {
         socket.join(roomName);
       }
     }
+    if (!data.get(roomName).get("size")) {
+      data.get(roomName).set("size", 1);
+    } else {
+      data.get(roomName).set("size", data.get(roomName).get("size") + 1);
+    }
+    const res = [];
+    publicRooms().forEach((roomName) => {
+      res.push({
+        roomName,
+        size: data.get(roomName).get("size")
+      });
+    });
+    socket.emit("room_change", res);
     done();
     socket.emit(
       "welcome",
@@ -114,6 +132,7 @@ io.on("connection", (socket) => {
     socket.emit("start_lobby", true);
   });
   socket.on("start_game", (socketId, roomName, line, order) => {
+    data.get(roomName).set("isStarted", true);
     data.get(roomName).set("order", order);
     data.get(roomName).set("now", 0);
     data.get(roomName).set("timeout", null);
@@ -150,7 +169,14 @@ io.on("connection", (socket) => {
     data.get(roomName).set("timeout", timeoutId);
   });
   socket.on("room_change", () => {
-    socket.emit("room_change", publicRooms());
+    const res = [];
+    publicRooms().forEach((roomName) => {
+      res.push({
+        roomName,
+        size: data.get(roomName).get("size")
+      });
+    });
+    socket.emit("room_change", res);
   });
   socket.on(
     "answer",
