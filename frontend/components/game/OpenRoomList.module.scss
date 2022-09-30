@@ -46,7 +46,7 @@
   grid-template-columns: repeat(2, 414px);
   column-gap: 64px;
   row-gap: 30px;
-  margin-top: 44px;
+  margin: 44px 0;
   justify-self: flex-end;
   .chair1 {
     width: 40%;
@@ -95,7 +95,7 @@
       }
     }
   }
-  
+
   .footer {
     grid-template-columns: repeat(2, vw(414px));
     column-gap: vw(64px);

@@ -17,11 +17,11 @@ const Rooms: React.FunctionComponent<Props> = ({
   socket,
   setIsEntered
 }) => {
-  useEffect(() => {
-    socket.emit("enter_room", "지하철 게임", () => {
-      setIsEntered(true);
-    });
-  }, []);
+  // useEffect(() => {
+  //   socket.emit("enter_room", "지하철 게임", () => {
+  //     setIsEntered(true);
+  //   });
+  // }, []);
   const title = useRef<HTMLSpanElement>(null);
   const [roomName, setRoomName] = useState<string>("");
   const onChangeRoomName: React.ChangeEventHandler<HTMLInputElement> =
@@ -39,7 +39,7 @@ const Rooms: React.FunctionComponent<Props> = ({
   const onEnterRoom: React.MouseEventHandler<HTMLSpanElement> =
     useCallback(() => {
       if (title.current?.textContent) {
-        socket.emit("enter_room", title.current?.textContent, () => {
+        socket.emit("enter_room", title.current.textContent, () => {
           setIsEntered(true);
         });
       }

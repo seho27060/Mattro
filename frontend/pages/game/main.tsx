@@ -36,8 +36,6 @@ const Main: NextPage = () => {
   const [total, setTotal] = useState<string[]>([]);
   const [result, setResult] = useState({});
   const [now, setNow] = useState<number>(0);
-  const [limit, setLimit] = useState<number>(8000);
-
   const [line, setLine] = useState<string>("2");
   const onChangeLine: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     if (isStartedGame) return;
@@ -53,7 +51,6 @@ const Main: NextPage = () => {
     setTotal([]);
     setResult({});
     setNow(0);
-    setLimit(5000);
   }, []);
 
   useEffect(() => {
