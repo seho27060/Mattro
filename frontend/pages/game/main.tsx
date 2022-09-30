@@ -23,6 +23,7 @@ const Main: NextPage = () => {
   }>(null);
   const openRoomListRef = useRef<{
     toggleIsFullModal: (a: boolean) => void;
+    toggleIsStartedModal: (a: boolean) => void;
   }>(null);
   const [roomName, setRoomName] = useState<string>("");
   // const [messages, setMessages] = useState([]);
@@ -40,7 +41,6 @@ const Main: NextPage = () => {
   const [result, setResult] = useState({});
   const [now, setNow] = useState<number>(0);
   const [line, setLine] = useState<string>("2");
-  const [isFull, setIsFull] = useState<boolean>(false);
   const onChangeLine: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     if (isStartedGame) return;
     setLine(e.target.value);
@@ -76,6 +76,7 @@ const Main: NextPage = () => {
       setNowCnt(newCount);
     });
     socket.on("room_change", (rooms) => {
+      console.log(rooms);
       setRoomList(rooms);
     });
     socket.on("start_lobby", (canStart) => {
@@ -170,6 +171,9 @@ const Main: NextPage = () => {
     });
     socket.on("full", () => {
       openRoomListRef.current?.toggleIsFullModal(true);
+    });
+    socket.on("isStarted", () => {
+      openRoomListRef.current?.toggleIsStartedModal(true);
     });
     return () => {
       socket.off("welcome");

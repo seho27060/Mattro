@@ -27,7 +27,8 @@ interface Props {
 const Rooms: React.FunctionComponent<Props> = forwardRef(
   ({ roomList, socket, setIsEntered }, ref) => {
     useImperativeHandle(ref, () => ({
-      toggleIsFullModal
+      toggleIsFullModal,
+      toggleIsStartedModal
     }));
     const title = useRef<HTMLSpanElement>(null);
     const modalRoomNameInput = useRef<HTMLInputElement>(null);
@@ -37,6 +38,10 @@ const Rooms: React.FunctionComponent<Props> = forwardRef(
     const toggleMakeRoomModal = () => setIsMakeRoomModalOpen((prev) => !prev);
     const [isFullModalOpen, setIsFullModalOpen] = useState<boolean>(false);
     const toggleIsFullModal = () => setIsFullModalOpen((prev) => !prev);
+
+    const [isStartedModalOpen, setIsStartedModalOpen] =
+      useState<boolean>(false);
+    const toggleIsStartedModal = () => setIsStartedModalOpen((prev) => !prev);
 
     const onChangeRoomName: React.ChangeEventHandler<HTMLInputElement> =
       useCallback((e) => {
@@ -77,7 +82,7 @@ const Rooms: React.FunctionComponent<Props> = forwardRef(
         }
       }
     }, [isMakeRoomModalOpen]);
-
+    console.log(roomList);
     return (
       <div className={`${styles.wrapper} flex column align-center`}>
         <span className={styles.station}>
@@ -146,6 +151,9 @@ const Rooms: React.FunctionComponent<Props> = forwardRef(
         </Modal>
         <Modal isOpen={isFullModalOpen} onClose={toggleIsFullModal}>
           <div className="fs-32 coreExtra">방이 꽉 찼습니다.</div>
+        </Modal>
+        <Modal isOpen={isStartedModalOpen} onClose={toggleIsStartedModal}>
+          <div className="fs-32 coreExtra">게임이 이미 시작했습니다.</div>
         </Modal>
       </div>
     );
