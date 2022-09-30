@@ -1,10 +1,13 @@
 package com.carrot.mattro;
 
 import com.carrot.mattro.Repository.CrawlingRepository;
+import com.carrot.mattro.service.RecommendationService;
+import com.carrot.mattro.service.SetStandardsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,8 +15,11 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserPreferServiceImpl implements UserPreferService {
     private final List<String> koreanFoodList = List.of("한식");
-    private final List<String> nonKoreanFoodList = List.of("비한식");
+    private final List<String> MeatFoodList = List.of("돼지고기 구이","소고기 구이","양꼬치","돼지고기 구이");
     private final CrawlingRepository crawlingRepository;
+    private final RecommendationService recommendationService;
+    private final SetStandardsService setStandardsService;
+
     @Override
     public List<Output> userPrefer(String choices) {
         Boolean index0 = false;
@@ -44,5 +50,12 @@ public class UserPreferServiceImpl implements UserPreferService {
         System.out.println(byUserPrefer.size());
         System.out.println(byUserPrefer);
         return byUserPrefer;
+    }
+
+    @Override
+    public List<Output> getStoreByStoreIndexList(String storeIndexStr) {
+        String[] storeIndexList = storeIndexStr.split(",");
+        List<Output> result = crawlingRepository.findByStoreIdxIn(storeIndexList);
+        return result;
     }
 }
