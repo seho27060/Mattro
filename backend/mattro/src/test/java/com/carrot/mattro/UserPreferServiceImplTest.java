@@ -33,7 +33,7 @@ class UserPreferServiceImplTest {
 
     @Test
     void testFunc(){
-        String input = "11100";
+        String input = "11111";
 //       1,2,3 은 키워드
 //        4,5는 음식 카테고리
 
