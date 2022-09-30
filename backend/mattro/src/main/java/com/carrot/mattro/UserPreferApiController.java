@@ -18,7 +18,7 @@ public class UserPreferApiController {
     private final UserPreferService userPreferService;
     @GetMapping("/individual/recommendation/{choices}")
     public ResponseEntity userPrefer(@PathVariable("choices") String choices){
-        List<Output> result = userPreferService.userPrefer(choices);
+        List<Integer> result = userPreferService.userPrefer(choices);
 
         if(result.isEmpty()){
             return new ResponseEntity("데이터가 없습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -35,7 +35,6 @@ public class UserPreferApiController {
         if(result.isEmpty()){
             return new ResponseEntity("데이터가 없습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
         }else{
-
             return new ResponseEntity(result,HttpStatus.OK);
         }
     }
