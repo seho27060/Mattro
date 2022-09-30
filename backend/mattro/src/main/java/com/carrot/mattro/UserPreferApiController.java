@@ -28,9 +28,16 @@ public class UserPreferApiController {
         }
     }
 
-//    @GetMapping("/individual/recommendation/list/{storeIdxList}")
-//    public ResponseEntity getPlacesByStoreIndexList(@PathVariable(name = "storeIndexList") String storeIdxList){
-////        List<Output> result =
-//    }
+    @GetMapping("/individual/recommendation/list/{storeIndexStr}")
+    public ResponseEntity getStoreByStoreIndexList(@PathVariable(name = "storeIndexStr") String storeIndexStr){
+        List<Output> result = userPreferService.getStoreByStoreIndexList(storeIndexStr);
+
+        if(result.isEmpty()){
+            return new ResponseEntity("데이터가 없습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
+        }else{
+
+            return new ResponseEntity(result,HttpStatus.OK);
+        }
+    }
 
 }

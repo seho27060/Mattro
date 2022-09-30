@@ -33,7 +33,7 @@ class UserPreferServiceImplTest {
 
     @Test
     void testFunc(){
-        String input = "00000";
+        String input = "11100";
 //       1,2,3 은 키워드
 //        4,5는 음식 카테고리
 
@@ -62,6 +62,7 @@ class UserPreferServiceImplTest {
         }
         System.out.printf("%b %b %b %s",index0,index1,index2,resultFoodCategoryList.toString());
         List<Output> testResult3 = crawlingRepository.findByUserPrefer(index0,index1,index2,resultFoodCategoryList);
+        System.out.println(testResult3.size());
         assertThat(testResult3).isNotEmpty();
 
         store[] storeZ = new store[testResult3.size()];
@@ -102,8 +103,18 @@ class UserPreferServiceImplTest {
                 i--;
             }
         }
-        System.out.println(numLst);
+        System.out.println(numLst.size());
     }
 
 
+    @Test
+    void getStoreByStoreIndexList() {
+        String[] storeIndexList = "18028431,17595140,17461696".split(",");
+        System.out.println(storeIndexList.length);
+        List<Output> result = crawlingRepository.findByStoreIdxIn(storeIndexList);
+
+        assertThat(result.isEmpty());
+
+        System.out.println(result.size());
+    }
 }

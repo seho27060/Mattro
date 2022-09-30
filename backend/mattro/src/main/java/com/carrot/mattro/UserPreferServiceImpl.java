@@ -78,7 +78,7 @@ public class UserPreferServiceImpl implements UserPreferService {
             List<Integer> numLst = new ArrayList<>();
             for(int i = 0; i < 5; i++){
                 int num = Integer.parseInt(storeZ[(int)(Math.random() * limit)].getStoreIdx());
-                System.out.println(num);
+
                 if(numLst.isEmpty()){
                     numLst.add(num);
                     continue;
@@ -93,5 +93,12 @@ public class UserPreferServiceImpl implements UserPreferService {
             return numLst;
         }
 
+    }
+
+    @Override
+    public List<Output> getStoreByStoreIndexList(String storeIndexStr) {
+        String[] storeIndexList = storeIndexStr.split(",");
+        List<Output> result = crawlingRepository.findByStoreIdxIn(storeIndexList);
+        return result;
     }
 }
