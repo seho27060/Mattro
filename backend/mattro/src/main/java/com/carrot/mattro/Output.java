@@ -1,12 +1,16 @@
 package com.carrot.mattro;
 
-import lombok.Data;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
-@Document(collection = "output")
+@Builder
+@Getter
+@RequiredArgsConstructor
+@AllArgsConstructor
+@Document(collection = "subwayToStore")
 @Data
 public class Output {
     @Id

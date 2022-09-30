@@ -1,0 +1,223 @@
+.wrapper {
+  width: 100%;
+  height: 100%;
+  background-color: $GRAY_ED;
+  h2 {
+    margin-top: 40px;
+    margin-bottom: 30px;
+    padding: 30px 158px;
+    border-radius: 22px;
+    background-color: $GRAY_3A;
+    color: $WHITE;
+    span {
+      color: $SUB_YELLOW;
+    }
+  }
+}
+
+.userList {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 44px;
+  margin-top: 58px;
+  margin-bottom: 130px;
+  .user {
+    width: 202px;
+    height: 68px;
+    border-radius: 22px;
+    background-color: $GRAY_5F;
+    color: $WHITE;
+  }
+}
+
+.line {
+  margin-bottom: 100px;
+  width: 100%;
+  height: 90px;
+  background-color: $LS;
+  .circle {
+    width: min-content;
+    // width: 292px;
+    height: 292px;
+    padding: 20px;
+    border: 20px solid $LS;
+    border-radius: 236px;
+    text-align: center;
+    background-color: $WHITE;
+    input {
+      max-width: 236px;
+      background: none;
+    }
+    span {
+      width: 160px;
+    }
+  }
+}
+
+.footer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 80%;
+  margin-top: 30px;
+  button {
+    color: $GRAY_3A;
+    &:hover {
+      color: $LS;
+    }
+  }
+  .chair2 {
+    justify-self: flex-end;
+    width: 30%;
+  }
+}
+
+@media screen and (max-width: $DESKTOP-VW) {
+  .wrapper {
+    h2 {
+      margin-top: vw(40px);
+      margin-bottom: vw(30px);
+      padding: vw(30px) vw(158px);
+    }
+  }
+  
+  .userList {
+    column-gap: vw(44px);
+    margin-bottom: vw(130px);
+    .user {
+      width: vw(202px);
+      height: vw(68px);
+    }
+  }
+  
+  .line {
+    margin-bottom: vw(100px);
+    height: vw(90px);
+    .circle {
+      // width: vw(292px);
+      height: vw(292px);
+      border-radius: vw(236px);
+      input {
+        max-width: vw(236px);
+      }
+    }
+  }
+  .footer {
+    margin-top: vw(30px);
+  }
+}
+
+
+@media screen and (max-width: $TABLET-VW) {
+  .wrapper {
+    h2 {
+      margin: 30px;
+      padding: 16px 84px;
+      font-size: 20px;
+    }
+  }
+  
+  .userList {
+    width: 80%;
+    margin-top: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 16px;
+    .user {
+      width: 126px;
+      height: 42px;
+      justify-self: center;
+      border-radius: 16px;
+      font-size: 16px;
+    }
+  }
+  
+  .line {
+    margin-top: 58px;
+    width: 100%;
+    height: 40px;
+    .circle {
+      // width: 180px;
+      height: 180px;
+      border: 12px solid $LS;
+      border-radius: 236px;
+      input {
+        max-width: 128px;
+        background: none;
+        font-size: 32px;
+      }
+      span {
+        width: 86px;
+        font-size: 32px;
+      }
+    }
+  }
+  
+  .footer {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 160px;
+    margin-top: 58px;
+    .chair1 {
+      align-self: flex-end;
+    }
+    button {
+      grid-column-start: span 2;
+      align-self: flex-start;
+      justify-self: center;
+      font-size: 72px;
+    }
+    .chair2 {
+      justify-self: flex-start;
+      align-self: flex-end;
+      width: 50%;
+    }
+  }
+}
+
+@media screen and (max-width: $PHONE-VW) {
+  .wrapper {
+    h2 {
+      margin: vw-p(30px);
+      padding: vw-p(16px) vw-p(84px);
+      font-size: vw-p(20px);
+    }
+  }
+  
+  .userList {
+    margin-top: vw-p(20px);
+    row-gap: vw-p(16px);
+    .user {
+      width: vw-p(126px);
+      height: vw-p(42px);
+      border-radius: vw-p(16px);
+      font-size: vw-p(16px);
+    }
+  }
+  
+  .line {
+    margin-top: vw-p(58px);
+    height: vw-p(40px);
+    .circle {
+      // width: vw-p(180px);
+      height: vw-p(180px);
+      border: vw-p(12px) solid $LS;
+      border-radius: vw-p(236px);
+      input {
+        max-width: vw-p(156px);
+        background: none;
+        font-size: vw-p(32px);
+      }
+      span {
+        width: vw-p(108px);
+        font-size: vw-p(32px);
+      }
+    }
+  }
+  
+  .footer {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: vw-p(160px);
+    margin-top: vw-p(58px);
+    button {
+      font-size: vw-p(72px);
+    }
+  }
+}

@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -20,8 +21,8 @@ class OutputRepositoryTest {
     @Test
     void findBy역명() {
         String subwayName = "논현";
-        Optional<Output> output = outputRepository.findBy역명(subwayName);
+        List<Output> output = outputRepository.findAllBy역명(subwayName);
         assertThat(output).isNotEmpty();
-        assertThat(output.get().get역명()).isEqualTo(subwayName);
+        assertThat(output.get(0).get역명()).isEqualTo(subwayName);
     }
 }
