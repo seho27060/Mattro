@@ -131,7 +131,7 @@ const Main: NextPage = () => {
       setTurn(turn);
       setTimeout(() => {
         setResult({});
-      });
+      }, 1500);
     });
     socket.on("uncorrect", (answer, socketId) => {
       setResult({ answer, socketId });
