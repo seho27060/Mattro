@@ -14,7 +14,6 @@ const app = express();
 app.use(cors());
 
 const httpServer = http.createServer(app);
-// const wss = new WebSocket.Server({ httpServer });
 const io = new Server(httpServer, {
   cors: {
     credentials: true
@@ -128,7 +127,13 @@ io.on("connection", (socket) => {
         socket
           .to(room)
           .emit("who_out", socket.id, data.get(room).get("size") - 1);
-        data.get(room).get("nicknameList").push(socket.data.nickname);
+        if (
+          ["4번 출구", "3번 출구", "2번 출구", "1번 출구"].contains(
+            socket.data.nickname
+          )
+        ) {
+          data.get(room).get("nicknameList").push(socket.data.nickname);
+        }
         data.get(room).set("isStarted", false);
         data.get(room).set("size", data.get(room).get("size") - 1);
       }
@@ -207,13 +212,6 @@ io.on("connection", (socket) => {
           userListNum,
           socketId
         );
-      // const limit =
-      //   data.get(roomName).get("limit") -
-      //   500 *
-      //     Math.floor(
-      //       data.get(roomName).get("now") /
-      //         data.get(roomName).get("order").length
-      //     );
       const limit =
         data.get(roomName).get("limit") -
         200 * (data.get(roomName).get("now") + 1);
