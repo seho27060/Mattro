@@ -128,7 +128,7 @@ io.on("connection", (socket) => {
           .to(room)
           .emit("who_out", socket.id, data.get(room).get("size") - 1);
         if (
-          ["4번 출구", "3번 출구", "2번 출구", "1번 출구"].contains(
+          ["4번 출구", "3번 출구", "2번 출구", "1번 출구"].includes(
             socket.data.nickname
           )
         ) {
