@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import styles from "./question.module.scss";
 import QuestionCard from "../../components/theme/QuestionCard";
 import Stepbar from "../../components/theme/Stepbar";
-import { themeRecommend } from "../apis/recommend";
+import { themeRecommend } from "../api/recommend";
 import { setMaxListeners } from "events";
 
 const question = () => {
