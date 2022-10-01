@@ -13,7 +13,7 @@ import styles from "./main.module.scss";
 const socket =
   process.env.NODE_ENV === "development"
     ? io("ws://localhost:8000")
-    : io("wss://j7c206.p.ssafy.io/node/");
+    : io("wss://j7c206.p.ssafy.io", { path: "/nodejs/socket.io" });
 
 const Main: NextPage = () => {
   const roomStartRef = useRef<{
