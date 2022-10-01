@@ -193,7 +193,7 @@ const lineData = {
       {
         id: "0150",
 
-        name: "서울역",
+        name: "서울",
 
         intertChange: true
       },
@@ -641,7 +641,7 @@ const lineData = {
 
       {
         id: "0205",
-        name: "동대문역사\n문화공원",
+        name: "동대문역사문화공원",
 
         intertChange: true
       },
@@ -1154,7 +1154,7 @@ const lineData = {
 
       {
         id: "0205",
-        name: "동대문역사\n문화공원",
+        name: "동대문역사문화공원",
 
         intertChange: true
       },
@@ -1176,7 +1176,7 @@ const lineData = {
       {
         id: "0150",
 
-        name: "서울역",
+        name: "서울",
 
         intertChange: true
       },
@@ -1209,7 +1209,7 @@ const lineData = {
       },
       {
         id: "0432",
-        name: "총신대입구",
+        name: "이수",
 
         intertChange: true
       },
@@ -1493,7 +1493,7 @@ const lineData = {
       },
       {
         id: "0205",
-        name: "동대문역사\n문화공원",
+        name: "동대문역사문화공원",
 
         intertChange: true
       },
@@ -1981,7 +1981,7 @@ const lineData = {
       },
       {
         id: "0432",
-        name: "총신대입구",
+        name: "이수",
 
         intertChange: true
       },
@@ -3152,7 +3152,7 @@ const lineData = {
       {
         id: "1251",
 
-        name: "서울역"
+        name: "서울"
       },
       {
         id: "1265",
@@ -3440,7 +3440,7 @@ const lineData = {
       {
         id: "0150",
 
-        name: "서울역",
+        name: "서울",
 
         intertChange: true
       }

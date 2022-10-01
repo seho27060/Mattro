@@ -16,13 +16,16 @@ const socket =
     : io("ws://j7c206.p.ssafy.io:8000");
 
 const Main: NextPage = () => {
-  const childRef = useRef<{
+  const roomStartRef = useRef<{
     setLine: (line: string) => void;
     toggleModal: (a: boolean) => void;
     clear: () => void;
   }>(null);
+  const openRoomListRef = useRef<{
+    toggleIsFullModal: (a: boolean) => void;
+    toggleIsStartedModal: (a: boolean) => void;
+  }>(null);
   const [roomName, setRoomName] = useState<string>("");
-  // const [messages, setMessages] = useState([]);
   const [roomList, setRoomList] = useState([]);
   const [isEntered, setIsEntered] = useState<boolean>(false);
   const [isStartedLobby, setIsStartedLobby] = useState<boolean>(false);
@@ -30,13 +33,19 @@ const Main: NextPage = () => {
   const [userList, setUserList] = useState<IUserList[]>([]);
   const [canStart, setCanStart] = useState<boolean>(false);
   const [isStartedGame, setIsStartedGame] = useState<boolean>(false);
-  const [nickname, setNickname] = useState<string>("익명");
   const [order, setOrder] = useState<IUserList[]>([]);
   const [turn, setTurn] = useState<IUserList | object>({});
   const [total, setTotal] = useState<string[]>([]);
   const [result, setResult] = useState({});
   const [now, setNow] = useState<number>(0);
+  const [line, setLine] = useState<string>("2");
   const [limit, setLimit] = useState<number>(8000);
+  const [startId, setStartId] = useState<string>("");
+  const onChangeLine: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    if (isStartedGame) return;
+    setLine(e.target.value);
+    socket.emit("on_change_line", roomName, e.target.value);
+  };
 
   const resetGame = useCallback(() => {
     setIsStartedLobby(false);
@@ -46,7 +55,6 @@ const Main: NextPage = () => {
     setTotal([]);
     setResult({});
     setNow(0);
-    setLimit(5000);
   }, []);
 
   useEffect(() => {
@@ -63,24 +71,21 @@ const Main: NextPage = () => {
         return [...filteredPrev, newUser];
       });
     });
-    socket.on("bye", (socketId, newCount) => {
-      setUserList((prev) => [...prev].filter((user) => user.id !== socketId));
-      setNowCnt(newCount);
-    });
     socket.on("room_change", (rooms) => {
       setRoomList(rooms);
     });
-    socket.on("start_lobby", (canStart) => {
+    socket.on("start_lobby", (canStart, socketId) => {
+      setStartId(socketId);
       setCanStart(canStart);
       setIsStartedLobby(true);
     });
-    socket.on("start_game", (line, order) => {
+    socket.on("start_game", (line, order, limit) => {
       setIsStartedGame(true);
-      childRef.current?.setLine(line);
+      setLine(line);
       setTurn(order[0]);
       setOrder(order);
       setNow(0);
-      // setLimit(limit);
+      setLimit(limit);
     });
     socket.on("nickname", (socketId, nickname) => {
       setUserList((prev) => {
@@ -96,7 +101,7 @@ const Main: NextPage = () => {
     socket.on(
       "check_answer",
       (roomName, res, arr, answer, order, now, userListNum, socketId) => {
-        childRef.current?.clear();
+        roomStartRef.current?.clear();
         if (res === "정답") {
           console.log("맞음!!");
           setTotal(arr);
@@ -130,10 +135,7 @@ const Main: NextPage = () => {
     });
     socket.on("uncorrect", (answer, socketId) => {
       setResult({ answer, socketId });
-      childRef.current?.toggleModal(true);
-      // setTimeout(() => {
-      //   childRef.current?.toggleModal(true);
-      // }, 1000);
+      roomStartRef.current?.toggleModal(true);
       setTimeout(() => {
         resetGame();
       }, 3000);
@@ -143,10 +145,7 @@ const Main: NextPage = () => {
         answer: "시간초과",
         socketId: order[(now + 1) % order.length].id
       });
-      childRef.current?.toggleModal(true);
-      // setTimeout(() => {
-      //   childRef.current?.toggleModal(true);
-      // }, 1000);
+      roomStartRef.current?.toggleModal(true);
       setTimeout(() => {
         resetGame();
       }, 3000);
@@ -156,21 +155,31 @@ const Main: NextPage = () => {
         answer: "시간초과",
         socketId
       });
-      childRef.current?.toggleModal(true);
-      // setTimeout(() => {
-      //   childRef.current?.toggleModal(true);
-      // }, 1000);
+      roomStartRef.current?.toggleModal(true);
       setTimeout(() => {
         resetGame();
       }, 3000);
     });
-    socket.on("who_out", () => {
+    socket.on("who_out", (socketId, newCnt) => {
+      setUserList((prev) => [...prev].filter((user) => user.id !== socketId));
+      setNowCnt(newCnt);
       resetGame();
+    });
+    socket.on("on_change_line", (line) => {
+      setLine(line);
+    });
+    socket.on("full", () => {
+      openRoomListRef.current?.toggleIsFullModal(true);
+    });
+    socket.on("isStarted", () => {
+      openRoomListRef.current?.toggleIsStartedModal(true);
+    });
+    socket.on("limit", (limit) => {
+      setLimit(limit);
     });
     return () => {
       socket.off("welcome");
       socket.off("iMHere");
-      socket.off("bye");
       socket.off("room_change");
       socket.off("start_lobby");
       socket.off("start_game");
@@ -181,48 +190,11 @@ const Main: NextPage = () => {
       socket.off("time_over");
       socket.off("start_time_over");
       socket.off("who_out");
+      socket.off("on_change_line");
+      socket.off("full");
+      socket.off("limit");
     };
   }, []);
-
-  // const leave = (e: any) => {
-  // setIsEntered(false);
-  // resetGame();
-  // socket.disconnect();
-  // setTimeout(() => {
-  //   router.push("/");
-  // }, 10000);
-  // e.preventDefault();
-  // e.returnValue = "";
-  // socket.emit("time_over", roomName, "시간초과", socket.id);
-  // };
-
-  // useEffect(() => {
-  //   window.addEventListener("beforeunload", leave);
-  //   return () => {
-  //     window.removeEventListener("beforeunload", leave);
-  //   };
-  // }, []);
-
-  // const [closeSession, setCloseSession] = useState(false);
-
-  // const closeQuickView = () => {
-  //   setCloseSession(true);
-  // };
-
-  // useEffect(() => {
-  //   window.history.pushState(
-  //     "fake-route",
-  //     document.title,
-  //     window.location.href
-  //   );
-  //   window.addEventListener("popstate", closeQuickView);
-  //   return () => {
-  //     window.removeEventListener("popstate", closeQuickView);
-  //     if (window.history.state === "fake-route") {
-  //       window.history.back();
-  //     }
-  //   };
-  // }, []);
   return (
     <div className={styles.wrapper}>
       {socket && isEntered ? (
@@ -233,29 +205,34 @@ const Main: NextPage = () => {
             roomName={roomName}
             canStart={canStart}
             isStartedGame={isStartedGame}
-            ref={childRef}
+            ref={roomStartRef}
             turn={turn}
             total={total}
             result={result}
             order={order}
             now={now}
-            // limit={limit}
-            // closeSession={closeSession}
-            resetGame={resetGame}
-            setIsEntered={setIsEntered}
+            line={line}
+            onChangeLine={onChangeLine}
+            limit={limit}
+            startId={startId}
           />
         ) : (
-          <RoomLobby
-            socket={socket}
-            nowCnt={nowCnt}
-            userList={userList}
-            roomName={roomName}
-            nickname={nickname}
-            setNickname={setNickname}
-          />
+          userList &&
+          userList.filter((user) => user.id === socket.id)?.[0]?.nickname && (
+            <RoomLobby
+              socket={socket}
+              nowCnt={nowCnt}
+              userList={userList}
+              roomName={roomName}
+              defaultNick={
+                userList.filter((user) => user.id === socket.id)[0].nickname
+              }
+            />
+          )
         )
       ) : (
         <OpenRoomList
+          ref={openRoomListRef}
           roomList={roomList}
           socket={socket}
           setIsEntered={setIsEntered}

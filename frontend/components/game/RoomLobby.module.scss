@@ -1,8 +1,6 @@
 .wrapper {
-  justify-content: space-between;
-  flex-direction: column;
-  background-color: $GRAY_ED;
   height: 100%;
+  background-color: $GRAY_ED;
   h2 {
     display: grid;
     grid-template-columns: 1fr 5fr 1fr;
@@ -52,6 +50,7 @@
   column-gap: 36px;
   height: 60%;
   align-content: center;
+  margin: 20px;
   .user {
     width: 224px;
     height: 340px;
@@ -100,12 +99,16 @@
   }
 }
 
-.modal__label {
-  margin-right: 10px;
-}
-.modal__input {
-  border-bottom: 1px solid $BLACK;
-  width: 440px;
+.modal {
+  margin-bottom: 20px;
+  .modal__label {
+    width: 100px;
+    margin-right: 10px;
+  }
+  .modal__input {
+    border-bottom: 1px solid $BLACK;
+    width: 440px;
+  }
 }
 
 @media screen and (max-width: $DESKTOP-VW) {
@@ -140,6 +143,7 @@
   }
   .userList {
     column-gap: vw(36px);
+    margin: vw(20px);
     .user {
       width: vw(224px);
       height: vw(340px);
@@ -163,12 +167,15 @@
     width: vw(1004px);
     margin-bottom: vw(40px);
   }
-
-  .modal__label {
-    margin-right: vw(10px);
-  }
-  .modal__input {
-    width: vw(440px);
+  .modal {
+    margin-bottom: vw(20px);
+    .modal__label {
+      width: vw(100px);
+      margin-right: vw(10px);
+    }
+    .modal__input {
+      width: vw(440px);
+    }
   }
 }
 
@@ -214,7 +221,6 @@
       }
     }
   }
-
   .userList {
     width: 90%;
     display: grid;
@@ -249,7 +255,6 @@
       }
     }
   }
-
   .footer {
     width: 80%;
     margin-bottom: 30px;
@@ -264,12 +269,17 @@
     .chair2 {
     }
   }
-  .modal__label {
-    margin-right: 0;
-  }
-  .modal__input {
-    width: 240px;
-    margin-top: 20px;
+  .modal {
+    margin-bottom: 20px;
+    font-size: 20px;
+    .modal__label {
+      width: 80px;
+      margin-right: 10px;
+    }
+    .modal__input {
+      width: 160px;
+      font-size: 20px;
+    }
   }
 }
 
@@ -341,10 +351,16 @@
       font-size: vw-p(24px);
     }
   }
-  .modal__label {
-  }
-  .modal__input {
-    width: vw-p(240px);
-    margin-top: vw-p(20px);
+  .modal {
+    margin-bottom: vw-p(20px);
+    font-size: vw-p(20px);
+    .modal__label {
+      width: vw-p(80px);
+      margin-right: vw-p(10px);
+    }
+    .modal__input {
+      width: vw-p(160px);
+      font-size: vw-p(20px);
+    }
   }
 }

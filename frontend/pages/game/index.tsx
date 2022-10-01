@@ -36,14 +36,20 @@ const index: NextPage = () => {
       <Modal isOpen={isModalOpen} onClose={toggleModal}>
         <div className={`${styles.children} fs-32 coreExtra`}>
           <div className={styles.article}>
-            1. 랜덤한 유저가 지하철 노선 중 하나를 입력하면 게임이 시작됩니다.
+            1. 어떤 유저가 게임을 시작하고 지하철 노선 중 하나를 입력하면 게임이
+            시작됩니다.
           </div>
           <div className={styles.article}>
-            2. 유저들이 순서대로 해당 노선에 포함되는 지하철 역 이름을 제한시간
-            내에 입력합니다.
+            2. 유저들은 랜덤한 순서대로 해당 노선에 포함되는 지하철 역 이름을
+            제한시간 내에 입력합니다.
           </div>
           <div className={styles.article}>
-            3. 1등이 가려질 때까지 위를 반복합니다.
+            3. 정답이 틀리거나 시간을 초과한 유저는 패배하고 나머지는
+            승리합니다.
+          </div>
+          <div className={styles.article}>
+            &#8251; 호선은 1 ~ 9 호선, 경의중앙선, 수인분당선, 신분당선,
+            우아신설선, 신림선만 입력 가능합니다.
           </div>
         </div>
       </Modal>

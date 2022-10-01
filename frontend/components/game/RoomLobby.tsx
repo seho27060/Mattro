@@ -15,8 +15,7 @@ interface Props {
   nowCnt: number;
   userList: IUserList[];
   roomName: string;
-  nickname: string;
-  setNickname: (a: string) => void;
+  defaultNick: string;
 }
 
 const RoomLobby: React.FunctionComponent<Props> = ({
@@ -24,23 +23,20 @@ const RoomLobby: React.FunctionComponent<Props> = ({
   nowCnt,
   userList,
   roomName,
-  nickname,
-  setNickname
+  defaultNick
 }) => {
   const nicknameRef = useRef<HTMLInputElement>(null);
-  // const [nickname, setNickname] = useState("익명");
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const toggleModal = () => setIsModalOpen(!isModalOpen);
-
+  const [nickname, setNickname] = useState<string>(defaultNick);
   const onChangeNickname: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     setNickname(e.target.value);
   };
   const onStartLobby: React.MouseEventHandler<HTMLButtonElement> = () => {
     if (roomName) {
-      socket.emit("start_lobby", roomName);
+      socket.emit("start_lobby", roomName, socket.id);
     }
   };
-
   useEffect(() => {
     if (isModalOpen && nicknameRef?.current) {
       nicknameRef.current.focus();
@@ -52,13 +48,10 @@ const RoomLobby: React.FunctionComponent<Props> = ({
       toggleModal();
     }
   };
-  useEffect(() => {
-    if (nickname === "익명") {
-      setIsModalOpen(true);
-    }
-  }, [nickname]);
   return (
-    <div className={`${styles.wrapper} flex align-center`}>
+    <div
+      className={`${styles.wrapper} flex column justify-space-between align-center`}
+    >
       <h2 className="align-center coreExtra fs-30">
         <span
           className={`${styles.room__num} flex justify-center align-center coreExtra fs-28`}
@@ -66,7 +59,9 @@ const RoomLobby: React.FunctionComponent<Props> = ({
           {nowCnt}/4
         </span>
         <span className={`${styles.room__title}`}>
-          {roomName.length > 9 ? `${roomName.slice(0, 9)}...` : roomName}
+          {roomName && roomName.length > 9
+            ? `${roomName.slice(0, 9)}...`
+            : roomName}
         </span>
         <span className={`${styles.subway1}`}>
           <Image src={subway1} alt="subway1" />
@@ -119,25 +114,23 @@ const RoomLobby: React.FunctionComponent<Props> = ({
           <Image src={chair2} alt="chair1" />
         </span>
       </footer>
-      {/* <form onSubmit={onSubmitNickname}>
-        <input value={nickname} onChange={onChangeNickname} />
-        <button type="submit">Save</button>
-      </form> */}
       <Modal isOpen={isModalOpen} onClose={toggleModal}>
-        <div className={`${styles.children} fs-32 coreExtra`}>
-          <div>
-            <span className={styles.modal__label}>닉네임 :</span>
-            <input
-              onKeyUp={onEnterKeyUp}
-              ref={nicknameRef}
-              className={`${styles.modal__input} fs-32 coreExtra`}
-              type="text"
-              required
-              maxLength={6}
-              value={nickname}
-              onChange={onChangeNickname}
-            />
-          </div>
+        <div className={`${styles.modal} flex fs-32 coreExtra`}>
+          <span
+            className={`${styles.modal__label} flex align-center justify-center`}
+          >
+            닉네임 :
+          </span>
+          <input
+            onKeyUp={onEnterKeyUp}
+            ref={nicknameRef}
+            className={`${styles.modal__input} fs-32 coreExtra`}
+            type="text"
+            required
+            maxLength={6}
+            value={nickname}
+            onChange={onChangeNickname}
+          />
         </div>
       </Modal>
     </div>
