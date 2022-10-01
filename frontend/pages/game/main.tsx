@@ -127,9 +127,11 @@ const Main: NextPage = () => {
     );
     socket.on("correct", (answer, socketId, now, turn) => {
       setResult({ answer, socketId });
-      setResult({});
       setNow(now);
       setTurn(turn);
+      setTimeout(() => {
+        setResult({});
+      });
     });
     socket.on("uncorrect", (answer, socketId) => {
       setResult({ answer, socketId });
