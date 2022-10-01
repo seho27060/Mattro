@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 /* eslint-disable no-shadow */
 /* eslint-disable no-self-assign */
 /* eslint-disable no-param-reassign */
@@ -31,6 +32,17 @@ function publicRooms() {
   return res;
 }
 
+function getAllRooms() {
+  const res = [];
+  publicRooms().forEach((roomName) => {
+    res.push({
+      roomName,
+      size: data.get(roomName).get("size")
+    });
+  });
+  return res;
+}
+
 function whoInRoom(roomName) {
   return io.sockets.adapter.rooms.get(roomName);
 }
@@ -39,59 +51,70 @@ function howManyInRoom(roomName) {
   return io.sockets.adapter.rooms.get(roomName)?.size;
 }
 
-let timeout;
-let order;
-let now;
-let limit;
-let clear = false;
-let roomName;
+const data = new Map();
 
 io.on("connection", (socket) => {
-  order = [];
-  now = 0;
-  limit = 8000;
   // 소켓 연결 되자마자 강제로 어떤 방으로 입장시키기
   // io.socketsJoin("어떤");
   // socket.data.nickname = `Anonymous`;
-  socket.data.nickname = `익명`;
+  // socket.data.nickname = `익명`;
   // socket.emit("room_change", publicRooms());
   socket.onAny((event) => {
     // console.log(io.sockets.adapter);
     console.log(`Socket Event : ${event}`);
   });
-  socket.on("enter_room", (newRoomName, done) => {
-    roomName = newRoomName;
-    if (howManyInRoom(newRoomName) >= 4) {
+  socket.on("enter_room", (roomName, done) => {
+    if (!data.get(roomName)) {
+      data.set(roomName, new Map());
+      data
+        .get(roomName)
+        .set("nicknameList", ["4번 출구", "3번 출구", "2번 출구", "1번 출구"]);
+    }
+    if (data.get(roomName).get("isStarted")) {
+      socket.emit("isStarted");
       return;
     }
-    const totalUser = whoInRoom(newRoomName);
+    if (howManyInRoom(roomName) >= 4) {
+      socket.emit("full");
+      return;
+    }
+    const totalUser = whoInRoom(roomName);
     if (!totalUser) {
-      socket.join(newRoomName);
+      socket.join(roomName);
     } else {
       for (let i = 0; i < totalUser.size; i += 1) {
         if (totalUser[i] === socket.id) {
           return;
         }
-        socket.join(newRoomName);
+        socket.join(roomName);
       }
+    }
+    if (!data.get(roomName).get("size")) {
+      data.get(roomName).set("size", 1);
+    } else {
+      data.get(roomName).set("size", data.get(roomName).get("size") + 1);
+    }
+    if (data.get(roomName).get("nicknameList").length > 0) {
+      socket.data.nickname = data.get(roomName).get("nicknameList").pop();
+    } else {
+      socket.data.nickname = "익명";
     }
     done();
     socket.emit(
       "welcome",
-      newRoomName,
+      roomName,
       { id: socket.id, nickname: socket.data.nickname },
-      howManyInRoom(newRoomName)
+      howManyInRoom(roomName)
     );
     socket
-      .to(newRoomName)
+      .to(roomName)
       .emit(
         "welcome",
-        newRoomName,
+        roomName,
         { id: socket.id, nickname: socket.data.nickname },
-        howManyInRoom(newRoomName)
+        howManyInRoom(roomName)
       );
-    // 방 입장할 때마다 방 개수를 emit
-    io.sockets.emit("room_change", publicRooms());
+    io.sockets.emit("room_change", getAllRooms());
   });
   socket.on("iMHere", (roomName) => {
     socket.to(roomName).emit("iMHere", {
@@ -101,53 +124,61 @@ io.on("connection", (socket) => {
   });
   socket.on("disconnecting", () => {
     socket.rooms.forEach((room) => {
-      socket.to(room).emit("bye", socket.id, howManyInRoom(room) - 1);
-      socket.emit("bye", socket.id, howManyInRoom(room) - 1);
+      if (data.get(room)) {
+        socket
+          .to(room)
+          .emit("who_out", socket.id, data.get(room).get("size") - 1);
+        data.get(room).get("nicknameList").push(socket.data.nickname);
+        data.get(room).set("isStarted", false);
+        data.get(room).set("size", data.get(room).get("size") - 1);
+      }
     });
   });
   socket.on("disconnect", () => {
-    io.sockets.emit("room_change", publicRooms());
-    socket.to(roomName).emit("who_out");
+    io.sockets.emit("room_change", getAllRooms());
   });
   socket.on("nickname", (roomName, nickname) => {
     socket.data.nickname = nickname;
     socket.emit("nickname", socket.id, nickname);
     socket.to(roomName).emit("nickname", socket.id, nickname);
   });
-  socket.on("start_lobby", (roomName) => {
-    socket.to(roomName).emit("start_lobby", false);
-    socket.emit("start_lobby", true);
+  socket.on("start_lobby", (roomName, socketId) => {
+    data.get(roomName).set("isStarted", true);
+    socket.to(roomName).emit("start_lobby", false, socketId);
+    socket.emit("start_lobby", true, socketId);
   });
-  socket.on("start_game", (socketId, roomName, line, newOrder) => {
-    order = newOrder;
-    socket.to(roomName).emit("start_game", line, order);
-    socket.emit("start_game", line, order);
-    clearTimeout(timeout);
+  socket.on("start_game", (socketId, roomName, line, order) => {
+    data.get(roomName).set("order", order);
+    data.get(roomName).set("now", 0);
+    data.get(roomName).set("timeout", null);
+    data.get(roomName).set("limit", 8000);
+    data.get(roomName).set("clear", false);
+    const limit =
+      data.get(roomName).get("limit") - 200 * data.get(roomName).get("now");
+    socket.to(roomName).emit("start_game", line, order, limit);
+    socket.emit("start_game", line, order, limit);
+    clearTimeout(data.get(roomName).get("timeout"));
     console.log("스타트게임 클리어");
-    clear = true;
-    console.log(
-      "시간 체크 시작========",
-      limit - 500 * Math.floor(now / order.length)
-    );
-    timeout = setTimeout(() => {
-      console.log(
-        "시간초과 =============",
-        limit - 500 * Math.floor(now / order.length)
-      );
+    data.get(roomName).set("clear", true);
+    console.log("시간 체크 시작========", limit);
+    const timeoutId = setTimeout(() => {
+      console.log("시간초과 =============", limit);
       socket.emit("start_time_over", socketId);
       socket.to(roomName).emit("start_time_over", socketId);
-      clear = false;
-    }, limit - 500 * Math.floor(now / order.length));
+      data.get(roomName).set("clear", false);
+    }, limit + 3800);
+    data.get(roomName).set("timeout", timeoutId);
   });
   socket.on("room_change", () => {
-    socket.emit("room_change", publicRooms());
+    socket.emit("room_change", getAllRooms());
   });
   socket.on(
     "answer",
     (roomName, line, answer, arr, order, now, userListNum, socketId) => {
-      clearTimeout(timeout);
+      clearTimeout(data.get(roomName).get("timeout"));
+      data.get(roomName).set("clear", true);
       console.log("앤서 클리어");
-      if (!clear) {
+      if (!data.get(roomName).get("clear")) {
         return;
       }
       const res = isAnswer(line, answer, arr);
@@ -176,25 +207,32 @@ io.on("connection", (socket) => {
           userListNum,
           socketId
         );
-      console.log(
-        "시간 체크 시작========",
-        limit - 500 * Math.floor(now / order.length)
-      );
-      clear = true;
-      timeout = setTimeout(() => {
-        console.log(
-          "시간초과 =============",
-          limit - 500 * Math.floor(now / order.length)
-        );
+      // const limit =
+      //   data.get(roomName).get("limit") -
+      //   500 *
+      //     Math.floor(
+      //       data.get(roomName).get("now") /
+      //         data.get(roomName).get("order").length
+      //     );
+      const limit =
+        data.get(roomName).get("limit") -
+        200 * (data.get(roomName).get("now") + 1);
+      socket.emit("limit", limit);
+      socket.to(roomName).emit("limit", limit);
+      console.log("시간 체크 시작========", limit);
+      const timeoutId = setTimeout(() => {
+        console.log("시간초과 =============", limit);
         socket.emit("time_over", order, now);
         socket.to(roomName).emit("time_over", order, now);
-        clear = false;
-      }, limit - 500 * Math.floor(now / order.length));
+        data.get(roomName).set("clear", false);
+      }, limit);
+      data.get(roomName).set("timeout", timeoutId);
     }
   );
   socket.on(
     "correct",
     (roomName, answer, order, now, userListNum, socketId) => {
+      data.get(roomName).set("now", data.get(roomName).get("now") + 1);
       now += 1;
       socket.emit("correct", answer, socketId, now, order[now % userListNum]);
       socket
@@ -203,16 +241,21 @@ io.on("connection", (socket) => {
     }
   );
   socket.on("uncorrect", (roomName, answer, socketId) => {
-    clearTimeout(timeout);
+    clearTimeout(data.get(roomName).get("timeout"));
     console.log("언코렉트 클리어");
     socket.to(roomName).emit("uncorrect", answer, socketId);
     socket.emit("uncorrect", answer, socketId);
+    data.get(roomName).set("isStarted", false);
   });
   socket.on("time_over", (roomName, answer, socketId) => {
-    clearTimeout(timeout);
+    clearTimeout(data.get(roomName).get("timeout"));
     console.log("타임오버 클리어");
     socket.to(roomName).emit("uncorrect", answer, socketId);
     socket.emit("uncorrect", answer, socketId);
+    data.get(roomName).set("isStarted", false);
+  });
+  socket.on("on_change_line", (roomName, line) => {
+    socket.to(roomName).emit("on_change_line", line);
   });
 });
 

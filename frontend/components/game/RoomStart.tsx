@@ -11,9 +11,12 @@ import React, {
   useRef,
   useEffect
 } from "react";
+
 import styles from "./RoomStart.module.scss";
 import { IUserList, ISocket } from "../../constants/socketio";
 import Modal from "../layouts/Modal";
+import Ready from "./Ready";
+import BarTimer from "./BarTimer";
 
 interface Props {
   userList: IUserList[];
@@ -21,16 +24,16 @@ interface Props {
   roomName: string;
   canStart: boolean;
   isStartedGame: boolean;
-  ref: React.ForwardedRef<unknown>;
   turn: any;
   total: string[];
   result: any;
   order: IUserList[];
   now: number;
-  // limit: number;
-  // closeSession: boolean;
-  resetGame: () => void;
-  setIsEntered: (a: boolean) => void;
+  line: string;
+  onChangeLine: React.ChangeEventHandler<HTMLInputElement>;
+  limit: number;
+  startId: string;
+  ref: React.ForwardedRef<unknown>;
 }
 
 const lineToColor = (line: string): string => {
@@ -92,10 +95,10 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
       result,
       order,
       now,
-      // limit,
-      // closeSession,
-      resetGame,
-      setIsEntered
+      line,
+      onChangeLine,
+      limit,
+      startId
     },
     ref
   ) => {
@@ -114,25 +117,37 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
     // const lineRef = useRef<any>(null);
     // const circleRef = useRef<HTMLDivElement>(null);
     // const answerRef = useRef<HTMLDivElement>(null);
-    const [line, setLine] = useState<string>("2");
     const [answer, setAnswer] = useState<string>("");
+    const [isReadyOpen, setIsReadyOpen] = useState<boolean>(false);
     useImperativeHandle(ref, () => ({
-      setLine,
       toggleModal,
       clear
     }));
-    const onChangeLine: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-      if (isStartedGame) return;
-      setLine(e.target.value);
-    };
     const onChangeAnswer: React.ChangeEventHandler<HTMLInputElement> =
       useCallback((e) => {
         setAnswer(e.target.value);
       }, []);
-    const onStartGame: React.MouseEventHandler<HTMLButtonElement> | undefined =
-      useCallback(() => {
-        if (!roomName) return;
-        if (inputLineRef?.current) {
+    const onStartGame = () => {
+      if (!roomName) return;
+      if (inputLineRef.current) {
+        if (
+          [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "경의중앙",
+            "수인분당",
+            "신분당",
+            "우아신설",
+            "신림"
+          ].includes(inputLineRef.current.value)
+        ) {
           socket.emit(
             "start_game",
             socket.id,
@@ -141,9 +156,10 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
             shuffle([...userList], socket.id)
           );
         }
-      }, [roomName]);
-
+      }
+    };
     const onSubmitAnswer = (answer: string) => {
+      if (isReadyOpen) return;
       socket.emit(
         "answer",
         roomName,
@@ -157,22 +173,6 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
       );
       setAnswer("");
     };
-    // useEffect(() => {
-    //   if (!limit) return;
-    //   if (socket.id !== turn.id) return;
-    //   console.log(limit - now * 500, "시간초과 카운트 시작=========");
-    //   const id = setTimeout(() => {
-    //     console.log("시간초과 됨===========");
-    //     socket.emit("time_over", roomName, "시간초과", socket.id);
-    //   }, limit - now * 500);
-    //   if (timeoutReturn?.current) {
-    //     timeoutReturn.current = id;
-    //   }
-    //   return () => {
-    //     clearTimeout(id);
-    //   };
-    // }, [limit, now, turn]);
-
     useEffect(() => {
       if (socket.id === turn.id) {
         if (inputAnswerRef?.current) {
@@ -180,43 +180,54 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
         }
       }
     }, [turn]);
-    // useEffect(() => {
-    //   if (closeSession) {
-    //     setIsEntered(false);
-    //     resetGame();
-    //     socket.disconnect();
-    //     setTimeout(() => {
-    //       router.push("/game");
-    //     });
-    //   }
-    // }, [closeSession]);
     const onEnterKeyUp = (e: { key: string }) => {
       if (answer && e.key === "Enter") {
         onSubmitAnswer(answer);
       }
     };
+    useEffect(() => {
+      if (inputLineRef?.current) {
+        inputLineRef.current.focus();
+      }
+    }, []);
+    useEffect(() => {
+      if (isStartedGame) {
+        setIsReadyOpen(true);
+        setTimeout(() => {
+          setIsReadyOpen(false);
+        }, 3800);
+      }
+    }, [isStartedGame]);
     return (
       <div className={`${styles.wrapper} flex column align-center`}>
         <h2 className="flex justify-center align-center coreExtra fs-34">
           {turn && (
             <div>
-              <span
-                className={`${
-                  socket.id === turn.id ? styles.isTurn : styles.isNotTurn
-                }`}
-              >
-                {turn.nickname}
-              </span>
-              님 차례
+              {isStartedGame ? (
+                <div>
+                  <span
+                    className={`${
+                      socket.id === turn.id ? styles.isTurn : styles.isNotTurn
+                    }`}
+                  >
+                    {turn.nickname}
+                  </span>
+                  <span>님 차례</span>
+                </div>
+              ) : (
+                <span>호선을 선택해주세요.</span>
+              )}
             </div>
           )}
         </h2>
+        {isStartedGame && !isReadyOpen && (
+          <div>
+            <BarTimer limit={limit} line={lineToColor(line)} />
+          </div>
+        )}
         <div className={`${styles.userList}`}>
           {order.map((user) => (
-            <div
-              key={user.id}
-              className="flex column align-center justify-center"
-            >
+            <div key={user.id} className="flex column">
               <div
                 className={`${
                   result.socketId === user.id ? styles.result : styles.empty
@@ -247,7 +258,7 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
                 <span
                   className={`${
                     styles.answer__station
-                  } flex justify-center align-center coreExtra fs-60 L${lineToColor(
+                  } flex justify-center align-center coreExtra fs-48 L${lineToColor(
                     line
                   )}`}
                 >
@@ -265,9 +276,10 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
             ) : (
               <input
                 ref={inputLineRef}
-                className="coreExtra fs-60"
+                className={`${styles.line__content} coreExtra fs-60`}
                 value={line}
                 onChange={onChangeLine}
+                disabled={socket.id !== startId}
               />
             )}
             {isStartedGame ? (
@@ -277,10 +289,7 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
             )}
           </div>
         </div>
-        <div className={`${styles.footer} flex align-center justify-center`}>
-          {/* <span className={styles.chair1}>
-            <Image src={chair1} alt="chair1" />
-          </span> */}
+        <div className={`${styles.footer} flex justify-center`}>
           <button
             className={`${
               !isStartedGame && canStart ? styles.visible : styles.invisible
@@ -290,9 +299,6 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
           >
             Start!
           </button>
-          {/* <span className={styles.chair2}>
-            <Image src={chair2} alt="chair2" />
-          </span> */}
         </div>
         <Modal isOpen={isModalOpen} onClose={toggleModal}>
           <div className={`${styles.children} fs-32 coreExtra`}>
@@ -303,6 +309,7 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
             </div>
           </div>
         </Modal>
+        <Ready isOpen={isReadyOpen} lineColor={`L${lineToColor(line)}`} />
       </div>
     );
   }

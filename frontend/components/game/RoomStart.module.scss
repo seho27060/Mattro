@@ -5,7 +5,6 @@
 }
 
 .wrapper {
-  width: 100%;
   height: 100%;
   background-color: $GRAY_ED;
   h2 {
@@ -15,14 +14,16 @@
     border-radius: 22px;
     background-color: $GRAY_3A;
     color: $WHITE;
-    span {
-      color: $SUB_YELLOW;
-    }
     .isTurn {
-      animation: blink-effect 1s step-end infinite;
+      animation: blink-effect 1.5s step-end infinite;
+      color: $SUB_YELLOW;
+      span {
+        color: $WHITE;
+      }
     }
     .isNotTurn {
       animation: none;
+      color: $GRAY_E0;
     }
   }
 }
@@ -32,15 +33,14 @@
   grid-template-columns: repeat(4, 1fr);
   justify-content: center;
   column-gap: 44px;
-  margin-top: 50px;
   margin-bottom: 120px;
   .result {
-    width: 200px;
+    width: 202px;
     height: 68px;
   }
   .empty {
     visibility: hidden;
-    width: 200px;
+    width: 202px;
     height: 68px;
   }
   .user {
@@ -58,41 +58,42 @@
   height: 90px;
   .circle {
     width: min-content;
-    // width: 292px;
     height: 292px;
     padding: 20px;
     border-width: 20px;
     border-style: solid;
-    // border: 20px solid;
     border-radius: 236px;
     text-align: center;
     background-color: $WHITE;
     .answer__station {
-      border-radius: 50%;
-      width: 100px;
-      height: 100px;
+      width: min-content;
+      border-radius: 70px;
+      padding: 20px 24px;
       margin-right: 10px;
       color: $WHITE;
+      white-space: nowrap;
     }
     input {
       max-width: 236px;
       border-bottom: 1px solid black;
       background: none;
+      text-align: center;
     }
     span {
-      width: 144px;
+      width: 200px;
     }
   }
 }
 
 .footer {
+  align-items: flex-end;
   width: 80%;
-  margin-top: 30px;
+  margin: 30px 0;
   button {
-    // grid-column-start: 2;
     color: $GRAY_3A;
+    opacity: 0.5;
     &:hover {
-      color: $LS;
+      opacity: 1;
     }
   }
   .visible {
@@ -100,10 +101,6 @@
   .invisible {
     visibility: hidden;
   }
-  // .chair2 {
-  //   justify-self: flex-end;
-  //   width: 30%;
-  // }
 }
 
 @media screen and (max-width: $DESKTOP-VW) {
@@ -112,12 +109,13 @@
       margin-top: vw(40px);
       margin-bottom: vw(30px);
       padding: vw(30px) vw(158px);
+      span {
+        font-size: vw(32px);
+      }
     }
   }
-
   .userList {
     column-gap: vw(44px);
-    margin-top: vw(50px);
     margin-bottom: vw(120px);
     .result {
       width: vw(200px);
@@ -133,16 +131,22 @@
       height: vw(68px);
     }
   }
-
   .line {
     margin-bottom: vw(100px);
     height: vw(90px);
     .circle {
-      // width: vw(292px);
       height: vw(292px);
       border-radius: vw(236px);
+      .answer__station {
+        border-radius: vw(70px);
+        padding: vw(20px) vw(24px);
+        margin-right: vw(10px);
+      }
       input {
         max-width: vw(236px);
+      }
+      span {
+        width: vw(200px);
       }
     }
   }
@@ -157,9 +161,11 @@
       margin: 30px;
       padding: 16px 84px;
       font-size: 20px;
+      span {
+        font-size: 16px;
+      }
     }
   }
-
   .userList {
     width: 80%;
     margin-top: 20px;
@@ -182,7 +188,6 @@
       font-size: 16px;
     }
   }
-
   .line {
     margin-top: 58px;
     height: 40px;
@@ -192,9 +197,9 @@
       border-width: 12px;
       border-radius: 236px;
       .answer__station {
-        width: 50px;
-        height: 50px;
-        margin-right: 10px;
+        border-radius: (36px);
+        padding: (10px) (14px);
+        font-size: 24px;
       }
       input {
         max-width: 128px;
@@ -206,7 +211,6 @@
       }
     }
   }
-
   .footer {
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: 160px;
@@ -234,9 +238,11 @@
       margin: vw-p(30px);
       padding: vw-p(16px) vw-p(84px);
       font-size: vw-p(20px);
+      span {
+        font-size: vw-p(16px);
+      }
     }
   }
-
   .userList {
     margin-top: vw-p(20px);
     row-gap: vw-p(16px);
@@ -256,7 +262,6 @@
       font-size: vw-p(16px);
     }
   }
-
   .line {
     margin-top: vw-p(58px);
     height: vw-p(40px);
@@ -266,9 +271,9 @@
       border-width: vw-p(12px);
       border-radius: vw-p(236px);
       .answer__station {
-        width: vw-p(50px);
-        height: vw-p(50px);
-        margin-right: vw-p(10px);
+        border-radius: vw-p(36px);
+        padding: vw-p(10px) vw-p(14px);
+        font-size: vw-p(24px);
       }
       input {
         max-width: vw-p(128px);
@@ -280,7 +285,6 @@
       }
     }
   }
-
   .footer {
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: vw-p(160px);
