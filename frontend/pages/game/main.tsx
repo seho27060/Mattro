@@ -10,11 +10,10 @@ import RoomLobby from "../../components/game/RoomLobby";
 import RoomStart from "../../components/game/RoomStart";
 import styles from "./main.module.scss";
 
-const socket = io("ws://localhost:8000");
-// const socket =
-//   process.env.NODE_ENV === "development"
-//     ? io("ws://localhost:8000")
-//     : io("wss://j7c206.p.ssafy.io:8000");
+const socket =
+  process.env.NODE_ENV === "development"
+    ? io("ws://localhost:8000")
+    : io("wss://j7c206.p.ssafy.io:8000");
 
 const Main: NextPage = () => {
   const roomStartRef = useRef<{
