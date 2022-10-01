@@ -1,7 +1,7 @@
 .step {
   // margin-top: (200px);
   position: absolute;
-  bottom: 15%;
+  bottom: 10%;
   align-items: flex-end;
   .num {
     color: $GRAY-5B;
@@ -15,8 +15,8 @@
     div {
       background-color: $MAIN;
       height: 100%;
-      width: 20%;
       border-radius: (46px);
+      animation-duration: 1s;
     }
   }
 }

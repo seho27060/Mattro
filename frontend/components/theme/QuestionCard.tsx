@@ -1,15 +1,27 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, {
+  useEffect,
+  useState,
+  Dispatch,
+  useRef,
+  SetStateAction
+} from "react";
 import styles from "./QuestionCard.module.scss";
 // import Stepbar from "./Stepbar";
 
 type QuestionType = {
   start: number;
   moveNext: any;
+  choices: string;
+  setChoices: (chioce: string) => void;
+  // setChoices: Dispatch<SetStateAction<string>>;
 };
 
-export default function QuestionCard({ start, moveNext }: QuestionType) {
-  const [result, setResult] = useState<number[]>([]); // 배열에 값 담아 보내기 api
-
+export default function QuestionCard({
+  start,
+  moveNext,
+  choices,
+  setChoices
+}: QuestionType) {
   const aniRef = useRef<any>();
   const [quesList, setQuesList] = useState([
     { num: 0, question: "같이 갈 일행이 있나요?" },
@@ -29,18 +41,20 @@ export default function QuestionCard({ start, moveNext }: QuestionType) {
   };
 
   useEffect(() => {
+    // 처음 액션
     moveLeft();
   }, []);
 
-  const clickAns = (answer: number) => {
+  const clickAns = (answer: string) => {
     if (start < 4) moveLeft();
+    setChoices(choices + answer);
     moveNext(start);
   };
 
   return (
     <div className={`${styles.card} flex`}>
       <div ref={aniRef} className={`${styles.container} flex column`}>
-        <div className={`${styles.title} coreExtra fs-60`}>
+        <div className={`${styles.title} coreExtra`}>
           Q{quesList[start].num + 1}.
         </div>
         <div className={`${styles.ques} coreExtra fs-40`}>
@@ -49,14 +63,14 @@ export default function QuestionCard({ start, moveNext }: QuestionType) {
         <div className={styles.select}>
           <button
             type="button"
-            onClick={() => clickAns(1)}
+            onClick={() => clickAns("1")}
             className="fs-32 notoBold flex align-center"
           >
             네
           </button>
           <button
             type="button"
-            onClick={() => clickAns(2)}
+            onClick={() => clickAns("0")}
             className="fs-32 notoBold flex align-center"
           >
             아니오

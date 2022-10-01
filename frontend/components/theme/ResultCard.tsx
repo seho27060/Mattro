@@ -4,26 +4,24 @@ import styles from "./ResultCard.module.scss";
 import temp from "../../public/images/foodTemp.jpeg";
 import star from "../../public/images/star.png";
 import kakao from "../../public/images/kakao.svg";
+import { storeDataType } from "../../constants/storeData";
 
-export default function ResultCard() {
-  const storeName = "동대문 엽기 떡볶이";
-  const address = "경기도 용인시 기흥구 탑실로 111-1111ssssss";
-  const time = "오전 11시 ~ 오후 09시";
-  const menu = "엽떡 오리지널 + 주먹밥";
-  const nearStation = "역삼역";
-
-  //   function stars() {
-  //     const starArray = [];
-  //     for (const i = 0; i < 5; i + 1) {
-  //       starArray.push(<Image src={star} alt="star" />);
-  //     }
-  //     return starArray;
-  //   }
-
+const ResultCard = ({
+  id,
+  mainImageURL,
+  menuImageUrl,
+  menuList,
+  name,
+  rating,
+  searchKeyword,
+  storUrl,
+  storeIdx,
+  역명
+}: storeDataType) => {
   // 카카오톡 공유하기 기능
   const shareKakao = () => {
+    const shareUrl = `/theme/share/${id}`; // 공유페이지 위해서
     const { Kakao, location } = window;
-
     if (!window.Kakao.isInitialized()) {
       // 공유하기 기능을 위해 initialize 마운트 될때 적용
       window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_API_KEY);
@@ -32,12 +30,14 @@ export default function ResultCard() {
     Kakao.Link.sendDefault({
       objectType: "feed",
       content: {
-        title: "[역삼역]우영우 김밥",
+        title: { name },
         description: "테스트 입니당",
-        imageUrl: "https://picsum.photos/200/300",
+        imageUrl: mainImageURL !== null ? { mainImageURL } : { menuImageUrl },
         link: {
-          mobileWebUrl: location.href,
+          // mobileWebUrl: "http://localhost:3000/theme/share" + { id },
+          mobileUrl: location.href,
           webUrl: location.href
+          // webUrl: "http://localhost:3000/theme/share" + { id }
         }
       }
     });
@@ -47,47 +47,35 @@ export default function ResultCard() {
     <div className={`${styles.card} flex column align-center justify-center`}>
       <div className={`${styles.num} coreExtra fs-18 flex align-center`}>
         <p>1</p>
-        <div className="coreBold fs-24 flex ">{storeName}</div>
+        <div className="coreBold fs-24 flex ">{name}</div>
       </div>
 
       <div className={`${styles.img} flex align-center justify-center`}>
-        <Image src={temp} alt="food" className={styles.sub} />
-      </div>
-      <div className={styles.stars}>
-        <span>
-          <Image src={star} alt="star" className={styles.star} />
-        </span>
-        <span>
-          <Image src={star} alt="star" className={styles.star} />
-        </span>
-        <span>
-          <Image src={star} alt="star" className={styles.star} />
-        </span>
-        <span>
-          <Image src={star} alt="star" className={styles.star} />
-        </span>
-        <span>
-          <Image src={star} alt="star" className={styles.star} />
-        </span>
-
-        {/* {stars()} */}
+        <Image
+          src={mainImageURL || menuImageUrl || temp}
+          alt="food"
+          className={styles.sub}
+          unoptimized={true}
+          width="400px"
+          height="300px"
+        />
       </div>
       <div className={`${styles.detail} flex column justify-center`}>
         <div className={`${styles.txt} flex  notoMid`}>
           <span>주소</span>
-          <span>{address}</span>
+          <span>{searchKeyword}</span>
         </div>
         <div className={`${styles.txt} flex fs-15 notoMid`}>
           <span>대표 메뉴</span>
-          <span>{menu}</span>
-        </div>
-        <div className={`${styles.txt} flex fs-15 notoMid`}>
-          <span>영업 시간</span>
-          <span>{time}</span>
+          <span>{menuList}</span>
         </div>
         <div className={`${styles.txt} flex fs-15 notoMid`}>
           <span>가까운 역</span>
-          <span>{nearStation}</span>
+          <span>{역명}</span>
+        </div>
+        <div className={`${styles.txt} flex fs-15 notoMid`}>
+          <span>별점</span>
+          <span>{rating}</span>
         </div>
       </div>
       <button
@@ -102,4 +90,5 @@ export default function ResultCard() {
       </button>
     </div>
   );
-}
+};
+export default ResultCard;
