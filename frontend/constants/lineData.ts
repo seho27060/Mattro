@@ -3101,9 +3101,10 @@ const lineData: lineDataType = {
       },
 
       {
-        id: "1251",
+        id: "0150", // orign 1251
 
-        name: "서울역"
+        name: "서울역",
+        intertChange: true
       },
       // {
       //   id: "1265",
@@ -4191,7 +4192,7 @@ export const searchByName = (name: string) => {
       });
     }
   }
-
+  console.log(newResult);
   return newResult;
 };
 

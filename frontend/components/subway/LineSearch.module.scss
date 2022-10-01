@@ -11,9 +11,14 @@
 
 .input {
   @include box();
+  box-shadow: none;
+  border: 1px solid $GRAY_BA;
   font-size: 20px;
 }
 .ul {
+  max-height: (481px);
+  overflow-y: scroll;
+  overflow-x: none;
   .li {
     @include box();
     &:hover {
@@ -49,6 +54,7 @@
     font-size: vw(20px);
   }
   .ul {
+    max-height: vw(481px);
     .li {
       @include box();
 
@@ -77,6 +83,7 @@
     font-size: 16px;
   }
   .ul {
+    max-height: (160px);
     display: flex;
     flex-wrap: wrap;
     .li {
