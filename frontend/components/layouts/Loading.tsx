@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import styles from "./loading.module.scss";
+import styles from "./Loading.module.scss";
 
 export default function loading() {
   const router = useRouter();

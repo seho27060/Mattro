@@ -4,7 +4,6 @@ import ResultCard from "../../components/theme/ResultCard";
 import styles from "./result.module.scss";
 import Loading from "../../components/layouts/Loading";
 import { indexRes, themeRecommend } from "../api/recommend";
-import loading from "../../components/layouts/Loading";
 import { storeDataType } from "../../constants/storeData";
 import { GetServerSideProps } from "next";
 
