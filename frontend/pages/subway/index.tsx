@@ -52,7 +52,7 @@ const Index = () => {
   };
 
   // 현재 선택된 라인 불투명조정
-  const handleLineOpacity = (lineId: UsedLineIdType, opacity: 0.1 | 1) => {
+  const handleLineOpacity = (lineId: UsedLineIdType, opacity: 0.25 | 1) => {
     const lines = document.querySelectorAll<HTMLElement>(`.${lineId}`);
     lines.forEach((line) => {
       if (line.tagName !== "LI" && line.tagName !== "DIV") {
@@ -134,7 +134,13 @@ const Index = () => {
     );
     path.setAttributeNS(null, "fill", "#e53060");
     svg.appendChild(path);
-
+    svg.addEventListener("click", (e) => {
+      const marker = e.currentTarget as SVGAElement;
+      removeFromSelectedStations(station);
+      if (marker && marker.parentElement) {
+        marker.parentElement.removeChild(marker);
+      }
+    });
     markerGroup?.appendChild(svg);
     toggleCircle(
       document.querySelector(`.M${station.stationId}`) as SVGCircleElement
@@ -181,7 +187,7 @@ const Index = () => {
           cy /= circleChilds.length - 1;
         }
         const id = e.currentTarget.parentElement?.classList.value
-          .match(/M\d{4}/g)
+          .match(/M.{4}/g)
           ?.map((id_) => id_.replace("M", ""))[0];
         if (id) {
           name = findNameById(id as UsedLineIdType);
@@ -202,12 +208,12 @@ const Index = () => {
       }
     } else if (e.currentTarget.tagName === "text") {
       const circleIds = e.currentTarget.classList.value
-        .match(/S\d{4}/g)
+        .match(/S.{4}/g)
         ?.map((id) => id.replace("S", ""));
       if (!circleIds) {
         return;
       }
-
+      console.log(circleIds);
       if (circleIds.length === 1) {
         const circle = document.querySelector(
           `.M${circleIds[0]}`
@@ -258,7 +264,7 @@ const Index = () => {
         (lineId: UsedLineIdType) =>
           selectedLines.findIndex((item) => item === lineId) === -1
       );
-    unSelectedLines.map((line) => handleLineOpacity(line, 0.1));
+    unSelectedLines.map((line) => handleLineOpacity(line, 0.25));
     selectedLines.map((line) => handleLineOpacity(line, 1));
   }, [selectedLines]);
 
