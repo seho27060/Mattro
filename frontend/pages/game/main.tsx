@@ -16,6 +16,7 @@ const socket =
     : io("wss://j7c206.p.ssafy.io", { path: "/node/socket.io" });
 
 const Main: NextPage = () => {
+  let timeout: any;
   const roomStartRef = useRef<{
     setLine: (line: string) => void;
     toggleModal: (a: boolean) => void;
@@ -129,7 +130,8 @@ const Main: NextPage = () => {
       setResult({ answer, socketId });
       setNow(now);
       setTurn(turn);
-      setTimeout(() => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
         setResult({});
       }, 1500);
     });
