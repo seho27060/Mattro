@@ -83,7 +83,7 @@ pipeline {
             steps {
                 sh 'docker run -d --network my-network --name mattro wlsgh97/mattro'
                 sh 'docker run -d -p 3000:80 --network my-network --link mattro:nextjs --name mattro-nginx wlsgh97/mattro-nginx'
-                sh 'docker run -d --network my-network --name mattro-node wlsgh97/mattro-node'
+                sh 'docker run -d -p 8000:8000 --network my-network --name mattro-node wlsgh97/mattro-node'
             }
         }    
     }    
