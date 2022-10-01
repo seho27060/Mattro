@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+const { redirect } = require("next/dist/server/api-utils");
 const path = require("path");
 
 const nextConfig = {
@@ -14,6 +15,16 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true
   }
+
+  // async redirect() {
+  //   return [
+  //     {
+  //       source: `/theme/:choices/:path/(\\)`,
+  //       destination: "/404",
+  //       permanent: false
+  //     }
+  //   ];
+  // }
 };
 
 module.exports = nextConfig;

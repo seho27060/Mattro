@@ -13,7 +13,7 @@ export default function Navbar() {
   // console.log(document.querySelector("body"));
   const { pathname } = useRouter();
   const router = useRouter();
-  const bodyRef = useRef();
+  const bodyRef = useRef<HTMLSpanElement>();
   const [clicked, setClicked] = useState(false);
 
   const navList = [
@@ -23,7 +23,7 @@ export default function Navbar() {
     ["/game", "지하철 게임"]
   ];
 
-  const toggleClass = (element, stringClass) => {
+  const toggleClass = (element: HTMLElement, stringClass: string) => {
     // 해당 요소의 클래스 속성값을 추가, 같은 캘래스 명 있는 경우 무시
     if (element.current.classList.contains(stringClass)) {
       element.current.classList.remove(stringClass);
@@ -34,7 +34,7 @@ export default function Navbar() {
     }
   };
 
-  const movePage = (url) => {
+  const movePage = (url: string) => {
     router.push(url);
     setTimeout(function () {
       if (bodyRef.current.classList.contains(styles.nav_active)) {

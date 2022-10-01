@@ -8,13 +8,27 @@
       margin: (30px) 0 (34px) 0;
     }
     .box {
-      width: 100%;
+      .textBalloon,
+      .dummy {
+        margin: (20px) 0 (-80px) (200px);
+        p {
+          position: absolute;
+          color: $GRAY-5B;
+          margin-bottom: (45px);
+          font-size: (24px);
+        }
+      }
+
+      .dummy {
+        opacity: 0%;
+      }
     }
+
     .images {
       z-index: 2;
       position: relative;
       width: (1000px);
-      margin: (50px) 0 0 0;
+      // margin: (50px) 0 0 0;
       justify-content: space-between;
       :nth-child(2n + 1) {
         display: flex;
@@ -177,12 +191,23 @@
     .contents {
       .title {
         width: 70%;
-        margin: vw(30px) 0 vw(34px) 0;
+        // margin: vw(30px) 0 vw(30px) 0;
       }
+      .box {
+        .textBalloon,
+        .dummy {
+          margin: vw(20px) 0 vw(-80px) vw(200px);
+          p {
+            margin-bottom: vw(60px);
+            font-size: vw(24px);
+          }
+        }
+      }
+
       .images {
         z-index: 2;
         width: vw(1000px);
-        margin: vw(50px) 0 0 0;
+        // margin: vw(50px) 0 0 0;
       }
       nav {
         top: vw(-80px);
@@ -207,9 +232,23 @@
         width: 90%;
         margin: (40px) 0 (30px) 0;
       }
+
       p {
         font-size: (20px);
       }
+
+      .box {
+        .textBalloon,
+        .dummy {
+          margin: (50px) 0 (-50px) (100px);
+
+          p {
+            margin-bottom: (50px);
+            font-size: 18px;
+          }
+        }
+      }
+
       .images {
         z-index: 2;
         width: (350px);
@@ -248,9 +287,22 @@
         width: 90%;
         margin: vw-p(40px) 0 vw-p(30px) 0;
       }
+
       p {
         font-size: vw-p(20px);
       }
+      .box {
+        .textBalloon,
+        .dummy {
+          margin: vw-p(50px) 0 vw-p(-50px) vw-p(100px);
+          // background-color: red;
+          p {
+            margin-bottom: vw-p(50px);
+            font-size: vw-p(18px);
+          }
+        }
+      }
+
       .images {
         z-index: 2;
         width: vw-p(350px);

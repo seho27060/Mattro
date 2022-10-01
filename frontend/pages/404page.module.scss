@@ -1,0 +1,66 @@
+.back {
+  width: 1440px;
+  height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-image: url("../public/images/404page.png");
+  //   overflow: hidden;
+  //   justify-content: end;
+
+  .btn {
+    position: absolute;
+    left: calc(50% + 300px);
+    bottom: 20%;
+    background-color: $WHITE;
+    border: 4px solid #c5dcfd;
+    color: $GRAY-3A;
+    border-radius: 25px;
+    cursor: pointer;
+    padding: 10px 24px;
+    font-size: 32px;
+    &:hover {
+      background-color: #c5dcfd;
+      color: $WHITE;
+    }
+  }
+}
+
+@media screen and (max-width: $DESKTOP-VW) {
+  .back {
+    width: vw(1440px);
+    .btn {
+      // right: 5%;
+      left: calc(50% + vw(300px));
+      bottom: 20%;
+      font-size: vw(32px);
+      padding: vw(10px) vw(24px);
+    }
+  }
+}
+@media screen and (max-width: $TABLET-VW) {
+  .back {
+    width: (390px);
+    background-image: url("../public/images/404_phone.png");
+
+    justify-content: center;
+    align-items: center;
+    .btn {
+      font-size: 20px;
+      position: static;
+      margin-bottom: 50px;
+      padding: (10px) (24px);
+    }
+  }
+}
+
+@media screen and (max-width: $PHONE-VW) {
+  .back {
+    width: vw-p(390px);
+    .btn {
+      font-size: vw-p(20px);
+      margin-bottom: vw-p(50px);
+      padding: vw-p(10px) vw-p(24px);
+    }
+  }
+}
