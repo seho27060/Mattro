@@ -1,3 +1,10 @@
+@mixin me {
+  width: 86px;
+  height: 38px;
+  border-radius: 22px;
+  background-color: $SUB_YELLOW;
+}
+
 .wrapper {
   height: 100%;
   background-color: $GRAY_ED;
@@ -61,19 +68,22 @@
       margin: 28px 0;
       color: $WHITE;
       cursor: pointer;
+      .username__nickname {
+        margin-right: 6px;
+      }
+      .edit__visible {
+        width: 12px;
+      }
+      .edit__invisible {
+        display: none;
+      }
     }
-    .visible {
-      width: 86px;
-      height: 38px;
-      border-radius: 22px;
-      background-color: $SUB_YELLOW;
+    .me__visible {
+      @include me();
     }
-    .invisible {
+    .me__invisible {
       visibility: hidden;
-      width: 86px;
-      height: 38px;
-      border-radius: 22px;
-      background-color: $SUB_YELLOW;
+      @include me();
     }
   }
 }
@@ -108,6 +118,11 @@
 }
 
 @media screen and (max-width: $DESKTOP-VW) {
+  @mixin me {
+    width: vw(86px);
+    height: vw(38px);
+    border-radius: vw(22px);
+  }
   .wrapper {
     width: 100%;
     h2 {
@@ -144,21 +159,22 @@
     column-gap: vw(36px);
     margin: vw(20px);
     .user {
-      width: vw(224px);
-      height: vw(340px);
-      border-radius: vw(44px);
       .username {
         margin: vw(28px) 0;
+        .username__nickname {
+          margin-right: vw(6px);
+        }
+        .edit__visible {
+          width: vw(12px);
+        }
+        .edit__invisible {
+        }
       }
-      .visible {
-        width: vw(86px);
-        height: vw(38px);
-        border-radius: vw(22px);
+      .me__visible {
+        @include me();
       }
-      .invisible {
-        width: vw(86px);
-        height: vw(38px);
-        border-radius: vw(22px);
+      .me__invisible {
+        @include me();
       }
     }
   }
@@ -177,6 +193,12 @@
 }
 
 @media screen and (max-width: $TABLET-VW) {
+  @mixin me {
+    width: 66px;
+    height: 30px;
+    border-radius: 20px;
+    font-size: 16px;
+  }
   .wrapper {
     width: 100%;
     height: 100%;
@@ -231,20 +253,22 @@
         width: 30%;
       }
       .username {
-        margin: 28px 0;
-        font-size: 20px;
+        margin: (14px) 0;
+        .username__nickname {
+          margin-right: (5px);
+          font-size: 20px;
+        }
+        .edit__visible {
+          width: (10px);
+        }
+        .edit__invisible {
+        }
       }
-      .visible {
-        width: 86px;
-        height: 38px;
-        border-radius: 22px;
-        font-size: 20px;
+      .me__visible {
+        @include me();
       }
-      .invisible {
-        width: 86px;
-        height: 38px;
-        border-radius: 22px;
-        font-size: 20px;
+      .me__invisible {
+        @include me();
       }
     }
   }
@@ -277,6 +301,12 @@
 }
 
 @media screen and (max-width: $PHONE-VW) {
+  @mixin me {
+    width: vw-p(66px);
+    height: vw-p(30px);
+    border-radius: vw-p(20px);
+    font-size: vw-p(16px);
+  }
   .wrapper {
     h2 {
       margin-top: vw-p(20px);
@@ -318,20 +348,22 @@
       height: vw-p(208px);
       border-radius: vw-p(24px);
       .username {
-        margin: vw-p(28px) 0;
-        font-size: vw-p(20px);
+        margin: vw-p(14px) 0;
+        .username__nickname {
+          margin-right: vw-p(5px);
+          font-size: vw-p(20px);
+        }
+        .edit__visible {
+          width: vw-p(10px);
+        }
+        .edit__invisible {
+        }
       }
-      .visible {
-        width: vw-p(86px);
-        height: vw-p(38px);
-        border-radius: vw-p(22px);
-        font-size: vw-p(20px);
+      .me__visible {
+        @include me();
       }
-      .invisible {
-        width: vw-p(86px);
-        height: vw-p(38px);
-        border-radius: vw-p(22px);
-        font-size: vw-p(20px);
+      .me__invisible {
+        @include me();
       }
     }
   }

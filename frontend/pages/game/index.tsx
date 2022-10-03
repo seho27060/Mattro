@@ -1,16 +1,25 @@
 import type { NextPage } from "next";
-import Link from "next/link";
 import { useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/router";
+
 import logo from "../../public/images/logo/game_logo.png";
 import Modal from "../../components/layouts/Modal";
-
 import styles from "./index.module.scss";
+import useAudio from "../../components/useAudio";
+import gameMainMusic from "../../public/sounds/gameMainMusic.mp3";
 
-const index: NextPage = () => {
+const Index: NextPage = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
+  const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const toggleModal = () => setIsModalOpen(!isModalOpen);
+  const [toggle] = useAudio(gameMainMusic);
+
+  const onClickStart = () => {
+    toggle();
+    router.push("/game/main");
+  };
 
   return (
     <div
@@ -19,13 +28,13 @@ const index: NextPage = () => {
       <div>
         <Image src={logo} alt="logo" />
       </div>
-      <Link href="/game/main">
-        <div
-          className={`${styles.start__btn} flex justify-center align-center fs-32 coreExtra`}
-        >
-          start
-        </div>
-      </Link>
+      <div
+        className={`${styles.start__btn} flex justify-center align-center fs-32 coreExtra`}
+        onClick={onClickStart}
+        aria-hidden="true"
+      >
+        start
+      </div>
       <button
         className={`${styles.explanation_btn} flex justify-center align-center fs-32 coreExtra`}
         type="button"
@@ -57,4 +66,4 @@ const index: NextPage = () => {
   );
 };
 
-export default index;
+export default Index;
