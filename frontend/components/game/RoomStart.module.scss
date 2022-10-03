@@ -150,16 +150,24 @@
     .circle {
       height: vw(292px);
       border-radius: vw(236px);
-      .answer__station {
-        border-radius: vw(70px);
-        padding: vw(20px) vw(24px);
-        margin-right: vw(10px);
+      .answer {
+        .answer__station {
+          border-radius: vw(70px);
+          padding: vw(20px) vw(24px);
+          margin-right: vw(10px);
+        }
+        .answer__content {
+          width: vw(400px);
+        }
       }
-      input {
-        max-width: vw(236px);
+      .line__content {
+        width: vw(240px);
       }
-      span {
-        width: vw(200px);
+      .fix__station {
+        width: vw(60px);
+      }
+      .fix__line {
+        width: vw(160px);
       }
     }
   }
@@ -212,18 +220,30 @@
       padding: 10px;
       border-width: 12px;
       border-radius: 236px;
-      .answer__station {
-        border-radius: (36px);
-        padding: (10px) (14px);
-        font-size: 24px;
+      .answer {
+        width: 260px;
+        .answer__station {
+          border-radius: (70px);
+          padding: (10px) (12px);
+          margin-right: (10px);
+          font-size: 20px;
+        }
+        .answer__content {
+          width: (160px);
+          font-size: 20px;
+        }
       }
-      input {
-        max-width: 128px;
-        font-size: 28px;
+      .line__content {
+        width: (160px);
+        font-size: 30px;
       }
-      span {
-        width: 76px;
-        font-size: 28px;
+      .fix__station {
+        width: (60px);
+        font-size: 30px;
+      }
+      .fix__line {
+        width: (120px);
+        font-size: 30px;
       }
     }
   }
@@ -289,18 +309,30 @@
       padding: vw-p(10px);
       border-width: vw-p(12px);
       border-radius: vw-p(236px);
-      .answer__station {
-        border-radius: vw-p(36px);
-        padding: vw-p(10px) vw-p(14px);
-        font-size: vw-p(24px);
+      .answer {
+        width: vw-p(260px);
+        .answer__station {
+          border-radius: vw-p(70px);
+          padding: vw-p(10px) vw-p(12px);
+          margin-right: vw-p(10px);
+          font-size: vw-p(20px);
+        }
+        .answer__content {
+          width: vw-p(160px);
+          font-size: vw-p(20px);
+        }
       }
-      input {
-        max-width: vw-p(128px);
-        font-size: vw-p(28px);
+      .line__content {
+        width: vw-p(160px);
+        font-size: vw-p(30px);
       }
-      span {
-        width: vw-p(76px);
-        font-size: vw-p(28px);
+      .fix__station {
+        width: vw-p(60px);
+        font-size: vw-p(30px);
+      }
+      .fix__line {
+        width: vw-p(120px);
+        font-size: vw-p(30px);
       }
     }
   }
