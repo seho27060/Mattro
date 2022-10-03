@@ -2,7 +2,6 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable react/prop-types */
 import React, {
-  useCallback,
   useEffect,
   useRef,
   useState,
@@ -91,23 +90,34 @@ const Rooms: React.FunctionComponent<Props> = forwardRef(
         <div className={styles.roomList}>
           {roomList.map((room) => (
             <div
-              className={`${styles.room} flex align-center`}
+              className={`${styles.room} flex justify-space-between align-center`}
               key={room.roomName}
               onClick={onEnterRoom}
               aria-hidden="true"
             >
-              <p className="flex align-center fs-34 coreExtra">
+              <div className={`${styles.room__num__name} flex`}>
                 <span
-                  className={`${styles.room__num} flex justify-center align-center fs-24 coreExtra`}
+                  className={`${styles.room__num} flex justify-center align-center coreExtra fs-28`}
                 >
                   {room.size}/4
                 </span>
-                <span>
-                  {room.roomName && room.roomName.length > 10
-                    ? `${room.roomName.slice(0, 10)}...`
+                <span
+                  className={`${styles.room__name} flex justify-center align-center coreExtra fs-32`}
+                >
+                  {room.roomName && room.roomName.length > 9
+                    ? `${room.roomName.slice(0, 9)}...`
                     : room.roomName}
                 </span>
-              </p>
+              </div>
+              <div className={`${styles.room__status}`}>
+                {room.isStarted && (
+                  <span
+                    className={`${styles.room__isStarted} flex justify-center align-center coreExtra fs-20`}
+                  >
+                    게임중
+                  </span>
+                )}
+              </div>
             </div>
           ))}
         </div>
@@ -115,7 +125,6 @@ const Rooms: React.FunctionComponent<Props> = forwardRef(
           <span className={styles.chair1}>
             <Image src={chair1} alt="chair1" />
           </span>
-
           <button
             className="fs-24 coreExtra"
             type="button"
@@ -150,10 +159,14 @@ const Rooms: React.FunctionComponent<Props> = forwardRef(
           </div>
         </Modal>
         <Modal isOpen={isFullModalOpen} onClose={toggleIsFullModal}>
-          <div className="fs-32 coreExtra">방이 꽉 찼습니다.</div>
+          <div className={`${styles.modal__warning} fs-32 coreExtra`}>
+            방이 꽉 찼습니다.
+          </div>
         </Modal>
         <Modal isOpen={isStartedModalOpen} onClose={toggleIsStartedModal}>
-          <div className="fs-32 coreExtra">게임이 이미 시작했습니다.</div>
+          <div className={`${styles.modal__warning} fs-32 coreExtra`}>
+            게임이 이미 시작했습니다.
+          </div>
         </Modal>
       </div>
     );

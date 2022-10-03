@@ -352,7 +352,7 @@ const lineData = {
       {
         id: "1702",
 
-        name: "가산\n디지털단지",
+        name: "가산디지털단지",
         intertChange: true
       },
       {
@@ -1936,7 +1936,7 @@ const lineData = {
       {
         id: "1702",
 
-        name: "가산\n디지털단지",
+        name: "가산디지털단지",
         intertChange: true
       },
       {
@@ -1961,7 +1961,7 @@ const lineData = {
       },
       {
         id: "2743",
-        name: "신대방\n삼거리"
+        name: "신대방삼거리"
       },
       {
         id: "2742",
@@ -2427,7 +2427,7 @@ const lineData = {
 
       {
         id: "4138",
-        name: "중앙\n보훈병원"
+        name: "중보훈병원"
       },
 
       {}
@@ -2459,11 +2459,11 @@ const lineData = {
       },
       {
         id: "4926",
-        name: "사우 \n (김포시청)"
+        name: "김포시청"
       },
       {
         id: "4925",
-        name: "걸포\n북변"
+        name: "걸포북변"
       },
 
       {
@@ -2553,7 +2553,7 @@ const lineData = {
       {
         id: "4610",
 
-        name: "경기도청\n북부청사"
+        name: "경기도청북부청사"
       },
       {
         id: "4611",
@@ -2600,7 +2600,7 @@ const lineData = {
       },
       {
         id: "3139",
-        name: "송도달빛\n축제공원"
+        name: "송도달빛축제공원"
       },
       {
         id: "3138",
@@ -2783,7 +2783,7 @@ const lineData = {
 
       {
         id: "3209",
-        name: "아시아드\n경기장"
+        name: "아시아드경기장"
       },
       {
         id: "3210",
@@ -3366,15 +3366,15 @@ const lineData = {
       },
       {
         id: "4215",
-        name: "인천공항\n2터미널"
+        name: "인천공항2터미널"
       },
       {
         id: "4213",
-        name: "인천공항\n1터미널"
+        name: "인천공항1터미널"
       },
       {
         id: "4212",
-        name: "공항\n화물청사"
+        name: "공항화물청사"
       },
       {
         id: "4211",
@@ -3386,7 +3386,7 @@ const lineData = {
       },
       {
         id: "4210",
-        name: "청라\n국제도시"
+        name: "청라국제도시"
       },
       {
         id: "4209",
@@ -3502,7 +3502,7 @@ const lineData = {
 
       {
         id: "1883",
-        name: "남동\n인더스파크"
+        name: "남동인더스파크"
       },
       {
         id: "1882",
@@ -4182,7 +4182,7 @@ const lineData = {
       },
       {
         id: "4403",
-        name: "서울지방\n병무청"
+        name: "서울지방병무청"
       },
 
       {

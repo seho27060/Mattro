@@ -20,7 +20,6 @@ const Main: NextPage = () => {
   const roomStartRef = useRef<{
     setLine: (line: string) => void;
     toggleModal: (a: boolean) => void;
-    clear: () => void;
   }>(null);
   const openRoomListRef = useRef<{
     toggleIsFullModal: (a: boolean) => void;
@@ -102,7 +101,6 @@ const Main: NextPage = () => {
     socket.on(
       "check_answer",
       (roomName, res, arr, answer, order, now, userListNum, socketId) => {
-        roomStartRef.current?.clear();
         if (res === "정답") {
           console.log("맞음!!");
           setTotal(arr);
@@ -136,6 +134,7 @@ const Main: NextPage = () => {
       }, 1500);
     });
     socket.on("uncorrect", (answer, socketId) => {
+      setTurn({});
       setResult({ answer, socketId });
       roomStartRef.current?.toggleModal(true);
       setTimeout(() => {
@@ -143,6 +142,7 @@ const Main: NextPage = () => {
       }, 3000);
     });
     socket.on("time_over", (order, now) => {
+      setTurn({});
       setResult({
         answer: "시간초과",
         socketId: order[(now + 1) % order.length].id
@@ -153,6 +153,7 @@ const Main: NextPage = () => {
       }, 3000);
     });
     socket.on("start_time_over", (socketId) => {
+      setTurn({});
       setResult({
         answer: "시간초과",
         socketId

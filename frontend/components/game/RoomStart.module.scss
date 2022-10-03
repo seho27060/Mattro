@@ -65,22 +65,31 @@
     border-radius: 236px;
     text-align: center;
     background-color: $WHITE;
-    .answer__station {
-      width: min-content;
-      border-radius: 70px;
-      padding: 20px 24px;
-      margin-right: 10px;
-      color: $WHITE;
-      white-space: nowrap;
+    .answer {
+      .answer__station {
+        width: min-content;
+        border-radius: 70px;
+        padding: 20px 24px;
+        margin-right: 10px;
+        color: $WHITE;
+        white-space: nowrap;
+      }
+      .answer__content {
+        width: 400px;
+        border-bottom: 1px solid black;
+        text-align: center;
+      }
     }
-    input {
-      max-width: 236px;
+    .line__content {
+      width: 240px;
       border-bottom: 1px solid black;
-      background: none;
       text-align: center;
     }
-    span {
-      width: 200px;
+    .fix__station {
+      width: 60px;
+    }
+    .fix__line {
+      width: 160px;
     }
   }
 }
@@ -101,6 +110,10 @@
   .invisible {
     visibility: hidden;
   }
+}
+
+.children {
+  margin-bottom: 16px;
 }
 
 @media screen and (max-width: $DESKTOP-VW) {
@@ -152,6 +165,9 @@
   }
   .footer {
     margin-top: vw(30px);
+  }
+  .children {
+    margin-bottom: vw(16px);
   }
 }
 
@@ -230,6 +246,9 @@
       width: 50%;
     }
   }
+  .children {
+    margin-bottom: (16px);
+  }
 }
 
 @media screen and (max-width: $PHONE-VW) {
@@ -292,5 +311,8 @@
     button {
       font-size: vw-p(72px);
     }
+  }
+  .children {
+    margin-bottom: vw-p(16px);
   }
 }

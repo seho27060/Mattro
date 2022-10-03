@@ -36,7 +36,8 @@ function getAllRooms() {
   publicRooms().forEach((roomName) => {
     res.push({
       roomName,
-      size: data.get(roomName).get("size")
+      size: data.get(roomName).get("size"),
+      isStarted: data.get(roomName).get("isStarted")
     });
   });
   return res;
@@ -68,6 +69,7 @@ io.on("connection", (socket) => {
       data
         .get(roomName)
         .set("nicknameList", ["4번 출구", "3번 출구", "2번 출구", "1번 출구"]);
+      data.get(roomName).set("isStarted", false);
     }
     if (data.get(roomName).get("isStarted")) {
       socket.emit("isStarted");
@@ -149,6 +151,7 @@ io.on("connection", (socket) => {
   });
   socket.on("start_lobby", (roomName, socketId) => {
     data.get(roomName).set("isStarted", true);
+    io.sockets.emit("room_change", getAllRooms());
     socket.to(roomName).emit("start_lobby", false, socketId);
     socket.emit("start_lobby", true, socketId);
   });
@@ -158,8 +161,8 @@ io.on("connection", (socket) => {
     data.get(roomName).set("timeout", null);
     data.get(roomName).set("limit", 8000);
     data.get(roomName).set("clear", false);
-    const limit =
-      data.get(roomName).get("limit") - 200 * data.get(roomName).get("now");
+    const limit = data.get(roomName).get("limit");
+    data.get(roomName).set("limit", limit);
     socket.to(roomName).emit("start_game", line, order, limit);
     socket.emit("start_game", line, order, limit);
     clearTimeout(data.get(roomName).get("timeout"));
@@ -180,8 +183,6 @@ io.on("connection", (socket) => {
   socket.on(
     "answer",
     (roomName, line, answer, arr, order, now, userListNum, socketId) => {
-      clearTimeout(data.get(roomName).get("timeout"));
-      data.get(roomName).set("clear", true);
       console.log("앤서 클리어");
       if (!data.get(roomName).get("clear")) {
         return;
@@ -212,18 +213,29 @@ io.on("connection", (socket) => {
           userListNum,
           socketId
         );
-      const limit =
-        data.get(roomName).get("limit") -
-        200 * (data.get(roomName).get("now") + 1);
-      socket.emit("limit", limit);
-      socket.to(roomName).emit("limit", limit);
-      console.log("시간 체크 시작========", limit);
+      console.log(
+        data.get(roomName).get("limit"),
+        data.get(roomName).get("now"),
+        data.get(roomName).get("size")
+      );
+      if (data.get(roomName).get("limit") > 4500) {
+        const limit =
+          data.get(roomName).get("limit") -
+          100 *
+            (data.get(roomName).get("now") / data.get(roomName).get("size"));
+        data.get(roomName).set("limit", limit);
+      }
+      socket.emit("limit", data.get(roomName).get("limit"));
+      socket.to(roomName).emit("limit", data.get(roomName).get("limit"));
+      clearTimeout(data.get(roomName).get("timeout"));
+      data.get(roomName).set("clear", true);
+      console.log("시간 체크 시작========", data.get(roomName).get("limit"));
       const timeoutId = setTimeout(() => {
-        console.log("시간초과 =============", limit);
+        console.log("시간초과 =============", data.get(roomName).get("limit"));
         socket.emit("time_over", order, now);
         socket.to(roomName).emit("time_over", order, now);
         data.get(roomName).set("clear", false);
-      }, limit);
+      }, data.get(roomName).get("limit"));
       data.get(roomName).set("timeout", timeoutId);
     }
   );
@@ -244,6 +256,7 @@ io.on("connection", (socket) => {
     socket.to(roomName).emit("uncorrect", answer, socketId);
     socket.emit("uncorrect", answer, socketId);
     data.get(roomName).set("isStarted", false);
+    io.sockets.emit("room_change", getAllRooms());
   });
   socket.on("time_over", (roomName, answer, socketId) => {
     clearTimeout(data.get(roomName).get("timeout"));
@@ -251,6 +264,7 @@ io.on("connection", (socket) => {
     socket.to(roomName).emit("uncorrect", answer, socketId);
     socket.emit("uncorrect", answer, socketId);
     data.get(roomName).set("isStarted", false);
+    io.sockets.emit("room_change", getAllRooms());
   });
   socket.on("on_change_line", (roomName, line) => {
     socket.to(roomName).emit("on_change_line", line);
