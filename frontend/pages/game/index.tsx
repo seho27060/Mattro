@@ -7,14 +7,14 @@ import logo from "../../public/images/logo/game_logo.png";
 import Modal from "../../components/layouts/Modal";
 import styles from "./index.module.scss";
 import useAudio from "../../components/useAudio";
-import gameMainMusic from "../../public/sounds/gameMainMusic.mp3";
+import click from "../../public/sounds/click.mp3";
 
 const Index: NextPage = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const toggleModal = () => setIsModalOpen(!isModalOpen);
-  const [toggle] = useAudio(gameMainMusic);
+  const [toggle] = useAudio(click);
 
   const onClickStart = () => {
     toggle();
@@ -38,7 +38,10 @@ const Index: NextPage = () => {
       <button
         className={`${styles.explanation_btn} flex justify-center align-center fs-32 coreExtra`}
         type="button"
-        onClick={toggleModal}
+        onClick={() => {
+          toggle();
+          toggleModal();
+        }}
       >
         게임 설명
       </button>

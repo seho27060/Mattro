@@ -17,6 +17,7 @@ interface Props {
   userList: IUserList[];
   roomName: string;
   defaultNick: string;
+  toggle: (a: boolean) => void;
 }
 
 const RoomLobby: React.FunctionComponent<Props> = ({
@@ -24,7 +25,8 @@ const RoomLobby: React.FunctionComponent<Props> = ({
   nowCnt,
   userList,
   roomName,
-  defaultNick
+  defaultNick,
+  toggle
 }) => {
   const nicknameRef = useRef<HTMLInputElement>(null);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -35,6 +37,7 @@ const RoomLobby: React.FunctionComponent<Props> = ({
   };
   const onStartLobby: React.MouseEventHandler<HTMLButtonElement> = () => {
     if (roomName) {
+      toggle(true);
       socket.emit("start_lobby", roomName, socket.id);
     }
   };
@@ -45,6 +48,7 @@ const RoomLobby: React.FunctionComponent<Props> = ({
   }, [isModalOpen]);
   const onEnterKeyUp = (e: { key: string }) => {
     if (e.key === "Enter") {
+      toggle(true);
       socket.emit("nickname", roomName, nickname);
       toggleModal();
     }

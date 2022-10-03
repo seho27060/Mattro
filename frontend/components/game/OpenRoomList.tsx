@@ -20,11 +20,12 @@ interface Props {
   roomList: IRoomList[];
   socket: ISocket;
   setIsEntered: (a: boolean) => void;
+  toggle: (a: boolean) => void;
   ref: React.ForwardedRef<unknown>;
 }
 
 const Rooms: React.FunctionComponent<Props> = forwardRef(
-  ({ roomList, socket, setIsEntered }, ref) => {
+  ({ roomList, socket, setIsEntered, toggle }, ref) => {
     useImperativeHandle(ref, () => ({
       toggleIsFullModal,
       toggleIsStartedModal
@@ -33,14 +34,15 @@ const Rooms: React.FunctionComponent<Props> = forwardRef(
     const [roomName, setRoomName] = useState<string>("");
     const [isMakeRoomModalOpen, setIsMakeRoomModalOpen] =
       useState<boolean>(false);
-    const toggleMakeRoomModal = () => setIsMakeRoomModalOpen((prev) => !prev);
+    const toggleMakeRoomModal = () => {
+      toggle(true);
+      setIsMakeRoomModalOpen((prev) => !prev);
+    };
     const [isFullModalOpen, setIsFullModalOpen] = useState<boolean>(false);
     const toggleIsFullModal = () => setIsFullModalOpen((prev) => !prev);
-
     const [isStartedModalOpen, setIsStartedModalOpen] =
       useState<boolean>(false);
     const toggleIsStartedModal = () => setIsStartedModalOpen((prev) => !prev);
-
     const onChangeRoomName: React.ChangeEventHandler<HTMLInputElement> = (
       e
     ) => {
@@ -48,6 +50,7 @@ const Rooms: React.FunctionComponent<Props> = forwardRef(
     };
     const onMakeRoom: React.MouseEventHandler<HTMLButtonElement> = () => {
       if (roomName.trim() === "") return;
+      toggle(true);
       socket.emit("enter_room", roomName, () => {
         setIsEntered(true);
       });
@@ -57,6 +60,7 @@ const Rooms: React.FunctionComponent<Props> = forwardRef(
     > = (e: { key: string }) => {
       if (e.key === "Enter") {
         if (roomName.trim() === "") return;
+        toggle(true);
         socket.emit("enter_room", roomName, () => {
           setIsEntered(true);
         });
@@ -64,6 +68,7 @@ const Rooms: React.FunctionComponent<Props> = forwardRef(
     };
     const onEnterRoom = (e: any) => {
       if (e.currentTarget?.innerText?.split("\n")?.[1]) {
+        toggle(true);
         socket.emit(
           "enter_room",
           e.currentTarget.innerText.split("\n")[1],

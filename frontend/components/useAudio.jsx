@@ -4,11 +4,13 @@ const useAudio = (url) => {
   const [audio] = useState(typeof Audio !== "undefined" && new Audio(url));
   const [playing, setPlaying] = useState(false);
 
-  const toggle = () => setPlaying(!playing);
+  const toggle = (a) => setPlaying(a);
 
   useEffect(() => {
     if (playing) {
       audio.play();
+    } else {
+      audio.pause();
     }
   }, [playing]);
 
