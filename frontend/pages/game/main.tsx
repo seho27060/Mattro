@@ -193,6 +193,7 @@ const Main: NextPage = () => {
       socket.off("on_change_line");
       socket.off("full");
       socket.off("limit");
+      socket.disconnect();
     };
   }, []);
   return (

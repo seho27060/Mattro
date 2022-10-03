@@ -9,6 +9,7 @@ import subway1 from "../../public/images/subway1.svg";
 import subway2 from "../../public/images/subway2.svg";
 import { ISocket, IUserList } from "../../constants/socketio";
 import Modal from "../layouts/Modal";
+import pencil from "../../public/images/pencil.svg";
 
 interface Props {
   socket: ISocket;
@@ -80,7 +81,7 @@ const RoomLobby: React.FunctionComponent<Props> = ({
                 <Image src={subway2} alt="subway2" />
               </span>
               <div
-                className={`${styles.username} notoBold`}
+                className={`${styles.username} flex justify-center align-center notoBold`}
                 onClick={() => {
                   if (user.id === socket.id) {
                     toggleModal();
@@ -88,11 +89,24 @@ const RoomLobby: React.FunctionComponent<Props> = ({
                 }}
                 aria-hidden="true"
               >
-                {user.nickname}님
+                <span className={`${styles.username__nickname}`}>
+                  {user.nickname}님
+                </span>
+                <div
+                  className={
+                    user.id === socket.id
+                      ? styles.edit__visible
+                      : styles.edit__invisible
+                  }
+                >
+                  <Image src={pencil} alt="pencil" />
+                </div>
               </div>
               <span
                 className={`${
-                  user.id === socket.id ? styles.visible : styles.invisible
+                  user.id === socket.id
+                    ? styles.me__visible
+                    : styles.me__invisible
                 } flex justify-center align-center notoBold fs-20`}
               >
                 나
