@@ -3,7 +3,6 @@
   .ani {
     animation-name: moveLeft;
     animation-duration: 1.3s;
-    opacity: 0%;
     animation-timing-function: ease;
     animation-fill-mode: forwards;
   }
@@ -38,13 +37,14 @@
 }
 @keyframes moveLeft {
   from {
-    right: 0%;
+    // right: 0%;
+    transform: translateX(50%);
     opacity: 0%;
   }
   to {
     // transform: (-50%, -50%);
-    right: 50%;
-    transform: translateX(50%);
+    // right: 50%;
+    // transform: translateX(50%);
     opacity: 100%;
   }
 }
