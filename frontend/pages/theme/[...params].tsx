@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useDebugValue } from "react";
 import { useRouter } from "next/router";
+import { GetServerSideProps } from "next";
 import ResultCard from "../../components/theme/ResultCard";
 import styles from "./result.module.scss";
 import Loading from "../../components/layouts/Loading";
 import { indexRes, themeRecommend } from "../api/recommend";
 import { storeDataType } from "../../constants/storeData";
-import { GetServerSideProps } from "next";
 
 const Result = () => {
   const router = useRouter();
@@ -30,7 +30,7 @@ const Result = () => {
   }, [storeIndex]);
 
   useEffect(() => {
-    //정규 표현식
+    // 정규 표현식
     const numTest = /^[0-1]{5}$/;
 
     if (numTest.test(choices) === false) {
@@ -63,7 +63,7 @@ const Result = () => {
           <div className="flex column align-center justify-center">
             <div className={`${styles.title} fs-24 coreBold`}>오늘 당신은</div>
             <div className="flex">
-              {foodList.map(
+              {/* {foodList.map(
                 ({
                   id,
                   mainImageURL,
@@ -76,21 +76,21 @@ const Result = () => {
                   storeIdx,
                   역명
                 }: storeDataType) => (
-                  <ResultCard
-                    key={id}
-                    id={id}
-                    mainImageURL={mainImageURL}
-                    menuImageUrl={menuImageUrl}
-                    menuList={menuList}
-                    name={name}
-                    rating={rating}
-                    searchKeyword={searchKeyword}
-                    storUrl={storUrl}
-                    storeIdx={storeIdx}
-                    역명={역명}
-                  />
+                  // <ResultCard
+                  //   key={id}
+                  //   id={id}
+                  //   mainImageURL={mainImageURL}
+                  //   menuImageUrl={menuImageUrl}
+                  //   menuList={menuList}
+                  //   name={name}
+                  //   rating={rating}
+                  //   searchKeyword={searchKeyword}
+                  //   storUrl={storUrl}
+                  //   storeIdx={storeIdx}
+                  //   역명={역명}
+                  // />
                 )
-              )}
+              )} */}
             </div>
 
             <div className={`${styles.btns} flex`}>
