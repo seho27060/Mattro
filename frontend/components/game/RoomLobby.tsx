@@ -52,17 +52,19 @@ const RoomLobby: React.FunctionComponent<Props> = ({
     <div
       className={`${styles.wrapper} flex column justify-space-between align-center`}
     >
-      <h2 className="align-center coreExtra fs-30">
-        <span
-          className={`${styles.room__num} flex justify-center align-center coreExtra fs-28`}
-        >
-          {nowCnt}/4
-        </span>
-        <span className={`${styles.room__title}`}>
-          {roomName && roomName.length > 9
-            ? `${roomName.slice(0, 9)}...`
-            : roomName}
-        </span>
+      <h2 className="flex justify-space-between align-center">
+        <div className={`${styles.room__num__title} flex align-center`}>
+          <span
+            className={`${styles.room__num} flex justify-center align-center coreExtra fs-24`}
+          >
+            {nowCnt}/4
+          </span>
+          <span className={`${styles.room__title} coreExtra fs-28`}>
+            {roomName && roomName.length > 9
+              ? `${roomName.slice(0, 9)}...`
+              : roomName}
+          </span>
+        </div>
         <span className={`${styles.subway1}`}>
           <Image src={subway1} alt="subway1" />
         </span>
@@ -115,9 +117,9 @@ const RoomLobby: React.FunctionComponent<Props> = ({
         </span>
       </footer>
       <Modal isOpen={isModalOpen} onClose={toggleModal}>
-        <div className={`${styles.modal} flex fs-32 coreExtra`}>
+        <div className={`${styles.modal} flex`}>
           <span
-            className={`${styles.modal__label} flex align-center justify-center`}
+            className={`${styles.modal__label} flex align-center justify-center fs-32 coreExtra`}
           >
             닉네임 :
           </span>

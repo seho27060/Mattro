@@ -102,32 +102,23 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
     },
     ref
   ) => {
-    const timeoutReturn: { current: NodeJS.Timeout | null } = useRef(null);
-    const clear = () => {
-      console.log("시간초과 클리어========");
-      clearTimeout(timeoutReturn.current as NodeJS.Timeout);
-    };
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const toggleModal = () => {
-      console.log("콘솔 켜져라 얍");
       setIsModalOpen(true);
     };
     const inputLineRef = useRef<HTMLInputElement>(null);
     const inputAnswerRef = useRef<HTMLInputElement>(null);
-    // const lineRef = useRef<any>(null);
-    // const circleRef = useRef<HTMLDivElement>(null);
-    // const answerRef = useRef<HTMLDivElement>(null);
     const [answer, setAnswer] = useState<string>("");
     const [isReadyOpen, setIsReadyOpen] = useState<boolean>(false);
     useImperativeHandle(ref, () => ({
-      toggleModal,
-      clear
+      toggleModal
     }));
     const onChangeAnswer: React.ChangeEventHandler<HTMLInputElement> =
       useCallback((e) => {
         setAnswer(e.target.value);
       }, []);
     const onStartGame = () => {
+      if (startId !== socket.id) return;
       if (!roomName) return;
       if (inputLineRef.current) {
         if (
@@ -174,22 +165,28 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
       setAnswer("");
     };
     useEffect(() => {
-      if (socket.id === turn.id) {
-        if (inputAnswerRef?.current) {
+      if (inputLineRef.current) {
+        inputLineRef.current.focus();
+      }
+    }, []);
+    const onEnterKeyUpline = (e: { key: string }) => {
+      if (startId !== socket.id) return;
+      if (e.key === "Enter") {
+        onStartGame();
+      }
+    };
+    useEffect(() => {
+      if (isStartedGame && !isReadyOpen && socket.id === turn.id) {
+        if (inputAnswerRef.current) {
           inputAnswerRef.current.focus();
         }
       }
-    }, [turn]);
-    const onEnterKeyUp = (e: { key: string }) => {
+    }, [isStartedGame, isReadyOpen, turn]);
+    const onEnterKeyUpAnswer = (e: { key: string }) => {
       if (answer && e.key === "Enter") {
         onSubmitAnswer(answer);
       }
     };
-    useEffect(() => {
-      if (inputLineRef?.current) {
-        inputLineRef.current.focus();
-      }
-    }, []);
     useEffect(() => {
       if (isStartedGame) {
         setIsReadyOpen(true);
@@ -265,16 +262,17 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
                   {line}
                 </span>
                 <input
-                  onKeyUp={onEnterKeyUp}
+                  onKeyUp={onEnterKeyUpAnswer}
                   ref={inputAnswerRef}
                   className={`${styles.answer__content} coreExtra fs-60`}
                   value={answer}
                   onChange={onChangeAnswer}
-                  disabled={socket.id !== turn.id}
+                  disabled={isReadyOpen || socket.id !== turn.id}
                 />
               </div>
             ) : (
               <input
+                onKeyUp={onEnterKeyUpline}
                 ref={inputLineRef}
                 className={`${styles.line__content} coreExtra fs-60`}
                 value={line}
@@ -283,9 +281,13 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
               />
             )}
             {isStartedGame ? (
-              <span className="coreExtra fs-60">역</span>
+              <span className={`${styles.fix__station} coreExtra fs-60`}>
+                역
+              </span>
             ) : (
-              <span className="coreExtra fs-60">(호)선</span>
+              <span className={`${styles.fix__line} coreExtra fs-60`}>
+                (호)선
+              </span>
             )}
           </div>
         </div>

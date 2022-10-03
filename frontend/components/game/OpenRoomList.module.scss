@@ -16,7 +16,7 @@
     padding: 16px;
     overflow: auto;
     .room {
-      padding: 18px 30px;
+      padding: 18px;
       width: 414px;
       height: 100px;
       border-radius: 22px;
@@ -25,16 +25,25 @@
       &:hover {
         transform: scale(1.02) translateY(-2px);
       }
-      p {
-        color: $WHITE;
+      .room__num__name {
         .room__num {
           margin-right: 24px;
-          padding: 12px;
           width: 64px;
           height: 64px;
           border-radius: 50%;
           background-color: $WHITE;
           color: $GRAY_3A;
+        }
+        .room__name {
+          color: $WHITE;
+        }
+      }
+      .room__status {
+        .room__isStarted {
+          width: 64px;
+          height: 64px;
+          border-radius: 50%;
+          background-color: $WHITE;
         }
       }
     }
@@ -92,6 +101,11 @@
   }
 }
 
+.modal__warning {
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
 @media screen and (max-width: $DESKTOP-VW) {
   .wrapper {
     padding-top: vw(20px);
@@ -101,16 +115,21 @@
       grid-auto-rows: vw(100px);
       column-gap: vw(64px);
       row-gap: vw(30px);
-      padding: vw(16px);
       .room {
-        padding: vw(18px) vw(30px);
         width: vw(414px);
         height: vw(100px);
         border-radius: vw(22px);
-        p {
+        .room__num__name {
           .room__num {
             margin-right: vw(24px);
-            padding: vw(12px);
+            width: vw(64px);
+            height: vw(64px);
+          }
+          .room__name {
+          }
+        }
+        .room__status {
+          .room__isStarted {
             width: vw(64px);
             height: vw(64px);
           }
@@ -147,6 +166,9 @@
       border-radius: vw(20px);
     }
   }
+  .modal__warning {
+    margin-bottom: vw(20px);
+  }
 }
 
 @media screen and (max-width: $TABLET-VW) {
@@ -166,16 +188,23 @@
       .room {
         width: 100%;
         height: 100%;
-        border-radius: 22px;
-        padding: 0;
-        p {
-          font-size: 20px;
+        border-radius: (20px);
+        .room__num__name {
           .room__num {
-            margin: 14px 14px;
-            padding: 12px;
-            width: 44px;
-            height: 44px;
-            font-size: 16px;
+            margin-right: (16px);
+            width: (44px);
+            height: (44px);
+            font-size: 18px;
+          }
+          .room__name {
+            font-size: 24px;
+          }
+        }
+        .room__status {
+          .room__isStarted {
+            width: (44px);
+            height: (44px);
+            font-size: 12px;
           }
         }
       }
@@ -220,6 +249,9 @@
       border-radius: 20px;
     }
   }
+  .modal__warning {
+    margin-bottom: (20px);
+  }
 }
 
 @media screen and (max-width: $PHONE-VW) {
@@ -235,15 +267,23 @@
       grid-auto-rows: vw-p(70px);
       row-gap: vw-p(30px);
       .room {
-        border-radius: vw-p(22px);
-        p {
-          font-size: vw-p(20px);
+        border-radius: vw-p(20px);
+        .room__num__name {
           .room__num {
-            margin: vw-p(14px) vw-p(14px);
-            padding: vw-p(12px);
+            margin-right: vw-p(16px);
             width: vw-p(44px);
             height: vw-p(44px);
-            font-size: vw-p(16px);
+            font-size: vw-p(18px);
+          }
+          .room__name {
+            font-size: vw-p(24px);
+          }
+        }
+        .room__status {
+          .room__isStarted {
+            width: vw-p(44px);
+            height: vw-p(44px);
+            font-size: vw-p(12px);
           }
         }
       }
@@ -275,5 +315,8 @@
       border: vw-p(4px) solid $GRAY_3A;
       border-radius: vw-p(20px);
     }
+  }
+  .modal__warning {
+    margin-bottom: vw-p(20px);
   }
 }

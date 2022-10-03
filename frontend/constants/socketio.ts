@@ -9,6 +9,8 @@ export interface IUserList {
 export interface IRoomList {
   roomName: string;
   size: number;
+  isStarted: boolean;
+  isFull: boolean;
 }
 
 export interface ServerToClientEvents {
