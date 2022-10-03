@@ -3,6 +3,7 @@ import React, { useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 import { SelectedStationType } from "../../pages/subway";
 import styles from "./LineSelectedBar.module.scss";
+import { recommandIndexByStation } from "../../pages/api/recommend";
 
 type LineSelectedBarProps = {
   selectedStations: SelectedStationType[];
@@ -16,10 +17,11 @@ const LineSelectedBar = ({
   const router = useRouter();
   const emptyRef = useRef<HTMLDivElement>(null);
 
-  const recommendPlace = () => {
+  const recommendPlace = async () => {
     const randomInd = Math.floor(Math.random() * selectedStations.length);
-    const { lineId, stationId } = selectedStations[randomInd];
-    router.push(`/subway/${lineId[0]}/${stationId}/1`);
+    const { name, lineId, stationId } = selectedStations[randomInd];
+    const storeIndex = await recommandIndexByStation(name);
+    router.push(`/subway/${lineId[0]}/${stationId}/${storeIndex || "null"}`);
   };
 
   useEffect(() => {

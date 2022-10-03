@@ -6,7 +6,7 @@ export const themeRecommend = async (choices) => {
     const res = await API.get(`/individual/recommendation/${choices}`);
     return res.data;
   } catch (error) {
-    console.log("Error");
+    console.log(error);
   }
 };
 
@@ -16,8 +16,26 @@ export const indexRes = async (data) => {
     const res = await API.get(`/individual/recommendation/list/${data}`);
     return res.data;
   } catch (error) {
-    console.log("Error");
+    console.log(error);
   }
 };
 
-export const ex = () => {};
+export const recommandIndexByStation = async (station) => {
+  const stationName = encodeURIComponent(station);
+  console.log(station, stationName);
+  try {
+    const res = await API.get(`/subway/recommendation/find/${stationName}`);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const recommandByStoreIndex = async (index) => {
+  try {
+    const res = await API.get(`/subway/recommendation/${index}`);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};

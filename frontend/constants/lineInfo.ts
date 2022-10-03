@@ -38,3 +38,13 @@ export const unUsedLineInfos: {
 ];
 
 export default lineInfos;
+
+export const lineNameById = (lineId: UsedLineIdType) => {
+  let result;
+  lineInfos.forEach((line) => {
+    if (line.id === lineId) {
+      result = line.name;
+    }
+  });
+  return result;
+};

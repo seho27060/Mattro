@@ -38,6 +38,7 @@ const Index = () => {
   });
   const [scaleSize, setScaleSize] = useState(1);
   const [searchId, setSearchId] = useState<string | null>(null);
+  const [prevScale, setPrevScale] = useState(1);
 
   // 현재 선택된 라인
   const handleSelectedLines = (line: UsedLineIdType) => {
@@ -247,6 +248,7 @@ const Index = () => {
   };
 
   useEffect(() => {
+    console.log(window.innerHeight, window.innerWidth);
     const circles = document.querySelectorAll("circle");
     const texts = document.querySelectorAll("text");
     circles.forEach((circle) =>
@@ -280,7 +282,11 @@ const Index = () => {
 
   return (
     <div className={styles.subway}>
-      <MetroMap scaleSize={scaleSize} searchId={searchId} />
+      <MetroMap
+        scaleSize={scaleSize}
+        searchId={searchId}
+        prevScale={prevScale}
+      />
       <div id="line-container" className="flex">
         <LineCircleList
           togggleSelectedLines={handleSelectedLines}
@@ -296,7 +302,10 @@ const Index = () => {
       <div id="map-btn" className="flex column">
         <button
           type="button"
-          onClick={() => setScaleSize((prev) => (prev >= 4 ? 4 : prev + 1))}
+          onClick={() => {
+            setPrevScale(scaleSize);
+            setScaleSize((prev) => (prev >= 4 ? 4 : prev + 1));
+          }}
           className="flex align-center justify-center"
         >
           <div className={`${styles.btnImg} flex align-center justify-center`}>
@@ -305,7 +314,10 @@ const Index = () => {
         </button>
         <button
           type="button"
-          onClick={() => setScaleSize((prev) => (prev <= 1 ? 1 : prev - 1))}
+          onClick={() => {
+            setPrevScale(scaleSize);
+            setScaleSize((prev) => (prev <= 1 ? 1 : prev - 1));
+          }}
           className="flex align-center justify-center"
         >
           <div className={`${styles.btnImg} flex align-center justify-center`}>
