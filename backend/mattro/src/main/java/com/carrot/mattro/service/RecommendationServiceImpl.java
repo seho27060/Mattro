@@ -17,12 +17,22 @@ public class RecommendationServiceImpl implements RecommendationService {
     private final SubwayRepository subwayRepository;
     private final OutputRepository outputRepository;
     private final SetStandardsService setStandardsService;
+    private final String EMPTY_RESULT = "empty_result";
+    private final String EMPTY_SUBWAY = "empty_subway";
 
     @Override
     public String recommendationStore(String subwayName) {
 
         List<Output> storeList = outputRepository.findAllBy역명(subwayName);
         Subway subway = subwayRepository.findBy역명(subwayName);
+
+        if(subway == null){
+            return EMPTY_SUBWAY;
+        }
+
+        if(storeList.size() == 0){
+            return EMPTY_RESULT;
+        }
 
         store[] storeZ = new store[storeList.size()];
 
@@ -47,9 +57,7 @@ public class RecommendationServiceImpl implements RecommendationService {
         // z에 따른 정렬
         Arrays.sort(storeZ, (o1, o2) -> Double.compare(o2.getZ(), o1.getZ()));
 
-        storeZ[(int)(Math.random() * 20)].getStoreIdx();
-
-        return storeZ[(int)(Math.random() * 20)].getStoreIdx();
+        return storeZ[(int)(Math.random() * Math.min(storeList.size(), 20))].getStoreIdx();
     }
 
     @Override
