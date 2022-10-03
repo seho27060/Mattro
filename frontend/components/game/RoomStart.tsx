@@ -32,6 +32,8 @@ interface Props {
   onChangeLine: React.ChangeEventHandler<HTMLInputElement>;
   limit: number;
   startId: string;
+  toggle: (a: boolean) => void;
+  toggleBGM: (a: boolean) => void;
   ref: React.ForwardedRef<unknown>;
 }
 
@@ -96,7 +98,9 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
       line,
       onChangeLine,
       limit,
-      startId
+      startId,
+      toggle,
+      toggleBGM
     },
     ref
   ) => {
@@ -137,6 +141,7 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
             "신림"
           ].includes(inputLineRef.current.value)
         ) {
+          toggle(true);
           socket.emit(
             "start_game",
             socket.id,
@@ -149,6 +154,7 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
     };
     const onSubmitAnswer = (answer: string) => {
       if (isReadyOpen) return;
+      toggle(true);
       socket.emit(
         "answer",
         roomName,
@@ -169,6 +175,7 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
     const onEnterKeyUpline = (e: { key: string }) => {
       if (startId !== socket.id) return;
       if (e.key === "Enter") {
+        toggle(true);
         onStartGame();
       }
     };
@@ -181,11 +188,13 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
     }, [isStartedGame, isReadyOpen, turn]);
     const onEnterKeyUpAnswer = (e: { key: string }) => {
       if (answer && e.key === "Enter") {
+        toggle(true);
         onSubmitAnswer(answer);
       }
     };
     useEffect(() => {
       if (isStartedGame) {
+        toggleBGM(true);
         setIsReadyOpen(true);
         setTimeout(() => {
           setIsReadyOpen(false);

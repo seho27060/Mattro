@@ -9,6 +9,9 @@ import OpenRoomList from "../../components/game/OpenRoomList";
 import RoomLobby from "../../components/game/RoomLobby";
 import RoomStart from "../../components/game/RoomStart";
 import styles from "./main.module.scss";
+import useAudio from "../../components/useAudio";
+import click from "../../public/sounds/click.mp3";
+import gameMainMusic from "../../public/sounds/gameMainMusic.mp3";
 
 const socket =
   process.env.NODE_ENV === "development"
@@ -16,6 +19,8 @@ const socket =
     : io("wss://j7c206.p.ssafy.io", { path: "/node/socket.io" });
 
 const Main: NextPage = () => {
+  const [toggle] = useAudio(click);
+  const [toggleBGM] = useAudio(gameMainMusic);
   let timeout: any;
   const roomStartRef = useRef<{
     setLine: (line: string) => void;
@@ -131,6 +136,7 @@ const Main: NextPage = () => {
       }, 1500);
     });
     socket.on("uncorrect", (answer, socketId) => {
+      toggleBGM(false);
       setTurn({});
       setResult({ answer, socketId });
       roomStartRef.current?.toggleModal(true);
@@ -139,6 +145,7 @@ const Main: NextPage = () => {
       }, 3000);
     });
     socket.on("time_over", (order, now) => {
+      toggleBGM(false);
       setTurn({});
       setResult({
         answer: "시간초과",
@@ -150,6 +157,7 @@ const Main: NextPage = () => {
       }, 3000);
     });
     socket.on("start_time_over", (socketId) => {
+      toggleBGM(false);
       setTurn({});
       setResult({
         answer: "시간초과",
@@ -161,6 +169,7 @@ const Main: NextPage = () => {
       }, 3000);
     });
     socket.on("who_out", (socketId, newCnt) => {
+      toggleBGM(false);
       setUserList((prev) => [...prev].filter((user) => user.id !== socketId));
       setNowCnt(newCnt);
       resetGame();
@@ -215,6 +224,8 @@ const Main: NextPage = () => {
             onChangeLine={onChangeLine}
             limit={limit}
             startId={startId}
+            toggle={toggle}
+            toggleBGM={toggleBGM}
           />
         ) : (
           userList &&
@@ -227,6 +238,7 @@ const Main: NextPage = () => {
               defaultNick={
                 userList.filter((user) => user.id === socket.id)[0].nickname
               }
+              toggle={toggle}
             />
           )
         )
@@ -236,6 +248,7 @@ const Main: NextPage = () => {
           roomList={roomList}
           socket={socket}
           setIsEntered={setIsEntered}
+          toggle={toggle}
         />
       )}
     </div>
