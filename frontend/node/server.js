@@ -54,13 +54,7 @@ function howManyInRoom(roomName) {
 const data = new Map();
 
 io.on("connection", (socket) => {
-  // 소켓 연결 되자마자 강제로 어떤 방으로 입장시키기
-  // io.socketsJoin("어떤");
-  // socket.data.nickname = `Anonymous`;
-  // socket.data.nickname = `익명`;
-  // socket.emit("room_change", publicRooms());
   socket.onAny((event) => {
-    // console.log(io.sockets.adapter);
     console.log(`Socket Event : ${event}`);
   });
   socket.on("enter_room", (roomName, done) => {
@@ -213,16 +207,14 @@ io.on("connection", (socket) => {
           userListNum,
           socketId
         );
-      console.log(
-        data.get(roomName).get("limit"),
-        data.get(roomName).get("now"),
-        data.get(roomName).get("size")
-      );
       if (data.get(roomName).get("limit") > 4500) {
         const limit =
           data.get(roomName).get("limit") -
           100 *
             (data.get(roomName).get("now") / data.get(roomName).get("size"));
+        data.get(roomName).set("limit", limit);
+      } else {
+        const limit = data.get(roomName).get("limit") - 1;
         data.get(roomName).set("limit", limit);
       }
       socket.emit("limit", data.get(roomName).get("limit"));
