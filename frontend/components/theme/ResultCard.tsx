@@ -5,6 +5,10 @@ import temp from "../../public/images/foodTemp.jpeg";
 import star from "../../public/images/star.png";
 import kakao from "../../public/images/kakao.svg";
 import { storeDataType } from "../../constants/storeData";
+import { lineNameById } from "../../constants/lineInfo";
+import { UsedLineIdType } from "../../constants/lineType";
+
+type ResultCardType = storeDataType & { lineId: UsedLineIdType };
 
 const ResultCard = ({
   id,
@@ -16,8 +20,9 @@ const ResultCard = ({
   searchKeyword,
   storUrl,
   storeIdx,
-  역명
-}: storeDataType) => {
+  역명,
+  lineId
+}: ResultCardType) => {
   // 카카오톡 공유하기 기능
   const shareKakao = () => {
     const shareUrl = `/theme/share/${id}`; // 공유페이지 위해서
@@ -44,9 +49,11 @@ const ResultCard = ({
   };
 
   return (
-    <div className={`${styles.card} flex column align-center justify-center`}>
+    <div
+      className={`${styles.card} ${lineId} flex column align-center justify-center`}
+    >
       <div className={`${styles.num} coreExtra fs-18 flex align-center`}>
-        <p>1</p>
+        <p className={lineId}>{lineNameById(lineId)}</p>
         <div className="coreBold fs-24 flex ">{name}</div>
       </div>
 
@@ -55,7 +62,7 @@ const ResultCard = ({
           src={mainImageURL || menuImageUrl || temp}
           alt="food"
           className={styles.sub}
-          unoptimized={true}
+          unoptimized
           width="400px"
           height="300px"
         />

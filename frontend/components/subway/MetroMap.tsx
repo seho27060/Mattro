@@ -10,10 +10,11 @@ import React, {
 import styles from "./MetroMap.module.scss";
 
 type MetroMapProps = {
+  prevScale: number;
   scaleSize: number;
   searchId: string | null;
 };
-const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
+const MetroMap = ({ scaleSize, searchId, prevScale }: MetroMapProps) => {
   const wrraperRef = useRef<HTMLDivElement>(null);
   const [dragging, setDragging] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -125,7 +126,7 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
             rect.setAttributeNS(null, "y", `${fdy[0].replace("fdy", "")}`);
           }
 
-          rect.setAttributeNS(null, "fill", "#e53060");
+          rect.setAttributeNS(null, "fill", "#ffeb00");
           rect.setAttributeNS(null, "width", labelWidth);
 
           if (tspan.classList.value.match(/fdw\d+/g)) {
@@ -146,6 +147,28 @@ const MetroMap = ({ scaleSize, searchId }: MetroMapProps) => {
       }
     }
   }, [searchId]);
+
+  useEffect(() => {
+    if (wrraperRef.current) {
+      if (scaleSize === 4 && prevScale !== 3) return;
+      movePosition(
+        (wrraperRef.current.style.left.replace("px", "") as unknown as number) -
+          ((wrraperRef.current.style.left.replace(
+            "px",
+            ""
+          ) as unknown as number) /
+            prevScale) *
+            scaleSize,
+        (wrraperRef.current.style.top.replace("px", "") as unknown as number) -
+          ((wrraperRef.current.style.top.replace(
+            "px",
+            ""
+          ) as unknown as number) /
+            prevScale) *
+            scaleSize
+      );
+    }
+  }, [prevScale, scaleSize]);
   return (
     <div id="metroMap">
       <div

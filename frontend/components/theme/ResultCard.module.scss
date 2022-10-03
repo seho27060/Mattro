@@ -4,13 +4,13 @@
   background-color: $WHITE;
   border-radius: (59px);
   color: $GRAY-3A;
-  border: (6px) solid $L1;
+  border-width: (6px);
+  border-style: solid;
   box-shadow: 0px 0px (19px) (14px) rgba(255, 255, 255, 0.44);
   //   .contents {
   .num {
     p {
       padding: (6px) (20px);
-      background-color: $L1;
       color: $WHITE;
       border-radius: (12px);
       margin: 0 (20px) 0 0;
@@ -82,7 +82,7 @@
     width: vw(430px);
     height: vw(470px);
     border-radius: vw(59px);
-    border: vw(6px) solid $L1;
+    border-width: vw(6px);
     box-shadow: 0px 0px vw(19px) vw(14px) rgba(255, 255, 255, 0.44);
     //   .contents {
     .num {
@@ -138,8 +138,7 @@
     width: (330px);
     height: (500px);
     border-radius: (59px);
-    border: (6px) solid $L1;
-    // box-shadow: 0px 0px (19px) (14px) rgba(255, 255, 255, 0.44);
+    border-width: (6px);
 
     .num {
       p {
@@ -201,9 +200,7 @@
     width: vw-p(330px);
     height: vw-p(500px);
     border-radius: vw-p(59px);
-    border: vw-p(6px) solid $L1;
-    // box-shadow: 0px 0px vw-p(19px) vw-p(14px) rgba(255, 255, 255, 0.44);
-
+    border-width: vw-p(6px);
     .num {
       p {
         font-size: vw-p(12px);
