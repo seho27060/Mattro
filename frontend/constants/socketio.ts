@@ -41,7 +41,6 @@ export interface ClientToServerEvents {
     roomName: string,
     line: string,
     answer: string,
-    total: string[],
     order: IUserList[],
     now: number,
     userListNum: number,

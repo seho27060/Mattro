@@ -150,6 +150,7 @@ io.on("connection", (socket) => {
     socket.emit("start_lobby", true, socketId);
   });
   socket.on("start_game", (socketId, roomName, line, order) => {
+    data.get(roomName).set("list", []);
     data.get(roomName).set("order", order);
     data.get(roomName).set("now", 0);
     data.get(roomName).set("timeout", null);
@@ -176,18 +177,16 @@ io.on("connection", (socket) => {
   });
   socket.on(
     "answer",
-    (roomName, line, answer, arr, order, now, userListNum, socketId) => {
+    (roomName, line, answer, order, now, userListNum, socketId) => {
       console.log("앤서 클리어");
       if (!data.get(roomName).get("clear")) {
         return;
       }
-      const res = isAnswer(line, answer, arr);
-      arr.push(answer);
+      const res = isAnswer(line, answer, data.get(roomName).get("list"));
       socket.emit(
         "check_answer",
         roomName,
         res,
-        arr,
         answer,
         order,
         now,
@@ -200,7 +199,6 @@ io.on("connection", (socket) => {
           "check_answer",
           roomName,
           res,
-          arr,
           answer,
           order,
           now,
@@ -234,6 +232,7 @@ io.on("connection", (socket) => {
   socket.on(
     "correct",
     (roomName, answer, order, now, userListNum, socketId) => {
+      data.get(roomName).get("list").push(answer);
       data.get(roomName).set("now", data.get(roomName).get("now") + 1);
       now += 1;
       socket.emit("correct", answer, socketId, now, order[now % userListNum]);

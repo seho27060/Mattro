@@ -35,7 +35,6 @@ const Main: NextPage = () => {
   const [isStartedGame, setIsStartedGame] = useState<boolean>(false);
   const [order, setOrder] = useState<IUserList[]>([]);
   const [turn, setTurn] = useState<IUserList | object>({});
-  const [total, setTotal] = useState<string[]>([]);
   const [result, setResult] = useState({});
   const [now, setNow] = useState<number>(0);
   const [line, setLine] = useState<string>("2");
@@ -52,7 +51,6 @@ const Main: NextPage = () => {
     setIsStartedGame(false);
     setOrder([]);
     setTurn({});
-    setTotal([]);
     setResult({});
     setNow(0);
   }, []);
@@ -100,10 +98,9 @@ const Main: NextPage = () => {
     });
     socket.on(
       "check_answer",
-      (roomName, res, arr, answer, order, now, userListNum, socketId) => {
+      (roomName, res, answer, order, now, userListNum, socketId) => {
         if (res === "정답") {
           console.log("맞음!!");
-          setTotal(arr);
           socket.emit(
             "correct",
             roomName,
@@ -210,7 +207,6 @@ const Main: NextPage = () => {
             isStartedGame={isStartedGame}
             ref={roomStartRef}
             turn={turn}
-            total={total}
             result={result}
             order={order}
             now={now}

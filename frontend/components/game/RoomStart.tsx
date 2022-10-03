@@ -25,7 +25,6 @@ interface Props {
   canStart: boolean;
   isStartedGame: boolean;
   turn: any;
-  total: string[];
   result: any;
   order: IUserList[];
   now: number;
@@ -91,7 +90,6 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
       canStart,
       isStartedGame,
       turn,
-      total,
       result,
       order,
       now,
@@ -156,7 +154,6 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
         roomName,
         line,
         answer,
-        total,
         order,
         now,
         userList.length,
