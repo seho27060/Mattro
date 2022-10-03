@@ -182,6 +182,8 @@ io.on("connection", (socket) => {
       if (!data.get(roomName).get("clear")) {
         return;
       }
+      clearTimeout(data.get(roomName).get("timeout"));
+      data.get(roomName).set("clear", true);
       const res = isAnswer(line, answer, data.get(roomName).get("list"));
       socket.emit(
         "check_answer",
@@ -217,8 +219,6 @@ io.on("connection", (socket) => {
       }
       socket.emit("limit", data.get(roomName).get("limit"));
       socket.to(roomName).emit("limit", data.get(roomName).get("limit"));
-      clearTimeout(data.get(roomName).get("timeout"));
-      data.get(roomName).set("clear", true);
       console.log("시간 체크 시작========", data.get(roomName).get("limit"));
       const timeoutId = setTimeout(() => {
         console.log("시간초과 =============", data.get(roomName).get("limit"));
