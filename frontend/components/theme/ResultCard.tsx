@@ -25,24 +25,20 @@ const ResultCard = ({
 }: ResultCardType) => {
   // 카카오톡 공유하기 기능
   const shareKakao = () => {
-    const shareUrl = `/theme/share/${id}`; // 공유페이지 위해서
     const { Kakao, location } = window;
     if (!window.Kakao.isInitialized()) {
       // 공유하기 기능을 위해 initialize 마운트 될때 적용
       window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_API_KEY);
     }
-
     Kakao.Link.sendDefault({
       objectType: "feed",
       content: {
-        title: { name },
-        description: "테스트 입니당",
-        imageUrl: mainImageURL !== null ? { mainImageURL } : { menuImageUrl },
+        title: name,
+        description: searchKeyword,
+        imageUrl: mainImageURL !== null ? mainImageURL : menuImageUrl,
         link: {
-          // mobileWebUrl: "http://localhost:3000/theme/share" + { id },
-          mobileUrl: location.href,
+          mobileWebUrl: location.href,
           webUrl: location.href
-          // webUrl: "http://localhost:3000/theme/share" + { id }
         }
       }
     });
