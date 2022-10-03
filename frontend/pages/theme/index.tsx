@@ -16,34 +16,25 @@ export default function themeMain() {
   const [throttle, setThrottle] = useState<boolean>(false);
   const [textAppear, setTextAppear] = useState<boolean>(false);
   const [foodNum, setFoodNum] = useState<number>(0);
+
   const coinAction = () => {
     if (throttle) return;
     if (!throttle) {
       setThrottle(true);
+      setTextAppear(true);
       const node = btnRef.current as any;
       node.classList.toggle(styles.animate);
-
+      const random = Math.floor(Math.random() * 30);
+      setFoodNum(random);
       setTimeout(function () {
         node.classList.remove(styles.animate);
         setThrottle(false);
+        setTextAppear(false);
       }, 800);
     }
   };
-
-  const textAction = () => {
-    console.log(foodList);
-
-    if (textAppear) setTextAppear(false);
-    if (!textAppear) {
-      setTextAppear(true);
-      const random = Math.floor(Math.random() * 30);
-      setFoodNum(random);
-    }
-  };
-
   const clickMe = () => {
     coinAction();
-    textAction();
   };
 
   const foodList: Array<string> = [
@@ -95,7 +86,7 @@ export default function themeMain() {
               className={`${styles.textBalloon} flex align-center justify-center`}
             >
               <Image src={textBox} alt="click" className={styles.balloonImg} />
-              <p className="notoBold fs-24">{foodList[foodNum]}</p>
+              <p className="notoBold">{foodList[foodNum]}</p>
             </div>
           )}
           {!textAppear && (

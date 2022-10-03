@@ -46,9 +46,11 @@ export default function QuestionCard({
   }, []);
 
   const clickAns = (answer: string) => {
-    if (start < 4) moveLeft();
     setChoices(choices + answer);
     moveNext(start);
+    // setTimeout(() => {
+    if (start < 4) moveLeft();
+    // }, 0);
   };
 
   return (

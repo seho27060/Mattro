@@ -5,7 +5,7 @@
   height: 100%;
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: center top;
+  background-position: center bottom;
   background-image: url("../public/images/empty.png");
   overflow: hidden;
   .contents {
@@ -41,8 +41,6 @@
     .train,
     .train_out {
       position: absolute;
-
-      // height: 300px;
       width: 800px;
       height: 600px;
       animation-timing-function: ease-out;
@@ -54,15 +52,14 @@
     }
     .train {
       animation-name: train;
-      animation-delay: 2s;
-      // animation-duration: 1s;
+      // animation-delay: 2s;
+      animation-duration: 1.5s;
       animation-fill-mode: forwards;
-      // margin-top: 30px;
-      left: -50%;
-      bottom: 300px;
+      left: calc(0% - 800px);
+      bottom: calc(0% + 400px);
     }
     .train_out {
-      animation-duration: 3s;
+      animation-duration: 2s;
       animation-name: train_out;
       animation-fill-mode: forwards;
     }
@@ -70,22 +67,23 @@
 
   @keyframes train {
     from {
-      left: -50%;
+      left: calc(0% - 800px);
+      bottom: calc(0% + 400px);
     }
     to {
-      left: -20%;
-      bottom: 0px;
+      left: calc(0% - 400px);
+      bottom: calc(0% + 150px);
     }
   }
 
   @keyframes train_out {
     from {
-      left: -20%;
-      bottom: 0px;
+      left: calc(0% - 400px);
+      bottom: calc(0% + 150px);
     }
     to {
-      left: 50%;
-      bottom: -60%;
+      left: calc(0% + 400px);
+      bottom: calc(0% - 300px);
     }
   }
 }
@@ -110,8 +108,33 @@
       }
       .train,
       .train_out {
-        width: vw(850px);
+        width: vw(800px);
         height: vw(600px);
+      }
+    }
+    .train {
+      left: calc(0% - vw(800px));
+      bottom: calc(0% + vw(400px));
+    }
+    @keyframes train {
+      from {
+        left: calc(0% - vw(800px));
+        bottom: calc(0% + vw(400px));
+      }
+      to {
+        left: calc(0% - vw(400px));
+        bottom: calc(0% + vw(150px));
+      }
+    }
+
+    @keyframes train_out {
+      from {
+        left: calc(0% - vw(400px));
+        bottom: calc(0% + vw(150px));
+      }
+      to {
+        left: calc(0% + vw(400px));
+        bottom: calc(0% - vw(300px));
       }
     }
   }
@@ -141,34 +164,38 @@
       }
       .train,
       .train_out {
-        width: (500px);
-        height: (250px);
+        width: (600px);
+        height: (450px);
       }
 
       .train {
-        left: -100%;
-        bottom: (300px);
-        // bottom: 0px;
+        animation-duration: 1.5s;
+        left: calc(0% - 700px);
+        bottom: calc(0% + 330px);
+      }
+      .train_out {
+        animation-duration: 1.5s;
       }
     }
     @keyframes train {
       from {
-        left: -100%;
+        left: calc(0% - 700px);
+        bottom: calc(0% + 330px);
       }
       to {
-        left: -50%;
-        bottom: 150px;
+        left: calc(0% - 400px);
+        bottom: calc(0% + 180px);
       }
     }
 
     @keyframes train_out {
       from {
-        left: -50%;
-        bottom: 150px;
+        left: calc(0% - 400px);
+        bottom: calc(0% + 180px);
       }
       to {
-        left: 40%;
-        bottom: -10%;
+        left: calc(0% + 50px);
+        bottom: calc(0% - 60px);
       }
     }
   }
@@ -196,35 +223,35 @@
       }
       .train,
       .train_out {
-        width: vw-p(500px);
-        height: vw-p(300px);
+        width: vw-p(600px);
+        height: vw-p(450px);
       }
 
       .train {
-        left: -100%;
-        bottom: vw-p(300px);
-        // bottom: 0px;
+        left: calc(0% - vw-p(700px));
+        bottom: calc(0% + vw-p(330px));
       }
     }
   }
   @keyframes train {
     from {
-      left: -100%;
+      left: calc(0% - vw-p(700px));
+      bottom: calc(0% + vw-p(320px));
     }
     to {
-      left: -50%;
-      bottom: vw-p(150px);
+      left: calc(0% - vw-p(400px));
+      bottom: calc(0% + vw-p(180px));
     }
   }
 
   @keyframes train_out {
     from {
-      left: -50%;
-      bottom: vw-p(150px);
+      left: calc(0% - vw-p(400px));
+      bottom: calc(0% + vw-p(180px));
     }
     to {
-      left: 40%;
-      bottom: -10%;
+      left: calc(0% + vw-p(50px));
+      bottom: calc(0% - vw-p(60px));
     }
   }
 }

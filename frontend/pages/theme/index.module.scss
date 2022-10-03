@@ -2,15 +2,14 @@
   height: 100%;
   .contents {
     justify-content: space-between;
-    // background: linear-gradient(to top, $GRAY-E0 30%, #ffffff 30%);
     .title {
       width: 70%;
-      margin: (30px) 0 (34px) 0;
+      margin: 0 0 (34px) 0;
     }
     .box {
       .textBalloon,
       .dummy {
-        margin: (20px) 0 (-80px) (200px);
+        margin: (0px) 0 (-80px) (200px);
         p {
           position: absolute;
           color: $GRAY-5B;
@@ -123,11 +122,12 @@
     nav {
       position: relative;
       top: -80px;
+
       z-index: 1;
       padding-top: 100px;
+      padding-bottom: 100px;
       margin-bottom: -80px;
       width: 100%;
-      height: 300px;
       background-color: $GRAY-E0;
     }
     .btn {
@@ -191,12 +191,12 @@
     .contents {
       .title {
         width: 70%;
-        // margin: vw(30px) 0 vw(30px) 0;
+        margin: 0 0 vw(30px) 0;
       }
       .box {
         .textBalloon,
         .dummy {
-          margin: vw(20px) 0 vw(-80px) vw(200px);
+          margin: 0 0 vw(-80px) vw(200px);
           p {
             margin-bottom: vw(60px);
             font-size: vw(24px);
