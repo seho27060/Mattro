@@ -230,7 +230,7 @@
     .contents {
       .title {
         width: 90%;
-        margin: (40px) 0 (30px) 0;
+        margin: 0 0 (30px) 0;
       }
 
       p {
@@ -252,14 +252,14 @@
       .images {
         z-index: 2;
         width: (350px);
-        margin: (50px) 0 0 0;
+        margin: (30px) 0 0 0;
         justify-content: center;
         :nth-child(1),
         :nth-child(3) {
           display: none;
         }
         :nth-child(2) {
-          margin: 0 0 (20px) 0;
+          margin: 0 0 0 0;
           width: 40%;
         }
       }
@@ -267,7 +267,6 @@
         top: (-80px);
         padding-top: (100px);
         margin-bottom: (-80px);
-        height: (350px);
       }
       .btn {
         font-size: (20px);
@@ -285,7 +284,7 @@
     .contents {
       .title {
         width: 90%;
-        margin: vw-p(40px) 0 vw-p(30px) 0;
+        margin: 0 0 vw-p(30px) 0;
       }
 
       p {
@@ -308,14 +307,13 @@
         width: vw-p(350px);
         margin: vw-p(50px) 0 0 0;
         :nth-child(2) {
-          margin: 0 0 vw-p(20px) 0;
+          margin: 0 0 vw-p(0px) 0;
         }
       }
       nav {
         top: vw-p(-80px);
         padding-top: vw-p(100px);
         margin-bottom: vw-p(-80px);
-        height: vw-p(350px);
       }
       .btn {
         font-size: vw-p(20px);
