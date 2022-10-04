@@ -16,6 +16,7 @@ type MetroMapProps = {
 };
 const MetroMap = ({ scaleSize, searchId, prevScale }: MetroMapProps) => {
   const wrraperRef = useRef<HTMLDivElement>(null);
+  const rootRef = useRef<HTMLDivElement>(null);
   const [dragging, setDragging] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
 
@@ -178,8 +179,37 @@ const MetroMap = ({ scaleSize, searchId, prevScale }: MetroMapProps) => {
       );
     }
   }, [prevScale, scaleSize]);
+
+  const onIntersect = (entries: IntersectionObserverEntry[]) => {
+    entries.forEach((entry: IntersectionObserverEntry) => {
+      if (!entry.isIntersecting && wrraperRef.current) {
+        movePosition(
+          wrraperRef.current.style.left.replace("px", "") as unknown as number,
+          wrraperRef.current.style.top.replace("px", "") as unknown as number
+        );
+      }
+    });
+  };
+
+  // eslint-disable-next-line consistent-return
+  useEffect(() => {
+    if (rootRef.current) {
+      const margin = `${window.innerWidth > 1024 ? "-60" : "-20"}px`;
+      const observer = new IntersectionObserver(onIntersect, {
+        root: rootRef.current,
+        rootMargin: margin
+      });
+      if (wrraperRef.current) {
+        observer.observe(wrraperRef.current);
+      }
+      return () => {
+        observer.disconnect();
+      };
+    }
+  }, []);
+
   return (
-    <div id="metroMap">
+    <div id="metroMap" ref={rootRef}>
       <div
         className={styles.wrraper}
         onMouseDown={startDrag}
