@@ -43,7 +43,6 @@ export interface ClientToServerEvents {
     answer: string,
     order: IUserList[],
     now: number,
-    userListNum: number,
     socketId: string
   ) => void;
   time_over: (roomName: string, answer: string, socketId: string) => void;
