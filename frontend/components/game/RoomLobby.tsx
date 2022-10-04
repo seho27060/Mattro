@@ -1,6 +1,7 @@
 /* eslint-disable no-shadow */
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 import styles from "./RoomLobby.module.scss";
 import chair1 from "../../public/images/chair1.png";
@@ -10,24 +11,26 @@ import subway2 from "../../public/images/subway2.svg";
 import { ISocket, IUserList } from "../../constants/socketio";
 import Modal from "../layouts/Modal";
 import pencil from "../../public/images/pencil.svg";
+import exit from "../../public/icons/exit.svg";
 
 interface Props {
   socket: ISocket;
-  nowCnt: number;
   userList: IUserList[];
   roomName: string;
   defaultNick: string;
   toggle: (a: boolean) => void;
+  isMute: boolean;
 }
 
 const RoomLobby: React.FunctionComponent<Props> = ({
   socket,
-  nowCnt,
   userList,
   roomName,
   defaultNick,
-  toggle
+  toggle,
+  isMute
 }) => {
+  const router = useRouter();
   const nicknameRef = useRef<HTMLInputElement>(null);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const toggleModal = () => setIsModalOpen(!isModalOpen);
@@ -37,7 +40,7 @@ const RoomLobby: React.FunctionComponent<Props> = ({
   };
   const onStartLobby: React.MouseEventHandler<HTMLButtonElement> = () => {
     if (roomName) {
-      toggle(true);
+      toggle(isMute);
       socket.emit("start_lobby", roomName, socket.id);
     }
   };
@@ -48,21 +51,29 @@ const RoomLobby: React.FunctionComponent<Props> = ({
   }, [isModalOpen]);
   const onEnterKeyUp = (e: { key: string }) => {
     if (e.key === "Enter") {
-      toggle(true);
+      toggle(isMute);
       socket.emit("nickname", roomName, nickname);
       toggleModal();
     }
+  };
+  const onClickExit = () => {
+    socket.disconnect();
+    socket.emit("exit", roomName);
+    router.push("/game");
   };
   return (
     <div
       className={`${styles.wrapper} flex column justify-space-between align-center`}
     >
+      <button className={`${styles.exit}`} type="button" onClick={onClickExit}>
+        <Image src={exit} alt="exit" />
+      </button>
       <h2 className="flex justify-space-between align-center">
         <div className={`${styles.room__num__title} flex align-center`}>
           <span
-            className={`${styles.room__num} flex justify-center align-center coreExtra fs-24`}
+            className={`${styles.room__num} flex justify-center align-center coreExtra fs-20`}
           >
-            {nowCnt}/4
+            {userList.length}/4
           </span>
           <span className={`${styles.room__title} coreExtra fs-28`}>
             {roomName && roomName.length > 9

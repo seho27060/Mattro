@@ -21,11 +21,12 @@ interface Props {
   socket: ISocket;
   setIsEntered: (a: boolean) => void;
   toggle: (a: boolean) => void;
+  isMute: boolean;
   ref: React.ForwardedRef<unknown>;
 }
 
 const Rooms: React.FunctionComponent<Props> = forwardRef(
-  ({ roomList, socket, setIsEntered, toggle }, ref) => {
+  ({ roomList, socket, setIsEntered, toggle, isMute }, ref) => {
     useImperativeHandle(ref, () => ({
       toggleIsFullModal,
       toggleIsStartedModal
@@ -35,7 +36,7 @@ const Rooms: React.FunctionComponent<Props> = forwardRef(
     const [isMakeRoomModalOpen, setIsMakeRoomModalOpen] =
       useState<boolean>(false);
     const toggleMakeRoomModal = () => {
-      toggle(true);
+      toggle(isMute);
       setIsMakeRoomModalOpen((prev) => !prev);
     };
     const [isFullModalOpen, setIsFullModalOpen] = useState<boolean>(false);
@@ -50,7 +51,7 @@ const Rooms: React.FunctionComponent<Props> = forwardRef(
     };
     const onMakeRoom: React.MouseEventHandler<HTMLButtonElement> = () => {
       if (roomName.trim() === "") return;
-      toggle(true);
+      toggle(isMute);
       socket.emit("enter_room", roomName, () => {
         setIsEntered(true);
       });
@@ -60,7 +61,7 @@ const Rooms: React.FunctionComponent<Props> = forwardRef(
     > = (e: { key: string }) => {
       if (e.key === "Enter") {
         if (roomName.trim() === "") return;
-        toggle(true);
+        toggle(isMute);
         socket.emit("enter_room", roomName, () => {
           setIsEntered(true);
         });
@@ -68,7 +69,7 @@ const Rooms: React.FunctionComponent<Props> = forwardRef(
     };
     const onEnterRoom = (e: any) => {
       if (e.currentTarget?.innerText?.split("\n")?.[1]) {
-        toggle(true);
+        toggle(isMute);
         socket.emit(
           "enter_room",
           e.currentTarget.innerText.split("\n")[1],
@@ -93,38 +94,39 @@ const Rooms: React.FunctionComponent<Props> = forwardRef(
           <Image src={station} alt="station" />
         </span>
         <div className={styles.roomList}>
-          {roomList.map((room) => (
-            <div
-              className={`${styles.room} flex justify-space-between align-center`}
-              key={room.roomName}
-              onClick={onEnterRoom}
-              aria-hidden="true"
-            >
-              <div className={`${styles.room__num__name} flex`}>
-                <span
-                  className={`${styles.room__num} flex justify-center align-center coreExtra fs-28`}
-                >
-                  {room.size}/4
-                </span>
-                <span
-                  className={`${styles.room__name} flex justify-center align-center coreExtra fs-32`}
-                >
-                  {room.roomName && room.roomName.length > 9
-                    ? `${room.roomName.slice(0, 9)}...`
-                    : room.roomName}
-                </span>
-              </div>
-              <div className={`${styles.room__status}`}>
-                {room.isStarted && (
+          {roomList &&
+            roomList.map((room) => (
+              <div
+                className={`${styles.room} flex justify-space-between align-center`}
+                key={room.roomName}
+                onClick={onEnterRoom}
+                aria-hidden="true"
+              >
+                <div className={`${styles.room__num__name} flex`}>
                   <span
-                    className={`${styles.room__isStarted} flex justify-center align-center coreExtra fs-20`}
+                    className={`${styles.room__num} flex justify-center align-center coreExtra fs-28`}
                   >
-                    게임중
+                    {room.size}/4
                   </span>
-                )}
+                  <span
+                    className={`${styles.room__name} flex justify-center align-center coreExtra fs-32`}
+                  >
+                    {room.roomName && room.roomName.length > 9
+                      ? `${room.roomName.slice(0, 9)}...`
+                      : room.roomName}
+                  </span>
+                </div>
+                <div className={`${styles.room__status}`}>
+                  {room.isStarted && (
+                    <span
+                      className={`${styles.room__isStarted} flex justify-center align-center coreExtra fs-20`}
+                    >
+                      게임중
+                    </span>
+                  )}
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
         </div>
         <div className={styles.footer}>
           <span className={styles.chair1}>

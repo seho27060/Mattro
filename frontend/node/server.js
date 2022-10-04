@@ -43,12 +43,35 @@ function getAllRooms() {
   return res;
 }
 
-function whoInRoom(roomName) {
-  return io.sockets.adapter.rooms.get(roomName);
-}
+// function whoInRoom(roomName) {
+//   return io.sockets.adapter.rooms.get(roomName);
+// }
 
 function howManyInRoom(roomName) {
   return io.sockets.adapter.rooms.get(roomName)?.size;
+}
+
+function getNickname(roomName) {
+  let nickname = "익명";
+  if (data.get(roomName).get("nicknameList").length > 0) {
+    nickname = data.get(roomName).get("nicknameList").pop();
+  }
+  return nickname;
+}
+
+function shuffle(arr, socketId) {
+  const userList = [...arr];
+  const res = [];
+  for (let i = 0; i < userList.length; i += 1) {
+    if (userList[i].id === socketId) {
+      res.push(userList.splice(i, 1)[0]);
+    }
+  }
+  while (userList.length) {
+    const randomIdx = Math.floor(Math.random() * userList.length);
+    res.push(userList.splice(randomIdx, 1)[0]);
+  }
+  return res;
 }
 
 const data = new Map();
@@ -60,6 +83,7 @@ io.on("connection", (socket) => {
   socket.on("enter_room", (roomName, done) => {
     if (!data.get(roomName)) {
       data.set(roomName, new Map());
+      data.get(roomName).set("userList", []);
       data
         .get(roomName)
         .set("nicknameList", ["4번 출구", "3번 출구", "2번 출구", "1번 출구"]);
@@ -73,52 +97,29 @@ io.on("connection", (socket) => {
       socket.emit("full");
       return;
     }
-    const totalUser = whoInRoom(roomName);
-    if (!totalUser) {
-      socket.join(roomName);
-    } else {
-      for (let i = 0; i < totalUser.size; i += 1) {
-        if (totalUser[i] === socket.id) {
-          return;
-        }
-        socket.join(roomName);
-      }
-    }
-    data.get(roomName).set("size", howManyInRoom(roomName));
-    if (data.get(roomName).get("nicknameList").length > 0) {
-      socket.data.nickname = data.get(roomName).get("nicknameList").pop();
-    } else {
-      socket.data.nickname = "익명";
-    }
-    done();
-    socket.emit(
-      "welcome",
-      roomName,
-      { id: socket.id, nickname: socket.data.nickname },
-      howManyInRoom(roomName)
-    );
-    socket
-      .to(roomName)
-      .emit(
-        "welcome",
-        roomName,
-        { id: socket.id, nickname: socket.data.nickname },
-        howManyInRoom(roomName)
-      );
-    io.sockets.emit("room_change", getAllRooms());
-  });
-  socket.on("iMHere", (roomName) => {
-    socket.to(roomName).emit("iMHere", {
+    socket.data.nickname = getNickname(roomName);
+    data.get(roomName).get("userList").push({
       id: socket.id,
       nickname: socket.data.nickname
     });
+    socket.join(roomName);
+    done();
+    socket.emit("welcome", roomName, [...data.get(roomName).get("userList")]);
+    socket
+      .to(roomName)
+      .emit("welcome", roomName, [...data.get(roomName).get("userList")]);
+    io.sockets.emit("room_change", getAllRooms());
   });
   socket.on("disconnecting", () => {
     socket.rooms.forEach((roomName) => {
       if (data.get(roomName)) {
-        socket
-          .to(roomName)
-          .emit("who_out", socket.id, howManyInRoom(roomName) - 1);
+        data.get(roomName).set("userList", [
+          ...data
+            .get(roomName)
+            .get("userList")
+            .filter((user) => user.id !== socket.id)
+        ]);
+        socket.to(roomName).emit("who_out", data.get(roomName).get("userList"));
         if (
           ["4번 출구", "3번 출구", "2번 출구", "1번 출구"].includes(
             socket.data.nickname
@@ -127,7 +128,6 @@ io.on("connection", (socket) => {
           data.get(roomName).get("nicknameList").push(socket.data.nickname);
         }
         data.get(roomName).set("isStarted", false);
-        data.get(roomName).set("size", howManyInRoom(roomName) - 1);
       }
     });
   });
@@ -136,8 +136,17 @@ io.on("connection", (socket) => {
   });
   socket.on("nickname", (roomName, nickname) => {
     socket.data.nickname = nickname;
-    socket.emit("nickname", socket.id, nickname);
-    socket.to(roomName).emit("nickname", socket.id, nickname);
+    data
+      .get(roomName)
+      .get("userList")
+      .forEach((user) => {
+        if (user.id === socket.id) {
+          user.nickname = nickname;
+        }
+      });
+    const newUserList = data.get(roomName).get("userList");
+    socket.emit("nickname", newUserList);
+    socket.to(roomName).emit("nickname", newUserList);
   });
   socket.on("start_lobby", (roomName, socketId) => {
     data.get(roomName).set("isStarted", true);
@@ -145,23 +154,25 @@ io.on("connection", (socket) => {
     socket.to(roomName).emit("start_lobby", false, socketId);
     socket.emit("start_lobby", true, socketId);
   });
-  socket.on("start_game", (socketId, roomName, line, order) => {
-    data.get(roomName).set("list", []);
-    data.get(roomName).set("order", order);
+  socket.on("start_game", (socketId, roomName, line) => {
+    data.get(roomName).set("answerList", []);
     data.get(roomName).set("now", 0);
     data.get(roomName).set("timeout", null);
     data.get(roomName).set("limit", 8000);
     data.get(roomName).set("clear", false);
+    const order = shuffle(data.get(roomName).get("userList"), socket.id);
+    data.get(roomName).set("order", order);
+    data.get(roomName).set("order", order);
     const limit = data.get(roomName).get("limit");
     data.get(roomName).set("limit", limit);
     socket.to(roomName).emit("start_game", line, order, limit);
     socket.emit("start_game", line, order, limit);
     clearTimeout(data.get(roomName).get("timeout"));
-    console.log("스타트게임 클리어");
+    // console.log("스타트게임 클리어");
     data.get(roomName).set("clear", true);
-    console.log("시간 체크 시작========", limit);
+    // console.log("시간 체크 시작========", limit);
     const timeoutId = setTimeout(() => {
-      console.log("시간초과 =============", limit);
+      // console.log("시간초과 =============", limit);
       socket.emit("start_time_over", socketId);
       socket.to(roomName).emit("start_time_over", socketId);
       data.get(roomName).set("clear", false);
@@ -169,53 +180,55 @@ io.on("connection", (socket) => {
     data.get(roomName).set("timeout", timeoutId);
   });
   socket.on("room_change", () => {
-    socket.emit("room_change", getAllRooms());
+    io.sockets.emit("room_change", getAllRooms());
   });
-  socket.on("answer", (roomName, line, answer, order, now, socketId) => {
-    console.log("앤서 클리어");
+  socket.on("answer", (roomName, line, answer, socketId) => {
+    // console.log("앤서 클리어");
     if (!data.get(roomName).get("clear")) {
       return;
     }
     clearTimeout(data.get(roomName).get("timeout"));
     data.get(roomName).set("clear", true);
-    const res = isAnswer(line, answer, data.get(roomName).get("list"));
-    socket.emit("check_answer", roomName, res, answer, order, now, socketId);
-    socket
-      .to(roomName)
-      .emit("check_answer", roomName, res, answer, order, now, socketId);
+    const res = isAnswer(line, answer, [
+      ...data.get(roomName).get("answerList")
+    ]);
+    socket.emit("check_answer", roomName, res, answer, socketId);
+    let limit = 8000;
     if (data.get(roomName).get("limit") > 4500) {
-      const limit =
+      limit =
         data.get(roomName).get("limit") -
         100 *
           ((data.get(roomName).get("now") + 1) /
-            data.get(roomName).get("size"));
+            data.get(roomName).get("userList").length);
       data.get(roomName).set("limit", limit);
     } else {
-      const limit = data.get(roomName).get("limit") - 1;
+      limit = data.get(roomName).get("limit") - 1;
       data.get(roomName).set("limit", limit);
     }
-    console.log(data.get(roomName).get("limit"));
     socket.emit("limit", data.get(roomName).get("limit"));
     socket.to(roomName).emit("limit", data.get(roomName).get("limit"));
-    console.log("시간 체크 시작========", data.get(roomName).get("limit"));
+    // console.log("시간 체크 시작========", data.get(roomName).get("limit"));
+    const order = data.get(roomName).get("order");
+    const now = data.get(roomName).get("now");
     const timeoutId = setTimeout(() => {
-      console.log("시간초과 =============", data.get(roomName).get("limit"));
+      // console.log("시간초과 =============", data.get(roomName).get("limit"));
       socket.emit("time_over", order, now);
       socket.to(roomName).emit("time_over", order, now);
       data.get(roomName).set("clear", false);
     }, data.get(roomName).get("limit"));
     data.get(roomName).set("timeout", timeoutId);
   });
-  socket.on("correct", (roomName, answer, order, now, socketId) => {
-    data.get(roomName).get("list").push(answer);
-    data.get(roomName).set("now", data.get(roomName).get("now") + 1);
-    now += 1;
+  socket.on("correct", (roomName, answer, socketId) => {
+    data.get(roomName).get("answerList").push(answer);
+    const next = data.get(roomName).get("now") + 1;
+    data.get(roomName).set("now", next);
+    const order = data.get(roomName).get("order");
     socket.emit(
       "correct",
       answer,
       socketId,
-      now,
-      order[now % data.get(roomName).get("size")]
+      next,
+      order[next % data.get(roomName).get("userList").length]
     );
     socket
       .to(roomName)
@@ -223,13 +236,13 @@ io.on("connection", (socket) => {
         "correct",
         answer,
         socketId,
-        now,
-        order[now % data.get(roomName).get("size")]
+        next,
+        order[next % data.get(roomName).get("userList").length]
       );
   });
   socket.on("uncorrect", (roomName, answer, socketId) => {
     clearTimeout(data.get(roomName).get("timeout"));
-    console.log("언코렉트 클리어");
+    // console.log("언코렉트 클리어");
     socket.to(roomName).emit("uncorrect", answer, socketId);
     socket.emit("uncorrect", answer, socketId);
     data.get(roomName).set("isStarted", false);
@@ -237,7 +250,7 @@ io.on("connection", (socket) => {
   });
   socket.on("time_over", (roomName, answer, socketId) => {
     clearTimeout(data.get(roomName).get("timeout"));
-    console.log("타임오버 클리어");
+    // console.log("타임오버 클리어");
     socket.to(roomName).emit("uncorrect", answer, socketId);
     socket.emit("uncorrect", answer, socketId);
     data.get(roomName).set("isStarted", false);
@@ -245,6 +258,26 @@ io.on("connection", (socket) => {
   });
   socket.on("on_change_line", (roomName, line) => {
     socket.to(roomName).emit("on_change_line", line);
+  });
+  socket.on("exit", (roomName) => {
+    if (data.get(roomName)) {
+      data.get(roomName).set("userList", [
+        ...data
+          .get(roomName)
+          .get("userList")
+          .filter((user) => user.id !== socket.id)
+      ]);
+      socket.to(roomName).emit("who_out", data.get(roomName).get("userList"));
+      if (
+        ["4번 출구", "3번 출구", "2번 출구", "1번 출구"].includes(
+          socket.data.nickname
+        )
+      ) {
+        data.get(roomName).get("nicknameList").push(socket.data.nickname);
+      }
+      data.get(roomName).set("isStarted", false);
+    }
+    io.sockets.emit("room_change", getAllRooms());
   });
 });
 
