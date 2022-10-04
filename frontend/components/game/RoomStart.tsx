@@ -92,6 +92,9 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
     },
     ref
   ) => {
+    const [isEnterInputStart, setIsEnterInputStart] = useState<boolean>(false);
+    const [isEnterInputAnswer, setIsEnterInputAnswer] =
+      useState<boolean>(false);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const toggleModal = () => {
       setIsModalOpen(true);
@@ -153,10 +156,15 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
     const onEnterKeyUpline = (e: { key: string }) => {
       if (startId !== socket.id) return;
       if (e.key === "Enter") {
+        setIsEnterInputStart(true);
+      }
+    };
+    useEffect(() => {
+      if (isEnterInputStart) {
         toggle(isMute);
         onStartGame();
       }
-    };
+    }, [isEnterInputStart]);
     useEffect(() => {
       if (isStartedGame && !isReadyOpen && socket.id === turn.id) {
         if (inputAnswerRef.current) {
