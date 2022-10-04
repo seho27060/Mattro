@@ -3,6 +3,30 @@
   height: 100%;
 }
 
-.icon {
+.icons {
   position: absolute;
+  z-index: 1;
+  left: 20px;
+  top: 20px;
+}
+
+@media screen and (max-width: $DESKTOP-VW) {
+  .icons {
+    left: vw(20px);
+    top: vw(20px);
+  }
+}
+
+@media screen and (max-width: $TABLET-VW) {
+  .icons {
+    left: 10px;
+    top: 10px;
+  }
+}
+
+@media screen and (max-width: $PHONE-VW) {
+  .icons {
+    left: vw-p(10px);
+    top: vw-p(10px);
+  }
 }

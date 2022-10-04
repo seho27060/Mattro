@@ -10,7 +10,6 @@ export interface IRoomList {
   roomName: string;
   size: number;
   isStarted: boolean;
-  isFull: boolean;
 }
 
 export interface ServerToClientEvents {
@@ -31,21 +30,16 @@ export interface ClientToServerEvents {
   new_message: (msg: string, room: object, done: () => void) => void;
   nickname: (roomName: string, nickname: string) => void;
   start_lobby: (roomName: string, socketId: string) => void;
-  start_game: (
-    socketId: string,
-    roomName: string,
-    line: string,
-    order: IUserList[]
-  ) => void;
+  start_game: (socketId: string, roomName: string, line: string) => void;
   answer: (
     roomName: string,
     line: string,
     answer: string,
-    order: IUserList[],
-    now: number,
     socketId: string
   ) => void;
   time_over: (roomName: string, answer: string, socketId: string) => void;
+  room_change: () => void;
+  exit: (roomName: string) => void;
 }
 
 export type ISocket = Socket<ServerToClientEvents, ClientToServerEvents>;
