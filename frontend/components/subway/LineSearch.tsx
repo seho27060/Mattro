@@ -22,9 +22,8 @@ const LineSearch = ({
 }: LineSearchProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [searchList, setSearchList] = useState<SearchListType[]>([]);
-  // searchByName("화");
+
   const searchByKeyword = (e: ChangeEvent<HTMLInputElement>) => {
-    // console.log(e.target.value);
     const keyword = e.target.value;
     if (keyword) {
       setSearchList(searchByName(keyword));

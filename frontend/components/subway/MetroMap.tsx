@@ -55,7 +55,6 @@ const MetroMap = ({ scaleSize, searchId, prevScale }: MetroMapProps) => {
 
   const touchMove = (e: TouchEvent<HTMLDivElement>) => {
     if (dragging && wrraperRef.current) {
-      // e.preventDefault();
       movePosition(
         position.x - e.touches[0].clientX,
         position.y - e.touches[0].clientY
@@ -89,7 +88,6 @@ const MetroMap = ({ scaleSize, searchId, prevScale }: MetroMapProps) => {
         (wrraperRef.current.style.top.replace("px", "") as unknown as number) -
           nextTop
       );
-      console.log(nextLeft, nextTop);
       const rectList: SVGRectElement[] = [];
       const labelGroup = document.querySelector(`.label-group`);
       const text = document.querySelector(`.S${searchId}`) as SVGTextElement;
@@ -104,7 +102,7 @@ const MetroMap = ({ scaleSize, searchId, prevScale }: MetroMapProps) => {
           if (text.style.textAnchor === "end") {
             xOffset = +labelWidth;
           }
-          // if (tspan && labelGroup) {
+
           const rect = document.createElementNS(
             "http://www.w3.org/2000/svg",
             "rect"
@@ -148,7 +146,6 @@ const MetroMap = ({ scaleSize, searchId, prevScale }: MetroMapProps) => {
           rect.setAttributeNS(null, "height", "6"); // `${6 * text.childNodes.length}`);
           labelGroup.insertAdjacentElement("afterbegin", rect);
           rectList.push(rect);
-          // }
         }
         // eslint-disable-next-line consistent-return
         return () => {
@@ -198,8 +195,6 @@ const MetroMap = ({ scaleSize, searchId, prevScale }: MetroMapProps) => {
           xmlns="http://www.w3.org/2000/svg"
           version="1.1"
           aria-hidden="true"
-          // id="metro-map"
-          // viewBox="0 0 1525 1000"
           viewBox="0 0 1500 1000"
           className={styles.map}
           style={{ transform: `scale(${scaleSize})` }}

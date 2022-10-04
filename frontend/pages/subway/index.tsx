@@ -214,7 +214,6 @@ const Index = () => {
       if (!circleIds) {
         return;
       }
-      console.log(circleIds);
       if (circleIds.length === 1) {
         const circle = document.querySelector(
           `.M${circleIds[0]}`
@@ -248,7 +247,6 @@ const Index = () => {
   };
 
   useEffect(() => {
-    console.log(window.innerHeight, window.innerWidth);
     const circles = document.querySelectorAll("circle");
     const texts = document.querySelectorAll("text");
     circles.forEach((circle) =>
@@ -269,10 +267,6 @@ const Index = () => {
     unSelectedLines.map((line) => handleLineOpacity(line, 0.25));
     selectedLines.map((line) => handleLineOpacity(line, 1));
   }, [selectedLines]);
-
-  useEffect(() => {
-    console.log(selectedStations);
-  }, [selectedStations]);
 
   useEffect(() => {
     if (selecting) handleSelectedStations();
