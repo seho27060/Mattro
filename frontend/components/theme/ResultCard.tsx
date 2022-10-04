@@ -1,8 +1,9 @@
 import Image from "next/image";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import styles from "./ResultCard.module.scss";
 import temp from "../../public/images/foodTemp.jpeg";
-import star from "../../public/images/star.png";
+import star_all from "../../public/images/star.png";
+import star_half from "../../public/images/half_star.png";
 import kakao from "../../public/images/kakao.svg";
 import { storeDataType } from "../../constants/storeData";
 import { lineNameById } from "../../constants/lineInfo";
@@ -23,6 +24,7 @@ const ResultCard = ({
   역명,
   lineId
 }: ResultCardType) => {
+  const [starView, setStarView] = useState<number>(0);
   // 카카오톡 공유하기 기능
   const shareKakao = () => {
     const { Kakao, location } = window;
@@ -42,6 +44,39 @@ const ResultCard = ({
         }
       }
     });
+  };
+  useEffect(() => {
+    // rating 계산
+    const temp = rating.split("/").map(Number);
+    setStarView(temp[0]);
+  }, []);
+
+  const repeatStar = () => {
+    const star = [];
+    for (let i = 1; i <= starView; i++) {
+      star.push(
+        <Image key={i} className={styles.stars} alt="star" src={star_all} />
+      );
+    }
+    if (starView % 1 >= 0.5) {
+      star.push(
+        <Image
+          key={"half"}
+          className={styles.stars}
+          alt="star"
+          src={star_half}
+        />
+      );
+    }
+    star.push(
+      <span
+        style={{ color: "#5a5a5a", margin: " 0 12px" }}
+        className="notoMid fs-16"
+      >
+        {starView}
+      </span>
+    );
+    return star;
   };
 
   return (
@@ -70,15 +105,17 @@ const ResultCard = ({
         </div>
         <div className={`${styles.txt} flex fs-15 notoMid`}>
           <span>대표 메뉴</span>
-          <span>{menuList}</span>
+          <span>{menuList[0]}</span>
         </div>
         <div className={`${styles.txt} flex fs-15 notoMid`}>
           <span>가까운 역</span>
-          <span>{역명}</span>
+          <span>{역명}역</span>
         </div>
         <div className={`${styles.txt} flex fs-15 notoMid`}>
           <span>별점</span>
-          <span>{rating}</span>
+          <span className={`${styles.starBox} flex align-center`}>
+            {repeatStar()}
+          </span>
         </div>
       </div>
       <button

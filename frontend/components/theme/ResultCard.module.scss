@@ -1,6 +1,7 @@
 .card {
   width: (500px);
   height: (700px);
+  margin: 0 (100px);
   background-color: $WHITE;
   border-radius: (59px);
   color: $GRAY-3A;
@@ -28,9 +29,6 @@
       object-fit: cover;
     }
   }
-  .stars {
-    display: none;
-  }
   .detail {
     margin-top: (24px);
 
@@ -49,6 +47,12 @@
           white-space: nowrap;
           text-overflow: ellipsis;
           overflow: hidden;
+        }
+      }
+      .starBox {
+        // width: 100%;
+        .stars {
+          margin-right: 10px;
         }
       }
     }
