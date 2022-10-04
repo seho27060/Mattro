@@ -1,6 +1,7 @@
-package com.carrot.mattro;
+package com.carrot.mattro.controller;
 
-import com.carrot.mattro.DTO.OutputResponse;
+import com.carrot.mattro.domain.entity.Output;
+import com.carrot.mattro.service.MongoDBService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,10 +26,13 @@ public class SubwayApiController {
 //        else
 //            return new ResponseEntity("데이터가 없습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
 //    }
-
+//    http://localhost:8080/api/subway/recommendation/18455932
     @GetMapping("/{store_index}")
     public ResponseEntity getPlaceByStoreIndex(@PathVariable(name = "store_index") String storeIndex){
-        Optional<Output> response = mds.findPlaceByStoreIndex(storeIndex);
+//        long before_time = System.currentTimeMillis();
+        Output response = mds.findPlaceByStoreIndex(storeIndex);
+//        long after_time = System.currentTimeMillis();
+//        System.out.println("컨트롤러 시간 차 : "+ (after_time - before_time));
         if(response != null) {
             return new ResponseEntity(response, HttpStatus.OK);
         }else {

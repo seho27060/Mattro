@@ -1,6 +1,6 @@
 package com.carrot.mattro.DTO;
 
-import com.carrot.mattro.Output;
+import com.carrot.mattro.domain.entity.Output;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

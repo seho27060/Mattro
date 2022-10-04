@@ -1,11 +1,12 @@
 package com.carrot.mattro.service;
 
 import com.carrot.mattro.DTO.store;
-import com.carrot.mattro.Output;
+import com.carrot.mattro.domain.entity.Output;
 import com.carrot.mattro.Repository.OutputRepository;
 import com.carrot.mattro.domain.entity.Subway;
 import com.carrot.mattro.domain.repository.SubwayRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -20,6 +21,9 @@ public class RecommendationServiceImpl implements RecommendationService {
     private final String EMPTY_RESULT = "empty_result";
     private final String EMPTY_SUBWAY = "empty_subway";
 
+//   캐시 설정으로 캐시 하나 만들어주고 이름을 layoutCaching 으로 지음.
+//    18455932 라는 상점 번호가 떴음. 내 화면엔
+//   캐시 속 : {남성 : 18455932}
     @Override
     public String recommendationStore(String subwayName) {
 

@@ -1,7 +1,8 @@
-package com.carrot.mattro;
+package com.carrot.mattro.service;
+
+import com.carrot.mattro.domain.entity.Output;
 
 import java.util.List;
-import java.util.Optional;
 
 
 public interface UserPreferService {

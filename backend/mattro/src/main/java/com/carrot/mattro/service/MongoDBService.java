@@ -1,14 +1,15 @@
-package com.carrot.mattro;
+package com.carrot.mattro.service;
 
-import com.carrot.mattro.DTO.OutputResponse;
+import com.carrot.mattro.domain.entity.Output;
 
 import java.util.Optional;
 
 public interface MongoDBService {
+//    public Output findPlaceByStoreIndex(String storeIndex);
     public Optional<Output> findPlaceBySubwayName(String SubwayName);
     public void findPlaceByUrl(String Url);
     public void findPlaceListByChoiceList(String ChoiceList);
     public void findPlaceListByUrl(String url);
 
-    Optional<Output> findPlaceByStoreIndex(String storeIndex);
+    Output findPlaceByStoreIndex(String storeIndex);
 }

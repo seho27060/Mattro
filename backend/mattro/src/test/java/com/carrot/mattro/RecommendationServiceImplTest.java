@@ -1,6 +1,7 @@
 package com.carrot.mattro;
 
 import com.carrot.mattro.Repository.OutputRepository;
+import com.carrot.mattro.domain.entity.Output;
 import com.carrot.mattro.domain.entity.Subway;
 import com.carrot.mattro.domain.repository.SubwayRepository;
 import com.carrot.mattro.service.RecommendationServiceImpl;
