@@ -32,6 +32,7 @@ const RoomLobby: React.FunctionComponent<Props> = ({
 }) => {
   const router = useRouter();
   const nicknameRef = useRef<HTMLInputElement>(null);
+  const [isEnterInput, setIsEnterInput] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const toggleModal = () => setIsModalOpen(!isModalOpen);
   const [nickname, setNickname] = useState<string>(defaultNick);
@@ -51,11 +52,16 @@ const RoomLobby: React.FunctionComponent<Props> = ({
   }, [isModalOpen]);
   const onEnterKeyUp = (e: { key: string }) => {
     if (e.key === "Enter") {
+      setIsEnterInput(true);
+    }
+  };
+  useEffect(() => {
+    if (isEnterInput) {
       toggle(isMute);
       socket.emit("nickname", roomName, nickname);
       toggleModal();
     }
-  };
+  }, [isEnterInput]);
   const onClickExit = () => {
     socket.disconnect();
     socket.emit("exit", roomName);

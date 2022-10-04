@@ -136,7 +136,7 @@ const Main: NextPage = () => {
       }, 3000);
     });
     socket.on("start_time_over", (socketId) => {
-      toggleBGM(false);
+      toggleBGM(isMute, false);
       setTurn({});
       setResult({
         answer: "시간초과",
@@ -198,7 +198,10 @@ const Main: NextPage = () => {
             <button
               className={`${styles.volumeOn}`}
               type="button"
-              onClick={() => setIsMute(true)}
+              onClick={() => {
+                setIsMute(true);
+                toggleBGM(isMute, false);
+              }}
             >
               <Image src={volumeOn} alt="volumeOn" />
             </button>

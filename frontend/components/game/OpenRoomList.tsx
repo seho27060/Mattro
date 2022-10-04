@@ -31,6 +31,7 @@ const Rooms: React.FunctionComponent<Props> = forwardRef(
       toggleIsFullModal,
       toggleIsStartedModal
     }));
+    const [isEnterInput, setIsEnterInput] = useState<boolean>(false);
     const modalRoomNameInput = useRef<HTMLInputElement>(null);
     const [roomName, setRoomName] = useState<string>("");
     const [isMakeRoomModalOpen, setIsMakeRoomModalOpen] =
@@ -60,13 +61,17 @@ const Rooms: React.FunctionComponent<Props> = forwardRef(
       HTMLInputElement
     > = (e: { key: string }) => {
       if (e.key === "Enter") {
-        if (roomName.trim() === "") return;
+        setIsEnterInput(true);
+      }
+    };
+    useEffect(() => {
+      if (isEnterInput) {
         toggle(isMute);
         socket.emit("enter_room", roomName, () => {
           setIsEntered(true);
         });
       }
-    };
+    }, [isEnterInput]);
     const onEnterRoom = (e: any) => {
       if (e.currentTarget?.innerText?.split("\n")?.[1]) {
         toggle(isMute);
@@ -154,6 +159,7 @@ const Rooms: React.FunctionComponent<Props> = forwardRef(
                 ref={modalRoomNameInput}
                 value={roomName}
                 onChange={onChangeRoomName}
+                maxLength={10}
               />
             </div>
             <button
