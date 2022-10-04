@@ -1,4 +1,4 @@
-package com.carrot.mattro;
+package com.carrot.mattro.domain.entity;
 
 import lombok.*;
 import org.springframework.data.annotation.Id;

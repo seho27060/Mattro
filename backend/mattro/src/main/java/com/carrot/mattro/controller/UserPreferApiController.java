@@ -1,14 +1,14 @@
-package com.carrot.mattro;
+package com.carrot.mattro.controller;
 
 
-import com.carrot.mattro.DTO.CrawlingResponse;
+import com.carrot.mattro.domain.entity.Output;
+import com.carrot.mattro.service.UserPreferService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @CrossOrigin("*")
 @RestController

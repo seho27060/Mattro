@@ -1,6 +1,6 @@
 package com.carrot.mattro.service;
 
-import com.carrot.mattro.Output;
+import com.carrot.mattro.domain.entity.Output;
 import com.carrot.mattro.domain.entity.Subway;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

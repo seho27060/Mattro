@@ -1,12 +1,10 @@
-package com.carrot.mattro;
+package com.carrot.mattro.service;
 
 import com.carrot.mattro.DTO.store;
+import com.carrot.mattro.domain.entity.Output;
 import com.carrot.mattro.Repository.CrawlingRepository;
-import com.carrot.mattro.service.RecommendationService;
-import com.carrot.mattro.service.SetStandardsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.*;
 
@@ -148,7 +146,17 @@ public class UserPreferServiceImpl implements UserPreferService {
     @Override
     public List<Output> getStoreByStoreIndexList(String storeIndexStr) {
         String[] storeIndexList = storeIndexStr.split(",");
-        List<Output> result = crawlingRepository.findByStoreIdxIn(storeIndexList);
-        return result;
+        // 순서가 뒤죽박죽인 리스트
+        List<Output> unOrderedResult = crawlingRepository.findByStoreIdxIn(storeIndexList);
+        List<Output> orderedResult = new ArrayList<>();
+        for(String str : storeIndexList){
+            for(Output output : unOrderedResult){
+                if(str.equals(output.getStoreIdx())){
+                    orderedResult.add(output);
+                    break;
+                }
+            }
+        }
+        return orderedResult;
     }
 }

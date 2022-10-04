@@ -2,6 +2,7 @@ package com.carrot.mattro;
 
 import com.carrot.mattro.DTO.store;
 import com.carrot.mattro.Repository.CrawlingRepository;
+import com.carrot.mattro.domain.entity.Output;
 import com.carrot.mattro.service.RecommendationService;
 import com.carrot.mattro.service.SetStandardsService;
 import lombok.RequiredArgsConstructor;
