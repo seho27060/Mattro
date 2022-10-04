@@ -70,14 +70,26 @@ const MetroMap = ({ scaleSize, searchId, prevScale }: MetroMapProps) => {
     if (wrraperRef.current && searchId) {
       const circle = document.querySelector(`.M${searchId}`);
       if (!circle || !window) return;
+
+      let nextLeft = 0;
+      let nextTop = 0;
+      // 데탑
+      if (window.innerWidth > 1024) {
+        nextLeft = (800 - (circle.getAttribute("cx") as unknown as number)) * 4;
+        nextTop =
+          (475 - (circle.getAttribute("cy") as unknown as number)) *
+          (window.innerHeight > 754 ? 4 : 2);
+      } else {
+        nextLeft = 800 - (circle.getAttribute("cx") as unknown as number);
+        nextTop = 475 - (circle.getAttribute("cy") as unknown as number);
+      }
       movePosition(
         (wrraperRef.current.style.left.replace("px", "") as unknown as number) -
-          (window.innerWidth > 1024 ? 4 : 1) *
-            (740 - (circle.getAttribute("cx") as unknown as number)),
+          nextLeft,
         (wrraperRef.current.style.top.replace("px", "") as unknown as number) -
-          (window.innerWidth > 1024 ? 4 : 1) *
-            (475 - (circle.getAttribute("cy") as unknown as number))
+          nextTop
       );
+      console.log(nextLeft, nextTop);
       const rectList: SVGRectElement[] = [];
       const labelGroup = document.querySelector(`.label-group`);
       const text = document.querySelector(`.S${searchId}`) as SVGTextElement;
