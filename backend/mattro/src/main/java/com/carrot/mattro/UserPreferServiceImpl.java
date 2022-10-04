@@ -126,7 +126,7 @@ public class UserPreferServiceImpl implements UserPreferService {
             Arrays.sort(storeZ, (o1, o2) -> Double.compare(o2.getZ(), o1.getZ()));
             Integer limit = Math.min(storeZ.length,20);
             List<Integer> numLst = new ArrayList<>();
-            for(int i = 0; i < 5; i++){
+            for(int i = 0; i < Math.min(limit,5); i++){
                 int num = Integer.parseInt(storeZ[(int)(Math.random() * limit)].getStoreIdx());
 
                 if(numLst.isEmpty()){
