@@ -138,7 +138,7 @@ const MetroMap = ({ scaleSize, searchId, prevScale }: MetroMapProps) => {
 
           rect.setAttributeNS(null, "fill", "#ffeb00");
           rect.setAttributeNS(null, "width", labelWidth);
-
+          rect.setAttributeNS(null, "class", "label");
           if (tspan.classList.value.match(/fdw\d+/g)) {
             const fdw = tspan.classList.value.match(/fdw\d+/g) as string[];
             rect.setAttributeNS(null, "width", `${fdw[0].replace("fdw", "")}`);
