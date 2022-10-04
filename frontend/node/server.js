@@ -36,7 +36,7 @@ function getAllRooms() {
   publicRooms().forEach((roomName) => {
     res.push({
       roomName,
-      size: data.get(roomName).get("size"),
+      size: howManyInRoom(roomName),
       isStarted: data.get(roomName).get("isStarted")
     });
   });
@@ -84,11 +84,7 @@ io.on("connection", (socket) => {
         socket.join(roomName);
       }
     }
-    if (!data.get(roomName).get("size")) {
-      data.get(roomName).set("size", 1);
-    } else {
-      data.get(roomName).set("size", data.get(roomName).get("size") + 1);
-    }
+    data.get(roomName).set("size", howManyInRoom(roomName));
     if (data.get(roomName).get("nicknameList").length > 0) {
       socket.data.nickname = data.get(roomName).get("nicknameList").pop();
     } else {
@@ -118,20 +114,20 @@ io.on("connection", (socket) => {
     });
   });
   socket.on("disconnecting", () => {
-    socket.rooms.forEach((room) => {
-      if (data.get(room)) {
+    socket.rooms.forEach((roomName) => {
+      if (data.get(roomName)) {
         socket
-          .to(room)
-          .emit("who_out", socket.id, data.get(room).get("size") - 1);
+          .to(roomName)
+          .emit("who_out", socket.id, howManyInRoom(roomName) - 1);
         if (
           ["4번 출구", "3번 출구", "2번 출구", "1번 출구"].includes(
             socket.data.nickname
           )
         ) {
-          data.get(room).get("nicknameList").push(socket.data.nickname);
+          data.get(roomName).get("nicknameList").push(socket.data.nickname);
         }
-        data.get(room).set("isStarted", false);
-        data.get(room).set("size", data.get(room).get("size") - 1);
+        data.get(roomName).set("isStarted", false);
+        data.get(roomName).set("size", howManyInRoom(roomName) - 1);
       }
     });
   });
@@ -175,74 +171,62 @@ io.on("connection", (socket) => {
   socket.on("room_change", () => {
     socket.emit("room_change", getAllRooms());
   });
-  socket.on(
-    "answer",
-    (roomName, line, answer, order, now, userListNum, socketId) => {
-      console.log("앤서 클리어");
-      if (!data.get(roomName).get("clear")) {
-        return;
-      }
-      clearTimeout(data.get(roomName).get("timeout"));
-      data.get(roomName).set("clear", true);
-      const res = isAnswer(line, answer, data.get(roomName).get("list"));
-      socket.emit(
-        "check_answer",
-        roomName,
-        res,
+  socket.on("answer", (roomName, line, answer, order, now, socketId) => {
+    console.log("앤서 클리어");
+    if (!data.get(roomName).get("clear")) {
+      return;
+    }
+    clearTimeout(data.get(roomName).get("timeout"));
+    data.get(roomName).set("clear", true);
+    const res = isAnswer(line, answer, data.get(roomName).get("list"));
+    socket.emit("check_answer", roomName, res, answer, order, now, socketId);
+    socket
+      .to(roomName)
+      .emit("check_answer", roomName, res, answer, order, now, socketId);
+    if (data.get(roomName).get("limit") > 4500) {
+      const limit =
+        data.get(roomName).get("limit") -
+        100 *
+          ((data.get(roomName).get("now") + 1) /
+            data.get(roomName).get("size"));
+      data.get(roomName).set("limit", limit);
+    } else {
+      const limit = data.get(roomName).get("limit") - 1;
+      data.get(roomName).set("limit", limit);
+    }
+    console.log(data.get(roomName).get("limit"));
+    socket.emit("limit", data.get(roomName).get("limit"));
+    socket.to(roomName).emit("limit", data.get(roomName).get("limit"));
+    console.log("시간 체크 시작========", data.get(roomName).get("limit"));
+    const timeoutId = setTimeout(() => {
+      console.log("시간초과 =============", data.get(roomName).get("limit"));
+      socket.emit("time_over", order, now);
+      socket.to(roomName).emit("time_over", order, now);
+      data.get(roomName).set("clear", false);
+    }, data.get(roomName).get("limit"));
+    data.get(roomName).set("timeout", timeoutId);
+  });
+  socket.on("correct", (roomName, answer, order, now, socketId) => {
+    data.get(roomName).get("list").push(answer);
+    data.get(roomName).set("now", data.get(roomName).get("now") + 1);
+    now += 1;
+    socket.emit(
+      "correct",
+      answer,
+      socketId,
+      now,
+      order[now % data.get(roomName).get("size")]
+    );
+    socket
+      .to(roomName)
+      .emit(
+        "correct",
         answer,
-        order,
+        socketId,
         now,
-        userListNum,
-        socketId
+        order[now % data.get(roomName).get("size")]
       );
-      socket
-        .to(roomName)
-        .emit(
-          "check_answer",
-          roomName,
-          res,
-          answer,
-          order,
-          now,
-          userListNum,
-          socketId
-        );
-      if (data.get(roomName).get("limit") > 4500) {
-        const limit =
-          data.get(roomName).get("limit") -
-          100 *
-            ((data.get(roomName).get("now") + 1) /
-              data.get(roomName).get("size"));
-        data.get(roomName).set("limit", limit);
-      } else {
-        const limit = data.get(roomName).get("limit") - 1;
-        data.get(roomName).set("limit", limit);
-      }
-      console.log(data.get(roomName).get("limit"));
-      socket.emit("limit", data.get(roomName).get("limit"));
-      socket.to(roomName).emit("limit", data.get(roomName).get("limit"));
-      console.log("시간 체크 시작========", data.get(roomName).get("limit"));
-      const timeoutId = setTimeout(() => {
-        console.log("시간초과 =============", data.get(roomName).get("limit"));
-        socket.emit("time_over", order, now);
-        socket.to(roomName).emit("time_over", order, now);
-        data.get(roomName).set("clear", false);
-      }, data.get(roomName).get("limit"));
-      data.get(roomName).set("timeout", timeoutId);
-    }
-  );
-  socket.on(
-    "correct",
-    (roomName, answer, order, now, userListNum, socketId) => {
-      data.get(roomName).get("list").push(answer);
-      data.get(roomName).set("now", data.get(roomName).get("now") + 1);
-      now += 1;
-      socket.emit("correct", answer, socketId, now, order[now % userListNum]);
-      socket
-        .to(roomName)
-        .emit("correct", answer, socketId, now, order[now % userListNum]);
-    }
-  );
+  });
   socket.on("uncorrect", (roomName, answer, socketId) => {
     clearTimeout(data.get(roomName).get("timeout"));
     console.log("언코렉트 클리어");

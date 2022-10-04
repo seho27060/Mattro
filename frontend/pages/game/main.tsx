@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-shadow */
 import type { NextPage } from "next";
+import Image from "next/image";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { io } from "socket.io-client";
 
@@ -12,6 +13,8 @@ import styles from "./main.module.scss";
 import useAudio from "../../components/useAudio";
 import click from "../../public/sounds/click.mp3";
 import gameMainMusic from "../../public/sounds/gameMainMusic.mp3";
+import volumeUp from "../../public/icons/volume_up.svg";
+import volumeOff from "../../public/icons/volume_off.svg";
 
 const socket =
   process.env.NODE_ENV === "development"
@@ -207,6 +210,14 @@ const Main: NextPage = () => {
   }, []);
   return (
     <div className={styles.wrapper}>
+      <div className={`${styles.icon}`}>
+        <button className={`${styles.volumeUp}`} type="button">
+          <Image src={volumeUp} alt="volumeUp" />
+        </button>
+        <button className={`${styles.volumeOff}`} type="button">
+          <Image src={volumeOff} alt="volumeOff" />
+        </button>
+      </div>
       {socket && isEntered ? (
         isStartedLobby ? (
           <RoomStart

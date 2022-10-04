@@ -155,16 +155,7 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
     const onSubmitAnswer = (answer: string) => {
       if (isReadyOpen) return;
       toggle(true);
-      socket.emit(
-        "answer",
-        roomName,
-        line,
-        answer,
-        order,
-        now,
-        userList.length,
-        socket.id
-      );
+      socket.emit("answer", roomName, line, answer, order, now, socket.id);
       setAnswer("");
     };
     useEffect(() => {
