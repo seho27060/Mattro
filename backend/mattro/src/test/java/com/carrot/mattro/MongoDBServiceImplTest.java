@@ -1,7 +1,7 @@
 package com.carrot.mattro;
-import static org.assertj.core.api.Assertions.*;
 
 import com.carrot.mattro.Repository.CrawlingRepository;
+import com.carrot.mattro.domain.entity.Crawling;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

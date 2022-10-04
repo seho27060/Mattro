@@ -16,6 +16,7 @@ public class RecommendationController {
     private final String EMPTY_RESULT = "empty_result";
     private final String EMPTY_SUBWAY = "empty_subway";
 
+//    http://localhost:8080/api/subway/recommendation/find/남성
     @GetMapping("/{subwayName}")
     public ResponseEntity<String> recommendStore(@PathVariable String subwayName) {
         String recommend = recommendationService.recommendationStore(subwayName);

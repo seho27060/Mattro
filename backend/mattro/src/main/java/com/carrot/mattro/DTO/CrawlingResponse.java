@@ -1,6 +1,6 @@
 package com.carrot.mattro.DTO;
 
-import com.carrot.mattro.Crawling;
+import com.carrot.mattro.domain.entity.Crawling;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
