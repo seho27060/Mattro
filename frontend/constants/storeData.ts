@@ -6,7 +6,7 @@ export type storeDataType = {
   name: string;
   rating: string;
   searchKeyword: string;
-  storUrl: string;
+  storURL: string;
   storeIdx: string;
   // stationName: string;
   역명: string;

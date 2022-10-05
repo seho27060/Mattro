@@ -30,7 +30,7 @@ const Result = ({ loadingBarData, lineId, placeInd }: ResultType) => {
           name,
           rating,
           searchKeyword,
-          storUrl,
+          storURL,
           storeIdx,
           역명
         } = res;
@@ -42,7 +42,7 @@ const Result = ({ loadingBarData, lineId, placeInd }: ResultType) => {
           name,
           rating,
           searchKeyword,
-          storUrl,
+          storURL,
           storeIdx,
           역명
         });
@@ -68,7 +68,7 @@ const Result = ({ loadingBarData, lineId, placeInd }: ResultType) => {
             name={storeData.name}
             rating={storeData.rating}
             searchKeyword={storeData.searchKeyword}
-            storUrl={storeData.storUrl}
+            storURL={storeData.storURL}
             storeIdx={storeData.storeIdx}
             역명={storeData.역명}
             lineId={lineId}
