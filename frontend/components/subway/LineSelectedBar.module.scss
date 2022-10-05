@@ -1,0 +1,134 @@
+.stations {
+  margin-left: (168px);
+  padding: 0 (16px);
+  max-width: (768px);
+  height: (100px);
+
+  background-color: white;
+  border: 1px solid $GRAY_BA;
+  border-radius: (20px);
+  box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, 0.25);
+  overflow-y: scroll;
+}
+
+.station {
+  width: min-content;
+  height: 40px;
+
+  padding: (14px) (25px);
+  border-radius: (20px);
+  color: white;
+  white-space: nowrap;
+  font-size: 20px;
+  & + .station {
+    margin-left: (16px);
+  }
+}
+
+.btn {
+  margin-left: (16px);
+  padding: (14px) (25px);
+  width: (180px);
+  height: (48px);
+
+  border-radius: (20px);
+  color: white;
+  background-color: $GRAY_BA;
+
+  &:hover {
+    color: black;
+  }
+}
+
+@media screen and (max-width: $DESKTOP-VW) {
+  .stations {
+    margin-left: vw(168px);
+    padding: 0 vw(16px);
+    max-width: vw(768px);
+    height: vw(100px);
+
+    border-radius: vw(20px);
+  }
+
+  .station {
+    height: vw(40px);
+    padding: vw(14px) vw(25px);
+    border-radius: vw(20px);
+    font-size: vw(20px);
+    & + .station {
+      margin-left: vw(16px);
+    }
+  }
+
+  .btn {
+    margin-left: vw(16px);
+    padding: vw(14px) vw(25px);
+    width: vw(180px);
+    height: vw(48px);
+
+    border-radius: vw(20px);
+  }
+}
+
+@media screen and (max-width: $TABLET-VW) {
+  .stations {
+    margin-left: 0;
+    padding: 0 (19px);
+    max-width: (350px);
+    height: (80px);
+
+    border-radius: (20px);
+  }
+
+  .station {
+    padding: 10px (16px);
+    height: 42px;
+    border-radius: (20px);
+    font-size: (14px);
+    & + .station {
+      margin-left: (16px);
+    }
+  }
+
+  .btn {
+    margin-left: 0;
+    margin-top: (20px);
+    padding: (14px) (25px);
+    width: (180px);
+    height: (48px);
+
+    font-size: (16px);
+    border-radius: (20px);
+  }
+}
+
+@media screen and (max-width: $PHONE-VW) {
+  .stations {
+    margin-left: 0;
+    padding: 0 vw-p(19px);
+    max-width: vw-p(350px);
+    height: vw-p(80px);
+
+    border-radius: vw-p(20px);
+  }
+
+  .station {
+    padding: vw-p(10px) vw-p(16px);
+    height: vw-p(42px);
+    border-radius: vw-p(20px);
+    font-size: vw-p(14px);
+    & + .station {
+      margin-left: vw-p(16px);
+    }
+  }
+
+  .btn {
+    margin-left: 0;
+    margin-top: vw-p(20px);
+    padding: vw-p(14px) vw-p(25px);
+    width: vw-p(180px);
+    height: vw-p(48px);
+    font-size: vw-p(16px);
+    border-radius: vw-p(20px);
+  }
+}

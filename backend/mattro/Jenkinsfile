@@ -1,0 +1,89 @@
+pipeline {
+    agent any           // 아무 에이전트에서 해당 파이프라인 또는 stage를 실행함.
+
+    stages {
+        stage('Prepare') {
+            agent any
+
+            steps {
+              checkout scm
+              
+              script{
+                try{
+                  sh 'docker stop mattro-back'
+                } catch(e) {
+                  echo 'stop mattro-back fail'
+                }
+
+                try{
+                  sh 'docker rm mattro-back'
+                } catch(e) {
+                  echo 'remove mattro-back container fail'
+                }
+
+                try{
+                  sh 'docker rmi mattro-back'
+                } catch(e) {
+                  echo 'remove mattro-back image fail'
+                }
+              }
+            }
+            post {
+                always {
+                    echo 'done prepare'
+                }
+            }
+        }
+
+        // gradle build
+        stage('Build Gradle') {
+          steps {
+            echo 'Build Gradle'
+            dir ('./backend/mattro'){
+              sh 'chmod +x gradlew'
+              sh './gradlew clean build'
+            }
+          }
+          post {
+            success {
+                echo 'Successfully Build Gradle'
+            }
+            failure {
+              error 'This pipeline stops here...'
+            }
+          }
+        }
+
+        // docker build
+        stage('Build Docker') {
+          steps {
+            echo 'Build Docker'
+            dir('./backend/mattro'){
+              sh 'docker build -t mattro-back .'
+            }
+          }
+          post {
+            success {
+              echo 'Successfully Build Docker'
+            }
+            failure {
+              error 'This pipeline stops here...'
+            }
+          }
+        }
+
+        stage('Deploy'){
+            steps{
+              sh 'docker run -d -p 9090:8080 --name mattro-back mattro-back'
+            }
+            post {
+            success {
+              echo 'Successfully Deploy Server'
+            }
+            failure {
+              error 'This pipeline stops here...'
+            }
+          }
+        }
+    }
+}
