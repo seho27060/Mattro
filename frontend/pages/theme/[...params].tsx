@@ -14,7 +14,6 @@ const Result = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [choices, storeIndex]: any = router.query.params || [];
   const [foodList, setFoodList] = useState([]);
-  // const [storeList, setStoreList] = useState<string[]>([]);
 
   // ==============================
   // carosel
@@ -53,7 +52,7 @@ const Result = () => {
     setIsLoading(true);
     if (storeIndex !== undefined) {
       // 즉시 실행 함수
-      (async function () {
+      (async () => {
         //  api 호출
         const res = await indexRes(storeIndex);
         setFoodList(res);
@@ -65,25 +64,10 @@ const Result = () => {
     }, 2000);
   }, [storeIndex]);
 
-  // url 확인
-  // useEffect(() => {
-  //   // 정규 표현식
-  //   const numTest = /^[0-1]{5}$/;
-
-  //   if (choices !== undefined) {
-  //     if (numTest.test(choices) === false) {
-  //       router.push("/404");
-  //     }
-  //     if (router.query.params?.length !== 2) {
-  //       router.push("/404");
-  //     }
-  //   }
-  // }, []);
-
   const again = () => {
     // api 재호출
     setIsLoading(true);
-    (async function () {
+    (async () => {
       const res = await themeRecommend(choices);
       const index = res.join(",");
       router.push(`/theme/${choices}/${index}`);
