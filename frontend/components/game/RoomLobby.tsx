@@ -18,7 +18,7 @@ interface Props {
   userList: IUserList[];
   roomName: string;
   defaultNick: string;
-  toggle: (a: boolean) => void;
+  toggle: (isMute: boolean) => void;
   isMute: boolean;
 }
 
@@ -57,6 +57,7 @@ const RoomLobby: React.FunctionComponent<Props> = ({
     }
   };
   const onClickExit = () => {
+    toggle(isMute);
     socket.disconnect();
     socket.emit("exit", roomName);
     router.push("/game");

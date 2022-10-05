@@ -20,7 +20,7 @@ interface Props {
   roomList: IRoomList[];
   socket: ISocket;
   setIsEntered: (a: boolean) => void;
-  toggle: (a: boolean) => void;
+  toggle: (isMute: boolean) => void;
   isMute: boolean;
   ref: React.ForwardedRef<unknown>;
 }

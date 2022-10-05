@@ -4,6 +4,7 @@ import type { NextPage } from "next";
 import Image from "next/image";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { io } from "socket.io-client";
+import { useRouter } from "next/router";
 
 import { IUserList, IRoomList } from "../../constants/socketio";
 import OpenRoomList from "../../components/game/OpenRoomList";
@@ -23,18 +24,19 @@ const Main: NextPage = () => {
           autoConnect: false,
           reconnectionDelay: 1000,
           reconnectionDelayMax: 5000,
-          reconnectionAttempts: 5
+          reconnectionAttempts: 3
         })
       : io("wss://j7c206.p.ssafy.io", {
           autoConnect: false,
           reconnectionDelay: 1000,
           reconnectionDelayMax: 5000,
-          reconnectionAttempts: 5
+          reconnectionAttempts: 3
         })
   );
+  const router = useRouter();
+  const [isMute, setIsMute] = useState<boolean>(false);
   const [toggle] = useAudio(click);
   const [toggleBGM] = useAudio(gameMainMusic);
-  const [isMute, setIsMute] = useState<boolean>(false);
   let timeout: any;
   const roomStartRef = useRef<{
     setLine: (line: string) => void;
@@ -54,7 +56,6 @@ const Main: NextPage = () => {
   const [order, setOrder] = useState<IUserList[]>([]);
   const [turn, setTurn] = useState<IUserList | object>({});
   const [result, setResult] = useState({});
-  const [now, setNow] = useState<number>(0);
   const [line, setLine] = useState<string>("2");
   const [limit, setLimit] = useState<number>(8000);
   const [startId, setStartId] = useState<string>("");
@@ -70,7 +71,6 @@ const Main: NextPage = () => {
     setOrder([]);
     setTurn({});
     setResult({});
-    setNow(0);
   }, []);
 
   useEffect(() => {
@@ -93,7 +93,6 @@ const Main: NextPage = () => {
       setLine(line);
       setTurn(order[0]);
       setOrder(order);
-      setNow(0);
       setLimit(limit);
     });
     socket.on("nickname", (newUserList) => {
@@ -110,9 +109,8 @@ const Main: NextPage = () => {
         socket.emit("uncorrect", roomName, res, socketId);
       }
     });
-    socket.on("correct", (answer, socketId, now, turn) => {
+    socket.on("correct", (answer, socketId, turn) => {
       setResult({ answer, socketId });
-      setNow(now);
       setTurn(turn);
       clearTimeout(timeout);
       timeout = setTimeout(() => {
@@ -170,7 +168,7 @@ const Main: NextPage = () => {
       setLimit(limit);
     });
     socket.io.on("reconnect_failed", () => {
-      console.log("reconnect_failed");
+      router.push("/game");
     });
     return () => {
       socket.disconnect();
@@ -192,34 +190,38 @@ const Main: NextPage = () => {
   }, []);
   return (
     <div className={styles.wrapper}>
-      {!isStartedLobby && (
-        <div className={`${styles.icons}`}>
-          {isMute ? (
-            <button
-              className={`${styles.volumeOff}`}
-              type="button"
-              onClick={() => setIsMute(false)}
-            >
-              <Image src={volumeOff} alt="volumeOff" />
-            </button>
-          ) : (
-            <button
-              className={`${styles.volumeOn}`}
-              type="button"
-              onClick={() => {
-                setIsMute(true);
-                toggleBGM(isMute, false);
-              }}
-            >
-              <Image src={volumeOn} alt="volumeOn" />
-            </button>
-          )}
-        </div>
-      )}
+      <div className={`${styles.icons}`}>
+        {isMute ? (
+          <button
+            className={`${styles.volumeOff}`}
+            type="button"
+            onClick={() => {
+              setIsMute(false);
+              if (isStartedGame) {
+                toggleBGM(false);
+              }
+            }}
+          >
+            <Image src={volumeOff} alt="volumeOff" />
+          </button>
+        ) : (
+          <button
+            className={`${styles.volumeOn}`}
+            type="button"
+            onClick={() => {
+              setIsMute(true);
+              if (isStartedGame) {
+                toggleBGM(true, false);
+              }
+            }}
+          >
+            <Image src={volumeOn} alt="volumeOn" />
+          </button>
+        )}
+      </div>
       {socket && isEntered ? (
         isStartedLobby ? (
           <RoomStart
-            // userList={userList}
             socket={socket}
             roomName={roomName}
             canStart={canStart}
@@ -228,7 +230,6 @@ const Main: NextPage = () => {
             turn={turn}
             result={result}
             order={order}
-            now={now}
             line={line}
             onChangeLine={onChangeLine}
             limit={limit}
