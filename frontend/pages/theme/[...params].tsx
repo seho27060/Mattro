@@ -67,6 +67,7 @@ const Result = () => {
   const again = () => {
     // api 재호출
     setIsLoading(true);
+    setCurrentSlide(0);
     (async () => {
       const res = await themeRecommend(choices);
       const index = res.join(",");
