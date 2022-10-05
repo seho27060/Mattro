@@ -34,7 +34,7 @@ const Home: NextPage = () => {
         <div
           className={`${styles.title} fs-100 coreHeavy flex align-center justify-center`}
         >
-          <Image src={logo} alt="logo" className={styles.logo} />
+          <Image src={logo} alt="logo" className={styles.logo} priority />
         </div>
         <button
           type="button"
