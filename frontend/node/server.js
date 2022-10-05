@@ -214,7 +214,6 @@ io.on("connection", (socket) => {
       "correct",
       answer,
       socketId,
-      next,
       order[next % data.get(roomName).get("userList").length]
     );
     socket
@@ -223,7 +222,6 @@ io.on("connection", (socket) => {
         "correct",
         answer,
         socketId,
-        next,
         order[next % data.get(roomName).get("userList").length]
       );
   });

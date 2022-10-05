@@ -19,7 +19,6 @@ import Ready from "./Ready";
 import BarTimer from "./BarTimer";
 
 interface Props {
-  // userList: IUserList[];
   socket: ISocket;
   roomName: string;
   canStart: boolean;
@@ -27,13 +26,12 @@ interface Props {
   turn: any;
   result: any;
   order: IUserList[];
-  now: number;
   line: string;
   onChangeLine: React.ChangeEventHandler<HTMLInputElement>;
   limit: number;
   startId: string;
-  toggle: (a: boolean) => void;
-  toggleBGM: (a: boolean) => void;
+  toggle: (isMute: boolean) => void;
+  toggleBGM: (isMute: boolean) => void;
   isMute: boolean;
   ref: React.ForwardedRef<unknown>;
 }
@@ -73,7 +71,6 @@ const lineToColor = (line: string): string => {
 const RoomStart: React.FunctionComponent<Props> = forwardRef(
   (
     {
-      // userList,
       socket,
       roomName,
       canStart,
@@ -81,7 +78,6 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
       turn,
       result,
       order,
-      now,
       line,
       onChangeLine,
       limit,
@@ -130,7 +126,7 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
             "신림"
           ].includes(inputLineRef.current.value)
         ) {
-          toggle(true);
+          toggle(isMute);
           socket.emit(
             "start_game",
             socket.id,
