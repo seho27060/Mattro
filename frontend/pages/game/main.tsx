@@ -19,8 +19,19 @@ import volumeOff from "../../public/icons/volume_off.svg";
 const Main: NextPage = () => {
   const [socket] = useState(
     process.env.NODE_ENV === "development"
-      ? io("ws://localhost:8000")
-      : io("wss://j7c206.p.ssafy.io", { path: "/node/socket.io" })
+      ? io("ws://localhost:8000", {
+          autoConnect: false,
+          reconnectionDelay: 1000,
+          reconnectionDelayMax: 5000,
+          reconnectionAttempts: 5
+        })
+      : io("wss://j7c206.p.ssafy.io", {
+          path: "/node/socket.io",
+          autoConnect: false,
+          reconnectionDelay: 1000,
+          reconnectionDelayMax: 5000,
+          reconnectionAttempts: 5
+        })
   );
   const [toggle] = useAudio(click);
   const [toggleBGM] = useAudio(gameMainMusic);
@@ -64,10 +75,8 @@ const Main: NextPage = () => {
   }, []);
 
   useEffect(() => {
+    socket.connect();
     socket.emit("room_change");
-  }, []);
-
-  useEffect(() => {
     socket.on("welcome", (roomName, newUserList) => {
       setRoomName(roomName);
       setUserList([...newUserList]);
@@ -164,7 +173,11 @@ const Main: NextPage = () => {
     socket.on("limit", (limit) => {
       setLimit(limit);
     });
+    socket.io.on("reconnect_failed", () => {
+      console.log("reconnect_failed");
+    });
     return () => {
+      socket.disconnect();
       socket.off("welcome");
       socket.off("room_change");
       socket.off("start_lobby");
@@ -179,7 +192,6 @@ const Main: NextPage = () => {
       socket.off("on_change_line");
       socket.off("full");
       socket.off("limit");
-      socket.disconnect();
     };
   }, []);
   return (
