@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/no-unknown-property */
 import React, {
@@ -16,9 +17,9 @@ type MetroMapProps = {
 };
 const MetroMap = ({ scaleSize, searchId, prevScale }: MetroMapProps) => {
   const wrraperRef = useRef<HTMLDivElement>(null);
+  const rootRef = useRef<HTMLDivElement>(null);
   const [dragging, setDragging] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
-
   const movePosition = (posX: number, posY: number) => {
     if (wrraperRef.current) {
       wrraperRef.current.style.left = `${
@@ -55,7 +56,6 @@ const MetroMap = ({ scaleSize, searchId, prevScale }: MetroMapProps) => {
 
   const touchMove = (e: TouchEvent<HTMLDivElement>) => {
     if (dragging && wrraperRef.current) {
-      // e.preventDefault();
       movePosition(
         position.x - e.touches[0].clientX,
         position.y - e.touches[0].clientY
@@ -66,17 +66,40 @@ const MetroMap = ({ scaleSize, searchId, prevScale }: MetroMapProps) => {
   const endTouch = () => {
     setDragging(false);
   };
+
+  const onIntersect = (entries: IntersectionObserverEntry[]) => {
+    entries.forEach((entry: IntersectionObserverEntry) => {
+      if (!entry.isIntersecting && wrraperRef.current) {
+        movePosition(
+          wrraperRef.current.style.left.replace("px", "") as unknown as number,
+          wrraperRef.current.style.top.replace("px", "") as unknown as number
+        );
+      }
+    });
+  };
+
   useEffect(() => {
     if (wrraperRef.current && searchId) {
       const circle = document.querySelector(`.M${searchId}`);
       if (!circle || !window) return;
+
+      let nextLeft = 0;
+      let nextTop = 0;
+      // 데탑
+      if (window.innerWidth > 1024) {
+        nextLeft = (800 - (circle.getAttribute("cx") as unknown as number)) * 4;
+        nextTop =
+          (475 - (circle.getAttribute("cy") as unknown as number)) *
+          (window.innerHeight > 754 ? 4 : 2);
+      } else {
+        nextLeft = 800 - (circle.getAttribute("cx") as unknown as number);
+        nextTop = 475 - (circle.getAttribute("cy") as unknown as number);
+      }
       movePosition(
         (wrraperRef.current.style.left.replace("px", "") as unknown as number) -
-          (window.innerWidth > 1024 ? 4 : 1) *
-            (740 - (circle.getAttribute("cx") as unknown as number)),
+          nextLeft,
         (wrraperRef.current.style.top.replace("px", "") as unknown as number) -
-          (window.innerWidth > 1024 ? 4 : 1) *
-            (475 - (circle.getAttribute("cy") as unknown as number))
+          nextTop
       );
       const rectList: SVGRectElement[] = [];
       const labelGroup = document.querySelector(`.label-group`);
@@ -92,7 +115,7 @@ const MetroMap = ({ scaleSize, searchId, prevScale }: MetroMapProps) => {
           if (text.style.textAnchor === "end") {
             xOffset = +labelWidth;
           }
-          // if (tspan && labelGroup) {
+
           const rect = document.createElementNS(
             "http://www.w3.org/2000/svg",
             "rect"
@@ -128,7 +151,7 @@ const MetroMap = ({ scaleSize, searchId, prevScale }: MetroMapProps) => {
 
           rect.setAttributeNS(null, "fill", "#ffeb00");
           rect.setAttributeNS(null, "width", labelWidth);
-
+          rect.setAttributeNS(null, "class", "label");
           if (tspan.classList.value.match(/fdw\d+/g)) {
             const fdw = tspan.classList.value.match(/fdw\d+/g) as string[];
             rect.setAttributeNS(null, "width", `${fdw[0].replace("fdw", "")}`);
@@ -136,9 +159,7 @@ const MetroMap = ({ scaleSize, searchId, prevScale }: MetroMapProps) => {
           rect.setAttributeNS(null, "height", "6"); // `${6 * text.childNodes.length}`);
           labelGroup.insertAdjacentElement("afterbegin", rect);
           rectList.push(rect);
-          // }
         }
-        // eslint-disable-next-line consistent-return
         return () => {
           rectList.forEach((r) => {
             labelGroup.removeChild(r);
@@ -168,9 +189,25 @@ const MetroMap = ({ scaleSize, searchId, prevScale }: MetroMapProps) => {
             scaleSize
       );
     }
+    if (scaleSize === 1) {
+      if (rootRef.current) {
+        const margin = `${window.innerWidth > 1024 ? "-60" : "-20"}px`;
+        const observer = new IntersectionObserver(onIntersect, {
+          root: rootRef.current,
+          rootMargin: margin
+        });
+        if (wrraperRef.current) {
+          observer.observe(wrraperRef.current);
+        }
+        return () => {
+          observer.disconnect();
+        };
+      }
+    }
   }, [prevScale, scaleSize]);
+
   return (
-    <div id="metroMap">
+    <div id="metroMap" ref={rootRef}>
       <div
         className={styles.wrraper}
         onMouseDown={startDrag}
@@ -186,8 +223,6 @@ const MetroMap = ({ scaleSize, searchId, prevScale }: MetroMapProps) => {
           xmlns="http://www.w3.org/2000/svg"
           version="1.1"
           aria-hidden="true"
-          // id="metro-map"
-          // viewBox="0 0 1525 1000"
           viewBox="0 0 1500 1000"
           className={styles.map}
           style={{ transform: `scale(${scaleSize})` }}

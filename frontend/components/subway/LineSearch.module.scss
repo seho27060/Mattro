@@ -11,6 +11,7 @@
 
 .input {
   @include box();
+  width: (290px);
   box-shadow: none;
   border: 1px solid $GRAY_BA;
   font-size: 20px;
@@ -70,6 +71,7 @@
 
   .input {
     @include box();
+    width: vw(290px);
     font-size: vw(20px);
   }
   .ul {

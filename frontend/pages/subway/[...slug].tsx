@@ -84,7 +84,7 @@ const Result = ({ loadingBarData, lineId, placeInd }: ResultType) => {
           type="button"
           onClick={() => router.push("/subway")}
         >
-          다시시작하기
+          다시하기
         </button>
       </div>
     </div>
