@@ -2,7 +2,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import styles from "./ResultCard.module.scss";
-import temp from "../../public/images/foodTemp.jpeg";
+import temp from "../../public/images/foodTemp.png";
 import star_all from "../../public/images/star.png";
 import star_half from "../../public/images/half_star.png";
 import kakao from "../../public/images/kakao.svg";
@@ -115,7 +115,7 @@ const ResultCard = ({
     >
       <div
         onClick={moveMap}
-        className={`${styles.num} coreExtra fs-18 flex align-center`}
+        className={`${styles.num} coreExtra fs-18 flex align-center justify-center`}
       >
         <p className={`${lineId} flex align-center justify-center`}>
           {lineNameById(lineId)}
