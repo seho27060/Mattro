@@ -11,16 +11,20 @@
   //   .contents {
   .num {
     cursor: pointer;
+
+    width: (260px);
     p {
       padding: (8px) (20px);
       color: $WHITE;
       border-radius: (20px);
       margin: 0 (20px) 0 0;
+      white-space: nowrap;
     }
     div {
-      // width: (150px);
-      white-space: nowrap;
       text-overflow: ellipsis;
+      overflow: hidden;
+      text-align: center;
+      white-space: nowrap;
       padding: 2px 0;
     }
   }
@@ -98,6 +102,7 @@
     box-shadow: 0px 0px vw(19px) vw(14px) rgba(255, 255, 255, 0.44);
     //   .contents {
     .num {
+      width: vw(260px);
       p {
         padding: vw(8px) vw(20px);
         border-radius: vw(20px);
@@ -162,14 +167,12 @@
     border-width: (6px);
 
     .num {
+      width: (220px);
       p {
         font-size: (14px);
         padding: (8px) (20px);
         border-radius: (20px);
         margin: 0 (12px) 0 0;
-      }
-      div {
-        // width: (150px);
       }
     }
     :nth-child(2) {
@@ -228,6 +231,7 @@
     border-width: vw-p(6px);
 
     .num {
+      width: vw-p(220px);
       p {
         font-size: vw-p(14px);
         padding: vw-p(8px) vw-p(20px);
