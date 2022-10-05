@@ -15,15 +15,6 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true
   },
-  // async redirect() {
-  //   return [
-  //     {
-  //       source: `/theme/:choices/:path/(\\)`,
-  //       destination: "/404",
-  //       permanent: false
-  //     }
-  //   ];
-  // }
   webpack(config, options) {
     config.module.rules.push({
       test: /\.(ogg|mp3|wav|mpe?g)$/i,

@@ -1,7 +1,6 @@
 .home {
   width: 100%;
   position: relative;
-  // width: 1440px;
   height: 100%;
   background-size: cover;
   background-repeat: no-repeat;
@@ -9,7 +8,6 @@
   background-image: url("../public/images/empty.png");
   overflow: hidden;
   .contents {
-    // width: vw(1440px);
     height: 100%;
     .subtitle {
       z-index: 1;
@@ -52,7 +50,6 @@
     }
     .train {
       animation-name: train;
-      // animation-delay: 2s;
       animation-duration: 1.5s;
       animation-fill-mode: forwards;
       left: calc(0% - 800px);
@@ -90,7 +87,6 @@
 
 @media screen and (max-width: $DESKTOP-VW) {
   .home {
-    // width: 100%;
     width: vw(1440px);
     .contents {
       .subtitle {

@@ -93,15 +93,12 @@ const Main: NextPage = () => {
     });
     socket.on("check_answer", (roomName, res, answer, socketId) => {
       if (res === "정답") {
-        console.log("맞음!!");
         socket.emit("correct", roomName, answer, socketId);
       }
       if (res === "오답") {
-        console.log("틀림!!");
         socket.emit("uncorrect", roomName, res, socketId);
       }
       if (res === "중복") {
-        console.log("중복!!");
         socket.emit("uncorrect", roomName, res, socketId);
       }
     });

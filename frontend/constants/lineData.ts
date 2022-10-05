@@ -4185,7 +4185,6 @@ export const searchByName = (name: string) => {
       });
     }
   }
-  console.log(newResult);
   return newResult;
 };
 

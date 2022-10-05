@@ -104,7 +104,6 @@ const ResultCard = ({
   const moveMap = () => {
     if (storURL !== undefined) {
       window.open(storURL);
-      console.log("click");
     } else {
       alert("이동할 수 있는 url이 없습니다");
     }

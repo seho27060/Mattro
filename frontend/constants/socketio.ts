@@ -13,9 +13,6 @@ export interface IRoomList {
 }
 
 export interface ServerToClientEvents {
-  // noArg: () => void;
-  // basicEmit: (a: number, b: string, c: Buffer) => void;
-  // withAck: (d: string, callback: (e: number) => void) => void;
   welcome: (nickname: string, newCount: number) => void;
   bye: (nickname: string, newCount: number) => void;
   new_message: (message: string) => void;

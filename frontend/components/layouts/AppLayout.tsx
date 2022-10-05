@@ -15,7 +15,6 @@ export default function AppLayout({ children }: AppLayoutProps) {
     <>
       <Head>
         <title>맛트로</title>
-        {/* <link rel = "icon" href ="/favicon.ico" /> */}
       </Head>
       <div className={`${styles.root} flex column align-center`}>
         <Navbar />

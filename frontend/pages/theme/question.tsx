@@ -1,11 +1,11 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import { setMaxListeners } from "events";
 import styles from "./question.module.scss";
 import QuestionCard from "../../components/theme/QuestionCard";
 import Stepbar from "../../components/theme/Stepbar";
 import { themeRecommend } from "../api/recommend";
-import { setMaxListeners } from "events";
 
 const question = () => {
   const [start, setStart] = useState<number>(0);
@@ -48,7 +48,7 @@ const question = () => {
               choices={choices}
               setChoices={setChoices}
             />
-            <Stepbar duration={start} choices={choices} />
+            <Stepbar duration={start} />
           </>
         )}
       </div>

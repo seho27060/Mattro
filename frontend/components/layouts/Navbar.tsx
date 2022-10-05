@@ -4,13 +4,9 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import logo from "../../public/images/logo/logo_gray.png";
 import logoNav from "../../public/images/logo/logo_nav.png";
-import sound from "../../public/icons/volume_off.svg";
-// import { useRouter } from "next/router";
 import styles from "./Navbar.module.scss";
-// import DarkMode from "./DarkMode";
 
 export default function Navbar() {
-  // console.log(document.querySelector("body"));
   const { pathname } = useRouter();
   const router = useRouter();
   const bodyRef = useRef<HTMLSpanElement>(null);
@@ -38,7 +34,7 @@ export default function Navbar() {
 
   const movePage = (url: string) => {
     router.push(url);
-    setTimeout(function () {
+    setTimeout(() => {
       if (
         bodyRef.current &&
         bodyRef.current.classList.contains(styles.nav_active)
@@ -68,9 +64,6 @@ export default function Navbar() {
           </div>
         </Link>
         <div className={`${styles.nav_wrap} flex align-center justify-center`}>
-          {/* <button type="button">
-            <Image src={sound} alt="sound" />
-          </button> */}
           <button
             type="button"
             onClick={() => toggleClass(styles.nav_active)}

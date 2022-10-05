@@ -1,15 +1,13 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import styles from "./Stepbar.module.scss";
 
 interface Props {
   duration: number;
-  choices: string;
 }
 
 const Stepbar: React.FunctionComponent<Props> = ({ duration }) => {
   const num = `${duration + 1} / 5`;
   const percent = (duration + 1) * 20;
-  const barRef = React.useRef<HTMLDivElement>(null);
   const name = `s${percent}`;
 
   return (

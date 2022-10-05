@@ -93,8 +93,6 @@ const RoomStart: React.FunctionComponent<Props> = forwardRef(
     ref
   ) => {
     const [isEnterInputStart, setIsEnterInputStart] = useState<boolean>(false);
-    const [isEnterInputAnswer, setIsEnterInputAnswer] =
-      useState<boolean>(false);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const toggleModal = () => {
       setIsModalOpen(true);

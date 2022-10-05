@@ -43,9 +43,6 @@ function getAllRooms() {
   return res;
 }
 
-// function whoInRoom(roomName) {
-//   return io.sockets.adapter.rooms.get(roomName);
-// }
 
 function howManyInRoom(roomName) {
   return io.sockets.adapter.rooms.get(roomName)?.size;
@@ -78,7 +75,6 @@ const data = new Map();
 
 io.on("connection", (socket) => {
   socket.onAny((event) => {
-    console.log(`Socket Event : ${event}`);
   });
   socket.on("enter_room", (roomName, done) => {
     if (!data.get(roomName)) {
@@ -168,11 +164,8 @@ io.on("connection", (socket) => {
     socket.to(roomName).emit("start_game", line, order, limit);
     socket.emit("start_game", line, order, limit);
     clearTimeout(data.get(roomName).get("timeout"));
-    // console.log("스타트게임 클리어");
     data.get(roomName).set("clear", true);
-    // console.log("시간 체크 시작========", limit);
     const timeoutId = setTimeout(() => {
-      // console.log("시간초과 =============", limit);
       socket.emit("start_time_over", socketId);
       socket.to(roomName).emit("start_time_over", socketId);
       data.get(roomName).set("clear", false);
@@ -183,7 +176,6 @@ io.on("connection", (socket) => {
     io.sockets.emit("room_change", getAllRooms());
   });
   socket.on("answer", (roomName, line, answer, socketId) => {
-    // console.log("앤서 클리어");
     if (!data.get(roomName).get("clear")) {
       return;
     }
@@ -207,11 +199,9 @@ io.on("connection", (socket) => {
     }
     socket.emit("limit", data.get(roomName).get("limit"));
     socket.to(roomName).emit("limit", data.get(roomName).get("limit"));
-    // console.log("시간 체크 시작========", data.get(roomName).get("limit"));
     const order = data.get(roomName).get("order");
     const now = data.get(roomName).get("now");
     const timeoutId = setTimeout(() => {
-      // console.log("시간초과 =============", data.get(roomName).get("limit"));
       socket.emit("time_over", order, now);
       socket.to(roomName).emit("time_over", order, now);
       data.get(roomName).set("clear", false);
@@ -242,7 +232,6 @@ io.on("connection", (socket) => {
   });
   socket.on("uncorrect", (roomName, answer, socketId) => {
     clearTimeout(data.get(roomName).get("timeout"));
-    // console.log("언코렉트 클리어");
     socket.to(roomName).emit("uncorrect", answer, socketId);
     socket.emit("uncorrect", answer, socketId);
     data.get(roomName).set("isStarted", false);
@@ -250,7 +239,6 @@ io.on("connection", (socket) => {
   });
   socket.on("time_over", (roomName, answer, socketId) => {
     clearTimeout(data.get(roomName).get("timeout"));
-    // console.log("타임오버 클리어");
     socket.to(roomName).emit("uncorrect", answer, socketId);
     socket.emit("uncorrect", answer, socketId);
     data.get(roomName).set("isStarted", false);
@@ -284,7 +272,6 @@ io.on("connection", (socket) => {
 const port = 8000;
 
 httpServer.listen(port, () => {
-  console.log(
     `Listening on http://localhost:${port} && Admin : https://admin.socket.io`
   );
 });

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import { rootCertificates } from "tls";
 import ResultCard from "../../components/theme/ResultCard";
 import styles from "./result.module.scss";
 import Loading from "../../components/layouts/Loading";
@@ -9,7 +10,6 @@ import { storeDataType } from "../../constants/storeData";
 import { searchByName } from "../../constants/lineData";
 import prevBtn from "../../public/icons/prev.svg";
 import nextBtn from "../../public/icons/prev.svg";
-import { rootCertificates } from "tls";
 
 const Result = () => {
   const router = useRouter();
@@ -64,32 +64,17 @@ const Result = () => {
     setTimeout(() => {
       setIsLoading(false);
     }, 2000);
-
-    console.log(foodList);
   }, [storeIndex]);
 
-  // useEffect(() => {
-  //   // 정규 표현식
-  //   const numTest = /^[0-1]{5}$/;
-
-  //   if (numTest.test(choices) === false) {
-  //     router.push("/404");
-  //   }
-  //   if (router.query.params?.length !== 2) {
-  //     router.push("/404");
-  //   }
-  // }, []);
   const again = () => {
     // api 재호출
     setIsLoading(true);
 
-    (async function () {
+    (async () => {
       const res = await themeRecommend(choices);
-      console.log(res);
       setStoreList(res);
       const index = res.join();
       router.push(`/theme/${choices}/${index}`);
-      // setIsFinished(true);
     })();
   };
 

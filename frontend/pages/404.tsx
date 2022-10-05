@@ -1,7 +1,5 @@
 import { useRouter } from "next/router";
 import React from "react";
-// import Image from "next/image";
-// import page from "../public/images/404page.png";
 import styles from "./404page.module.scss";
 
 const NotFound = () => {

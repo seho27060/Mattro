@@ -14,7 +14,6 @@ const Home: NextPage = () => {
   const startClick = () => {
     setClicked(true);
     setTimeout(() => {
-      // router.push("/subway");
       setTrainStop(true);
     }, 1800);
   };

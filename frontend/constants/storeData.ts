@@ -8,6 +8,5 @@ export type storeDataType = {
   searchKeyword: string;
   storURL: string;
   storeIdx: string;
-  // stationName: string;
   역명: string;
 };
