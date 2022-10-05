@@ -18,7 +18,7 @@
     margin-top: vw(24px);
 
     width: min-content;
-    padding: vw(8px);
+    padding: vw(8px) vw(16px);
 
     border-width: 4px;
     border-style: solid;
@@ -28,7 +28,7 @@
 
     white-space: nowrap;
     &:hover {
-      color: black;
+      opacity: 0.7;
     }
   }
   .noData {
@@ -71,7 +71,38 @@
 }
 
 @media screen and (max-width: $TABLET-VW) {
-  .noData {
-    font-size: 20px;
+  .card {
+    .noData {
+      font-size: 20px;
+    }
+
+    .button {
+      margin-top: (24px);
+      padding: (8px) (16px);
+
+      border-width: 4px;
+      border-style: solid;
+
+      border-radius: (20px);
+
+      font-size: 20px;
+    }
+  }
+}
+
+@media screen and (max-width: $PHONE-VW) {
+  .card {
+    .noData {
+      font-size: vw-p(20px);
+    }
+
+    .button {
+      margin-top: vw-p(24px);
+      padding: vw-p(8px) vw-p(16px);
+
+      border-width: vw-p(4px);
+
+      border-radius: vw-p(20px);
+    }
   }
 }

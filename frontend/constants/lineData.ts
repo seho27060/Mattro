@@ -366,13 +366,6 @@ const lineData: lineDataType = {
 
         name: "광명"
       },
-
-      {
-        id: "1703",
-
-        name: "금천구청",
-        intertChange: true
-      },
       {
         id: "1704",
 
