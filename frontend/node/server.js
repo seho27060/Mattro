@@ -43,7 +43,6 @@ function getAllRooms() {
   return res;
 }
 
-
 function howManyInRoom(roomName) {
   return io.sockets.adapter.rooms.get(roomName)?.size;
 }
@@ -74,8 +73,6 @@ function shuffle(arr, socketId) {
 const data = new Map();
 
 io.on("connection", (socket) => {
-  socket.onAny((event) => {
-  });
   socket.on("enter_room", (roomName, done) => {
     if (!data.get(roomName)) {
       data.set(roomName, new Map());
@@ -271,7 +268,4 @@ io.on("connection", (socket) => {
 
 const port = 8000;
 
-httpServer.listen(port, () => {
-    `Listening on http://localhost:${port} && Admin : https://admin.socket.io`
-  );
-});
+httpServer.listen(port);

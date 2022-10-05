@@ -26,7 +26,6 @@ const Main: NextPage = () => {
           reconnectionAttempts: 5
         })
       : io("wss://j7c206.p.ssafy.io", {
-          path: "/node/socket.io",
           autoConnect: false,
           reconnectionDelay: 1000,
           reconnectionDelayMax: 5000,
