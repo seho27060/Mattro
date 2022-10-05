@@ -7,6 +7,14 @@
     box-shadow: 1px 0 0 0 $GRAY_BA, 0 1px 0 0 $GRAY_BA, 1px 0 0 0 $GRAY_BA inset,
       0 1px 0 0 $GRAY_BA inset, 1px 1px 0 0 $GRAY_BA;
   }
+
+  button[class^="true"] {
+    opacity: 1;
+  }
+
+  button[class^="false"] {
+    opacity: 0.5;
+  }
 }
 
 @media screen and (max-width: $DESKTOP-VW) {

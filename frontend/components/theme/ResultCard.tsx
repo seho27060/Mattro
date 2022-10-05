@@ -1,56 +1,140 @@
 import Image from "next/image";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import styles from "./ResultCard.module.scss";
-import temp from "../../public/images/foodTemp.jpeg";
-import star from "../../public/images/star.png";
+import temp from "../../public/images/foodTemp.png";
+import star_all from "../../public/images/star.png";
+import star_half from "../../public/images/half_star.png";
 import kakao from "../../public/images/kakao.svg";
+import { storeDataType } from "../../constants/storeData";
+import { lineNameById } from "../../constants/lineInfo";
+import { UsedLineIdType } from "../../constants/lineType";
 
-export default function ResultCard() {
-  const storeName = "동대문 엽기 떡볶이";
-  const address = "경기도 용인시 기흥구 탑실로 111-1111ssssss";
-  const time = "오전 11시 ~ 오후 09시";
-  const menu = "엽떡 오리지널 + 주먹밥";
-  const nearStation = "역삼역";
+type ResultCardType = storeDataType & { lineId: UsedLineIdType };
 
-  //   function stars() {
-  //     const starArray = [];
-  //     for (const i = 0; i < 5; i + 1) {
-  //       starArray.push(<Image src={star} alt="star" />);
-  //     }
-  //     return starArray;
-  //   }
+const ResultCard = ({
+  id,
+  mainImageURL,
+  menuImageUrl,
+  menuList,
+  name,
+  rating,
+  searchKeyword,
+  storURL,
+  storeIdx,
+  역명,
+  lineId
+}: ResultCardType) => {
+  const router = useRouter();
+  const [starView, setStarView] = useState<number>(0);
 
+  const [address, setAddress] = useState<string>("");
+  // 카카오톡 공유하기 기능
   const shareKakao = () => {
-    console.log("kakao");
+    let url = null;
+    if (router.pathname === "/theme/[...params]") {
+      const [choices, storeIndex]: any = router.query.params;
+      // url 재정비, 현재 선택된 값을 2번째 요소에 집어넣기
+      const list = storeIndex.split(",");
+      const newList = list.filter(function (data: string) {
+        return data !== storeIdx;
+      });
+
+      newList.splice(2, 0, storeIdx);
+      const res = newList.join(",");
+      url = `theme/${choices}/${res}`;
+    } else {
+      url = router.asPath;
+    }
+
+    const { Kakao, location } = window;
+
+    // 공유하기 기능을 위해 initialize 마운트 될때 적용
+    if (!window.Kakao.isInitialized()) {
+      window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_API_KEY);
+    }
+    Kakao.Link.sendDefault({
+      objectType: "feed",
+      content: {
+        title: name,
+        description: address,
+        imageUrl: mainImageURL !== null ? mainImageURL : menuImageUrl,
+        link: {
+          mobileWebUrl: `https://j7c206.p.ssafy.io/${url}`,
+          webUrl: `https://j7c206.p.ssafy.io/${url}`
+        }
+      }
+    });
+  };
+
+  useEffect(() => {
+    // rating 계산
+    const temp = rating.split("/").map(Number);
+    setStarView(temp[0]);
+
+    const str = searchKeyword.split(" ");
+    str.shift();
+    setAddress(str.join(" "));
+  }, []);
+
+  const repeatStar = () => {
+    const star = [];
+    for (let i = 1; i <= starView; i++) {
+      star.push(
+        <Image key={i} className={styles.stars} alt="star" src={star_all} />
+      );
+    }
+    if (starView % 1 >= 0.5) {
+      star.push(
+        <Image key={name} className={styles.stars} alt="star" src={star_half} />
+      );
+    }
+    star.push(
+      <span
+        key={rating}
+        style={{ color: "#5a5a5a", margin: " 0 12px" }}
+        className={`${styles.rating} notoMid`}
+      >
+        {starView}
+      </span>
+    );
+    return star;
+  };
+
+  const moveMap = () => {
+    if (storURL !== undefined) {
+      window.open(storURL);
+    } else {
+      alert("이동할 수 있는 url이 없습니다");
+    }
   };
 
   return (
-    <div className={`${styles.card} flex column align-center justify-center`}>
-      <div className={`${styles.num} coreExtra fs-18 flex align-center`}>
-        <p>1</p>
-        <div className="coreBold fs-24 flex ">{storeName}</div>
+    <div
+      className={`${styles.card} ${lineId} flex column align-center justify-center`}
+    >
+      <div
+        onClick={moveMap}
+        className={`${styles.num} coreExtra fs-18 flex align-center justify-center`}
+      >
+        <p className={`${lineId} flex align-center justify-center`}>
+          {lineNameById(lineId)}
+        </p>
+        <div className="coreBold fs-24 flex">{name}</div>
       </div>
 
-      <div className={`${styles.img} flex align-center justify-center`}>
-        <Image src={temp} alt="food" className={styles.sub} />
-      </div>
-      <div className={styles.stars}>
-        <span>
-          <Image src={star} alt="star" className={styles.star} />
-        </span>
-        <span>
-          <Image src={star} alt="star" className={styles.star} />
-        </span>
-        <span>
-          <Image src={star} alt="star" className={styles.star} />
-        </span>
-        <span>
-          <Image src={star} alt="star" className={styles.star} />
-        </span>
-        <span>
-          <Image src={star} alt="star" className={styles.star} />
-        </span>
-
-        {/* {stars()} */}
+      <div
+        onClick={moveMap}
+        className={`${styles.img} flex align-center justify-center`}
+      >
+        <Image
+          src={mainImageURL || menuImageUrl || temp}
+          alt="food"
+          className={styles.sub}
+          unoptimized
+          width="250"
+          height="200"
+        />
       </div>
       <div className={`${styles.detail} flex column justify-center`}>
         <div className={`${styles.txt} flex  notoMid`}>
@@ -59,15 +143,17 @@ export default function ResultCard() {
         </div>
         <div className={`${styles.txt} flex fs-15 notoMid`}>
           <span>대표 메뉴</span>
-          <span>{menu}</span>
-        </div>
-        <div className={`${styles.txt} flex fs-15 notoMid`}>
-          <span>영업 시간</span>
-          <span>{time}</span>
+          <span>{menuList[0]}</span>
         </div>
         <div className={`${styles.txt} flex fs-15 notoMid`}>
           <span>가까운 역</span>
-          <span>{nearStation}</span>
+          <span>{역명}역</span>
+        </div>
+        <div className={`${styles.txt} flex fs-15 notoMid`}>
+          <span>별점</span>
+          <span className={`${styles.starBox} flex align-center`}>
+            {repeatStar()}
+          </span>
         </div>
       </div>
       <button
@@ -78,9 +164,9 @@ export default function ResultCard() {
         <div className="flex align-center justify-center">
           <Image src={kakao} alt="kakao" className={styles.icon} />
         </div>
-
         <p className={styles.btn_txt}>카카오톡 공유하기</p>
       </button>
     </div>
   );
-}
+};
+export default ResultCard;
