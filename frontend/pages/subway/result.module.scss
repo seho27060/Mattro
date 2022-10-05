@@ -14,22 +14,28 @@
   opacity: 0;
   animation: showCard 0.5s ease-in-out 3.5s forwards;
 
-  button {
+  .button {
     margin-top: vw(24px);
 
     width: min-content;
-    padding: vw(8px);
+    padding: vw(8px) vw(16px);
 
-    border: 4px solid $L1;
+    border-width: 4px;
+    border-style: solid;
+
     border-radius: vw(10px);
-    background-color: white;
+    color: white;
 
     white-space: nowrap;
-    color: $L1;
     &:hover {
-      color: white;
-      background-color: $L1;
+      opacity: 0.7;
     }
+  }
+  .noData {
+    // margin-top: vw(500px);
+    padding: vw(20px);
+    border-radius: vw(20px);
+    background-color: white;
   }
 }
 
@@ -61,5 +67,42 @@
 @keyframes showCard {
   to {
     opacity: 1;
+  }
+}
+
+@media screen and (max-width: $TABLET-VW) {
+  .card {
+    .noData {
+      font-size: 20px;
+    }
+
+    .button {
+      margin-top: (24px);
+      padding: (8px) (16px);
+
+      border-width: 4px;
+      border-style: solid;
+
+      border-radius: (20px);
+
+      font-size: 20px;
+    }
+  }
+}
+
+@media screen and (max-width: $PHONE-VW) {
+  .card {
+    .noData {
+      font-size: vw-p(20px);
+    }
+
+    .button {
+      margin-top: vw-p(24px);
+      padding: vw-p(8px) vw-p(16px);
+
+      border-width: vw-p(4px);
+
+      border-radius: vw-p(20px);
+    }
   }
 }
