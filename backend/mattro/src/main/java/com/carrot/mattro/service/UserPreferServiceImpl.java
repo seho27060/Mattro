@@ -4,9 +4,12 @@ import com.carrot.mattro.DTO.store;
 import com.carrot.mattro.domain.entity.Output;
 import com.carrot.mattro.Repository.CrawlingRepository;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+
 
 @Service
 @RequiredArgsConstructor
@@ -16,26 +19,27 @@ public class UserPreferServiceImpl implements UserPreferService {
     private final RecommendationService recommendationService;
     private final SetStandardsService setStandardsService;
 
+    private final Logger logger = LoggerFactory.getLogger(UserPreferServiceImpl.class);
     @Override
     public List<Integer> userPrefer(String choices) {
-        Boolean index0 = false;
-        Boolean index1 = false;
-        Boolean index2 = false;
+        int index0 = 0;
+        int index1 = 0;
+        int index2 = 0;
 
         HashSet<String> basicFoodList = new HashSet<>(Arrays.asList("일식튀김,꼬치","전복요리","급식","스페인음식","방앗간",
-                "3성급","고고즉석떡볶이","카레","반찬가게","1성급",
+                "고고즉석떡볶이","카레","반찬가게",
                 "장금수부대찌개","국수","향토음식","커피번","오뎅,꼬치","케이크전문",
                 "장어,먹장어요리","차","찌개,전골","쌀똑핫도그","족발,보쌈","백숙,삼계탕","떡카페","카페",
                 "일본식라면","빙수","베트남음식","미스터빠삭","갈비배달도시락스트릿테이블",
                 "냉면","과일,주스전문점","홍차전문점","호텔","한식","일식당","호두과자","브런치",
                 "이탈리아음식","김밥","식료품제조","국밥","도시락,컵밥","야식","시장",
-                "양꼬치","감자탕","만년닭강정","베이글","핫도그","커피가공,제조","4성급","제사음식","달떡볶이","차,커피","심야오뎅","ABC커피","정육식당","호떡",
+                "양꼬치","감자탕","만년닭강정","베이글","핫도그","커피가공,제조","제사음식","달떡볶이","차,커피","심야오뎅","ABC커피","정육식당","호떡",
                 "일식,초밥뷔페","아름다운커피","불닭","수산물","백반,가정식","고기원칙","그리스음식","샤브샤브",
                 "스파게티스토리","일석삼조버섯매운탕","햄버거","출장요리","유제품제조",
                 "해산물뷔페","인도음식","힐링카페","초밥,롤","죽","육류,고기요리","다이어트,샐러드","닭","막국수","만두",
                 "해물,생선요리","바나프레소","전통,민속주점","고기뷔페","돈가스","멕시코,남미음식","푸드트럭","곰탕,설렁탕","아부찌부대찌개","분식",
-                "순대,순댓국","음식점","가리미김밥","제과,제빵","오리요리","문래돼지불백","건어물","아귀찜,해물찜",
-                "한정식","2성급","보리밥","베이커리","돼지고기구이","뷔페","시골한우시골돼지","태국음식","복어요리","기사식당","우동,소바","밀도","바(BAR)","라면",
+                "순대,순댓국","음식점","가리미김밥","제과,제빵","오리요리","문래돼지불백","아귀찜,해물찜",
+                "한정식","2성급","보리밥","돼지고기구이","뷔페","시골한우시골돼지","태국음식","복어요리","기사식당","우동,소바","밀도","바(BAR)","라면",
                 "술집","양갈비","와인","닭요리","바닷가재요리","소고기구이","피자","양식","떡,한과","유흥주점","요리주점","과자,사탕,초코렛",
                 "칼국수,만두","이북음식","스테이크,립","밀키트","오니기리","슬라임카페","사철,영양탕","도넛",
                 "보드카페","초콜릿전문점","수산물가공,제조","신의주부대찌개","게요리", "덮밥","떡류제조","떡볶이","프랜차이즈본사","생선구이","대게요리","찜닭",
@@ -45,7 +49,7 @@ public class UserPreferServiceImpl implements UserPreferService {
                 "중식당","아이스크림","대구형제막창","주류제조","닭볶음탕","아시아음식","매운탕,해물탕","고기한끼",
                 "신룽푸마라탕","우유,유제품","조개요리","곱창,막창,양","와플","전,빈대떡","패밀리레스토랑",
                 "스파게티,파스타전문","포장마차","일반휴게소", "테이크아웃커피","종합분식","한식뷔페","독일음식","101번지남산돈까스","굴요리","차류가공,제조",
-                "단란주점","안경할머니곱창","주먹밥","샌드위치","JVL부대찌개","치킨,닭강정",
+                "안경할머니곱창","주먹밥","샌드위치","JVL부대찌개","치킨,닭강정",
                 "퓨전음식","닭발","채식,샐러드뷔페","스마일찹쌀꽈배기","도시락,조리식품제조"));
         HashSet<String> koreanFoodList = new HashSet<>(Arrays.asList("전복요리","급식","방앗간","고고즉석떡볶이","반찬가게","장금수부대찌개","국수","향토음식",
                 "장어,먹장어요리","찌개,전골","족발,보쌈","백숙,삼계탕","떡카페","미스터빠삭","갈비배달도시락스트릿테이블",
@@ -77,13 +81,13 @@ public class UserPreferServiceImpl implements UserPreferService {
                 "오뎅,꼬치","게요리","수산물가공,제조"));
 
         if(choices.charAt(0) == '1'){
-            index0 = true;
+            index0 = 1;
         }
         if(choices.charAt(1) == '1'){
-            index1 = true;
+            index1 = 1;
         }
         if(choices.charAt(2) == '1'){
-            index2 = true;
+            index2 = 1;
         }
         if(choices.charAt(3) == '1'){
             basicFoodList.removeAll(notKoreanFoodList);
@@ -98,50 +102,62 @@ public class UserPreferServiceImpl implements UserPreferService {
         List<String> resultFoodList = new ArrayList<>(basicFoodList);
         List<Output> byUserPrefer = crawlingRepository.findByUserPrefer(index0, index1, index2, resultFoodList );
 //        추천알고리즘 적용
+        logger.info("byUserPrefer len {}",byUserPrefer.size());
 
         if (byUserPrefer.isEmpty()){
             return new ArrayList<>();
         } else{
-            store[] storeZ = new store[byUserPrefer.size()];
-
-            double[] reviewCountZ = recommendationService.reviewCountNormalization(setStandardsService.reviewCountBase(byUserPrefer), byUserPrefer);
-            double[] reviewContentZ = recommendationService.reviewContentNormalization(setStandardsService.reviewContentBase(byUserPrefer), byUserPrefer);
-            double[] reviewBlogZ = recommendationService.reviewBlogNormalization(setStandardsService.blogBase(byUserPrefer), byUserPrefer);
-            double[] reviewRatingZ = recommendationService.reviewRatingNormalization(setStandardsService.ratingBase(byUserPrefer), byUserPrefer);
-
-            for(int i = 0; i < byUserPrefer.size(); i++){
-                double z = 0;
-
-                z += reviewCountZ[i] * 0.25;
-                z += reviewContentZ[i] * 0.1;
-                z += reviewBlogZ[i] * 0.1;
-                z += reviewRatingZ[i] * 0.25;
-
-                storeZ[i] = new store(byUserPrefer.get(i).getStoreIdx(), z);
-            }
-
-            // z에 따른 정렬
-            Arrays.sort(storeZ, (o1, o2) -> Double.compare(o2.getZ(), o1.getZ()));
-            Integer limit = Math.min(storeZ.length,20);
+            List<String> foodCategoryList = new ArrayList<>();
             List<Integer> numLst = new ArrayList<>();
-            for(int i = 0; i < 5; i++){
-                int num = Integer.parseInt(storeZ[(int)(Math.random() * limit)].getStoreIdx());
 
-                if(numLst.isEmpty()){
-                    numLst.add(num);
+            for(int idx = 0; idx < Math.min(5,byUserPrefer.size()); idx++) {
+                String randomFoodCategory = byUserPrefer.get((int)(Math.random() * byUserPrefer.size())).getFoodCategory();
+                if (foodCategoryList.isEmpty()) {
+                    foodCategoryList.add(randomFoodCategory);
                     continue;
                 }
-
-                if (!numLst.contains(num)){
-                    numLst.add(num);
-                } else{
-                    i--;
+                if (!foodCategoryList.contains(randomFoodCategory)) {
+                    foodCategoryList.add(randomFoodCategory);
+                } else {
+                    idx--;
                 }
             }
+            logger.info("random FoodCategoryList {}",foodCategoryList);
+            for(String foodCategory:foodCategoryList) {
+                List<Output> selectedOutputList = new ArrayList<>();
+                for (Output output : byUserPrefer) {
+                    if (foodCategory.equals(output.getFoodCategory())) {
+                        selectedOutputList.add(output);
+                    }
+                }
+                store[] storeZ = new store[selectedOutputList.size()];
+
+                double[] reviewCountZ = recommendationService.reviewCountNormalization(setStandardsService.reviewCountBase(selectedOutputList), selectedOutputList);
+                double[] reviewContentZ = recommendationService.reviewContentNormalization(setStandardsService.reviewContentBase(selectedOutputList), selectedOutputList);
+                double[] reviewBlogZ = recommendationService.reviewBlogNormalization(setStandardsService.blogBase(selectedOutputList), selectedOutputList);
+                double[] reviewRatingZ = recommendationService.reviewRatingNormalization(setStandardsService.ratingBase(selectedOutputList), selectedOutputList);
+
+                for(int i = 0; i < selectedOutputList.size(); i++){
+                    double z = 0;
+
+                    z += reviewCountZ[i] * 0.25;
+                    z += reviewContentZ[i] * 0.1;
+                    z += reviewBlogZ[i] * 0.1;
+                    z += reviewRatingZ[i] * 0.25;
+
+                    storeZ[i] = new store(selectedOutputList.get(i).getStoreIdx(), z);
+                }
+
+                // z에 따른 정렬
+                Arrays.sort(storeZ, (o1, o2) -> Double.compare(o2.getZ(), o1.getZ()));
+                numLst.add(Integer.parseInt(storeZ[(int)(Math.random() * Math.min(selectedOutputList.size(), 20))].getStoreIdx()));
+            }
+            logger.info("result numLst {}",numLst);
             return numLst;
         }
-
     }
+
+
 
     @Override
     public List<Output> getStoreByStoreIndexList(String storeIndexStr) {
