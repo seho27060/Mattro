@@ -106,7 +106,7 @@ const RoomLobby: React.FunctionComponent<Props> = ({
                 aria-hidden="true"
               >
                 <span className={`${styles.username__nickname}`}>
-                  {user.nickname}님
+                  {user.nickname}
                 </span>
                 <div
                   className={
