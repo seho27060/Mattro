@@ -159,7 +159,7 @@ const Rooms: React.FunctionComponent<Props> = forwardRef(
                 ref={modalRoomNameInput}
                 value={roomName}
                 onChange={onChangeRoomName}
-                maxLength={10}
+                maxLength={9}
               />
             </div>
             <button

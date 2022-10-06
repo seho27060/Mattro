@@ -8,6 +8,12 @@
   z-index: 1;
   left: 20px;
   top: 20px;
+  .volumeOff {
+    color: GRAY_5B;
+  }
+  .volumeOn {
+    color: GRAY_5B;
+  }
 }
 
 @media screen and (max-width: $DESKTOP-VW) {
