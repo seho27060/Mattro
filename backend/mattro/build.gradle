@@ -12,9 +12,9 @@ configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
-	all {
-		exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
-	}
+//	all {
+//		exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+//	}
 }
 
 repositories {
@@ -22,10 +22,14 @@ repositories {
 }
 
 dependencies {
-	implementation group: 'org.apache.spark', name: 'spark-core_2.13', version: '3.3.0'
+	implementation 'org.springframework.boot:spring-boot-starter-cache'
+	implementation group: 'net.sf.ehcache', name: 'ehcache', version: '2.10.9.2'
+//	implementation group: 'org.apache.spark', name: 'spark-core_2.13', version: '3.3.0'
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 //	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation 'org.projectlombok:lombok:1.18.22'
+	testImplementation 'org.projectlombok:lombok:1.18.22'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.projectlombok:lombok'
