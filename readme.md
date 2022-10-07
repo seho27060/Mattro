@@ -138,8 +138,41 @@
 
 <!-- ![](https://velog.velcdn.com/images/jmlee9707/post/1f4c67e2-aec8-45eb-b1e1-30580ff96ff7/image.gif) -->
 
-- 메인 소개 페이지
--
+- 메인 홈
+![메인 홈](https://user-images.githubusercontent.com/76723987/194450120-8cb45f7e-3a17-48a3-9bce-0145a0113ae4.png)
+
+- 네비게이션
+![네비게이션](https://user-images.githubusercontent.com/76723987/194450310-851c578f-de1e-47f7-ae6b-6e280c66560c.png)
+
+- 노선별 추천
+![노선별 추천](https://user-images.githubusercontent.com/76723987/194450118-44fdb951-0c84-480f-a50e-9ca76eeb6de2.png)
+
+- 노선별 추천 결과
+![노선별 추천 결과](https://user-images.githubusercontent.com/76723987/194450117-f11d9d0f-5c41-4382-a7cb-13462f52f11d.png)
+
+- 설문 추천 메인
+![설문 추천 메인](https://user-images.githubusercontent.com/76723987/194450114-f4089523-07b0-402d-a6ec-febbbdb5b7b3.png)
+
+- 추천을 위한 설문
+![추천을 위한 설문](https://user-images.githubusercontent.com/76723987/194450122-f51383b2-3c0d-4568-8af0-564412680aa5.png)
+
+- 설문 추천 결과
+![설문 추천 결과](https://user-images.githubusercontent.com/76723987/194450125-3a938748-5238-4c6c-9849-0380183c5d2f.png)
+
+- 게임 메인
+![게임 메인](https://user-images.githubusercontent.com/76723987/194450129-b6395094-47fe-4d2f-bd7f-f32095f9533a.png)
+
+- 게임 방 목록
+![게임 방 목록](https://user-images.githubusercontent.com/76723987/194450132-9bead0f2-1e51-48d5-8bcd-7a2b55f47199.png)
+
+- 개임 로비
+![개임 로비](https://user-images.githubusercontent.com/76723987/194450136-7f4daf19-e27b-43bf-a652-68d309e96b57.png)
+
+- 게임 준비
+![게임 준비](https://user-images.githubusercontent.com/76723987/194450139-79d2f03d-3fd2-46dd-893f-73c3edf20c6e.png)
+
+- 게임 중
+![게임 중](https://user-images.githubusercontent.com/76723987/194450111-59ef177c-1268-40c9-863c-d9720c3162bd.png)
 
 <br />
 
