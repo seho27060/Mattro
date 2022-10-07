@@ -124,9 +124,7 @@ mattro
 
 ### ERD 구조
 
-![erd.png](.\readmeimg\erd.png)
-
-
+![erd](/uploads/3fb1f5a3fb3b6368d5be4b2611aed8af/erd.png)
 
 <!-- ![erd](https://velog.velcdn.com/images/jmlee9707/post/37780a60-148c-41fd-ab48-169b46c3f9fd/image.png) -->
 
