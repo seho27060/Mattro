@@ -11,5 +11,8 @@
         <module name="mattro.main" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="mattro.test" target="11" />
+    </bytecodeTargetLevel>
   </component>
 </project>
