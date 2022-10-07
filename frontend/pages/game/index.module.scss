@@ -29,7 +29,7 @@
   }
   .children {
     margin: 72px 0;
-    p {
+    .article {
       margin: 20px 0;
       line-height: 36px;
       text-align: start;
@@ -52,7 +52,7 @@
     }
     .children {
       margin: vw(72px) 0;
-      p {
+      .article {
         margin: vw(20px) 0;
         line-height: vw(36px);
       }
@@ -72,7 +72,6 @@
     .explanation_btn {
       width: 282px;
       height: 80px;
-      border: 8px solid $MAIN;
       border-radius: 46px;
       font-size: 32px;
     }
@@ -81,7 +80,7 @@
     }
     .children {
       margin: 72px 0;
-      p {
+      .article {
         margin: 20px 0;
         line-height: 32px;
         font-size: 20px;
@@ -102,7 +101,7 @@
     .explanation_btn {
       width: vw-p(282px);
       height: vw-p(80px);
-      border: vw-p(8px) solid $MAIN;
+      border: vw-p(8px) solid $SUB_PINK;
       border-radius: vw-p(46px);
       font-size: vw-p(32px);
     }
@@ -111,7 +110,7 @@
     }
     .children {
       margin: vw-p(72px) 0;
-      p {
+      .article {
         margin: vw-p(20px) 0;
         line-height: vw-p(32px);
         font-size: vw-p(20px);

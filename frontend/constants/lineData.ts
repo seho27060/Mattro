@@ -1,7 +1,7 @@
 /* eslint-disable no-plusplus */
 import { LineCircleProps } from "../components/subway/LineCircle";
 import lineInfos from "./lineInfo";
-import { lineDataType } from "./lineType";
+import { lineDataType, UsedLineIdType } from "./lineType";
 
 const lineData: lineDataType = {
   "1": {
@@ -365,13 +365,6 @@ const lineData: lineDataType = {
         id: "1750",
 
         name: "광명"
-      },
-
-      {
-        id: "1703",
-
-        name: "금천구청",
-        intertChange: true
       },
       {
         id: "1704",
@@ -3101,9 +3094,10 @@ const lineData: lineDataType = {
       },
 
       {
-        id: "1251",
+        id: "0150", // orign 1251
 
-        name: "서울역"
+        name: "서울역",
+        intertChange: true
       },
       // {
       //   id: "1265",
@@ -4151,7 +4145,6 @@ const lineData: lineDataType = {
 };
 
 export const searchByName = (name: string) => {
-  console.log(name);
   const result: {
     id: string;
     name: string;
@@ -4170,8 +4163,7 @@ export const searchByName = (name: string) => {
       }
     });
   });
-  console.log(result);
-  // result.forEach((res)=>)
+
   for (let i = 0; i < result.length; i++) {
     let dupliInd = -1;
     for (let j = 0; j < newResult.length; j++) {
@@ -4193,7 +4185,29 @@ export const searchByName = (name: string) => {
       });
     }
   }
-  console.log(result, newResult);
   return newResult;
+};
+
+export const getLoadingData = (
+  lineId: UsedLineIdType,
+  stationId: string
+): string[] => {
+  const id = lineId.replace("L", "");
+  const result = [];
+  let stationInd = -1;
+  lineData[id].stations.forEach((station, ind) => {
+    if (station.id === stationId) {
+      stationInd = ind;
+    }
+  });
+  const longLindata = [...lineData[id].stations, ...lineData[id].stations];
+  for (
+    let i = lineData[id].stations.length + stationInd - 6;
+    i < lineData[id].stations.length + stationInd;
+    i++
+  ) {
+    result.push(longLindata[i + 1].name);
+  }
+  return result;
 };
 export default lineData;

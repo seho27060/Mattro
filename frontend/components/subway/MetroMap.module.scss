@@ -77,6 +77,9 @@
   rect {
     animation: init 2s ease-in;
   }
+  rect[class="label"] {
+    animation: init 1s ease-in;
+  }
   text:hover {
     cursor: pointer;
   }

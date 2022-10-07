@@ -1,5 +1,6 @@
-import React, { useState, ChangeEvent } from "react";
+import React, { useState, ChangeEvent, useRef } from "react";
 import { searchByName } from "../../constants/lineData";
+import { UsedLineIdType } from "../../constants/lineType";
 import LineCircle, { LineCircleProps } from "./LineCircle";
 import styles from "./LineSearch.module.scss";
 
@@ -9,11 +10,20 @@ type SearchListType = {
   lines: LineCircleProps[];
 };
 
-const LineSearch = () => {
+type LineSearchProps = {
+  setSearchId: (id: string) => void;
+  setScaleSize: (size: number) => void;
+  setSelectedLines: (lines: UsedLineIdType[]) => void;
+};
+const LineSearch = ({
+  setSearchId,
+  setScaleSize,
+  setSelectedLines
+}: LineSearchProps) => {
+  const inputRef = useRef<HTMLInputElement>(null);
   const [searchList, setSearchList] = useState<SearchListType[]>([]);
-  // searchByName("화");
+
   const searchByKeyword = (e: ChangeEvent<HTMLInputElement>) => {
-    // console.log(e.target.value);
     const keyword = e.target.value;
     if (keyword) {
       setSearchList(searchByName(keyword));
@@ -21,6 +31,16 @@ const LineSearch = () => {
       setSearchList([]);
     }
   };
+
+  const clickSearchItem = (item: SearchListType) => {
+    setSearchId(item.id);
+    setScaleSize(4);
+    setSearchList([]);
+    if (inputRef.current) inputRef.current.value = "";
+    const selectedLines = item.lines.map((line) => line.id);
+    setSelectedLines(selectedLines);
+  };
+
   return (
     <div id="lineSearch">
       <input
@@ -28,10 +48,16 @@ const LineSearch = () => {
         className={`fs-20 notoBold ${styles.input}`}
         placeholder="지하철 역 검색"
         onChange={searchByKeyword}
+        ref={inputRef}
       />
       <ul className={`${styles.ul}`}>
         {searchList.map((item) => (
-          <li key={item.id} className={`flex align-center ${styles.li}`}>
+          // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions
+          <li
+            key={item.id}
+            className={`flex align-center ${styles.li}`}
+            onClick={() => clickSearchItem(item)}
+          >
             {item.lines.map((line) => (
               <LineCircle
                 key={line.id}

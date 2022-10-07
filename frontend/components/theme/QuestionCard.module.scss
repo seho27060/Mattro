@@ -1,87 +1,121 @@
 .card {
-  .title {
-    color: $MAIN;
-    margin-bottom: (40px);
+  // align-items: flex-end;
+  .ani {
+    animation-name: moveLeft;
+    animation-duration: 1.3s;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
   }
-  .ques {
-    color: $GRAY-3A;
-    margin-bottom: (68px);
-  }
-  .select {
-    color: $GRAY-5B;
-    button {
-      padding-left: (51px);
-      margin-bottom: (40px);
-      border-radius: (46px);
-      //   justify-content: center;
-      width: (627px);
-      height: (114px);
-      background-color: $GRAY-ED;
-      &:hover {
-        opacity: 70%;
+  .container {
+    position: absolute;
+
+    .title {
+      color: $MAIN;
+      margin-bottom: (30px);
+      font-size: (60px);
+    }
+    .ques {
+      color: $GRAY-3A;
+      margin-bottom: (68px);
+      font-size: (40px);
+    }
+    .select {
+      color: $GRAY-5B;
+      button {
+        padding-left: (51px);
+        margin-bottom: (40px);
+        border-radius: (46px);
+        width: (627px);
+        height: (114px);
+        background-color: $GRAY-ED;
+        &:hover {
+          opacity: 70%;
+        }
       }
     }
   }
 }
+@keyframes moveLeft {
+  from {
+    // right: 0%;
+    transform: translateX(50%);
+    opacity: 0%;
+  }
+  to {
+    // transform: (-50%, -50%);
+    // right: 50%;
+    // transform: translateX(50%);
+    opacity: 100%;
+  }
+}
+
 @media screen and (max-width: $DESKTOP-VW) {
   .card {
-    .title {
-      margin-bottom: vw(40px);
-    }
-    .ques {
-      margin-bottom: vw(68px);
-    }
-    .select {
-      button {
-        padding-left: vw(51px);
-        margin-bottom: vw(40px);
-        border-radius: vw(46px);
-        width: vw(627px);
-        height: vw(114px);
+    .container {
+      .title {
+        margin-bottom: vw(30px);
+        font-size: vw(60px);
+      }
+      .ques {
+        font-size: vw(40px);
+        margin-bottom: vw(68px);
+      }
+      .select {
+        button {
+          padding-left: vw(51px);
+          margin-bottom: vw(40px);
+          border-radius: vw(46px);
+          width: vw(627px);
+          height: vw(114px);
+        }
       }
     }
   }
 }
 @media screen and (max-width: $TABLET-VW) {
   .card {
-    .title {
-      font-size: (32px);
-      margin-bottom: (32px);
-    }
-    .ques {
-      font-size: (24px);
-      margin-bottom: (48px);
-    }
-    .select {
-      button {
-        font-size: (14px);
-        padding-left: (24px);
-        margin-bottom: (20px);
-        border-radius: (22px);
-        width: (320px);
-        height: (64px);
+    .container {
+      .title {
+        font-size: (32px);
+        margin-bottom: (32px);
+      }
+      .ques {
+        font-size: (24px);
+        margin-bottom: (48px);
+      }
+      .select {
+        button {
+          font-size: (14px);
+          padding-left: (24px);
+          margin-bottom: (20px);
+          border-radius: (22px);
+          width: (320px);
+          height: (64px);
+        }
       }
     }
   }
 }
 @media screen and (max-width: $PHONE-VW) {
   .card {
-    .title {
-      font-size: vw-p(32px);
-      margin-bottom: vw-p(32px);
-    }
-    .ques {
-      font-size: vw-p(24px);
-      margin-bottom: vw-p(48px);
-    }
-    .select {
-      button {
-        font-size: vw-p(14px);
-        padding-left: vw-p(24px);
-        margin-bottom: vw-p(20px);
-        border-radius: vw-p(22px);
-        width: vw-p(320px);
-        height: vw-p(64px);
+    .container {
+      .title {
+        font-size: vw-p(32px);
+        margin-bottom: vw-p(32px);
+      }
+      .ques {
+        font-size: vw-p(24px);
+        margin-bottom: vw-p(48px);
+      }
+      .select {
+        button {
+          font-size: vw-p(14px);
+          padding-left: vw-p(24px);
+          margin-bottom: vw-p(20px);
+          border-radius: vw-p(22px);
+          width: vw-p(320px);
+          height: vw-p(64px);
+        }
       }
     }
   }
