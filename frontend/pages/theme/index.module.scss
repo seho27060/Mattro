@@ -1,0 +1,327 @@
+.theme {
+  height: 100%;
+  .contents {
+    justify-content: space-between;
+    .title {
+      width: 70%;
+      margin: 0 0 (34px) 0;
+    }
+    .box {
+      .textBalloon,
+      .dummy {
+        margin: (0px) 0 (-80px) (200px);
+        p {
+          position: absolute;
+          color: $GRAY-5B;
+          margin-bottom: (45px);
+          font-size: (24px);
+        }
+      }
+
+      .dummy {
+        opacity: 0%;
+      }
+    }
+
+    .images {
+      z-index: 2;
+      position: relative;
+      width: (1000px);
+      // margin: (50px) 0 0 0;
+      justify-content: space-between;
+      :nth-child(2n + 1) {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      :nth-child(2) {
+        margin-right: 11%;
+        width: 15%;
+        overflow: visible;
+      }
+      :nth-child(1) {
+        width: 26%;
+      }
+      :nth-child(3) {
+        width: 13%;
+      }
+      .confetti_button {
+        animation: up-down 0.3s infinite ease-in-out alternate;
+        :hover {
+          opacity: 80%;
+        }
+      }
+      .confetti_button {
+        display: inline-block;
+        appearance: none;
+        position: relative;
+        transition: transform ease-in 0.1s, box-shadow ease-in 0.25s;
+        text-transform: uppercase;
+      }
+
+      .confetti_button:focus {
+        outline: 0;
+      }
+      .confetti_button:before,
+      .confetti_button:after {
+        position: absolute;
+        content: "";
+        display: block;
+        width: 200%;
+        height: 130%;
+        left: -30%;
+        z-index: -1000;
+        transition: all ease-in-out 0.5s;
+        background-repeat: no-repeat;
+      }
+
+      .confetti_button:before {
+        display: none;
+        top: -60%;
+        background-image: radial-gradient(circle, #ffa946 20%, transparent 20%),
+          radial-gradient(circle, transparent 20%, #ffa946 20%, transparent 30%),
+          radial-gradient(circle, #ffa946 20%, transparent 20%),
+          radial-gradient(circle, #ffa946 20%, transparent 20%),
+          radial-gradient(circle, transparent 10%, #ffa946 15%, transparent 20%),
+          radial-gradient(circle, #ffa946 20%, transparent 20%),
+          radial-gradient(circle, #ffa946 20%, transparent 20%),
+          radial-gradient(circle, #ffa946 20%, transparent 20%),
+          radial-gradient(circle, #ffa946 20%, transparent 20%);
+        background-size: 10% 10%, 20% 20%, 15% 15%, 20% 20%, 18% 18%, 10% 10%,
+          15% 15%, 10% 10%, 18% 18%;
+      }
+
+      .confetti_button:after {
+        display: none;
+        bottom: -65%;
+        background-image: radial-gradient(circle, #ffa946 20%, transparent 20%),
+          radial-gradient(circle, #ffa946 20%, transparent 20%),
+          radial-gradient(circle, transparent 10%, #ffa946 15%, transparent 20%),
+          radial-gradient(circle, #ffa946 20%, transparent 20%),
+          radial-gradient(circle, #ffa946 20%, transparent 20%),
+          radial-gradient(circle, #ffa946 20%, transparent 20%),
+          radial-gradient(circle, #ffa946 20%, transparent 20%);
+        background-size: 15% 15%, 20% 20%, 18% 18%, 20% 20%, 15% 15%, 10% 10%,
+          20% 20%;
+      }
+
+      .confetti_button:active {
+        transform: scale(0.9);
+      }
+
+      .confetti_button.animate:before {
+        display: block;
+        animation: topBubbles ease-in-out 0.75s forwards;
+      }
+
+      .confetti_button.animate:after {
+        display: block;
+        animation: bottomBubbles ease-in-out 0.75s forwards;
+      }
+    }
+    nav {
+      position: relative;
+      top: -80px;
+
+      z-index: 1;
+      padding-top: 100px;
+      padding-bottom: 100px;
+      margin-bottom: -80px;
+      width: 100%;
+      background-color: $GRAY-E0;
+    }
+    .btn {
+      color: $MAIN;
+      background-color: $WHITE;
+      width: (389px);
+      height: (92px);
+      border: (8px) solid $MAIN;
+      border-radius: (46px);
+      cursor: pointer;
+
+      &:hover {
+        color: $WHITE;
+        background-color: $MAIN;
+      }
+    }
+  }
+}
+@keyframes up-down {
+  from {
+    transform: translatey(0px);
+  }
+  to {
+    transform: translatey(-20px);
+  }
+}
+@keyframes topBubbles {
+  0% {
+    background-position: 5% 90%, 10% 90%, 10% 90%, 15% 90%, 25% 90%, 25% 90%,
+      40% 90%, 55% 90%, 70% 90%;
+  }
+  50% {
+    background-position: 0 80%, 0 20%, 10% 40%, 20% 0, 30% 30%, 22% 50%, 50% 50%,
+      65% 20%, 90% 30%;
+  }
+  100% {
+    background-position: 0 70%, 0 10%, 10% 30%, 20% -10%, 30% 20%, 22% 40%,
+      50% 40%, 65% 10%, 90% 20%;
+    background-size: 0 0, 0 0, 0 0, 0 0, 0 0, 0 0;
+  }
+}
+
+@keyframes bottomBubbles {
+  0% {
+    background-position: 10% -10%, 30% 10%, 55% -10%, 70% -10%, 85% -10%,
+      70% -10%, 70% 0;
+  }
+  50% {
+    background-position: 0 80%, 20% 80%, 45% 60%, 60% 100%, 75% 70%, 95% 60%,
+      105% 0;
+  }
+  100% {
+    background-position: 0 90%, 20% 90%, 45% 70%, 60% 110%, 75% 80%, 95% 70%,
+      110% 10%;
+    background-size: 0 0, 0 0, 0 0, 0 0, 0 0, 0 0;
+  }
+}
+
+@media screen and (max-width: $DESKTOP-VW) {
+  .theme {
+    .contents {
+      .title {
+        width: 70%;
+        margin: 0 0 vw(30px) 0;
+      }
+      .box {
+        .textBalloon,
+        .dummy {
+          margin: 0 0 vw(-80px) vw(200px);
+          p {
+            margin-bottom: vw(60px);
+            font-size: vw(24px);
+          }
+        }
+      }
+
+      .images {
+        z-index: 2;
+        width: vw(1000px);
+        // margin: vw(50px) 0 0 0;
+      }
+      nav {
+        top: vw(-80px);
+        padding-top: vw(100px);
+        margin-bottom: vw(-80px);
+        height: vw(300px);
+      }
+      .btn {
+        width: vw(389px);
+        height: vw(92px);
+        border: vw(8px) solid $MAIN;
+        border-radius: vw(46px);
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $TABLET-VW) {
+  .theme {
+    .contents {
+      .title {
+        width: 90%;
+        margin: 0 0 (30px) 0;
+      }
+
+      p {
+        font-size: (20px);
+      }
+
+      .box {
+        .textBalloon,
+        .dummy {
+          margin: (50px) 0 (-50px) (100px);
+
+          p {
+            margin-bottom: (50px);
+            font-size: 18px;
+          }
+        }
+      }
+
+      .images {
+        z-index: 2;
+        width: (350px);
+        margin: (30px) 0 0 0;
+        justify-content: center;
+        :nth-child(1),
+        :nth-child(3) {
+          display: none;
+        }
+        :nth-child(2) {
+          margin: 0 0 0 0;
+          width: 40%;
+        }
+      }
+      nav {
+        top: (-80px);
+        padding-top: (100px);
+        margin-bottom: (-80px);
+      }
+      .btn {
+        font-size: (20px);
+        width: (276px);
+        height: (70px);
+        border: (6px) solid $MAIN;
+        border-radius: (46px);
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $PHONE-VW) {
+  .theme {
+    .contents {
+      .title {
+        width: 90%;
+        margin: 0 0 vw-p(30px) 0;
+      }
+
+      p {
+        font-size: vw-p(20px);
+      }
+      .box {
+        .textBalloon,
+        .dummy {
+          margin: vw-p(50px) 0 vw-p(-50px) vw-p(100px);
+          // background-color: red;
+          p {
+            margin-bottom: vw-p(50px);
+            font-size: vw-p(18px);
+          }
+        }
+      }
+
+      .images {
+        z-index: 2;
+        width: vw-p(350px);
+        margin: vw-p(50px) 0 0 0;
+        :nth-child(2) {
+          margin: 0 0 vw-p(0px) 0;
+        }
+      }
+      nav {
+        top: vw-p(-80px);
+        padding-top: vw-p(100px);
+        margin-bottom: vw-p(-80px);
+      }
+      .btn {
+        font-size: vw-p(20px);
+        width: vw-p(276px);
+        height: vw-p(70px);
+        border: vw-p(6px) solid $MAIN;
+        border-radius: vw-p(46px);
+      }
+    }
+  }
+}

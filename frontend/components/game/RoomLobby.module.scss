@@ -1,0 +1,412 @@
+@mixin me {
+  width: 86px;
+  height: 38px;
+  border-radius: 22px;
+  background-color: $SUB_YELLOW;
+}
+
+.wrapper {
+  position: relative;
+  height: 100%;
+  background-color: $GRAY_ED;
+  .exit {
+    width: 30px;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+  }
+  h2 {
+    margin-top: 20px;
+    width: 500px;
+    height: 100px;
+    background-color: $GRAY_3A;
+    color: $WHITE;
+    border-radius: 22px;
+    .room__num__title {
+      .room__num {
+        width: 50px;
+        height: 50px;
+        margin: 0 16px;
+        border-radius: 50%;
+        background-color: $SUB_YELLOW;
+        color: $GRAY_3A;
+      }
+      .room__title {
+      }
+    }
+    .subway1 {
+      width: 44px;
+      height: 44px;
+      margin-right: 18px;
+    }
+  }
+  .startBtn {
+    width: 200px;
+    height: 70px;
+    border: 4px solid $GRAY_3A;
+    border-radius: 20px;
+    color: $GRAY_3A;
+    text-transform: uppercase;
+    background-color: $WHITE;
+    &:hover {
+      border: 4px solid $GRAY_3A;
+      color: $WHITE;
+      background-color: $GRAY_3A;
+    }
+  }
+}
+
+.userList {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 36px;
+  height: 60%;
+  align-content: center;
+  .user {
+    width: 200px;
+    height: 300px;
+    border-radius: 44px;
+    background-color: $GRAY_5F;
+    .subway2 {
+      width: 60px;
+    }
+    .username {
+      margin: 28px 0;
+      color: $WHITE;
+      cursor: pointer;
+      .username__nickname {
+        margin-right: 6px;
+      }
+      .edit__visible {
+        width: 12px;
+      }
+      .edit__invisible {
+        display: none;
+      }
+    }
+    .me__visible {
+      @include me();
+    }
+    .me__invisible {
+      visibility: hidden;
+      @include me();
+    }
+  }
+}
+
+.footer {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  width: 1004px;
+  margin-bottom: 40px;
+  .chair1 {
+    grid-column-start: span 2;
+  }
+  .startBtn {
+    grid-column-start: span 4;
+    justify-self: center;
+    align-self: center;
+    cursor: pointer;
+  }
+  .chair2 {
+    grid-column-start: -2;
+  }
+}
+
+.modal {
+  margin-bottom: 20px;
+  .modal__label {
+    margin-right: 20px;
+  }
+  .modal__input {
+    border-bottom: 1px solid $BLACK;
+  }
+}
+
+@media screen and (max-width: $DESKTOP-VW) {
+  @mixin me {
+    width: vw(86px);
+    height: vw(38px);
+    border-radius: vw(22px);
+  }
+  .wrapper {
+    .exit {
+      width: vw(30px);
+      right: vw(20px);
+      top: vw(20px);
+    }
+    h2 {
+      margin-top: vw(20px);
+      width: vw(500px);
+      height: vw(100px);
+      border-radius: vw(22px);
+      .room__num__title {
+        .room__num {
+          width: vw(50px);
+          height: vw(50px);
+          margin: 0 vw(16px);
+        }
+        .room__title {
+        }
+      }
+      .subway1 {
+        width: vw(44px);
+        height: vw(44px);
+        margin-right: vw(18px);
+      }
+    }
+    .startBtn {
+      width: vw(200px);
+      height: vw(70px);
+      border: vw(4px) solid $GRAY_3A;
+      border-radius: vw(20px);
+      &:hover {
+        border: vw(4px) solid $GRAY_3A;
+      }
+    }
+  }
+  .userList {
+    column-gap: vw(36px);
+    .user {
+      .subway2 {
+        width: vw(60px);
+      }
+      .username {
+        margin: vw(28px) 0;
+        .username__nickname {
+          margin-right: vw(6px);
+        }
+        .edit__visible {
+          width: vw(12px);
+        }
+        .edit__invisible {
+        }
+      }
+      .me__visible {
+        @include me();
+      }
+      .me__invisible {
+        @include me();
+      }
+    }
+  }
+  .footer {
+    width: vw(1004px);
+    margin-bottom: vw(40px);
+  }
+  .modal {
+    margin-bottom: vw(20px);
+    .modal__label {
+      margin-right: vw(20px);
+    }
+    .modal__input {
+    }
+  }
+}
+
+@media screen and (max-width: $TABLET-VW) {
+  @mixin me {
+    width: 66px;
+    height: 30px;
+    border-radius: 20px;
+    font-size: 16px;
+  }
+  .wrapper {
+    .exit {
+      width: (24px);
+      right: (10px);
+      top: (10px);
+    }
+    h2 {
+      margin-top: (20px);
+      width: (300px);
+      height: (80px);
+      border-radius: (22px);
+      .room__num__title {
+        .room__num {
+          width: (50px);
+          height: (50px);
+          margin: 0 (12px);
+          font-size: 20px;
+        }
+        .room__title {
+          font-size: 24px;
+        }
+      }
+      .subway1 {
+        width: (36px);
+        height: (36px);
+        margin-right: (18px);
+      }
+    }
+    .startBtn {
+      width: 200px;
+      height: 70px;
+      border: 4px solid $GRAY_3A;
+      border-radius: 20px;
+      color: $GRAY_3A;
+      text-transform: uppercase;
+      &:hover {
+        border: 4px solid $GRAY_3A;
+        color: $WHITE;
+      }
+    }
+  }
+  .userList {
+    width: 90%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    row-gap: 18px;
+    column-gap: 0;
+    .user {
+      width: 130px;
+      height: 180px;
+      border-radius: 24px;
+      place-self: center center;
+      .subway2 {
+        width: (36px);
+      }
+      .username {
+        margin: (14px) 0;
+        .username__nickname {
+          margin-right: (5px);
+          font-size: 18px;
+        }
+        .edit__visible {
+          width: (10px);
+        }
+        .edit__invisible {
+        }
+      }
+      .me__visible {
+        @include me();
+      }
+      .me__invisible {
+        @include me();
+      }
+    }
+  }
+  .footer {
+    width: 80%;
+    margin-bottom: 30px;
+    .chair1 {
+    }
+    .startBtn {
+      width: 150px;
+      height: 52px;
+      font-size: 24px;
+      cursor: pointer;
+    }
+    .chair2 {
+    }
+  }
+  .modal {
+    flex-direction: column;
+    margin-bottom: 20px;
+    .modal__label {
+      justify-content: flex-start;
+      margin: 0 0 20px 0;
+      font-size: 24px;
+    }
+    .modal__input {
+      font-size: 24px;
+    }
+  }
+}
+
+@media screen and (max-width: $PHONE-VW) {
+  @mixin me {
+    width: vw-p(66px);
+    height: vw-p(30px);
+    border-radius: vw-p(20px);
+    font-size: vw-p(16px);
+  }
+  .wrapper {
+    .exit {
+      width: vw-p(24px);
+      right: vw-p(10px);
+      top: vw-p(10px);
+    }
+    h2 {
+      margin-top: vw-p(20px);
+      width: vw-p(300px);
+      height: vw-p(80px);
+      border-radius: vw-p(22px);
+      .room__num__title {
+        .room__num {
+          width: vw-p(50px);
+          height: vw-p(50px);
+          margin: 0 vw-p(12px);
+          font-size: vw-p(20px);
+        }
+        .room__title {
+          font-size: vw-p(24px);
+        }
+      }
+      .subway1 {
+        width: vw-p(36px);
+        height: vw-p(36px);
+        margin-right: vw-p(18px);
+      }
+    }
+    .startBtn {
+      width: vw-p(200px);
+      height: vw-p(70px);
+      border: vw-p(4px) solid $GRAY_3A;
+      border-radius: vw-p(20px);
+      &:hover {
+        border: vw-p(4px) solid $GRAY_3A;
+      }
+    }
+  }
+
+  .userList {
+    row-gap: vw-p(18px);
+    .user {
+      width: vw-p(130px);
+      height: vw-p(180px);
+      border-radius: vw-p(24px);
+      .subway2 {
+        width: vw-p(36px);
+      }
+      .username {
+        margin: vw-p(14px) 0;
+        .username__nickname {
+          margin-right: vw-p(5px);
+          font-size: vw-p(18px);
+        }
+        .edit__visible {
+          width: vw-p(10px);
+        }
+        .edit__invisible {
+        }
+      }
+      .me__visible {
+        @include me();
+      }
+      .me__invisible {
+        @include me();
+      }
+    }
+  }
+
+  .footer {
+    margin-bottom: vw-p(30px);
+    .startBtn {
+      width: vw-p(150px);
+      height: vw-p(52px);
+      font-size: vw-p(24px);
+    }
+  }
+  .modal {
+    margin-bottom: vw-p(20px);
+    .modal__label {
+      margin: 0 0 vw-p(20px) 0;
+      font-size: vw-p(24px);
+    }
+    .modal__input {
+      font-size: vw-p(24px);
+    }
+  }
+}

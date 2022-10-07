@@ -2,35 +2,12 @@ pipeline {
     agent any           // 아무 에이전트에서 해당 파이프라인 또는 stage를 실행함.
 
     stages {
-        stage('Prepare') {
-            agent any
-
-            steps {
-              checkout scm
-              
-              sh 'docker stop mattro-back'
-              sh 'docker rm mattro-back'
-              sh 'docker rmi mattro-back'
-            }
-            post {
-                success {
-                    echo 'prepare success'
-                }
-                always {
-                    echo 'done prepare'
-                }
-                cleanup {
-                    echo 'after all other post conditions'
-                }
-            }
-        }
-
-        // gradle build
         stage('Build Gradle') {
           steps {
             echo 'Build Gradle'
             dir ('./backend/mattro'){
               sh 'chmod +x gradlew'
+              sh 'chmod +x dev.sh'
               sh './gradlew clean build'
             }
           }
@@ -44,34 +21,16 @@ pipeline {
           }
         }
 
-        // docker build
-        stage('Build Docker') {
+        stage('Deploy') {
           steps {
-            echo 'Build Docker'
-            dir('./backend/mattro'){
-              sh 'docker build -t mattro-back .'
-            }
-          }
-          post {
-            success {
-              echo 'Successfully Build Docker'
-            }
-            failure {
-              error 'This pipeline stops here...'
-            }
-          }
-        }
-
-        stage('Deploy'){
-            steps{
-              sh 'docker run -d -p 9090:8080 --name mattro-back mattro-back'
-            }
-            post {
-            success {
-              echo 'Successfully Deploy Server'
-            }
-            failure {
-              error 'This pipeline stops here...'
+            echo 'hello start'
+            sshagent (credentials: ['ssh-deploy']) {
+              sh """
+                ssh -o StrictHostKeyChecking=no ubuntu@3.34.140.235 '
+                cd /var/jenkins/workspace/spring/backend/mattro
+                ./dev.sh
+                '
+              """
             }
           }
         }
