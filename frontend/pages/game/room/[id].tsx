@@ -17,7 +17,6 @@ const room = {
 
 const RoomDetail: NextPage = () => {
   const router = useRouter();
-  console.log(router.query.id);
   return (
     <div className={`${styles.wrapper} flex column align-center`}>
       <h2 className="align-center coreExtra fs-30">

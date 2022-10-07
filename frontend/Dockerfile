@@ -1,5 +1,7 @@
 FROM node:alpine
 
+ARG NEXT_PUBLIC_KAKAO_API_KEY
+
 WORKDIR /usr/app
 
 RUN npm i --global pm2

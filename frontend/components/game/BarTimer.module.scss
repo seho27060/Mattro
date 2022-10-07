@@ -1,0 +1,18 @@
+.wrapper {
+  .progress {
+    height: 30px;
+    width: 300px;
+    position: relative;
+    border: 1px solid black;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    .progress__inner {
+      width: 100%;
+      height: 100%;
+      transition: background 0.2s;
+      top: 0;
+      left: 0;
+    }
+  }
+}

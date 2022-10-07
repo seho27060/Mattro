@@ -9,9 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "axios": "^0.27.2",
     "next": "12.2.5",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "socket.io-client": "^4.5.2",
+    "url-loader": "^4.1.1"
   },
   "devDependencies": {
     "@types/node": "18.7.15",
@@ -28,6 +31,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.31.7",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "nodemon": "^2.0.20",
     "prettier": "^2.7.1",
     "sass": "^1.54.8",
     "typescript": "4.8.2"
