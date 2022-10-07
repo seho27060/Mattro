@@ -38,10 +38,10 @@
 
 ![](https://velog.velcdn.com/images/jmlee9707/post/80f37398-5613-436e-ac37-c9d6721eb5d7/image.png)
 
-|                                         [조성민](https://github.com/jmlee9707)                                          |                                          [박상현](https://github.com/4d656f77)                                           |                                          [박세호](https://github.com/Hanpark04)                                          |                                       [염진호](https://github.com/Dongmyeongleee)                                        |                                                       [윤정원]()                                                       |                                              [이정민](https://github.com/ammajoe)                                               |
-| :---------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------: |
+| [조성민](https://github.com/jmlee9707)                                                                                     | [박상현](https://github.com/4d656f77)                                                                                       | [박세호](https://github.com/Hanpark04)                                                                                      | [염진호](https://github.com/Dongmyeongleee)                                                                                 | [윤정원]()                                                                                                                | [이정민](https://github.com/ammajoe)                                                                                               |
+|:-----------------------------------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------------------------------------------------:|
 | <img src="https://velog.velcdn.com/images/jmlee9707/post/ce878cc7-7160-414c-9b8b-45c8cb5aa3ea/image.jpeg" width="100"/> | <img src="https://velog.velcdn.com/images/jmlee9707/post/8ec55370-2087-4e0a-95a3-5def41a84af1/image.jpeg" width ="100"/> | <img src="https://velog.velcdn.com/images/jmlee9707/post/2d057785-39f0-4d7c-9de1-c6214fe7cef7/image.jpeg" width ="100"/> | <img src="https://velog.velcdn.com/images/jmlee9707/post/43caa432-b8db-4dbd-951a-354b050d4abf/image.jpeg" width ="100"/> | <img src="https://velog.velcdn.com/images/jmlee9707/post/4836e2f7-2a50-4daf-aef1-1ca984cdf514/image.jpeg" width="100"> | <img src="https://user-images.githubusercontent.com/72871348/169957444-3e3a7ad7-d0fe-4a0a-9061-d7546aaae495.jpg" width ="100"/> |
-|                                                           BE                                                            |                                                            BE                                                            |                                                            BE                                                            |                                                            FE                                                            |                                                           FE                                                           |                                                               FE                                                                |
+| BE                                                                                                                      | BE                                                                                                                       | BE                                                                                                                       | FE                                                                                                                       | FE                                                                                                                     | FE                                                                                                                              |
 
 <br />
 <br />
@@ -92,25 +92,27 @@
 <br />
 
 ```text
-
-.
+mattro
 └─src
     └─main
          ├─java
-         │  └─com
-         │      └─web
-         │          └─curation
-         │              ├─config           # Spring Config 파일
-         │              ├─controller       # Http 요청과 응답을 위한 클래스
-         |	            ├─data
-         |              |   ├─dto          # 데이터 전송 객체
-         |              |   ├─entity       # JPA에서 사용할 엔티티
-         |              |   └─repository   # DB에 접근하는 Interface
-         │              ├─exception        # 예외처리
-         │              └─service          # Repository와 DTO를 통해 DB와 controller 연결
-         |
-         └─resources                       # application 필요한 옵션 지정
-
+         │  └─com.carrot.mattro
+         │    ├─controller         # Http 요청과 응답을 위한 클래스
+         |    |   └─...
+         │    ├─domain
+         │    │    ├─entity        # JPA에서 사용할 엔티티
+         │    │    │    └─...
+         │    │    ├─repository    # DB에 접근하는 Interface 
+         │    │    │    └─...
+         │    ├─DTO                # 데이터 전송 객체
+         │    │    └─...
+         │    ├─Repository         # DB에 접근하는 Interface
+         │    │    └─...
+         │    ├─service            # Repository와 DTO를 통해 DB와 controller 연결
+         │    │    └─...
+         │    ├─CacheConfig        # 캐시 적용을 위한 옵션 설정
+         │    └─MattroApplication  # application 파일
+         └─resources               # application 필요한 옵션 지정
 ```
 
 <br />
@@ -121,6 +123,10 @@
 <br />
 
 ### ERD 구조
+
+![erd.png](.\readmeimg\erd.png)
+
+
 
 <!-- ![erd](https://velog.velcdn.com/images/jmlee9707/post/37780a60-148c-41fd-ab48-169b46c3f9fd/image.png) -->
 
