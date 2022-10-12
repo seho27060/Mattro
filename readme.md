@@ -124,7 +124,7 @@ mattro
 
 ### ERD 구조
 
-![erd](https://github.com/seho27060/Mattro/issues/1#issue-1404730622)
+![erd](https://user-images.githubusercontent.com/81341784/195116844-da8af31c-f6c1-4727-8510-2c11184fecb8.png)
 
 <!-- ![erd](https://velog.velcdn.com/images/jmlee9707/post/37780a60-148c-41fd-ab48-169b46c3f9fd/image.png) -->
 
