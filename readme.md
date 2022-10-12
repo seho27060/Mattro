@@ -124,7 +124,7 @@ mattro
 
 ### ERD 구조
 
-![erd](/uploads/3fb1f5a3fb3b6368d5be4b2611aed8af/erd.png)
+![erd](https://github.com/seho27060/Mattro/issues/1#issue-1404730622)
 
 <!-- ![erd](https://velog.velcdn.com/images/jmlee9707/post/37780a60-148c-41fd-ab48-169b46c3f9fd/image.png) -->
 
@@ -186,7 +186,7 @@ mattro
 
 <br />
 
-[![](https://velog.velcdn.com/images/jmlee9707/post/aee20912-d7c9-446d-8441-a3035f217201/image.png)](https://youtu.be/meM1V3QMLmU)
+[![섬네일](http://img.youtube.com/vi/meM1V3QMLmU/maxresdefault.jpg)](https://youtu.be/meM1V3QMLmU)
 
 <br />
 
